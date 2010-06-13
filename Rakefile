@@ -5,10 +5,10 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "x_to_json"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{A gem to provide swappable JSON backends.}
+    gem.description = %Q{A gem to provide swappable JSON backends utilizing Yajl::Ruby, the JSON gem, ActiveSupport, or JSON pure.}
     gem.email = "michael@intridea.com"
-    gem.homepage = "http://github.com/mbleigh/x_to_json"
+    gem.homepage = "http://github.com/intridea/x_to_json"
     gem.authors = ["Michael Bleigh"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
