@@ -1,4 +1,4 @@
-= Use X to JSON
+= MultiJSON
 
 Lots of Ruby libraries utilize JSON parsing in some form, and everyone has their favorite JSON library. In order to best support multiple JSON parsers and libraries, <tt>multi_json</tt> is a general-purpose swappable JSON backend library. You use it like so:
 
