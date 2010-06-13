@@ -1,6 +1,6 @@
 require 'json/pure' unless defined?(::JSON)
 
-module XToJson
+module MultiJson
   module Engines
     class JsonPure
       def self.decode(string, options = {})

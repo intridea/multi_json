@@ -1,4 +1,4 @@
-module XToJson
+module MultiJson
   module_function
   
   # Get the current engine class.
@@ -28,8 +28,8 @@ module XToJson
   def engine=(new_engine)
     case new_engine
       when String, Symbol
-        require "x_to_json/engines/#{new_engine}"
-        @engine = XToJson::Engines.const_get("#{new_engine.to_s.split('_').map{|s| s.capitalize}.join('')}")
+        require "multi_json/engines/#{new_engine}"
+        @engine = MultiJson::Engines.const_get("#{new_engine.to_s.split('_').map{|s| s.capitalize}.join('')}")
       when Class
         @engine = new_engine
       else

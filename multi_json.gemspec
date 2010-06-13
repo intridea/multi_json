@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{x_to_json}
+  s.name = %q{multi_json}
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -24,24 +24,24 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "lib/x_to_json.rb",
-     "lib/x_to_json/engines/active_support.rb",
-     "lib/x_to_json/engines/json_gem.rb",
-     "lib/x_to_json/engines/json_pure.rb",
-     "lib/x_to_json/engines/yajl.rb",
+     "lib/multi_json.rb",
+     "lib/multi_json/engines/active_support.rb",
+     "lib/multi_json/engines/json_gem.rb",
+     "lib/multi_json/engines/json_pure.rb",
+     "lib/multi_json/engines/yajl.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
-     "spec/x_to_json_spec.rb",
-     "x_to_json.gemspec"
+     "spec/multi_json_spec.rb",
+     "multi_json.gemspec"
   ]
-  s.homepage = %q{http://github.com/intridea/x_to_json}
+  s.homepage = %q{http://github.com/intridea/multi_json}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{A gem to provide swappable JSON backends.}
   s.test_files = [
     "spec/spec_helper.rb",
-     "spec/x_to_json_spec.rb"
+     "spec/multi_json_spec.rb"
   ]
 
   if s.respond_to? :specification_version then

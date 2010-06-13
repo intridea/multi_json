@@ -1,6 +1,6 @@
 require 'active_support' unless defined?(::ActiveSupport::JSON)
 
-module XToJson
+module MultiJson
   module Engines
     class ActiveSupport
       def self.decode(string, options = {})

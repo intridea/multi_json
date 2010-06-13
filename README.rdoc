@@ -1,15 +1,15 @@
 = Use X to JSON
 
-Lots of Ruby libraries utilize JSON parsing in some form, and everyone has their favorite JSON library. In order to best support multiple JSON parsers and libraries, <tt>x_to_json</tt> is a general-purpose swappable JSON backend library. You use it like so:
+Lots of Ruby libraries utilize JSON parsing in some form, and everyone has their favorite JSON library. In order to best support multiple JSON parsers and libraries, <tt>multi_json</tt> is a general-purpose swappable JSON backend library. You use it like so:
 
-    require 'x_to_json'
+    require 'multi_json'
     
-    XToJson.engine = :yajl
-    XToJson.decode('{"abc":"def"}') # decoded using Yajl
+    MultiJson.engine = :yajl
+    MultiJson.decode('{"abc":"def"}') # decoded using Yajl
     
-    XToJson.engine = :json_gem
-    XToJson.engine = XToJson::Engines::JsonGem # equivalent to previous line
-    XToJson.encode({:abc => 'def'}) # encoded using the JSON gem
+    MultiJson.engine = :json_gem
+    MultiJson.engine = MultiJson::Engines::JsonGem # equivalent to previous line
+    MultiJson.encode({:abc => 'def'}) # encoded using the JSON gem
     
 The <tt>engine</tt> setter takes either a symbol or a class (to allow for custom JSON parsers) that responds to both <tt>.decode</tt> and <tt>.encode</tt> at the class level.
 

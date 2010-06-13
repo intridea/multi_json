@@ -1,6 +1,6 @@
 require 'json' unless defined?(::JSON)
 
-module XToJson
+module MultiJson
   module Engines
     class JsonGem
       def self.decode(string, options = {})

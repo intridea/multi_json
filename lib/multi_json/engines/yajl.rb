@@ -1,6 +1,6 @@
 require 'yajl' unless defined?(Yajl)
 
-module XToJson
+module MultiJson
   module Engines
     class Yajl
       def self.decode(string, options = {})
