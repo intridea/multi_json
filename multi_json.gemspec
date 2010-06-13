@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{multi_json}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bleigh"]
@@ -29,10 +29,10 @@ Gem::Specification.new do |s|
      "lib/multi_json/engines/json_gem.rb",
      "lib/multi_json/engines/json_pure.rb",
      "lib/multi_json/engines/yajl.rb",
+     "multi_json.gemspec",
      "spec/spec.opts",
      "spec/spec_helper.rb",
-     "spec/multi_json_spec.rb",
-     "multi_json.gemspec"
+     "spec/x_to_json_spec.rb"
   ]
   s.homepage = %q{http://github.com/intridea/multi_json}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -41,7 +41,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A gem to provide swappable JSON backends.}
   s.test_files = [
     "spec/spec_helper.rb",
-     "spec/multi_json_spec.rb"
+     "spec/x_to_json_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
