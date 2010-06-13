@@ -3,6 +3,9 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'x_to_json'
 require 'spec'
 require 'spec/autorun'
+require 'rubygems'
+require 'bundler'
+Bundler.setup
 
 Spec::Runner.configure do |config|
   
