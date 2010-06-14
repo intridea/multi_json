@@ -13,6 +13,8 @@ Lots of Ruby libraries utilize JSON parsing in some form, and everyone has their
     
 The <tt>engine</tt> setter takes either a symbol or a class (to allow for custom JSON parsers) that responds to both <tt>.decode</tt> and <tt>.encode</tt> at the class level.
 
+MultiJSON tries to have intelligent defaulting. That is, if you have any of the supported engines already loaded, it will utilize them before attempting to load any. When loading, libraries are ordered by speed. First Yajl-Ruby, then the JSON gem, then ActiveSupport, then JSON pure.
+
 == Note on Patches/Pull Requests
  
 * Fork the project.

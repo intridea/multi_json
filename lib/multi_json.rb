@@ -9,13 +9,22 @@ module MultiJson
   end
   
   # The default engine based on what you currently
-  # have loaded. Tries Yajl first, then JSON gem,
-  # then ActiveSupport and JSON pure.
+  # have loaded and installed. First checks to see
+  # if any engines are already loaded, then checks
+  # to see which are installed if none are loaded.
   def default_engine
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
     return :active_support if defined?(::ActiveSupport::JSON)
-    :json_pure
+    
+    %w(yajl json active_support json/pure).each do |req|
+      begin
+        require req
+        return req.sub('/','_').to_sym
+      rescue LoadError
+        next
+      end
+    end
   end
   
   # Set the JSON parser utilizing a symbol, string, or class.
