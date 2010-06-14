@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{multi_json}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bleigh"]
-  s.date = %q{2010-06-13}
+  s.date = %q{2010-06-14}
   s.description = %q{A gem to provide swappable JSON backends utilizing Yajl::Ruby, the JSON gem, ActiveSupport, or JSON pure.}
   s.email = %q{michael@intridea.com}
   s.extra_rdoc_files = [
