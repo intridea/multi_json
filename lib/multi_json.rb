@@ -7,6 +7,13 @@ module MultiJson
     self.engine = self.default_engine
     @engine
   end
+
+  DefaultByRequire = {
+    "yajl" => :yajl,
+    "json" => :json_gem,
+    "active_support" => :active_support,
+    "json/pure" => :json_pure
+  }
   
   # The default engine based on what you currently
   # have loaded and installed. First checks to see
@@ -16,11 +23,11 @@ module MultiJson
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
     return :active_support if defined?(::ActiveSupport::JSON)
-    
-    %w(yajl json active_support json/pure).each do |req|
+
+    DefaultByRequire.each_pair do |library, engine|
       begin
-        require req
-        return req.sub('/','_').to_sym
+        require library
+        return engine
       rescue LoadError
         next
       end
