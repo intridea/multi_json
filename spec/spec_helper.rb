@@ -4,8 +4,12 @@ require 'multi_json'
 require 'spec'
 require 'spec/autorun'
 require 'rubygems'
-require 'bundler'
-Bundler.setup
+begin
+  require 'bundler'
+  Bundler.setup
+rescue LoadError
+  $stderr.puts "Bundler (or a dependency) not available."
+end
 
 Spec::Runner.configure do |config|
   
