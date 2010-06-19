@@ -31,7 +31,11 @@ describe "MultiJson" do
   %w(active_support json_gem json_pure yajl).each do |engine|
     context engine do
       before do
-        MultiJson.engine = engine
+        begin
+          MultiJson.engine = engine
+        rescue LoadError
+          pending "Engine #{engine} couldn't be loaded (not installed?)"
+        end
       end
       
       describe '.encode' do
