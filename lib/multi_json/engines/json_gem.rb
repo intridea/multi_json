@@ -9,7 +9,7 @@ module MultiJson
         opts[:symbolize_names] = options[:symbolize_keys]
         ::JSON.parse(string, opts)
       end
-      
+
       def self.encode(object) #:nodoc:
         object.to_json
       end

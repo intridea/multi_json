@@ -1,6 +1,6 @@
 module MultiJson
   module_function
-  
+
   # Get the current engine class.
   def engine
     return @engine if @engine
@@ -14,7 +14,7 @@ module MultiJson
     ["active_support", :active_support],
     ["json/pure", :json_pure]
   ]
-  
+
   # The default engine based on what you currently
   # have loaded and installed. First checks to see
   # if any engines are already loaded, then checks
@@ -33,7 +33,7 @@ module MultiJson
       end
     end
   end
-  
+
   # Set the JSON parser utilizing a symbol, string, or class.
   # Supported by default are:
   #
@@ -52,7 +52,7 @@ module MultiJson
         raise "Did not recognize your engine specification. Please specify either a symbol or a class."
     end
   end
-  
+
   # Decode a JSON string into Ruby.
   #
   # <b>Options</b>
@@ -61,7 +61,7 @@ module MultiJson
   def decode(string, options = {})
     engine.decode(string, options)
   end
-  
+
   # Encodes a Ruby object as JSON.
   def encode(object)
     engine.encode(object)

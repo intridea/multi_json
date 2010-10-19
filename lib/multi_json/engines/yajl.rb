@@ -7,7 +7,7 @@ module MultiJson
       def self.decode(string, options = {}) #:nodoc:
         ::Yajl::Parser.new(:symbolize_keys => options[:symbolize_keys]).parse(string)
       end
-      
+
       def self.encode(object) #:nodoc:
         ::Yajl::Encoder.new.encode(object)
       end

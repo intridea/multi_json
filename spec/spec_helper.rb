@@ -10,7 +10,3 @@ begin
 rescue LoadError
   $stderr.puts "Bundler (or a dependency) not available."
 end
-
-Spec::Runner.configure do |config|
-  
-end

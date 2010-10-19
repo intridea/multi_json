@@ -4,7 +4,7 @@ class MockDecoder
   def self.decode(string, options = {})
     {'abc' => 'def'}
   end
-  
+
   def self.encode(string)
     '{"abc":"def"}'
   end
@@ -21,13 +21,13 @@ describe "MultiJson" do
       MultiJson.engine = :yajl
       MultiJson.engine.name.should == 'MultiJson::Engines::Yajl'
     end
-    
+
     it 'should be settable via a class' do
       MultiJson.engine = MockDecoder
       MultiJson.engine.name.should == 'MockDecoder'
     end
   end
-  
+
   %w(active_support json_gem json_pure yajl).each do |engine|
     context engine do
       before do
@@ -37,7 +37,7 @@ describe "MultiJson" do
           pending "Engine #{engine} couldn't be loaded (not installed?)"
         end
       end
-      
+
       describe '.encode' do
         it 'should write decodable JSON' do
           [
@@ -48,12 +48,12 @@ describe "MultiJson" do
           end
         end
       end
-      
+
       describe '.decode' do
         it 'should properly decode some json' do
           MultiJson.decode('{"abc":"def"}').should == {'abc' => 'def'}
         end
-        
+
         it 'should allow for symbolization of keys' do
           MultiJson.decode('{"abc":{"def":"hgi"}}', :symbolize_keys => true).should == {:abc => {:def => 'hgi'}}
         end
