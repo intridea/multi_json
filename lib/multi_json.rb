@@ -1,4 +1,5 @@
 module MultiJson
+  class DecodeError < StandardError; end
   module_function
 
   # Get the current engine class.
@@ -59,7 +60,11 @@ module MultiJson
   #
   # <tt>:symbolize_keys</tt> :: If true, will use symbols instead of strings for the keys.
   def decode(string, options = {})
-    engine.decode(string, options)
+    begin
+      engine.decode(string, options)
+    rescue StandardError => exception
+      raise DecodeError, exception.inspect
+    end
   end
 
   # Encodes a Ruby object as JSON.

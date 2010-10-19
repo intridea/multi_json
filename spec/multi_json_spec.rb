@@ -50,8 +50,14 @@ describe "MultiJson" do
       end
 
       describe '.decode' do
-        it 'should properly decode some json' do
+        it 'should properly decode valid JSON' do
           MultiJson.decode('{"abc":"def"}').should == {'abc' => 'def'}
+        end
+
+        it 'should raise MultiJson::DecodeError on invalid JSON' do
+          lambda do
+            MultiJson.decode('{"abc"}')
+          end.should raise_error(MultiJson::DecodeError)
         end
 
         it 'should allow for symbolization of keys' do
