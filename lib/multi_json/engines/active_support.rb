@@ -4,6 +4,8 @@ module MultiJson
   module Engines
     # Use ActiveSupport to encode/decode JSON.
     class ActiveSupport 
+      def self.parse_error; ::ActiveSupport::JSON::parse_error; end
+
       def self.decode(string, options = {}) #:nodoc:
         hash = ::ActiveSupport::JSON.decode(string)
         options[:symbolize_keys] ? symbolize_keys(hash) : hash

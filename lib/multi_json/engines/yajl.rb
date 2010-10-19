@@ -4,6 +4,8 @@ module MultiJson
   module Engines
     # Use the Yajl-Ruby library to encode/decode.
     class Yajl
+      def self.parse_error; ::Yajl::ParseError; end
+        
       def self.decode(string, options = {}) #:nodoc:
         ::Yajl::Parser.new(:symbolize_keys => options[:symbolize_keys]).parse(string)
       end
