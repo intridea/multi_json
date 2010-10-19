@@ -1,8 +1,10 @@
 source "http://rubygems.org"
 
-gem 'activesupport', :require => nil
-gem 'json', :require => nil
-gem 'json_pure', :require => nil
-gem 'yajl-ruby', :require => nil
+group :development, :test do
+  gem 'activesupport', '~> 3.0', :require => nil
+  gem 'json', '~> 1.4', :require => nil
+  gem 'json_pure', '~> 1.4', :require => nil
+  gem 'yajl-ruby', '~> 0.7', :require => nil
+end
 
 gemspec
