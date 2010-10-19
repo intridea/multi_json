@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    multi_json (0.0.4)
+    multi_json (0.0.5)
 
 GEM
   remote: http://rubygems.org/
