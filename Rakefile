@@ -10,6 +10,8 @@ begin
     gem.email = "michael@intridea.com"
     gem.homepage = "http://github.com/intridea/multi_json"
     gem.authors = ["Michael Bleigh"]
+    gem.add_development_dependency "jeweler", "~> 1.4"
+    gem.add_development_dependency "rake", "~> 0.8"
     gem.add_development_dependency "rspec", "~> 1.3"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
