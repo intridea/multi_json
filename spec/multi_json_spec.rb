@@ -58,16 +58,17 @@ describe "MultiJson" do
           MultiJson.decode('{"abc":{"def":"hgi"}}', :symbolize_keys => true).should == {:abc => {:def => 'hgi'}}
         end
         
-        describe 'with invalid json'
+        describe 'with invalid json' do
           it 'should raise a MultiJson::ParseError' do
             lambda { MultiJson.decode('bad data') }.should raise_error(MultiJson::ParseError)
           end
           
-          it 'raised exception should preserve backtrace' do
-            lambda {MultiJson.decode('bad data')}.should raise_error do |e|
+          it 'should preserve backtrace from the original exception' do
+            lambda {MultiJson.decode('bad data')}.should raise_error { |e|
               e.backtrace.any? {|e| e =~ /multi_json\/engines/}.should be_true
-            end
+            }
           end
+        end
       end
     end
   end
