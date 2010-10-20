@@ -68,6 +68,13 @@ describe "MultiJson" do
               e.backtrace.any? {|e| e =~ /multi_json\/engines/}.should be_true
             }
           end
+          
+          it 'should preserve message from the original exception' do
+            begin; MultiJson.engine.decode('bad data'); rescue => @original; end
+            lambda {MultiJson.decode('bad data')}.should raise_error { |e|
+              e.message.should == @original.message
+            }
+          end
         end
       end
     end

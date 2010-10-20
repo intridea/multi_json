@@ -61,7 +61,7 @@ module MultiJson
   def decode(string, options = {})
     engine.decode(string, options)
   rescue engine.parse_error => e
-    raise ParseError, e.to_s, e.backtrace
+    raise ParseError, e.message, e.backtrace
   end
   
   # Encodes a Ruby object as JSON.
