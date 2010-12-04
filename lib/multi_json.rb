@@ -5,7 +5,11 @@ module MultiJson
   # Get the current engine class.
   def engine
     return @engine if @engine
-    self.engine = self.default_engine
+    if (default = self.default_engine)
+      self.engine = default
+    else
+      raise 'No JSON engine configured. Do you have one on your load path?'
+    end
     @engine
   end
 

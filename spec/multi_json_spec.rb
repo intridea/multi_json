@@ -11,6 +11,22 @@ class MockDecoder
 end
 
 describe "MultiJson" do
+
+  context 'with no engine available' do
+    before do
+      MultiJson.instance_eval do
+        @engine = nil
+      end
+      MultiJson.stub!(:default_engine).and_return(nil)
+    end
+
+    it 'should raise a meaningful error message if no engine is available' do
+      lambda {
+        MultiJson.decode('{"abc":{"def":"hgi"}}')
+      }.should raise_exception(MultiJson::DecodeError, %r{No JSON engine configured\. Do you have one on your load path\?})
+    end
+  end
+
   context 'engines' do
     it 'should default to the best available gem' do
       require 'yajl'
