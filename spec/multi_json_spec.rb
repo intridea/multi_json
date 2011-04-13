@@ -28,7 +28,7 @@ describe "MultiJson" do
     end
   end
 
-  %w(json_gem json_pure yajl).each do |engine|
+  %w(json_gem json_pure okjson yajl).each do |engine|
     context engine do
       before do
         begin
@@ -58,6 +58,11 @@ describe "MultiJson" do
           lambda do
             MultiJson.decode('{"abc"}')
           end.should raise_error(MultiJson::DecodeError)
+        end
+
+        it 'should stringify symbol keys when encoding' do
+          encoded_json = MultiJson.encode(:a => 1, :b => {:c => 2})
+          MultiJson.decode(encoded_json).should == {"a" => 1, "b" => {"c" => 2}}
         end
 
         it 'should allow for symbolization of keys' do

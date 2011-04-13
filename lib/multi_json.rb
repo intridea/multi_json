@@ -12,7 +12,8 @@ module MultiJson
   REQUIREMENT_MAP = [
     ["yajl", :yajl],
     ["json", :json_gem],
-    ["json/pure", :json_pure]
+    ["json/pure", :json_pure],
+    ["okjson", :okjson]
   ]
 
   # The default engine based on what you currently
@@ -38,6 +39,7 @@ module MultiJson
   #
   # * <tt>:json_gem</tt>
   # * <tt>:json_pure</tt>
+  # * <tt>:okjson</tt>
   # * <tt>:yajl</tt>
   def engine=(new_engine)
     case new_engine
