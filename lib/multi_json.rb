@@ -12,7 +12,6 @@ module MultiJson
   REQUIREMENT_MAP = [
     ["yajl", :yajl],
     ["json", :json_gem],
-    ["active_support", :active_support],
     ["json/pure", :json_pure]
   ]
 
@@ -23,7 +22,6 @@ module MultiJson
   def default_engine
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
-    return :active_support if defined?(::ActiveSupport::JSON)
 
     REQUIREMENT_MAP.each do |(library, engine)|
       begin
@@ -40,7 +38,6 @@ module MultiJson
   #
   # * <tt>:json_gem</tt>
   # * <tt>:json_pure</tt>
-  # * <tt>:active_support</tt> (useful for inside Rails apps)
   # * <tt>:yajl</tt>
   def engine=(new_engine)
     case new_engine
