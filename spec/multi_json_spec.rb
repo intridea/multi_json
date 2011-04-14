@@ -53,6 +53,11 @@ describe "MultiJson" do
             MultiJson.decode(MultiJson.encode(example)).should == example
           end
         end
+
+        it 'should encode symbol keys as strings' do
+          encoded_json = MultiJson.encode({ :foo => { :bar => 'baz' } })
+          MultiJson.decode(encoded_json).should == { 'foo' => { 'bar' => 'baz' } }
+        end
       end
 
       describe '.decode' do
