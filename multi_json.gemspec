@@ -26,10 +26,13 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec", "~> 2.0")
   s.add_development_dependency("json", "~> 1.4")
   s.add_development_dependency("json_pure", "~> 1.4")
-  s.add_development_dependency("yajl-ruby", "~> 0.7")
 
   unless ENV['RUBY_VERSION'].match(/^rbx-/)
     s.add_development_dependency("rcov", "~> 0.9")
+  end
+
+  unless ENV['RUBY_VERSION'].match(/^jruby-/)
+    s.add_development_dependency("yajl-ruby", "~> 0.7")
   end
 end
 
