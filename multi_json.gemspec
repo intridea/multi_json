@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 require File.expand_path("../lib/multi_json/version", __FILE__)
 
+ENV['RUBY_VERSION'] ||= ''
+
 Gem::Specification.new do |s|
   s.name = "multi_json"
   s.version = MultiJson::VERSION
