@@ -1,12 +1,14 @@
 require 'rubygems'
-require 'bundler'
-
-Bundler::GemHelper.install_tasks
+begin
+  require 'bundler'
+  Bundler::GemHelper.install_tasks
+rescue LoadError => e
+  puts "although not required, it's recommended that you use bundler during development"
+end
 
 require 'rspec/core/rake_task'
 desc "Run all examples"
-RSpec::Core::RakeTask.new(:spec) do |t|
-end
+RSpec::Core::RakeTask.new(:spec)
 
 task :cleanup_rcov_files do
   rm_rf 'coverage.data'
