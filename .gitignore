@@ -29,6 +29,6 @@ Gemfile.lock
 coverage.data
 
 ## RUBINIUS
-.rbc
+*.rbc
 
 ## PROJECT::SPECIFIC
