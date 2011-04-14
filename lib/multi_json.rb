@@ -2,6 +2,8 @@ module MultiJson
   class DecodeError < StandardError; end
   module_function
 
+  @engine = nil
+
   # Get the current engine class.
   def engine
     return @engine if @engine
