@@ -28,4 +28,7 @@ Gemfile.lock
 ## RCOV
 coverage.data
 
+## RUBINIUS
+.rbc
+
 ## PROJECT::SPECIFIC

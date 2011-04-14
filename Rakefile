@@ -10,19 +10,6 @@ require 'rspec/core/rake_task'
 desc "Run all examples"
 RSpec::Core::RakeTask.new(:spec)
 
-task :cleanup_rcov_files do
-  rm_rf 'coverage.data'
-end
-
-namespace :spec do
-  desc "Run all examples using rcov"
-  RSpec::Core::RakeTask.new :rcov => :cleanup_rcov_files do |t|
-    t.rcov = true
-    t.rcov_opts =  %[-Ilib -Ispec --exclude "gems/*,features"]
-    t.rcov_opts << %[--text-report --sort coverage --no-html --aggregate coverage.data]
-  end
-end
-
 task :default => :spec
 
 require 'rake/rdoctask'
@@ -31,4 +18,20 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "multi_json #{MultiJson::VERSION}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+task :cleanup_rcov_files do
+  rm_rf 'coverage.data'
+end
+
+begin
+  namespace :spec do
+    desc "Run all examples using rcov"
+    RSpec::Core::RakeTask.new :rcov => :cleanup_rcov_files do |t|
+      t.rcov = true
+      t.rcov_opts =  %[-Ilib -Ispec --exclude "gems/*,features"]
+      t.rcov_opts << %[--text-report --sort coverage --no-html --aggregate coverage.data]
+    end
+  end
+rescue LoadError
 end

@@ -23,10 +23,13 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency("rake", "~> 0.8")
-  s.add_development_dependency("rcov", "~> 0.9")
   s.add_development_dependency("rspec", "~> 2.0")
   s.add_development_dependency("json", "~> 1.4")
   s.add_development_dependency("json_pure", "~> 1.4")
   s.add_development_dependency("yajl-ruby", "~> 0.7")
+
+  unless ENV['RUBY_VERSION'].match(/^rbx-/)
+    s.add_development_dependency("rcov", "~> 0.9")
+  end
 end
 
