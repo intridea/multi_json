@@ -1,11 +1,9 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+begin
+  require 'bundler'
+rescue LoadError
+  puts "although not required, it's recommended that you use bundler during development"
+end
+
 require 'multi_json'
 require 'rspec'
 require 'rspec/autorun'
-begin
-  require 'bundler'
-  Bundler.setup
-rescue LoadError
-  $stderr.puts "Bundler (or a dependency) not available."
-end
