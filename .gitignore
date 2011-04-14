@@ -23,6 +23,7 @@ log
 *.gem
 .bundle
 pkg
+Gemfile.lock
 
 ## RCOV
 coverage.data
