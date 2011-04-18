@@ -9,6 +9,7 @@ module MultiJson
       def self.decode(string, options = {}) #:nodoc:
         opts = {}
         opts[:symbolize_names] = options[:symbolize_keys]
+        string = string.read if string.respond_to?(:read)
         ::JSON.parse(string, opts)
       end
 

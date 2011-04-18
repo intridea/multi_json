@@ -6,6 +6,7 @@ module MultiJson
       ParseError = ::OkJson::Error
 
       def self.decode(string, options = {}) #:nodoc:
+        string = string.read if string.respond_to?(:read)
         result = ::OkJson.decode(string)
         options[:symbolize_keys] ? symbolize_keys(result) : result
       end

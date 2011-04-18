@@ -1,5 +1,6 @@
 require 'spec_helper'
-
+require 'stringio'
+          
 class MockDecoder
   def self.decode(string, options = {})
     { 'abc' => 'def' }
@@ -74,6 +75,11 @@ describe "MultiJson" do
         it 'stringifys symbol keys when encoding' do
           encoded_json = MultiJson.encode(:a => 1, :b => {:c => 2})
           MultiJson.decode(encoded_json).should == { "a" => 1, "b" => { "c" => 2 } }
+        end
+        
+        it "properly decodes valid JSON in StringIOs" do
+          json = StringIO.new('{"abc":"def"}')
+          MultiJson.decode(json).should == { 'abc' => 'def' }
         end
 
         it 'allows for symbolization of keys' do
