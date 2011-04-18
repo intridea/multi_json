@@ -4,6 +4,8 @@ module MultiJson
   module Engines
     # Use JSON pure to encode/decode.
     class JsonPure
+      ParseError = ::JSON::ParserError
+
       def self.decode(string, options = {}) #:nodoc:
         opts = {}
         opts[:symbolize_names] = options[:symbolize_keys]

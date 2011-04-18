@@ -4,6 +4,8 @@ module MultiJson
   module Engines
     # Use the JSON gem to encode/decode.
     class JsonGem
+      ParseError = ::JSON::ParserError
+
       def self.decode(string, options = {}) #:nodoc:
         opts = {}
         opts[:symbolize_names] = options[:symbolize_keys]

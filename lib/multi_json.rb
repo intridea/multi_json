@@ -61,11 +61,9 @@ module MultiJson
   #
   # <tt>:symbolize_keys</tt> :: If true, will use symbols instead of strings for the keys.
   def decode(string, options = {})
-    begin
-      engine.decode(string, options)
-    rescue StandardError => exception
-      raise DecodeError, exception.inspect
-    end
+    engine.decode(string, options)
+  rescue engine::ParseError => exception
+    raise DecodeError, exception.message, exception.backtrace
   end
 
   # Encodes a Ruby object as JSON.
