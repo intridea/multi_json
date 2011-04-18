@@ -14,7 +14,7 @@ describe "MultiJson" do
   context 'engines' do
     it 'should default to the best available gem' do
       # the yajl-ruby gem does not work on jruby, so the best engine is the JsonGem engine
-      if ENV['RUBY_VERSION'].match(/^jruby-/)
+      if jruby?
         require 'json'
         MultiJson.engine.name.should == 'MultiJson::Engines::JsonGem'
       else

@@ -9,3 +9,7 @@ require 'rspec/autorun'
 
 $VERBOSE = true
 require 'multi_json'
+
+def jruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == "jruby"
+end
