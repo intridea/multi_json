@@ -12,7 +12,7 @@ end
 
 describe "MultiJson" do
   context 'engines' do
-    it 'should default to the best available gem' do
+    it 'defaults to the best available gem' do
       # the yajl-ruby gem does not work on jruby, so the best engine is the JsonGem engine
       if jruby?
         require 'json'
@@ -23,12 +23,12 @@ describe "MultiJson" do
       end
     end
 
-    it 'should be settable via a symbol' do
+    it 'is settable via a symbol' do
       MultiJson.engine = :json_gem
       MultiJson.engine.name.should == 'MultiJson::Engines::JsonGem'
     end
 
-    it 'should be settable via a class' do
+    it 'is settable via a class' do
       MultiJson.engine = MockDecoder
       MultiJson.engine.name.should == 'MockDecoder'
     end
@@ -45,7 +45,7 @@ describe "MultiJson" do
       end
 
       describe '.encode' do
-        it 'should write decodable JSON' do
+        it 'writes decodable JSON' do
           [
             { 'abc' => 'def' },
             [1, 2, 3, "4"]
@@ -54,29 +54,29 @@ describe "MultiJson" do
           end
         end
 
-        it 'should encode symbol keys as strings' do
+        it 'encodes symbol keys as strings' do
           encoded_json = MultiJson.encode({ :foo => { :bar => 'baz' } })
           MultiJson.decode(encoded_json).should == { 'foo' => { 'bar' => 'baz' } }
         end
       end
 
       describe '.decode' do
-        it 'should properly decode valid JSON' do
+        it 'properly decodes valid JSON' do
           MultiJson.decode('{"abc":"def"}').should == { 'abc' => 'def' }
         end
 
-        it 'should raise MultiJson::DecodeError on invalid JSON' do
+        it 'raises MultiJson::DecodeError on invalid JSON' do
           lambda do
             MultiJson.decode('{"abc"}')
           end.should raise_error(MultiJson::DecodeError)
         end
 
-        it 'should stringify symbol keys when encoding' do
+        it 'stringifys symbol keys when encoding' do
           encoded_json = MultiJson.encode(:a => 1, :b => {:c => 2})
           MultiJson.decode(encoded_json).should == { "a" => 1, "b" => { "c" => 2 } }
         end
 
-        it 'should allow for symbolization of keys' do
+        it 'allows for symbolization of keys' do
           MultiJson.decode('{"abc":{"def":"hgi"}}', :symbolize_keys => true).should == { :abc => { :def => 'hgi' } }
         end
       end
