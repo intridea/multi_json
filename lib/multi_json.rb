@@ -15,7 +15,7 @@ module MultiJson
     ["yajl", :yajl],
     ["json", :json_gem],
     ["json/pure", :json_pure],
-    ["okjson", :okjson]
+    ["ok_json", :ok_json]
   ]
 
   # The default engine based on what you currently
@@ -41,7 +41,7 @@ module MultiJson
   #
   # * <tt>:json_gem</tt>
   # * <tt>:json_pure</tt>
-  # * <tt>:okjson</tt>
+  # * <tt>:ok_json</tt>
   # * <tt>:yajl</tt>
   def engine=(new_engine)
     case new_engine
