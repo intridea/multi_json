@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors = ["Michael Bleigh"]
   s.email   = ["michael@intridea.com"]
   s.summary = %q{A gem to provide swappable JSON backends.}
-  s.description = %q{A gem to provide swappable JSON backends utilizing Yajl::Ruby, the JSON gem, ActiveSupport, or JSON pure.}
+  s.description = %q{A gem to provide swappable JSON backends utilizing Yajl::Ruby, the JSON gem, JSON pure, or a vendored version of okjson.}
   s.homepage = "http://github.com/intridea/multi_json"
 
   s.extra_rdoc_files = ["LICENSE", "README.rdoc"]
