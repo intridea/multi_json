@@ -14,8 +14,7 @@ module MultiJson
   REQUIREMENT_MAP = [
     ["yajl", :yajl],
     ["json", :json_gem],
-    ["json/pure", :json_pure],
-    ["ok_json", :ok_json]
+    ["json/pure", :json_pure]
   ]
 
   # The default engine based on what you currently
@@ -34,6 +33,8 @@ module MultiJson
         next
       end
     end
+
+    :ok_json
   end
 
   # Set the JSON parser utilizing a symbol, string, or class.
@@ -45,13 +46,13 @@ module MultiJson
   # * <tt>:yajl</tt>
   def engine=(new_engine)
     case new_engine
-      when String, Symbol
-        require "multi_json/engines/#{new_engine}"
-        @engine = MultiJson::Engines.const_get("#{new_engine.to_s.split('_').map{|s| s.capitalize}.join('')}")
-      when Class
-        @engine = new_engine
-      else
-        raise "Did not recognize your engine specification. Please specify either a symbol or a class."
+    when String, Symbol
+      require "multi_json/engines/#{new_engine}"
+      @engine = MultiJson::Engines.const_get("#{new_engine.to_s.split('_').map{|s| s.capitalize}.join('')}")
+    when Class
+      @engine = new_engine
+    else
+      raise "Did not recognize your engine specification. Please specify either a symbol or a class."
     end
   end
 
