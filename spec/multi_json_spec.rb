@@ -13,6 +13,20 @@ end
 
 describe "MultiJson" do
   context 'engines' do
+    it 'defaults to ok_json if no other json implementions are available' do
+      old_map = MultiJson::REQUIREMENT_MAP
+      begin
+        MultiJson::REQUIREMENT_MAP.each_with_index do |(library, engine), index|
+          MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", engine]
+        end
+        MultiJson.default_engine.should == :ok_json
+      ensure
+        old_map.each_with_index do |(library, engine), index|
+          MultiJson::REQUIREMENT_MAP[index] = [library, engine]
+        end
+      end
+    end
+    
     it 'defaults to the best available gem' do
       # the yajl-ruby gem does not work on jruby, so the best engine is the JsonGem engine
       if jruby?
