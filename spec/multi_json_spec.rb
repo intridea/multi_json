@@ -73,6 +73,11 @@ describe "MultiJson" do
           encoded_json = MultiJson.encode({ :foo => { :bar => 'baz' } })
           MultiJson.decode(encoded_json).should == { 'foo' => { 'bar' => 'baz' } }
         end
+
+        it 'encodes rootless JSON' do
+          MultiJson.encode("random rootless string").should == "\"random rootless string\""
+          MultiJson.encode(123).should == "123"
+        end
       end
 
       describe '.decode' do
