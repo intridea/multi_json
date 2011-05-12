@@ -12,7 +12,7 @@ module MultiJson
       end
 
       def self.encode(object) #:nodoc:
-        ::OkJson.encode(stringify_keys(object))
+        ::OkJson.valenc(stringify_keys(object))
       end
 
       def self.symbolize_keys(object) #:nodoc:
