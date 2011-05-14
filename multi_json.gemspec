@@ -4,6 +4,7 @@ require File.expand_path("../lib/multi_json/version", __FILE__)
 Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake', '~> 0.8'
   gem.add_development_dependency 'rspec', '~> 2.6'
+  gem.add_development_dependency 'simplecov', '~> 0.4'
   gem.authors = ["Michael Bleigh", "Josh Kalderimis", "Erik Michaels-Ober"]
   gem.description = %q{A gem to provide swappable JSON backends utilizing Yajl::Ruby, the JSON gem, JSON pure, or a vendored version of okjson.}
   gem.email = ['michael@intridea.com', 'josh.kalderimis@gmail.com', 'sferik@gmail.com']
