@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'helper'
 require 'stringio'
-          
+
 class MockDecoder
   def self.decode(string, options = {})
-    { 'abc' => 'def' }
+    {'abc' => 'def'}
   end
 
   def self.encode(string)
@@ -26,16 +26,10 @@ describe "MultiJson" do
         end
       end
     end
-    
+
     it 'defaults to the best available gem' do
-      # the yajl-ruby gem does not work on jruby, so the best engine is the JsonGem engine
-      if jruby?
-        require 'json'
-        MultiJson.engine.name.should == 'MultiJson::Engines::JsonGem'
-      else
-        require 'yajl'
-        MultiJson.engine.name.should == 'MultiJson::Engines::Yajl'
-      end
+      require 'yajl'
+      MultiJson.engine.name.should == 'MultiJson::Engines::Yajl'
     end
 
     it 'is settable via a symbol' do
@@ -95,7 +89,7 @@ describe "MultiJson" do
           encoded_json = MultiJson.encode(:a => 1, :b => {:c => 2})
           MultiJson.decode(encoded_json).should == { "a" => 1, "b" => { "c" => 2 } }
         end
-        
+
         it "properly decodes valid JSON in StringIOs" do
           json = StringIO.new('{"abc":"def"}')
           MultiJson.decode(json).should == { 'abc' => 'def' }

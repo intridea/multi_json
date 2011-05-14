@@ -1,9 +1,9 @@
-require 'rubygems'
+#!/usr/bin/env rake
 begin
   require 'bundler'
   Bundler::GemHelper.install_tasks
 rescue LoadError => e
-  puts "although not required, it's recommended that you use bundler during development"
+  warn "[WARNING]: It is recommended that you use bundler during development: gem install bundler"
 end
 
 require 'rspec/core/rake_task'
@@ -11,27 +11,13 @@ desc "Run all examples"
 RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
+task :test => :spec
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "multi_json #{MultiJson::VERSION}"
-  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('README.md')
+  rdoc.rdoc_files.include('LICENSE.md')
   rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-task :cleanup_rcov_files do
-  rm_rf 'coverage.data'
-end
-
-begin
-  namespace :spec do
-    desc "Run all examples using rcov"
-    RSpec::Core::RakeTask.new :rcov => :cleanup_rcov_files do |t|
-      t.rcov = true
-      t.rcov_opts =  %[-Ilib -Ispec --exclude "gems/*,features"]
-      t.rcov_opts << %[--text-report --sort coverage --no-html --aggregate coverage.data]
-    end
-  end
-rescue LoadError
 end
