@@ -25,6 +25,10 @@ load any. When loading, libraries are ordered by speed. First Yajl-Ruby, then
 the JSON gem, then JSON pure. If no JSON library is available, MultiJSON falls
 back to a bundled version of [OkJson](https://github.com/kr/okjson).
 
+Continuous Integration
+----------------------
+[![Build Status](http://travis-ci.org/intridea/multi_json.png)](http://travis-ci.org/intridea/multi_json)
+
 Contributing
 ------------
 In the spirit of [free software](http://www.fsf.org/licensing/essays/free-sw.html), **everyone** is encouraged to help improve this project.
