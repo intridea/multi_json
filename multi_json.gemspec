@@ -2,7 +2,7 @@
 require File.expand_path("../lib/multi_json/version", __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.add_development_dependency 'rake', '~> 0.8'
+  gem.add_development_dependency 'rake', '~> 0.9'
   gem.add_development_dependency 'rspec', '~> 2.6'
   gem.add_development_dependency 'simplecov', '~> 0.4'
   gem.authors = ["Michael Bleigh", "Josh Kalderimis", "Erik Michaels-Ober"]
