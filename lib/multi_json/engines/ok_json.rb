@@ -16,11 +16,19 @@ module MultiJson
       end
 
       def self.symbolize_keys(object) #:nodoc:
-        return object unless object.is_a?(Hash)
-        object.inject({}) do |result, (key, value)|
-          new_key   = key.is_a?(String) ? key.to_sym : key
-          new_value = value.is_a?(Hash) ? symbolize_keys(value) : value
-          result.merge! new_key => new_value
+        case object
+        when Array
+          object.map do |value|
+            symbolize_keys(value)
+          end
+        when Hash
+          object.inject({}) do |result, (key, value)|
+            new_key   = key.is_a?(String) ? key.to_sym : key
+            new_value = symbolize_keys(value)
+            result.merge! new_key => new_value
+          end
+        else
+          object
         end
       end
 

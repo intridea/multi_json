@@ -111,7 +111,22 @@ describe "MultiJson" do
         end
 
         it 'allows for symbolization of keys' do
-          MultiJson.decode('{"abc":{"def":"hgi"}}', :symbolize_keys => true).should == { :abc => { :def => 'hgi' } }
+          [
+            [
+              '{"abc":{"def":"hgi"}}',
+              { :abc => { :def => 'hgi' } }
+            ],
+            [
+              '[{"abc":{"def":"hgi"}}]',
+              [ { :abc => { :def => 'hgi' } } ]
+            ],
+            [
+              '{"abc":[{"def":"hgi"}]}',
+              { :abc => [ { :def => 'hgi' } ] }
+            ],
+          ].each do |example, expected|
+            MultiJson.decode(example, :symbolize_keys => true).should == expected
+          end
         end
       end
     end
