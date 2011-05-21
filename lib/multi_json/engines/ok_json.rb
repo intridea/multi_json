@@ -25,11 +25,19 @@ module MultiJson
       end
 
       def self.stringify_keys(object) #:nodoc:
-        return object unless object.is_a?(Hash)
-        object.inject({}) do |result, (key, value)|
-          new_key   = key.is_a?(Symbol) ? key.to_s : key
-          new_value = value.is_a?(Hash) ? stringify_keys(value) : value
-          result.merge! new_key => new_value
+        case object
+        when Array
+          object.map do |value|
+            stringify_keys(value)
+          end
+        when Hash
+          object.inject({}) do |result, (key, value)|
+            new_key   = key.is_a?(Symbol) ? key.to_s : key
+            new_value = stringify_keys(value)
+            result.merge! new_key => new_value
+          end
+        else
+          object
         end
       end
     end
