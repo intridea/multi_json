@@ -64,8 +64,23 @@ describe "MultiJson" do
         end
 
         it 'encodes symbol keys as strings' do
-          encoded_json = MultiJson.encode({ :foo => { :bar => 'baz' } })
-          MultiJson.decode(encoded_json).should == { 'foo' => { 'bar' => 'baz' } }
+          [
+            [
+              { :foo => { :bar => 'baz' } },
+              { 'foo' => { 'bar' => 'baz' } }
+            ],
+            [
+              [ { :foo => { :bar => 'baz' } } ],
+              [ { 'foo' => { 'bar' => 'baz' } } ],
+            ],
+            [
+              { :foo => [ { :bar => 'baz' } ] },
+              { 'foo' => [ { 'bar' => 'baz' } ] },
+            ]
+          ].each do |example, expected|
+            encoded_json = MultiJson.encode(example)
+            MultiJson.decode(encoded_json).should == expected
+          end
         end
 
         it 'encodes rootless JSON' do
@@ -96,7 +111,22 @@ describe "MultiJson" do
         end
 
         it 'allows for symbolization of keys' do
-          MultiJson.decode('{"abc":{"def":"hgi"}}', :symbolize_keys => true).should == { :abc => { :def => 'hgi' } }
+          [
+            [
+              '{"abc":{"def":"hgi"}}',
+              { :abc => { :def => 'hgi' } }
+            ],
+            [
+              '[{"abc":{"def":"hgi"}}]',
+              [ { :abc => { :def => 'hgi' } } ]
+            ],
+            [
+              '{"abc":[{"def":"hgi"}]}',
+              { :abc => [ { :def => 'hgi' } ] }
+            ],
+          ].each do |example, expected|
+            MultiJson.decode(example, :symbolize_keys => true).should == expected
+          end
         end
       end
     end
