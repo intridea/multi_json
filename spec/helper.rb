@@ -1,11 +1,6 @@
-begin
-  require 'bundler'
-  Bundler.setup
-rescue LoadError
-  warn "[WARNING]: It is recommended that you use bundler during development: gem install bundler"
-end
-
+$:.unshift File.expand_path('..', __FILE__)
+$:.unshift File.expand_path('../../lib', __FILE__)
 require 'simplecov'
 SimpleCov.start
-require 'rspec'
 require 'multi_json'
+require 'rspec'
