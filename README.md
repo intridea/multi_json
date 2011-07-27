@@ -27,7 +27,7 @@ back to a bundled version of [OkJson](https://github.com/kr/okjson).
 
 Continuous Integration
 ----------------------
-[![Build Status](http://travis-ci.org/intridea/multi_json.png)](http://travis-ci.org/intridea/multi_json)
+[![Build Status](https://secure.travis-ci.org/intridea/multi_json.png)](http://travis-ci.org/intridea/multi_json)
 
 Contributing
 ------------
