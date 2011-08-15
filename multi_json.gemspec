@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8
 require File.expand_path("../lib/multi_json/version", __FILE__)
 
 Gem::Specification.new do |gem|
@@ -9,7 +9,6 @@ Gem::Specification.new do |gem|
   gem.authors = ["Michael Bleigh", "Josh Kalderimis", "Erik Michaels-Ober"]
   gem.description = %q{A gem to provide swappable JSON backends utilizing Yajl::Ruby, the JSON gem, JSON pure, or a vendored version of okjson.}
   gem.email = ['michael@intridea.com', 'josh.kalderimis@gmail.com', 'sferik@gmail.com']
-  gem.executables = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f)}
   gem.extra_rdoc_files = ['LICENSE.md', 'README.md']
   gem.files = `git ls-files`.split("\n")
   gem.homepage = 'http://github.com/intridea/multi_json'
