@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.email = ['michael@intridea.com', 'josh.kalderimis@gmail.com', 'sferik@gmail.com']
   gem.extra_rdoc_files = ['LICENSE.md', 'README.md']
   gem.files = `git ls-files`.split("\n")
+  gem.files = Dir['LICENSE.md', 'README.md', 'Rakefile', 'multi_json.gemspec', 'Gemfile', '.document', '.rspec', '.travis.yml' ,'spec/**/*', 'lib/**/*']
   gem.homepage = 'http://github.com/intridea/multi_json'
   gem.name = 'multi_json'
   gem.rdoc_options = ["--charset=UTF-8"]
