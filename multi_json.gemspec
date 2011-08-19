@@ -17,6 +17,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.required_rubygems_version = Gem::Requirement.new(">= 1.3.6")
   gem.summary = %q{A gem to provide swappable JSON backends.}
-  gem.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.test_files = Dir['spec/**/*']
   gem.version = MultiJson::VERSION
 end
