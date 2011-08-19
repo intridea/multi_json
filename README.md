@@ -1,6 +1,4 @@
-MultiJSON
-=========
-
+# MultiJSON
 Lots of Ruby libraries utilize JSON parsing in some form, and everyone has
 their favorite JSON library. In order to best support multiple JSON parsers and
 libraries, <tt>multi_json</tt> is a general-purpose swappable JSON backend
@@ -25,12 +23,10 @@ load any. When loading, libraries are ordered by speed. First Yajl-Ruby, then
 the JSON gem, then JSON pure. If no JSON library is available, MultiJSON falls
 back to a bundled version of [OkJson](https://github.com/kr/okjson).
 
-<a name="ci">Continuous Integration</a>
-----------------------
+## <a name="ci">Continuous Integration</a>
 [![Build Status](https://secure.travis-ci.org/intridea/multi_json.png)](http://travis-ci.org/intridea/multi_json)
 
-<a name="contributing">Contributing</a>
-------------
+## <a name="contributing">Contributing</a>
 In the spirit of [free software](http://www.fsf.org/licensing/essays/free-sw.html), **everyone** is encouraged to help improve this project.
 
 Here are some ways *you* can contribute:
@@ -45,17 +41,18 @@ Here are some ways *you* can contribute:
 * by closing [issues](https://github.com/intridea/multi_json/issues)
 * by reviewing patches
 
-<a name="issues">Submitting an Issue</a>
--------------------
-We use the [GitHub issue tracker](https://github.com/intridea/multi_json/issues) to track bugs and
-features. Before submitting a bug report or feature request, check to make sure it hasn't already
-been submitted. You can indicate support for an existing issuse by voting it up. When submitting a
-bug report, please include a [Gist](https://gist.github.com/) that includes a stack trace and any
-details that may be necessary to reproduce the bug, including your gem version, Ruby version, and
-operating system. Ideally, a bug report should include a pull request with failing specs.
+## <a name="issues">Submitting an Issue</a>
+We use the [GitHub issue
+tracker](https://github.com/intridea/multi_json/issues) to track bugs and
+features. Before submitting a bug report or feature request, check to make sure
+it hasn't already been submitted. You can indicate support for an existing
+issuse by voting it up. When submitting a bug report, please include a
+[Gist](https://gist.github.com/) that includes a stack trace and any details
+that may be necessary to reproduce the bug, including your gem version, Ruby
+version, and operating system. Ideally, a bug report should include a pull
+request with failing specs.
 
-<a name="pulls">Submitting a Pull Request</a>
--------------------------
+## <a name="pulls">Submitting a Pull Request</a>
 1. Fork the project.
 2. Create a topic branch.
 3. Implement your feature or bug fix.
@@ -64,8 +61,7 @@ operating system. Ideally, a bug report should include a pull request with faili
 6. Commit and push your changes.
 7. Submit a pull request. Please do not include changes to the gemspec, version, or history file. (If you want to create your own version for some reason, please do so in a separate commit.)
 
-<a name="rubies">Supported Rubies</a>
-----------------
+## <a name="rubies">Supported Rubies</a>
 This library aims to support and is [tested
 against](http://travis-ci.org/intridea/multi_json) the following Ruby
 implementations:
@@ -91,7 +87,6 @@ implementation, you will be personally responsible for providing patches in a
 timely fashion. If critical issues for a particular implementation exist at the
 time of a major release, support for that Ruby version may be dropped.
 
-<a name="copyright">Copyright</a>
----------
+## <a name="copyright">Copyright</a>
 Copyright (c) 2010 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober, and Intridea, Inc.
 See [LICENSE](https://github.com/intridea/multi_json/blob/master/LICENSE.md) for details.
