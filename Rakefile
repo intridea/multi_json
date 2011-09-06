@@ -13,11 +13,13 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 task :test => :spec
 
-require 'rdoc/task'
-Rake::RDocTask.new do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "multi_json #{MultiJson::VERSION}"
-  rdoc.rdoc_files.include('README.md')
-  rdoc.rdoc_files.include('LICENSE.md')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+namespace :doc do
+  require 'rdoc/task'
+  require File.expand_path('../lib/multi_json/version', __FILE__)
+  RDoc::Task.new do |rdoc|
+    rdoc.rdoc_dir = 'rdoc'
+    rdoc.title = "multi_json #{MultiJson::VERSION}"
+    rdoc.main = 'README.md'
+    rdoc.rdoc_files.include('README.md', 'LICENSE.md', 'lib/**/*.rb')
+  end
 end
