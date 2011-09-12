@@ -7,11 +7,11 @@ library. You use it like so:
     require 'multi_json'
 
     MultiJson.engine = :yajl
-    MultiJson.decode('{"abc":"def"}') # decoded using Yajl
+    MultiJson.decode('{ "abc":"def" }') # decoded using Yajl
 
     MultiJson.engine = :json_gem
     MultiJson.engine = MultiJson::Engines::JsonGem # equivalent to previous line
-    MultiJson.encode({:abc => 'def'}) # encoded using the JSON gem
+    MultiJson.encode({ :abc => 'def' }) # encoded using the JSON gem
 
 The <tt>engine</tt> setter takes either a symbol or a class (to allow for
 custom JSON parsers) that responds to both <tt>.decode</tt> and
