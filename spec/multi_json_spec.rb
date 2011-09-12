@@ -28,8 +28,13 @@ describe "MultiJson" do
     end
 
     it 'defaults to the best available gem' do
-      require 'yajl'
-      MultiJson.engine.name.should == 'MultiJson::Engines::Yajl'
+      unless RUBY_ENGINE == 'jruby'
+        require 'yajl'
+        MultiJson.engine.name.should == 'MultiJson::Engines::Yajl'
+      else
+        require 'json'
+        MultiJson.engine.name.should == 'MultiJson::Engines::JsonGem'
+      end
     end
 
     it 'is settable via a symbol' do
