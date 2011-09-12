@@ -21,5 +21,5 @@ end
 
 
 def yajl_on_travis(engine)
-  ENV['TRAVIS'] && engine == 'yajl' && RUBY_ENGINE == 'jruby'
+  ENV['TRAVIS'] && engine == 'yajl' && defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
