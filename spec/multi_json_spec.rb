@@ -18,7 +18,7 @@ describe "MultiJson" do
     end
 
     it 'defaults to the best available gem' do
-      unless RUBY_ENGINE == 'jruby'
+      unless jruby?
         require 'yajl'
         MultiJson.engine.name.should == 'MultiJson::Engines::Yajl'
       else
