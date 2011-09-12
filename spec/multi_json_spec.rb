@@ -1,16 +1,6 @@
 require 'helper'
 require 'stringio'
 
-class MockDecoder
-  def self.decode(string, options = {})
-    {'abc' => 'def'}
-  end
-
-  def self.encode(string)
-    '{"abc":"def"}'
-  end
-end
-
 describe "MultiJson" do
   context 'engines' do
     it 'defaults to ok_json if no other json implementions are available' do
@@ -49,6 +39,11 @@ describe "MultiJson" do
   end
 
   %w(json_gem json_pure ok_json yajl).each do |engine|
+    if yajl_on_travis(engine)
+      puts "Yajl with JRuby is not tested on Travis as C-exts are turned off due to there experimental nature"
+      next
+    end
+    
     context engine do
       before do
         begin
