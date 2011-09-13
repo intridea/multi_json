@@ -100,6 +100,15 @@ describe "MultiJson" do
           end.should raise_error(MultiJson::DecodeError)
         end
 
+        it 'raises MultiJson::DecodeError with data on invalid JSON' do
+          data = '{crapper}'
+          begin
+            MultiJson.decode(data)
+          rescue MultiJson::DecodeError => de
+            de.data.should == data
+          end
+        end
+
         it 'stringifys symbol keys when encoding' do
           encoded_json = MultiJson.encode(:a => 1, :b => {:c => 2})
           MultiJson.decode(encoded_json).should == { "a" => 1, "b" => { "c" => 2 } }
