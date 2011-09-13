@@ -87,6 +87,10 @@ describe "MultiJson" do
           MultiJson.encode("random rootless string").should == "\"random rootless string\""
           MultiJson.encode(123).should == "123"
         end
+        
+        it "encodes custom objects which implement as_json" do
+          MultiJson.encode(TimeWithZone.new).should == "\"2005-02-01T15:15:10Z\""
+        end
       end
 
       describe '.decode' do

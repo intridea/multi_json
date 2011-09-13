@@ -19,6 +19,12 @@ class MockDecoder
   end
 end
 
+class TimeWithZone
+  def to_json
+    "\"2005-02-01T15:15:10Z\""
+  end
+end
+
 
 def yajl_on_travis(engine)
   ENV['TRAVIS'] && engine == 'yajl' && jruby?
