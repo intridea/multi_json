@@ -101,7 +101,7 @@ describe "MultiJson" do
         end
 
         it 'raises MultiJson::DecodeError with data on invalid JSON' do
-          data = '{crapper}'
+          data = '{invalid}'
           begin
             MultiJson.decode(data)
           rescue MultiJson::DecodeError => de

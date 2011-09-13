@@ -4,11 +4,10 @@ module MultiJson
     def initialize(message, backtrace, data)
       super(message)
       self.set_backtrace(backtrace)
-      self.data= data
+      @data = data
     end
-  private
-    attr_writer :data
   end
+
   module_function
 
   @engine = nil
