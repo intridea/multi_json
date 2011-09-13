@@ -1,5 +1,14 @@
 module MultiJson
-  class DecodeError < StandardError; end
+  class DecodeError < StandardError
+    attr_reader :data
+    def initialize(message, backtrace, data)
+      super(message)
+      self.set_backtrace(backtrace)
+      self.data= data
+    end
+  private
+    attr_writer :data
+  end
   module_function
 
   @engine = nil
@@ -64,7 +73,7 @@ module MultiJson
   def decode(string, options = {})
     engine.decode(string, options)
   rescue engine::ParseError => exception
-    raise DecodeError, exception.message, exception.backtrace
+    raise DecodeError.new(exception.message, exception.backtrace, string)
   end
 
   # Encodes a Ruby object as JSON.
