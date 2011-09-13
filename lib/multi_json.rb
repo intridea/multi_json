@@ -9,7 +9,8 @@ module MultiJson
   end
 
   module_function
-
+  
+  
   @engine = nil
 
   # Get the current engine class.
@@ -19,12 +20,20 @@ module MultiJson
     @engine
   end
 
+  
+  
   REQUIREMENT_MAP = [
     ["yajl", :yajl],
     ["json", :json_gem],
     ["json/pure", :json_pure]
   ]
-
+  
+  # Swap ordering if it's JRuby
+  if defined?(JRUBY_VERSION)
+    REQUIREMENT_MAP[0], REQUIREMENT_MAP[1] = REQUIREMENT_MAP[1], REQUIREMENT_MAP[0]
+  end
+  
+  
   # The default engine based on what you currently
   # have loaded and installed. First checks to see
   # if any engines are already loaded, then checks
