@@ -3,17 +3,33 @@ require 'stringio'
 
 describe "MultiJson" do
   context 'engines' do
-    it 'defaults to ok_json if no other json implementions are available' do
-      old_map = MultiJson::REQUIREMENT_MAP
-      begin
+    context 'when no other json implementations are available' do
+      before(:each) do
+        @old_map = MultiJson::REQUIREMENT_MAP
+        @old_yajl = Object.const_get :Yajl if Object.const_defined?(:Yajl)
+        @old_json = Object.const_get :JSON if Object.const_defined?(:JSON)
         MultiJson::REQUIREMENT_MAP.each_with_index do |(library, engine), index|
           MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", engine]
         end
-        MultiJson.default_engine.should == :ok_json
-      ensure
-        old_map.each_with_index do |(library, engine), index|
+        Object.send :remove_const, :Yajl if @old_yajl
+        Object.send :remove_const, :JSON if @old_json
+      end
+
+      after(:each) do
+        @old_map.each_with_index do |(library, engine), index|
           MultiJson::REQUIREMENT_MAP[index] = [library, engine]
         end
+        Object.const_set :Yajl, @old_yajl if @old_yajl
+        Object.const_set :JSON, @old_json if @old_json
+      end
+
+      it 'defaults to ok_json if no other json implementions are available' do
+        MultiJson.default_engine.should == :ok_json
+      end
+
+      it 'prints a warning' do
+        Kernel.should_receive(:warn).with(/warning/i)
+        MultiJson.default_engine
       end
     end
 
