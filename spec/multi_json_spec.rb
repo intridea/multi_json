@@ -26,6 +26,11 @@ describe "MultiJson" do
       it 'defaults to ok_json if no other json implementions are available' do
         MultiJson.default_engine.should == :ok_json
       end
+
+      it 'prints a warning' do
+        Kernel.should_receive(:warn).with(/warning/i)
+        MultiJson.default_engine
+      end
     end
 
     it 'defaults to the best available gem' do
