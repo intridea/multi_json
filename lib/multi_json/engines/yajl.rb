@@ -10,8 +10,8 @@ module MultiJson
         ::Yajl::Parser.new(:symbolize_keys => options[:symbolize_keys]).parse(string)
       end
 
-      def self.encode(object) #:nodoc:
-        ::Yajl::Encoder.new.encode(object)
+      def self.encode(object, options = {}) #:nodoc:
+        ::Yajl::Encoder.encode(object, options)
       end
     end
   end

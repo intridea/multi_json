@@ -1,21 +1,12 @@
 require 'json' unless defined?(::JSON)
+require File.join(File.dirname(__FILE__),'json_common')
 
 module MultiJson
   module Engines
     # Use the JSON gem to encode/decode.
     class JsonGem
       ParseError = ::JSON::ParserError
-
-      def self.decode(string, options = {}) #:nodoc:
-        opts = {}
-        opts[:symbolize_names] = options[:symbolize_keys]
-        string = string.read if string.respond_to?(:read)
-        ::JSON.parse(string, opts)
-      end
-
-      def self.encode(object) #:nodoc:
-        object.to_json
-      end
+      extend JsonCommon
     end
   end
 end
