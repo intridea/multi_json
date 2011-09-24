@@ -103,6 +103,22 @@ describe "MultiJson" do
           MultiJson.encode("random rootless string").should == "\"random rootless string\""
           MultiJson.encode(123).should == "123"
         end
+        
+        it 'passes options to the engine' do
+          MultiJson.engine.should_receive(:encode).with('foo', {:bar => :baz})
+          MultiJson.encode('foo', :bar => :baz)
+        end
+
+        if engine == 'json_gem' || engine == 'json_pure' 
+          describe 'with :pretty option set to true' do
+            it 'passes default pretty options' do
+              object = 'foo'
+              object.should_receive(:to_json).with(JSON::PRETTY_STATE_PROTOTYPE.to_h)
+              MultiJson.encode(object,:pretty => true)
+            end
+          end
+        end
+
       end
 
       describe '.decode' do

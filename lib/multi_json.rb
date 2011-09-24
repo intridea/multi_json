@@ -79,7 +79,7 @@ module MultiJson
   end
 
   # Encodes a Ruby object as JSON.
-  def encode(object)
-    engine.encode(object)
+  def encode(object, options = {})
+    engine.encode(object, options)
   end
 end

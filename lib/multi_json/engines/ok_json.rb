@@ -11,7 +11,7 @@ module MultiJson
         options[:symbolize_keys] ? symbolize_keys(result) : result
       end
 
-      def self.encode(object) #:nodoc:
+      def self.encode(object, options = {}) #:nodoc:
         ::OkJson.valenc(stringify_keys(object))
       end
 
