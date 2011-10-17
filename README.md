@@ -13,6 +13,8 @@ library. You use it like so:
     MultiJson.engine = MultiJson::Engines::JsonGem # equivalent to previous line
     MultiJson.encode({ :abc => 'def' }) # encoded using the JSON gem
 
+    MultiJson.encode({ :abc => 'def' }, :pretty => true) # encoded in a pretty form (ignored if engine is ok_json)
+
 The <tt>engine</tt> setter takes either a symbol or a class (to allow for
 custom JSON parsers) that responds to both <tt>.decode</tt> and
 <tt>.encode</tt> at the class level.
