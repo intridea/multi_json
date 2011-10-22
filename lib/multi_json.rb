@@ -25,8 +25,6 @@ module MultiJson
     ["json/pure", :json_pure]
   ]
 
-  DEFAULT_ENGINE_WARNING = 'Warning: multi_json is using default ok_json engine. Suggested action: require and load an appropriate JSON library.'
-
   # The default engine based on what you currently
   # have loaded and installed. First checks to see
   # if any engines are already loaded, then checks
@@ -44,7 +42,6 @@ module MultiJson
       end
     end
 
-    Kernel.warn DEFAULT_ENGINE_WARNING
     :ok_json
   end
 
