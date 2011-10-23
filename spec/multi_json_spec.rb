@@ -59,7 +59,7 @@ describe "MultiJson" do
       puts "Yajl with JRuby is not tested on Travis as C-exts are turned off due to there experimental nature"
       next
     end
-    
+
     context engine do
       before do
         begin
@@ -103,13 +103,13 @@ describe "MultiJson" do
           MultiJson.encode("random rootless string").should == "\"random rootless string\""
           MultiJson.encode(123).should == "123"
         end
-        
+
         it 'passes options to the engine' do
           MultiJson.engine.should_receive(:encode).with('foo', {:bar => :baz})
           MultiJson.encode('foo', :bar => :baz)
         end
 
-        if engine == 'json_gem' || engine == 'json_pure' 
+        if engine == 'json_gem' || engine == 'json_pure'
           describe 'with :pretty option set to true' do
             it 'passes default pretty options' do
               object = 'foo'
@@ -119,6 +119,9 @@ describe "MultiJson" do
           end
         end
 
+        it "encodes custom objects which implement as_json" do
+          MultiJson.encode(TimeWithZone.new).should == "\"2005-02-01T15:15:10Z\""
+        end
       end
 
       describe '.decode' do
