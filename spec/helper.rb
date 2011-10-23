@@ -20,7 +20,7 @@ class MockDecoder
 end
 
 class TimeWithZone
-  def to_json
+  def to_json(options = {})
     "\"2005-02-01T15:15:10Z\""
   end
 end

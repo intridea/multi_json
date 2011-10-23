@@ -2,17 +2,17 @@ module MultiJson
   module Engines
     module JsonCommon
 
-      def decode(string, options = {}) #:nodoc:
+      def decode(string, options = {})
         opts = {}
         opts[:symbolize_names] = options[:symbolize_keys]
         string = string.read if string.respond_to?(:read)
         ::JSON.parse(string, opts)
       end
 
-      def encode(object, options = {}) #:nodoc:
-        object.to_json( process_options(options) )
+      def encode(object, options = {})
+        object.to_json(process_options(options))
       end
-      
+
       protected
 
         def process_options(options={})
