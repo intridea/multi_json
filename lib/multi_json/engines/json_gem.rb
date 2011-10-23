@@ -1,5 +1,5 @@
 require 'json' unless defined?(::JSON)
-require File.join(File.dirname(__FILE__),'json_common')
+require 'multi_json/engines/json_common'
 
 module MultiJson
   module Engines
