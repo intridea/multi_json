@@ -32,7 +32,7 @@ back to a bundled version of [OkJson][].
 [ci]: http://travis-ci.org/intridea/multi_json
 
 ## <a name="dependencies"></a>Dependency Status
-[![Dependency Status](https://gemnasium.com/intridea/multi_json.png)][gemnasium]
+[![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
 
 [gemnasium]: https://gemnasium.com/intridea/multi_json
 
