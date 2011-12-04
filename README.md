@@ -26,10 +26,10 @@ back to a bundled version of [OkJson][].
 
 [okjson]: https://github.com/kr/okjson
 
-## <a name="ci"></a>Continuous Integration
-[![Build Status](https://secure.travis-ci.org/intridea/multi_json.png)][ci]
+## <a name="build"></a>Build Status
+[![Build Status](https://secure.travis-ci.org/intridea/multi_json.png)][travis]
 
-[ci]: http://travis-ci.org/intridea/multi_json
+[travis]: http://travis-ci.org/intridea/multi_json
 
 ## <a name="dependencies"></a>Dependency Status
 [![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
@@ -81,7 +81,7 @@ bug report should include a pull request with failing specs.
    reason, please do so in a separate commit.)
 
 ## <a name="versions"></a>Supported Ruby Versions
-This library aims to support and is [tested against][ci] the following Ruby
+This library aims to support and is [tested against][travis] the following Ruby
 implementations:
 
 * Ruby 1.8.7
