@@ -25,7 +25,7 @@ module MultiJson
     ["json/pure", :json_pure]
   ]
 
-  DEFAULT_ENGINE_WARNING = %{Warning: multi_json is using default ok_json engine. Suggested action: require and load a JSON library such as yajl-ruby (fast, but doesn't work on JRuby) or json_pure (works everywhere).}
+  DEFAULT_ENGINE_WARNING = %{Warning: multi_json is using default ok_json engine. Suggested action: require and load a JSON library such as 'yajl-ruby' (fast, but doesn't work on JRuby) or 'json' (works everywhere).}
 
   # The default engine based on what you currently
   # have loaded and installed. First checks to see
