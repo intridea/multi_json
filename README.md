@@ -1,4 +1,4 @@
-# MultiJSON [![Build Status](https://secure.travis-ci.org/intridea/multi_json.png)][travis] [![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
+# MultiJSON [![Build Status](https://secure.travis-ci.org/intridea/multi_json.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
 
 [travis]: http://travis-ci.org/intridea/multi_json
 [gemnasium]: https://gemnasium.com/intridea/multi_json
