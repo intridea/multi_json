@@ -1,4 +1,8 @@
-# MultiJSON
+# MultiJSON [![Build Status](https://secure.travis-ci.org/intridea/multi_json.png)][travis] [![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
+
+[travis]: http://travis-ci.org/intridea/multi_json
+[gemnasium]: https://gemnasium.com/intridea/multi_json
+
 Lots of Ruby libraries utilize JSON parsing in some form, and everyone has
 their favorite JSON library. In order to best support multiple JSON parsers and
 libraries, `multi_json` is a general-purpose swappable JSON backend library.
@@ -25,16 +29,6 @@ the JSON gem, then JSON pure. If no JSON library is available, MultiJSON falls
 back to a bundled version of [OkJson][].
 
 [okjson]: https://github.com/kr/okjson
-
-## <a name="build"></a>Build Status
-[![Build Status](https://secure.travis-ci.org/intridea/multi_json.png)][travis]
-
-[travis]: http://travis-ci.org/intridea/multi_json
-
-## <a name="dependencies"></a>Dependency Status
-[![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
-
-[gemnasium]: https://gemnasium.com/intridea/multi_json
 
 ## <a name="contributing"></a>Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
