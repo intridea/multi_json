@@ -60,6 +60,8 @@ module MultiJson
     when String, Symbol
       require "multi_json/engines/#{new_engine}"
       @engine = MultiJson::Engines.const_get("#{new_engine.to_s.split('_').map{|s| s.capitalize}.join('')}")
+    when NilClass
+      @engine = nil
     when Class
       @engine = new_engine
     else

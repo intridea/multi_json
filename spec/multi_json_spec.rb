@@ -3,8 +3,11 @@ require 'stringio'
 
 describe "MultiJson" do
   context 'engines' do
+    before do
+      MultiJson.engine = nil
+    end
     context 'when no other json implementations are available' do
-      before(:each) do
+      before do
         @old_map = MultiJson::REQUIREMENT_MAP
         @old_yajl = Object.const_get :Yajl if Object.const_defined?(:Yajl)
         @old_json = Object.const_get :JSON if Object.const_defined?(:JSON)
@@ -15,7 +18,7 @@ describe "MultiJson" do
         Object.send :remove_const, :JSON if @old_json
       end
 
-      after(:each) do
+      after do
         @old_map.each_with_index do |(library, engine), index|
           MultiJson::REQUIREMENT_MAP[index] = [library, engine]
         end
