@@ -13,6 +13,8 @@ You use it like so:
     MultiJson.engine = :yajl
     MultiJson.decode('{ "abc":"def" }') # decoded using Yajl
 
+    MultiJson.decode('{ "abc":"def" }', :symbolize_keys => true) # for symbol keys: {:abc => "def"}
+
     MultiJson.engine = :json_gem
     MultiJson.engine = MultiJson::Engines::JsonGem # equivalent to previous line
     MultiJson.encode({ :abc => 'def' }) # encoded using the JSON gem
