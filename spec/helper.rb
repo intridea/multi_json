@@ -1,5 +1,9 @@
+def macruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
+end
+
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start unless macruby?
 require 'multi_json'
 require 'rspec'
 
@@ -21,6 +25,10 @@ end
 
 def yajl_on_travis(engine)
   ENV['TRAVIS'] && engine == 'yajl' && jruby?
+end
+
+def nsjsonserialization_on_other_than_macruby(engine)
+  engine == 'nsjsonserialization' && !macruby?
 end
 
 def jruby?

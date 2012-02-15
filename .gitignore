@@ -32,3 +32,4 @@ coverage.data
 *.rbc
 
 ## PROJECT::SPECIFIC
+.rbenv*

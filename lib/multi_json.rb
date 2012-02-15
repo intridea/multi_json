@@ -55,6 +55,7 @@ module MultiJson
   # * <tt>:json_pure</tt>
   # * <tt>:ok_json</tt>
   # * <tt>:yajl</tt>
+  # * <tt>:nsjsonserialization</tt> (MacRuby only)
   def engine=(new_engine)
     case new_engine
     when String, Symbol
