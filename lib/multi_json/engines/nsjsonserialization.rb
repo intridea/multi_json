@@ -1,3 +1,4 @@
+framework 'Foundation'
 require 'multi_json/engines/ok_json'
 
 module MultiJson
@@ -8,7 +9,7 @@ module MultiJson
       def self.decode(string, options = {})
         string = string.read if string.respond_to?(:read)
         data = string.dataUsingEncoding(NSUTF8StringEncoding)
-        object = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingMutableContainers, error: nil)
+        object = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves, error: nil)
         if object
           object = symbolize_keys(object) if options[:symbolize_keys]
           object
@@ -22,7 +23,7 @@ module MultiJson
         object = object.as_json if object.respond_to?(:as_json)
         if NSJSONSerialization.isValidJSONObject(object)
           data = NSJSONSerialization.dataWithJSONObject(object, options: pretty, error: nil)
-          NSString.alloc.initWithData(data, encoding: NSUTF8StringEncoding)
+          NSMutableString.alloc.initWithData(data, encoding: NSUTF8StringEncoding)
         else
           super(object, options)
         end

@@ -2,10 +2,6 @@ def macruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
 end
 
-if macruby?
-  framework 'Cocoa'
-end
-
 require 'simplecov'
 SimpleCov.start unless macruby?
 require 'multi_json'
