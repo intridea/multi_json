@@ -32,6 +32,14 @@ back to a bundled version of [OkJson][].
 
 [okjson]: https://github.com/kr/okjson
 
+## Supported JSON Engines
+
+* [`:yajl`](https://github.com/brianmario/yajl-ruby) Yet another json library, C extension
+* [`:json_gem`](https://github.com/genki/json) Json gem as C extension
+* [`:json_pure`](https://github.com/genki/json) Pure ruby implementation of the json gem
+* [`:ok_json`][okjson] Pure ruby implementation, aiming for maximum compatibility
+* [`:nsjsonserialization`](https://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html) Wrapper for Apple's NSJSONSerialization out of the Cocoa Framework (MacRuby only)
+
 ## <a name="contributing"></a>Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
 improve this project.
@@ -86,10 +94,12 @@ implementations:
 * [JRuby][]
 * [Rubinius][]
 * [Ruby Enterprise Edition][ree]
+* [MacRuby][] (not tested on Travis CI)
 
 [jruby]: http://www.jruby.org/
 [rubinius]: http://rubini.us/
 [ree]: http://www.rubyenterpriseedition.com/
+[macruby]: http://www.macruby.org/
 
 If something doesn't work on one of these interpreters, it should be considered
 a bug.
