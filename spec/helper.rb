@@ -2,8 +2,10 @@ def macruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
 end
 
-require 'simplecov'
-SimpleCov.start unless macruby?
+unless ENV['CI'] || macruby?
+  require 'simplecov'
+  SimpleCov.start
+end
 require 'multi_json'
 require 'rspec'
 
