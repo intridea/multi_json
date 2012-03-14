@@ -25,10 +25,6 @@ class TimeWithZone
   end
 end
 
-def yajl_on_travis(engine)
-  ENV['TRAVIS'] && engine == 'yajl' && jruby?
-end
-
 def nsjsonserialization_on_other_than_macruby(engine)
   engine == 'nsjsonserialization' && !macruby?
 end

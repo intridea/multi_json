@@ -9,11 +9,13 @@ describe "MultiJson" do
     context 'when no other json implementations are available' do
       before do
         @old_map = MultiJson::REQUIREMENT_MAP
+        @old_oj = Object.const_get :Oj if Object.const_defined?(:Oj)
         @old_yajl = Object.const_get :Yajl if Object.const_defined?(:Yajl)
         @old_json = Object.const_get :JSON if Object.const_defined?(:JSON)
         MultiJson::REQUIREMENT_MAP.each_with_index do |(library, engine), index|
           MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", engine]
         end
+        Object.send :remove_const, :Oj if @old_oj
         Object.send :remove_const, :Yajl if @old_yajl
         Object.send :remove_const, :JSON if @old_json
       end
@@ -22,6 +24,7 @@ describe "MultiJson" do
         @old_map.each_with_index do |(library, engine), index|
           MultiJson::REQUIREMENT_MAP[index] = [library, engine]
         end
+        Object.const_set :Oj, @old_oj if @old_oj
         Object.const_set :Yajl, @old_yajl if @old_yajl
         Object.const_set :JSON, @old_json if @old_json
       end
@@ -38,8 +41,8 @@ describe "MultiJson" do
 
     it 'defaults to the best available gem' do
       unless jruby?
-        require 'yajl'
-        MultiJson.engine.name.should == 'MultiJson::Engines::Yajl'
+        require 'oj'
+        MultiJson.engine.name.should == 'MultiJson::Engines::Oj'
       else
         require 'json'
         MultiJson.engine.name.should == 'MultiJson::Engines::JsonGem'
@@ -57,11 +60,7 @@ describe "MultiJson" do
     end
   end
 
-  %w(json_gem json_pure ok_json yajl nsjsonserialization).each do |engine|
-    if yajl_on_travis(engine)
-      puts "Yajl with JRuby is not tested on Travis as C-exts are turned off due to there experimental nature"
-      next
-    end
+  %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |engine|
     if nsjsonserialization_on_other_than_macruby(engine)
       puts "NSJSONSerialization is exclusively available for MacRuby only."
       next
