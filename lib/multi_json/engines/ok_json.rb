@@ -1,4 +1,4 @@
-require "multi_json/vendor/ok_json"
+require 'multi_json/vendor/ok_json'
 
 module MultiJson
   module Engines

@@ -5,7 +5,7 @@ module MultiJson
   module Engines
     class Nsjsonserialization < MultiJson::Engines::OkJson
       ParseError = ::MultiJson::OkJson::Error
-      
+
       def self.decode(string, options = {})
         string = string.read if string.respond_to?(:read)
         data = string.dataUsingEncoding(NSUTF8StringEncoding)
@@ -28,7 +28,7 @@ module MultiJson
           super(object, options)
         end
       end
-      
+
     end
   end
 end

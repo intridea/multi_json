@@ -1,4 +1,4 @@
-require 'yajl' unless defined?(Yajl)
+require 'yajl' unless defined?(::Yajl)
 
 module MultiJson
   module Engines
