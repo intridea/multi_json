@@ -6,6 +6,8 @@ module MultiJson
     class Oj
       ParseError = SyntaxError
 
+      ::Oj.default_options = {:mode => :compat}
+
       def self.decode(string, options = {}) #:nodoc:
         ::Oj.load(string, options)
       end
