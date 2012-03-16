@@ -57,7 +57,7 @@ describe "MultiJson" do
     end
   end
 
-  %w(json_gem json_pure ok_json yajl nsjsonserialization).each do |engine|
+  %w(json_gem json_pure ok_json yajl oj nsjsonserialization).each do |engine|
     if yajl_on_travis(engine)
       puts "Yajl with JRuby is not tested on Travis as C-exts are turned off due to there experimental nature"
       next
