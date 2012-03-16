@@ -9,7 +9,9 @@ module MultiJson
       ParseError = SyntaxError
 
       def self.decode(string, options = {}) #:nodoc:
-        ::Oj.load(string, options)
+        opts = {}
+        opts[:symbol_keys] = options[:symbolize_keys]
+        ::Oj.load(string, opts)
       end
 
       def self.encode(object, options = {}) #:nodoc:
