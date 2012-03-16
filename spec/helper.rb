@@ -25,10 +25,6 @@ class TimeWithZone
   end
 end
 
-def nsjsonserialization_on_other_than_macruby(engine)
-  engine == 'nsjsonserialization' && !macruby?
-end
-
 def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end

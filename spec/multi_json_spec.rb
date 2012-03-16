@@ -61,10 +61,8 @@ describe "MultiJson" do
   end
 
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |engine|
-    if nsjsonserialization_on_other_than_macruby(engine)
-      puts "NSJSONSerialization is exclusively available for MacRuby only."
-      next
-    end
+    next if !macruby? && engine == 'nsjsonserialization'
+    next if jruby? && engine == 'oj'
 
     context engine do
       before do
