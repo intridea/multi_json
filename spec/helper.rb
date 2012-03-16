@@ -1,3 +1,7 @@
+def jruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+end
+
 def macruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
 end
@@ -23,8 +27,4 @@ class TimeWithZone
   def to_json(options = {})
     "\"2005-02-01T15:15:10Z\""
   end
-end
-
-def jruby?
-  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end

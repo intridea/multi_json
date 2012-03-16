@@ -1,7 +1,7 @@
 require 'helper'
 require 'stringio'
 
-describe "MultiJson" do
+describe 'MultiJson' do
   context 'engines' do
     before do
       MultiJson.engine = nil
@@ -62,7 +62,7 @@ describe "MultiJson" do
 
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |engine|
     next if !macruby? && engine == 'nsjsonserialization'
-    next if jruby? && engine == 'oj'
+    next if jruby? && (engine == 'oj' || engine == 'yajl')
 
     context engine do
       before do
@@ -76,8 +76,8 @@ describe "MultiJson" do
       describe '.encode' do
         it 'writes decodable JSON' do
           [
-            { 'abc' => 'def' },
-            [1, 2, 3, "4"]
+            {'abc' => 'def'},
+            [1, 2, 3, "4"],
           ].each do |example|
             MultiJson.decode(MultiJson.encode(example)).should == example
           end
@@ -86,16 +86,16 @@ describe "MultiJson" do
         it 'encodes symbol keys as strings' do
           [
             [
-              { :foo => { :bar => 'baz' } },
-              { 'foo' => { 'bar' => 'baz' } }
+              {:foo => {:bar => 'baz'}},
+              {'foo' => {'bar' => 'baz'}},
             ],
             [
-              [ { :foo => { :bar => 'baz' } } ],
-              [ { 'foo' => { 'bar' => 'baz' } } ],
+              [{:foo => {:bar => 'baz'}}],
+              [{'foo' => {'bar' => 'baz'}}],
             ],
             [
-              { :foo => [ { :bar => 'baz' } ] },
-              { 'foo' => [ { 'bar' => 'baz' } ] },
+              {:foo => [{:bar => 'baz'}]},
+              {'foo' => [{'bar' => 'baz'}]},
             ]
           ].each do |example, expected|
             encoded_json = MultiJson.encode(example)
@@ -130,7 +130,7 @@ describe "MultiJson" do
 
       describe '.decode' do
         it 'properly decodes valid JSON' do
-          MultiJson.decode('{"abc":"def"}').should == { 'abc' => 'def' }
+          MultiJson.decode('{"abc":"def"}').should == {'abc' => 'def'}
         end
 
         it 'raises MultiJson::DecodeError on invalid JSON' do
@@ -150,27 +150,27 @@ describe "MultiJson" do
 
         it 'stringifys symbol keys when encoding' do
           encoded_json = MultiJson.encode(:a => 1, :b => {:c => 2})
-          MultiJson.decode(encoded_json).should == { "a" => 1, "b" => { "c" => 2 } }
+          MultiJson.decode(encoded_json).should == {"a" => 1, "b" => {"c" => 2}}
         end
 
         it "properly decodes valid JSON in StringIOs" do
           json = StringIO.new('{"abc":"def"}')
-          MultiJson.decode(json).should == { 'abc' => 'def' }
+          MultiJson.decode(json).should == {'abc' => 'def'}
         end
 
         it 'allows for symbolization of keys' do
           [
             [
               '{"abc":{"def":"hgi"}}',
-              { :abc => { :def => 'hgi' } }
+              {:abc => {:def => 'hgi'}},
             ],
             [
               '[{"abc":{"def":"hgi"}}]',
-              [ { :abc => { :def => 'hgi' } } ]
+              [{:abc => {:def => 'hgi'}}],
             ],
             [
               '{"abc":[{"def":"hgi"}]}',
-              { :abc => [ { :def => 'hgi' } ] }
+              {:abc => [{:def => 'hgi'}]},
             ],
           ].each do |example, expected|
             MultiJson.decode(example, :symbolize_keys => true).should == expected
