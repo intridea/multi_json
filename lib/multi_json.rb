@@ -20,6 +20,7 @@ module MultiJson
   end
 
   REQUIREMENT_MAP = [
+    ["oj", :oj],
     ["yajl", :yajl],
     ["json", :json_gem],
     ["json/pure", :json_pure]
@@ -32,6 +33,7 @@ module MultiJson
   # if any engines are already loaded, then checks
   # to see which are installed if none are loaded.
   def default_engine
+    return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
 
