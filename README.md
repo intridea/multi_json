@@ -3,42 +3,37 @@
 [travis]: http://travis-ci.org/intridea/multi_json
 [gemnasium]: https://gemnasium.com/intridea/multi_json
 
-Lots of Ruby libraries utilize JSON parsing in some form, and everyone has
-their favorite JSON library. In order to best support multiple JSON parsers and
-libraries, `multi_json` is a general-purpose swappable JSON backend library.
-You use it like so:
+Lots of Ruby libraries parse JSON and everyone has their favorite JSON coder.
+Instead of choosing a single JSON coder and forcing users of your library to be
+stuck with it, you can use MultiJSON instead, which will simply choose the
+fastest available JSON coder. Here's how to use it:
 
     require 'multi_json'
 
-    MultiJson.engine = :yajl
-    MultiJson.decode('{ "abc":"def" }') # decoded using Yajl
-
-    MultiJson.decode('{ "abc":"def" }', :symbolize_keys => true) # for symbol keys: {:abc => "def"}
-
-    MultiJson.engine = :json_gem
-    MultiJson.engine = MultiJson::Engines::JsonGem # equivalent to previous line
-    MultiJson.encode({ :abc => 'def' }) # encoded using the JSON gem
-
-    MultiJson.encode({ :abc => 'def' }, :pretty => true) # encoded in a pretty form (ignored if engine is ok_json)
+    MultiJson.decode('{"abc":"def"}') #=> {"abc" => "def"}
+    MultiJson.decode('{"abc":"def"}', :symbolize_keys => true) #=> {:abc => "def"}
+    MultiJson.encode({:abc => 'def'}) # convert Ruby back to JSON
+    MultiJson.encode({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
 
 The `engine` setter takes either a symbol or a class (to allow for custom JSON
 parsers) that responds to both `.decode` and `.encode` at the class level.
 
 MultiJSON tries to have intelligent defaulting. That is, if you have any of the
 supported engines already loaded, it will utilize them before attempting to
-load any. When loading, libraries are ordered by speed. First Yajl-Ruby, then
-the JSON gem, then JSON pure. If no JSON library is available, MultiJSON falls
-back to a bundled version of [OkJson][].
+load any. When loading, libraries are ordered by speed. First Oj, then Yajl,
+then the JSON gem, then JSON pure. If no other JSON library is available,
+MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 
 [okjson]: https://github.com/kr/okjson
 
 ## Supported JSON Engines
 
-* [`:yajl`](https://github.com/brianmario/yajl-ruby) Yet another json library, C extension
-* [`:json_gem`](https://github.com/genki/json) Json gem as C extension
-* [`:json_pure`](https://github.com/genki/json) Pure ruby implementation of the json gem
-* [`:ok_json`][okjson] Pure ruby implementation, aiming for maximum compatibility
-* [`:nsjsonserialization`](https://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html) Wrapper for Apple's NSJSONSerialization out of the Cocoa Framework (MacRuby only)
+* [Oj](https://github.com/ohler55/oj) Optimized JSON by Peter Ohler
+* [Yajl](https://github.com/brianmario/yajl-ruby) Yet Another JSON Library by Brian Lopez
+* [JSON](https://github.com/flori/json) The default JSON gem with C-extensions (ships with Ruby 1.9)
+* [JSON Pure](https://github.com/flori/json) A Ruby variant of the JSON gem
+* [NSJSONSerialization](https://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html) Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
+* [OkJson][okjson] A simple, vendorable JSON parser
 
 ## <a name="contributing"></a>Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
