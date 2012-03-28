@@ -3,10 +3,8 @@ module MultiJson
     module JsonCommon
 
       def decode(string, options={})
-        opts = {}
-        opts[:symbolize_names] = options[:symbolize_keys]
         string = string.read if string.respond_to?(:read)
-        ::JSON.parse(string, opts)
+        ::JSON.parse(string, :symbolize_keys => options[:symbolize_keys])
       end
 
       def encode(object, options={})
@@ -19,7 +17,7 @@ module MultiJson
         return options if options.empty?
         opts = {}
         opts.merge!(JSON::PRETTY_STATE_PROTOTYPE.to_h) if options.delete(:pretty)
-        opts.merge! options
+        opts.merge!(options)
       end
 
     end
