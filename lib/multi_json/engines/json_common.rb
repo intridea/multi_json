@@ -4,7 +4,7 @@ module MultiJson
 
       def decode(string, options={})
         string = string.read if string.respond_to?(:read)
-        ::JSON.parse(string, :symbolize_keys => options[:symbolize_keys])
+        ::JSON.parse(string, :symbolize_names => options[:symbolize_keys])
       end
 
       def encode(object, options={})
