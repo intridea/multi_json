@@ -88,12 +88,10 @@ implementations:
 * Ruby 1.9.3
 * [JRuby][]
 * [Rubinius][]
-* [Ruby Enterprise Edition][ree]
 * [MacRuby][] (not tested on Travis CI)
 
 [jruby]: http://www.jruby.org/
 [rubinius]: http://rubini.us/
-[ree]: http://www.rubyenterpriseedition.com/
 [macruby]: http://www.macruby.org/
 
 If something doesn't work on one of these interpreters, it should be considered
