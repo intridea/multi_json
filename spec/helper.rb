@@ -14,17 +14,17 @@ require 'multi_json'
 require 'rspec'
 
 class MockDecoder
-  def self.decode(string, options = {})
+  def self.load(string, options={})
     {'abc' => 'def'}
   end
 
-  def self.encode(string)
+  def self.dump(string)
     '{"abc":"def"}'
   end
 end
 
 class TimeWithZone
-  def to_json(options = {})
+  def to_json(options={})
     "\"2005-02-01T15:15:10Z\""
   end
 end

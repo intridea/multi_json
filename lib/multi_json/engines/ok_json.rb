@@ -5,13 +5,13 @@ module MultiJson
     class OkJson
       ParseError = ::MultiJson::OkJson::Error
 
-      def self.decode(string, options = {}) #:nodoc:
+      def self.load(string, options={}) #:nodoc:
         string = string.read if string.respond_to?(:read)
         result = ::MultiJson::OkJson.decode(string)
         options[:symbolize_keys] ? symbolize_keys(result) : result
       end
 
-      def self.encode(object, options = {}) #:nodoc:
+      def self.dump(object, options={}) #:nodoc:
         ::MultiJson::OkJson.valenc(stringify_keys(object))
       end
 

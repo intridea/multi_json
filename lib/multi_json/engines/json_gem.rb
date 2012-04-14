@@ -3,7 +3,7 @@ require 'multi_json/engines/json_common'
 
 module MultiJson
   module Engines
-    # Use the JSON gem to encode/decode.
+    # Use the JSON gem to dump/load.
     class JsonGem
       ParseError = ::JSON::ParserError
       extend JsonCommon

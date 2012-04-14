@@ -3,7 +3,7 @@ require 'multi_json/engines/json_common'
 
 module MultiJson
   module Engines
-    # Use JSON pure to encode/decode.
+    # Use JSON pure to dump/load.
     class JsonPure
       ParseError = ::JSON::ParserError
       extend JsonCommon

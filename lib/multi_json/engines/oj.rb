@@ -2,17 +2,17 @@ require 'oj' unless defined?(::Oj)
 
 module MultiJson
   module Engines
-    # Use the Oj library to encode/decode.
+    # Use the Oj library to dump/load.
     class Oj
       ParseError = SyntaxError
 
       ::Oj.default_options = {:mode => :compat}
 
-      def self.decode(string, options = {}) #:nodoc:
+      def self.load(string, options={}) #:nodoc:
         ::Oj.load(string, :symbol_keys => options[:symbolize_keys])
       end
 
-      def self.encode(object, options = {}) #:nodoc:
+      def self.dump(object, options={}) #:nodoc:
         ::Oj.dump(object, options)
       end
     end

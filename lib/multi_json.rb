@@ -72,19 +72,31 @@ module MultiJson
     end
   end
 
+  # TODO: Remove for 2.0 release (but not any sooner)
+  def decode(string, options={})
+    warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.decode is deprecated and will be removed in the next major version. Use MultiJson.load instead."
+    load(string, options)
+  end
+
+  # TODO: Remove for 2.0 release (but not any sooner)
+  def encode(object, options={})
+    warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.encode is deprecated and will be removed in the next major version. Use MultiJson.dump instead."
+    dump(object, options)
+  end
+
   # Decode a JSON string into Ruby.
   #
   # <b>Options</b>
   #
   # <tt>:symbolize_keys</tt> :: If true, will use symbols instead of strings for the keys.
-  def decode(string, options = {})
-    engine.decode(string, options)
+  def load(string, options={})
+    engine.load(string, options)
   rescue engine::ParseError => exception
     raise DecodeError.new(exception.message, exception.backtrace, string)
   end
 
   # Encodes a Ruby object as JSON.
-  def encode(object, options = {})
-    engine.encode(object, options)
+  def dump(object, options={})
+    engine.dump(object, options)
   end
 end

@@ -6,7 +6,7 @@ module MultiJson
     class Nsjsonserialization < MultiJson::Engines::OkJson
       ParseError = ::MultiJson::OkJson::Error
 
-      def self.decode(string, options = {})
+      def self.load(string, options={})
         string = string.read if string.respond_to?(:read)
         data = string.dataUsingEncoding(NSUTF8StringEncoding)
         object = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves, error: nil)
@@ -14,11 +14,11 @@ module MultiJson
           object = symbolize_keys(object) if options[:symbolize_keys]
           object
         else
-          super(string, options = {})
+          super(string, options={})
         end
       end
 
-      def self.encode(object, options = {})
+      def self.dump(object, options={})
         pretty = options[:pretty] ? NSJSONWritingPrettyPrinted : 0
         object = object.as_json if object.respond_to?(:as_json)
         if NSJSONSerialization.isValidJSONObject(object)

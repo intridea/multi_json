@@ -2,12 +2,12 @@ module MultiJson
   module Engines
     module JsonCommon
 
-      def decode(string, options={})
+      def load(string, options={})
         string = string.read if string.respond_to?(:read)
         ::JSON.parse(string, :symbolize_names => options[:symbolize_keys])
       end
 
-      def encode(object, options={})
+      def dump(object, options={})
         object.to_json(process_options(options))
       end
 

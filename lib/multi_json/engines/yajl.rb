@@ -2,15 +2,15 @@ require 'yajl' unless defined?(::Yajl)
 
 module MultiJson
   module Engines
-    # Use the Yajl-Ruby library to encode/decode.
+    # Use the Yajl-Ruby library to dump/load.
     class Yajl
       ParseError = ::Yajl::ParseError
 
-      def self.decode(string, options = {}) #:nodoc:
+      def self.load(string, options={}) #:nodoc:
         ::Yajl::Parser.new(:symbolize_keys => options[:symbolize_keys]).parse(string)
       end
 
-      def self.encode(object, options = {}) #:nodoc:
+      def self.dump(object, options={}) #:nodoc:
         ::Yajl::Encoder.encode(object, options)
       end
     end
