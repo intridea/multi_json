@@ -13,6 +13,12 @@ Gem::Specification.new do |gem|
   gem.files = Dir['LICENSE.md', 'README.md', 'Rakefile', 'multi_json.gemspec', 'Gemfile', '.document', '.rspec', '.travis.yml' ,'spec/**/*', 'lib/**/*']
   gem.homepage = 'http://github.com/intridea/multi_json'
   gem.name = 'multi_json'
+  gem.post_install_message =<<eos
+********************************************************************************
+  MultiJson.encode and MultiJson.decode are deprecated and will be removed in
+  the next major version. Use MultiJson.dump and MultiJson.load instead.
+********************************************************************************
+eos
   gem.rdoc_options = ["--charset=UTF-8"]
   gem.require_paths = ['lib']
   gem.required_rubygems_version = Gem::Requirement.new(">= 1.3.6")
