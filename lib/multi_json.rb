@@ -10,14 +10,7 @@ module MultiJson
 
   module_function
 
-  @engine = nil
-
-  # Get the current engine class.
-  def engine
-    return @engine if @engine
-    self.engine = self.default_engine
-    @engine
-  end
+  @adapter = nil
 
   REQUIREMENT_MAP = [
     ["oj", :oj],
@@ -26,62 +19,74 @@ module MultiJson
     ["json/pure", :json_pure]
   ]
 
-  DEFAULT_ENGINE_WARNING = 'Warning: multi_json is using default ok_json engine. Suggested action: require and load an appropriate JSON library.'
-
-  # The default engine based on what you currently
+  # The default adapter based on what you currently
   # have loaded and installed. First checks to see
-  # if any engines are already loaded, then checks
+  # if any adapters are already loaded, then checks
   # to see which are installed if none are loaded.
-  def default_engine
+  def default_adapter
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
 
-    REQUIREMENT_MAP.each do |(library, engine)|
+    REQUIREMENT_MAP.each do |(library, adapter)|
       begin
         require library
-        return engine
+        return adapter
       rescue LoadError
         next
       end
     end
 
-    Kernel.warn DEFAULT_ENGINE_WARNING
+    Kernel.warn "[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance."
     :ok_json
+  end
+
+  # TODO: Remove for 2.0 release (but no sooner)
+  def engine
+    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.engine is deprecated and will be removed in the next major version. Use MultiJson.adapter instead."
+    self.adapter
+  end
+
+  # Get the current adapter class.
+  def adapter
+    return @adapter if @adapter
+    self.use self.default_adapter
+    @adapter
+  end
+
+  # TODO: Remove for 2.0 release (but no sooner)
+  def adapter=(new_adapter)
+    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.adapter= is deprecated and will be removed in the next major version. Use MultiJson.use instead."
+    self.use(new_adapter)
   end
 
   # Set the JSON parser utilizing a symbol, string, or class.
   # Supported by default are:
   #
+  # * <tt>:oj</tt>
   # * <tt>:json_gem</tt>
   # * <tt>:json_pure</tt>
   # * <tt>:ok_json</tt>
   # * <tt>:yajl</tt>
   # * <tt>:nsjsonserialization</tt> (MacRuby only)
-  def engine=(new_engine)
-    case new_engine
+  def use(new_adapter)
+    case new_adapter
     when String, Symbol
-      require "multi_json/engines/#{new_engine}"
-      @engine = MultiJson::Engines.const_get("#{new_engine.to_s.split('_').map{|s| s.capitalize}.join('')}")
+      require "multi_json/adapters/#{new_adapter}"
+      @adapter = MultiJson::Adapters.const_get("#{new_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
     when NilClass
-      @engine = nil
+      @adapter = nil
     when Class
-      @engine = new_engine
+      @adapter = new_adapter
     else
-      raise "Did not recognize your engine specification. Please specify either a symbol or a class."
+      raise "Did not recognize your adapter specification. Please specify either a symbol or a class."
     end
   end
 
-  # TODO: Remove for 2.0 release (but not any sooner)
+  # TODO: Remove for 2.0 release (but no sooner)
   def decode(string, options={})
-    warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.decode is deprecated and will be removed in the next major version. Use MultiJson.load instead."
-    load(string, options)
-  end
-
-  # TODO: Remove for 2.0 release (but not any sooner)
-  def encode(object, options={})
-    warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.encode is deprecated and will be removed in the next major version. Use MultiJson.dump instead."
-    dump(object, options)
+    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.decode is deprecated and will be removed in the next major version. Use MultiJson.load instead."
+    self.load(string, options)
   end
 
   # Decode a JSON string into Ruby.
@@ -90,13 +95,19 @@ module MultiJson
   #
   # <tt>:symbolize_keys</tt> :: If true, will use symbols instead of strings for the keys.
   def load(string, options={})
-    engine.load(string, options)
-  rescue engine::ParseError => exception
+    adapter.load(string, options)
+  rescue adapter::ParseError => exception
     raise DecodeError.new(exception.message, exception.backtrace, string)
+  end
+
+  # TODO: Remove for 2.0 release (but no sooner)
+  def encode(object, options={})
+    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.encode is deprecated and will be removed in the next major version. Use MultiJson.dump instead."
+    self.dump(object, options)
   end
 
   # Encodes a Ruby object as JSON.
   def dump(object, options={})
-    engine.dump(object, options)
+    adapter.dump(object, options)
   end
 end

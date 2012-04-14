@@ -1,5 +1,5 @@
 module MultiJson
-  module Engines
+  module Adapters
     module JsonCommon
 
       def load(string, options={})

@@ -15,8 +15,19 @@ Gem::Specification.new do |gem|
   gem.name = 'multi_json'
   gem.post_install_message =<<eos
 ********************************************************************************
-  MultiJson.encode and MultiJson.decode are deprecated and will be removed in
-  the next major version. Use MultiJson.dump and MultiJson.load instead.
+
+  MultiJson.encode is deprecated and will be removed in the next major version.
+  Use MultiJson.dump instead.
+
+  MultiJson.decode is deprecated and will be removed in the next major version.
+  Use MultiJson.load instead.
+
+  MultiJson.engine is deprecated and will be removed in the next major version.
+  Use MultiJson.adapter instead.
+
+  MultiJson.engine= is deprecated and will be removed in the next major version.
+  Use MultiJson.use instead.
+
 ********************************************************************************
 eos
   gem.rdoc_options = ["--charset=UTF-8"]

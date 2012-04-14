@@ -1,7 +1,7 @@
 require 'oj' unless defined?(::Oj)
 
 module MultiJson
-  module Engines
+  module Adapters
     # Use the Oj library to dump/load.
     class Oj
       ParseError = SyntaxError

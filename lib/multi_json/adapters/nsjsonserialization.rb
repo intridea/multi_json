@@ -1,9 +1,9 @@
 framework 'Foundation'
-require 'multi_json/engines/ok_json'
+require 'multi_json/adapters/ok_json'
 
 module MultiJson
-  module Engines
-    class Nsjsonserialization < MultiJson::Engines::OkJson
+  module Adapters
+    class Nsjsonserialization < MultiJson::Adapters::OkJson
       ParseError = ::MultiJson::OkJson::Error
 
       def self.load(string, options={})

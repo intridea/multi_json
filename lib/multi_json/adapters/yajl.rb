@@ -1,7 +1,7 @@
 require 'yajl' unless defined?(::Yajl)
 
 module MultiJson
-  module Engines
+  module Adapters
     # Use the Yajl-Ruby library to dump/load.
     class Yajl
       ParseError = ::Yajl::ParseError

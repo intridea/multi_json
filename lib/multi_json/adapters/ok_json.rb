@@ -1,7 +1,7 @@
-require 'multi_json/vendor/ok_json'
+require 'multi_json/vendor/okjson'
 
 module MultiJson
-  module Engines
+  module Adapters
     class OkJson
       ParseError = ::MultiJson::OkJson::Error
 

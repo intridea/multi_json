@@ -1,10 +1,10 @@
-shared_examples_for "an engine" do |engine|
+shared_examples_for "an adapter" do |adapter|
 
   before do
     begin
-      MultiJson.engine = engine
+      MultiJson.use adapter
     rescue LoadError
-      pending "Engine #{engine} couldn't be loaded (not installed?)"
+      pending "Adapter #{adapter} couldn't be loaded (not installed?)"
     end
   end
 
@@ -43,12 +43,12 @@ shared_examples_for "an engine" do |engine|
       MultiJson.dump(123).should == "123"
     end
 
-    it 'passes options to the engine' do
-      MultiJson.engine.should_receive(:dump).with('foo', {:bar => :baz})
+    it 'passes options to the adapter' do
+      MultiJson.adapter.should_receive(:dump).with('foo', {:bar => :baz})
       MultiJson.dump('foo', :bar => :baz)
     end
 
-    if engine == 'json_gem' || engine == 'json_pure'
+    if adapter == 'json_gem' || adapter == 'json_pure'
       describe 'with :pretty option set to true' do
         it 'passes default pretty options' do
           object = 'foo'

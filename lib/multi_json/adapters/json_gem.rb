@@ -1,8 +1,8 @@
 require 'json' unless defined?(::JSON)
-require 'multi_json/engines/json_common'
+require 'multi_json/adapters/json_common'
 
 module MultiJson
-  module Engines
+  module Adapters
     # Use the JSON gem to dump/load.
     class JsonGem
       ParseError = ::JSON::ParserError
