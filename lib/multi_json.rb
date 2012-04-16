@@ -47,12 +47,6 @@ module MultiJson
     self.adapter
   end
 
-  # TODO: Remove for 2.0 release (but no sooner)
-  def engine=(new_engine)
-    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.engine= is deprecated and will be removed in the next major version. Use MultiJson.use instead."
-    self.use(new_engine)
-  end
-  
   # Get the current adapter class.
   def adapter
     return @adapter if @adapter
@@ -61,9 +55,9 @@ module MultiJson
   end
 
   # TODO: Remove for 2.0 release (but no sooner)
-  def adapter=(new_adapter)
-    deprecate("MultiJson.adapter= is deprecated and will be removed in the next major version. Use MultiJson.use instead.")
-    self.use(new_adapter)
+  def engine=(new_engine)
+    deprecate("MultiJson.engine= is deprecated and will be removed in the next major version. Use MultiJson.use instead.")
+    self.use(new_engine)
   end
 
   # Set the JSON parser utilizing a symbol, string, or class.
@@ -88,6 +82,7 @@ module MultiJson
       raise "Did not recognize your adapter specification. Please specify either a symbol or a class."
     end
   end
+  alias :adapter= :use
 
   # TODO: Remove for 2.0 release (but no sooner)
   def decode(string, options={})
