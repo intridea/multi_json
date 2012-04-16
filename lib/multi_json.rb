@@ -114,7 +114,7 @@ module MultiJson
   # Sends of a deprecation warning
   def deprecate(raw_message)
     @messages ||= {}
-    message = "#{Kernel.caller.first}: [DEPRECATION] #{raw_message}"
+    message = "#{Kernel.caller[1]}: [DEPRECATION] #{raw_message}"
     unless @messages[message]
       @messages[message] = true
       Kernel.warn message
