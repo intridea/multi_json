@@ -47,6 +47,12 @@ module MultiJson
     self.adapter
   end
 
+  # TODO: Remove for 2.0 release (but no sooner)
+  def engine=(new_engine)
+    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.engine= is deprecated and will be removed in the next major version. Use MultiJson.use instead."
+    self.use(new_engine)
+  end
+  
   # Get the current adapter class.
   def adapter
     return @adapter if @adapter
