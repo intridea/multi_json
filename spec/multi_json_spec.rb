@@ -59,6 +59,21 @@ describe 'MultiJson' do
       MultiJson.use MockDecoder
       MultiJson.adapter.name.should == 'MockDecoder'
     end
+
+    context "using one-shot parser" do
+      before(:each) do
+        require 'multi_json/adapters/json_pure'
+        MultiJson::Adapters::JsonPure.should_receive(:dump).exactly(1).times.and_return('dump_something')
+        MultiJson::Adapters::JsonPure.should_receive(:load).exactly(1).times.and_return('load_something')
+      end
+
+      it "should use the defined parser just for the call" do
+        MultiJson.use :yajl
+        MultiJson.dump('', :adapter => :json_pure).should eql('dump_something')
+        MultiJson.load('', :adapter => :json_pure).should eql('load_something')
+        MultiJson.adapter.to_s.should eql("MultiJson::Adapters::Yajl")
+      end
+    end
   end
 
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|

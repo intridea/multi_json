@@ -70,19 +70,23 @@ module MultiJson
   # * <tt>:yajl</tt>
   # * <tt>:nsjsonserialization</tt> (MacRuby only)
   def use(new_adapter)
+    @adapter = load_adapter(new_adapter)
+  end
+  alias :adapter= :use
+
+  def load_adapter(new_adapter)
     case new_adapter
     when String, Symbol
       require "multi_json/adapters/#{new_adapter}"
-      @adapter = MultiJson::Adapters.const_get("#{new_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
+      MultiJson::Adapters.const_get("#{new_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
     when NilClass
-      @adapter = nil
+      nil
     when Class
-      @adapter = new_adapter
+      new_adapter
     else
       raise "Did not recognize your adapter specification. Please specify either a symbol or a class."
     end
   end
-  alias :adapter= :use
 
   # TODO: Remove for 2.0 release (but no sooner)
   def decode(string, options={})
@@ -95,10 +99,20 @@ module MultiJson
   # <b>Options</b>
   #
   # <tt>:symbolize_keys</tt> :: If true, will use symbols instead of strings for the keys.
+  # <tt>:adapter</tt> :: If set, the selected engine will be used just for the call.
   def load(string, options={})
+    adapter = current_adapter(options)
     adapter.load(string, options)
   rescue adapter::ParseError => exception
     raise DecodeError.new(exception.message, exception.backtrace, string)
+  end
+
+  def current_adapter(options)
+    if new_adapter = (options || {}).delete(:adapter)
+      load_adapter(new_adapter)
+    else
+      adapter
+    end
   end
 
   # TODO: Remove for 2.0 release (but no sooner)
@@ -109,6 +123,7 @@ module MultiJson
 
   # Encodes a Ruby object as JSON.
   def dump(object, options={})
+    adapter = current_adapter(options)
     adapter.dump(object, options)
   end
 
