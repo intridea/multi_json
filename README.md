@@ -10,13 +10,14 @@ fastest available JSON coder. Here's how to use it:
 
     require 'multi_json'
 
-    MultiJson.decode('{"abc":"def"}') #=> {"abc" => "def"}
-    MultiJson.decode('{"abc":"def"}', :symbolize_keys => true) #=> {:abc => "def"}
-    MultiJson.encode({:abc => 'def'}) # convert Ruby back to JSON
-    MultiJson.encode({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
+    MultiJson.load('{"abc":"def"}') #=> {"abc" => "def"}
+    MultiJson.load('{"abc":"def"}', :symbolize_keys => true) #=> {:abc => "def"}
+    MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON
+    MultiJson.dump({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
 
-The `engine` setter takes either a symbol or a class (to allow for custom JSON
-parsers) that responds to both `.decode` and `.encode` at the class level.
+The `use` method, which sets the MultiJson adapter, takes either a symbol or a
+class (to allow for custom JSON parsers) that responds to both `.load` and `.dump`
+at the class level.
 
 MultiJSON tries to have intelligent defaulting. That is, if you have any of the
 supported engines already loaded, it will utilize them before attempting to

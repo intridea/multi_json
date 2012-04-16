@@ -43,7 +43,7 @@ module MultiJson
 
   # TODO: Remove for 2.0 release (but no sooner)
   def engine
-    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.engine is deprecated and will be removed in the next major version. Use MultiJson.adapter instead."
+    deprecate("MultiJson.engine is deprecated and will be removed in the next major version. Use MultiJson.adapter instead.")
     self.adapter
   end
 
@@ -56,7 +56,7 @@ module MultiJson
 
   # TODO: Remove for 2.0 release (but no sooner)
   def adapter=(new_adapter)
-    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.adapter= is deprecated and will be removed in the next major version. Use MultiJson.use instead."
+    deprecate("MultiJson.adapter= is deprecated and will be removed in the next major version. Use MultiJson.use instead.")
     self.use(new_adapter)
   end
 
@@ -85,7 +85,7 @@ module MultiJson
 
   # TODO: Remove for 2.0 release (but no sooner)
   def decode(string, options={})
-    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.decode is deprecated and will be removed in the next major version. Use MultiJson.load instead."
+    deprecate("MultiJson.decode is deprecated and will be removed in the next major version. Use MultiJson.load instead.")
     self.load(string, options)
   end
 
@@ -102,12 +102,22 @@ module MultiJson
 
   # TODO: Remove for 2.0 release (but no sooner)
   def encode(object, options={})
-    Kernel.warn "#{Kernel.caller.first}: [DEPRECATION] MultiJson.encode is deprecated and will be removed in the next major version. Use MultiJson.dump instead."
+    deprecate("MultiJson.encode is deprecated and will be removed in the next major version. Use MultiJson.dump instead.")
     self.dump(object, options)
   end
 
   # Encodes a Ruby object as JSON.
   def dump(object, options={})
     adapter.dump(object, options)
+  end
+
+  # Sends of a deprecation warning
+  def deprecate(raw_message)
+    @messages ||= {}
+    message = "#{Kernel.caller[1]}: [DEPRECATION] #{raw_message}"
+    unless @messages[message]
+      @messages[message] = true
+      Kernel.warn message
+    end
   end
 end
