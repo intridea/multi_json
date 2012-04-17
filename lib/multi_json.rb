@@ -19,6 +19,12 @@ module MultiJson
     ["json/pure", :json_pure]
   ]
 
+  # TODO: Remove for 2.0 release (but no sooner)
+  def default_engine
+    deprecate("MultiJson.default_engine is deprecated and will be removed in the next major version. Use MultiJson.default_adapter instead.")
+    self.default_adapter
+  end
+
   # The default adapter based on what you currently
   # have loaded and installed. First checks to see
   # if any adapters are already loaded, then checks

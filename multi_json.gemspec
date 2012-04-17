@@ -25,8 +25,11 @@ Gem::Specification.new do |gem|
   MultiJson.engine is deprecated and will be removed in the next major version.
   Use MultiJson.adapter instead.
 
-  MultiJson.engine= is deprecated and will be removed in the next major version.
-  Use MultiJson.use instead.
+  MultiJson.engine= is deprecated and will be removed in the next major
+  version. Use MultiJson.use instead.
+
+  MultiJson.default_engine is deprecated and will be removed in the next major
+  version. Use MultiJson.default_adapter instead.
 
 ********************************************************************************
 eos
