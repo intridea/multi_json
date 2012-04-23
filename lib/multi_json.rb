@@ -13,6 +13,7 @@ module MultiJson
   @adapter = nil
 
   REQUIREMENT_MAP = [
+    ["jrjackson", :jr_jackson],
     ["oj", :oj],
     ["yajl", :yajl],
     ["json", :json_gem],
@@ -30,6 +31,7 @@ module MultiJson
   # if any adapters are already loaded, then checks
   # to see which are installed if none are loaded.
   def default_adapter
+    return :jr_jackson if defined?(::JrJackson::Json)
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
