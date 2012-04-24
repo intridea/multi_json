@@ -8,7 +8,9 @@ end
 
 unless ENV['CI'] || macruby?
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start do
+    add_filter 'spec'
+  end
 end
 require 'multi_json'
 require 'rspec'
