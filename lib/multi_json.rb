@@ -19,12 +19,6 @@ module MultiJson
     ["json/pure", :json_pure]
   ]
 
-  # TODO: Remove for 2.0 release (but no sooner)
-  def default_engine
-    deprecate("MultiJson.default_engine is deprecated and will be removed in the next major version. Use MultiJson.default_adapter instead.")
-    self.default_adapter
-  end
-
   # The default adapter based on what you currently
   # have loaded and installed. First checks to see
   # if any adapters are already loaded, then checks
@@ -46,12 +40,8 @@ module MultiJson
     Kernel.warn "[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance."
     :ok_json
   end
-
-  # TODO: Remove for 2.0 release (but no sooner)
-  def engine
-    deprecate("MultiJson.engine is deprecated and will be removed in the next major version. Use MultiJson.adapter instead.")
-    self.adapter
-  end
+  # :nodoc:
+  alias :default_engine :default_adapter
 
   # Get the current adapter class.
   def adapter
@@ -59,12 +49,8 @@ module MultiJson
     self.use self.default_adapter
     @adapter
   end
-
-  # TODO: Remove for 2.0 release (but no sooner)
-  def engine=(new_engine)
-    deprecate("MultiJson.engine= is deprecated and will be removed in the next major version. Use MultiJson.use instead.")
-    self.use(new_engine)
-  end
+  # :nodoc:
+  alias :engine :adapter
 
   # Set the JSON parser utilizing a symbol, string, or class.
   # Supported by default are:
@@ -79,6 +65,8 @@ module MultiJson
     @adapter = load_adapter(new_adapter)
   end
   alias :adapter= :use
+  # :nodoc:
+  alias :engine= :use
 
   def load_adapter(new_adapter)
     case new_adapter
@@ -94,12 +82,6 @@ module MultiJson
     end
   end
 
-  # TODO: Remove for 2.0 release (but no sooner)
-  def decode(string, options={})
-    deprecate("MultiJson.decode is deprecated and will be removed in the next major version. Use MultiJson.load instead.")
-    self.load(string, options)
-  end
-
   # Decode a JSON string into Ruby.
   #
   # <b>Options</b>
@@ -112,6 +94,8 @@ module MultiJson
   rescue adapter::ParseError => exception
     raise DecodeError.new(exception.message, exception.backtrace, string)
   end
+  # :nodoc:
+  alias :decode :load
 
   def current_adapter(options)
     if new_adapter = (options || {}).delete(:adapter)
@@ -121,25 +105,12 @@ module MultiJson
     end
   end
 
-  # TODO: Remove for 2.0 release (but no sooner)
-  def encode(object, options={})
-    deprecate("MultiJson.encode is deprecated and will be removed in the next major version. Use MultiJson.dump instead.")
-    self.dump(object, options)
-  end
-
   # Encodes a Ruby object as JSON.
   def dump(object, options={})
     adapter = current_adapter(options)
     adapter.dump(object, options)
   end
+  # :nodoc:
+  alias :encode :dump
 
-  # Sends of a deprecation warning
-  def deprecate(raw_message)
-    @messages ||= {}
-    message = "#{Kernel.caller[1]}: [DEPRECATION] #{raw_message}"
-    unless @messages[message]
-      @messages[message] = true
-      Kernel.warn message
-    end
-  end
 end
