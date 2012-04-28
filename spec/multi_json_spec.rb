@@ -68,10 +68,10 @@ describe 'MultiJson' do
       end
 
       it "should use the defined parser just for the call" do
-        MultiJson.use :yajl
+        MultiJson.use :json_gem
         MultiJson.dump('', :adapter => :json_pure).should eql('dump_something')
         MultiJson.load('', :adapter => :json_pure).should eql('load_something')
-        MultiJson.adapter.to_s.should eql("MultiJson::Adapters::Yajl")
+        MultiJson.adapter.to_s.should eql("MultiJson::Adapters::JsonGem")
       end
     end
   end
