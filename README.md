@@ -36,7 +36,7 @@ MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 * [NSJSONSerialization](https://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html) Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
 * [OkJson][okjson] A simple, vendorable JSON parser
 
-## <a name="contributing"></a>Contributing
+## Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
 improve this project.
 
@@ -57,7 +57,7 @@ Here are some ways *you* can contribute:
 
 [issues]: https://github.com/intridea/multi_json/issues
 
-## <a name="issues"></a>Submitting an Issue
+## Submitting an Issue
 We use the [GitHub issue tracker][issues] to track bugs and features. Before
 submitting a bug report or feature request, check to make sure it hasn't
 already been submitted. You can indicate support for an existing issuse by
@@ -68,7 +68,7 @@ bug report should include a pull request with failing specs.
 
 [gist]: https://gist.github.com/
 
-## <a name="pulls"></a>Submitting a Pull Request
+## Submitting a Pull Request
 1. Fork the project.
 2. Create a topic branch.
 3. Implement your feature or bug fix.
@@ -80,7 +80,7 @@ bug report should include a pull request with failing specs.
    version, or history file. (If you want to create your own version for some
    reason, please do so in a separate commit.)
 
-## <a name="versions"></a>Supported Ruby Versions
+## Supported Ruby Versions
 This library aims to support and is [tested against][travis] the following Ruby
 implementations:
 
@@ -109,7 +109,7 @@ implementation, you will be personally responsible for providing patches in a
 timely fashion. If critical issues for a particular implementation exist at the
 time of a major release, support for that Ruby version may be dropped.
 
-## <a name="copyright"></a>Copyright
+## Copyright
 Copyright (c) 2010 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober, and Intridea, Inc.
 See [LICENSE][] for details.
 
