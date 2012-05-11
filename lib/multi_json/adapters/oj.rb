@@ -13,6 +13,7 @@ module MultiJson
       end
 
       def self.dump(object, options={}) #:nodoc:
+        options.merge!(:indent => 2) if options[:pretty] || options['pretty']
         ::Oj.dump(object, options)
       end
     end
