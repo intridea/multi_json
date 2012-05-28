@@ -9,7 +9,8 @@ module MultiJson
       ::Oj.default_options = {:mode => :compat}
 
       def self.load(string, options={}) #:nodoc:
-        ::Oj.load(string, :symbol_keys => options[:symbolize_keys])
+        options.merge!(:symbol_keys => options[:symbolize_keys] || options['symbolize_keys'])
+        ::Oj.load(string, options)
       end
 
       def self.dump(object, options={}) #:nodoc:
