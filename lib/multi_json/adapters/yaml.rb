@@ -8,7 +8,7 @@ module MultiJson
 
       def self.load(string, options={}) #:nodoc:
         YAML.load(convert_json_to_yaml(string))
-      rescue ArgumentError => e
+      rescue ArgumentError, TypeError
         raise ParseError, "Invalid JSON string"
       end
 
