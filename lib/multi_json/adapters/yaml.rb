@@ -8,7 +8,7 @@ module MultiJson
 
       def self.load(string, options={}) #:nodoc:
         # Convert to string if we get a stringio object.
-        string = string.string if string.respond_to?(:string)
+        string = string.read if string.respond_to?(:read)
         YAML.load(convert_json_to_yaml(string))
       rescue ArgumentError, TypeError
         raise ParseError, "Invalid JSON string.\n#{string}"
