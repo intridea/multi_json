@@ -2,7 +2,8 @@ require 'multi_json/adapters/json_common'
 
 module MultiJson
   module Adapters
-    # Use the Oj library to dump/load.
+    # The old Rails 2 compatible YAML parser to parse json. Yes, this is
+    # disgusting. 
     class Yaml
       extend JsonCommon
 

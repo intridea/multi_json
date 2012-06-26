@@ -76,7 +76,7 @@ describe 'MultiJson' do
     end
   end
 
-  %w(json_gem json_pure nsjsonserialization oj ok_json yajl yaml).each do |adapter|
+  %w(json_gem json_pure nsjsonserialization oj ok_json yajl yaml oj_yaml_fallback).each do |adapter|
     next if !macruby? && adapter == 'nsjsonserialization'
     next if jruby? && (adapter == 'oj' || adapter == 'yajl')
 
