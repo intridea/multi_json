@@ -70,7 +70,7 @@ shared_examples_for "an adapter" do |adapter|
 
     it 'raises MultiJson::DecodeError on invalid JSON' do
       lambda do
-        MultiJson.load('{"abc"}')
+        MultiJson.load('{{"abc"}')
       end.should raise_error(MultiJson::DecodeError)
     end
 
