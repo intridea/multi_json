@@ -1,7 +1,11 @@
+require 'multi_json/adapters/json_common'
+
 module MultiJson
   module Adapters
     # Use the Oj library to dump/load.
     class Yaml
+      extend JsonCommon
+
       ParseError = SyntaxError
       DATE_REGEX = /^(?:\d{4}-\d{2}-\d{2}|\d{4}-\d{1,2}-\d{1,2}[ \t]+\d{1,2}:\d{2}:\d{2}(\.[0-9]*)?(([ \t]*)Z|[-+]\d{2}?(:\d{2})?))$/
       
@@ -9,13 +13,13 @@ module MultiJson
       def self.load(string, options={}) #:nodoc:
         # Convert to string if we get a stringio object.
         string = string.read if string.respond_to?(:read)
-        YAML.load(convert_json_to_yaml(string))
+        json = YAML.load(convert_json_to_yaml(string))
+        if options[:symbolize_keys] 
+          json = symbolize_keys(json)
+        end
+        json
       rescue ArgumentError, TypeError
-        raise ParseError, "Invalid JSON string.\n#{string}"
-      end
-
-      def self.dump(object, options={}) #:nodoc:
-        JSON::dump(object, options)
+        raise ParseError, "Invalid JSON string.\n#{string}\n#{$!}"
       end
 
       private
@@ -84,6 +88,26 @@ module MultiJson
         end
       end
 
+      def self.symbolize_keys(object)
+        if object.is_a?(Hash)
+          object.inject({}) do |result, (key, value)|
+            new_key = case key
+                        when String then key.to_sym
+                        else key
+                      end
+
+            new_value = symbolize_keys(value)
+            result[new_key] = new_value
+            result
+          end
+        elsif object.is_a?(Array)
+          object.map do |o|
+            symbolize_keys o
+          end
+        else
+          object
+        end
+      end
     end
   end
 end
