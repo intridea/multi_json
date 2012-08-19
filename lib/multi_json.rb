@@ -90,9 +90,11 @@ module MultiJson
     # <tt>:adapter</tt> :: If set, the selected engine will be used just for the call.
     def load(string, options={})
       adapter = current_adapter(options)
-      adapter.load(string, options)
-    rescue adapter::ParseError => exception
-      raise DecodeError.new(exception.message, exception.backtrace, string)
+      begin
+        adapter.load(string, options)
+      rescue adapter::ParseError => exception
+        raise DecodeError.new(exception.message, exception.backtrace, string)
+      end
     end
     # :nodoc:
     alias :decode :load
