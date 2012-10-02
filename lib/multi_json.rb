@@ -1,4 +1,11 @@
 module MultiJson
+
+  @@default_options = {}
+
+  def self.default_options
+    @@default_options
+  end
+
   class DecodeError < StandardError
     attr_reader :data
     def initialize(message="", backtrace=[], data="")
@@ -91,7 +98,7 @@ module MultiJson
     def load(string, options={})
       adapter = current_adapter(options)
       begin
-        adapter.load(string, options)
+        adapter.load(string, options.merge(MultiJson.default_options))
       rescue adapter::ParseError => exception
         raise DecodeError.new(exception.message, exception.backtrace, string)
       end
@@ -110,7 +117,7 @@ module MultiJson
     # Encodes a Ruby object as JSON.
     def dump(object, options={})
       adapter = current_adapter(options)
-      adapter.dump(object, options)
+      adapter.dump(object, options.merge(MultiJson.default_options))
     end
     # :nodoc:
     alias :encode :dump

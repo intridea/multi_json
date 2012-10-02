@@ -3,6 +3,30 @@ require 'adapter_shared_example'
 require 'stringio'
 
 describe 'MultiJson' do
+
+  context 'configuration' do
+
+    before do
+      require 'multi_json/adapters/json_pure'
+      MultiJson.default_options[:max_nesting] = false
+    end
+
+    after do
+      MultiJson.default_options.clear
+    end
+
+    it 'passes default options into load' do
+      MultiJson::Adapters::JsonPure.should_receive(:load).with('', :max_nesting => false).exactly(1).times.and_return('load_something')
+      MultiJson.load('', :adapter => :json_pure)
+    end
+
+    it 'passes default options into dump' do
+      MultiJson::Adapters::JsonPure.should_receive(:dump).with('', :max_nesting => false).exactly(1).times.and_return('dump_something')
+      MultiJson.dump('', :adapter => :json_pure)
+    end
+
+  end
+
   context 'adapters' do
     before do
       MultiJson.use nil
