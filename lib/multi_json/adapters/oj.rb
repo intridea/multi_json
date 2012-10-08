@@ -9,12 +9,12 @@ module MultiJson
       ::Oj.default_options = {:mode => :compat}
 
       def self.load(string, options={}) #:nodoc:
-        options.merge!(:symbol_keys => options[:symbolize_keys] || options['symbolize_keys'])
+        options.merge!(:symbol_keys => options[:symbolize_keys])
         ::Oj.load(string, options)
       end
 
       def self.dump(object, options={}) #:nodoc:
-        options.merge!(:indent => 2) if options[:pretty] || options['pretty']
+        options.merge!(:indent => 2) if options[:pretty]
         ::Oj.dump(object, options)
       end
     end
