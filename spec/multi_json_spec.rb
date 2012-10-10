@@ -31,7 +31,7 @@ describe 'MultiJson' do
       end
 
       it 'defaults to ok_json if no other json implementions are available' do
-        MultiJson.default_adapter.should eq :ok_json
+        expect(MultiJson.default_adapter).to eq :ok_json
       end
 
       it 'prints a warning' do
@@ -43,21 +43,21 @@ describe 'MultiJson' do
     it 'defaults to the best available gem' do
       unless jruby?
         require 'oj'
-        MultiJson.adapter.name.should eq 'MultiJson::Adapters::Oj'
+        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Oj'
       else
         require 'json'
-        MultiJson.adapter.name.should eq 'MultiJson::Adapters::JsonGem'
+        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
       end
     end
 
     it 'is settable via a symbol' do
       MultiJson.use :json_gem
-      MultiJson.adapter.name.should eq 'MultiJson::Adapters::JsonGem'
+      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
     end
 
     it 'is settable via a class' do
       MultiJson.use MockDecoder
-      MultiJson.adapter.name.should eq 'MockDecoder'
+      expect(MultiJson.adapter.name).to eq 'MockDecoder'
     end
 
     context "using one-shot parser" do
@@ -69,9 +69,9 @@ describe 'MultiJson' do
 
       it "should use the defined parser just for the call" do
         MultiJson.use :json_gem
-        MultiJson.dump('', :adapter => :json_pure).should eq 'dump_something'
-        MultiJson.load('', :adapter => :json_pure).should eq 'load_something'
-        MultiJson.adapter.to_s.should eq "MultiJson::Adapters::JsonGem"
+        expect(MultiJson.dump('', :adapter => :json_pure)).to eq 'dump_something'
+        expect(MultiJson.load('', :adapter => :json_pure)).to eq 'load_something'
+        expect(MultiJson.adapter.to_s).to eq "MultiJson::Adapters::JsonGem"
       end
     end
   end

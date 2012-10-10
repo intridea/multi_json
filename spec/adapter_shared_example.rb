@@ -14,7 +14,7 @@ shared_examples_for "an adapter" do |adapter|
         {'abc' => 'def'},
         [1, 2, 3, "4"],
       ].each do |example|
-        MultiJson.load(MultiJson.dump(example)).should eq example
+        expect(MultiJson.load(MultiJson.dump(example))).to eq example
       end
     end
 
@@ -34,13 +34,13 @@ shared_examples_for "an adapter" do |adapter|
         ]
       ].each do |example, expected|
         dumped_json = MultiJson.dump(example)
-        MultiJson.load(dumped_json).should eq expected
+        expect(MultiJson.load(dumped_json)).to eq expected
       end
     end
 
     it 'dumps rootless JSON' do
-      MultiJson.dump("random rootless string").should eq "\"random rootless string\""
-      MultiJson.dump(123).should eq "123"
+      expect(MultiJson.dump("random rootless string")).to eq "\"random rootless string\""
+      expect(MultiJson.dump(123)).to eq "123"
     end
 
     it 'passes options to the adapter' do
@@ -59,19 +59,17 @@ shared_examples_for "an adapter" do |adapter|
     end
 
     it 'dumps custom objects which implement as_json' do
-      MultiJson.dump(TimeWithZone.new).should eq "\"2005-02-01T15:15:10Z\""
+      expect(MultiJson.dump(TimeWithZone.new)).to eq "\"2005-02-01T15:15:10Z\""
     end
   end
 
   describe '.load' do
     it 'properly loads valid JSON' do
-      MultiJson.load('{"abc":"def"}').should eq({'abc' => 'def'})
+      expect(MultiJson.load('{"abc":"def"}')).to eq({'abc' => 'def'})
     end
 
     it 'raises MultiJson::DecodeError on invalid JSON' do
-      lambda do
-        MultiJson.load('{"abc"}')
-      end.should raise_error(MultiJson::DecodeError)
+      expect{MultiJson.load('{"abc"}')}.to raise_error(MultiJson::DecodeError)
     end
 
     it 'raises MultiJson::DecodeError with data on invalid JSON' do
@@ -79,18 +77,18 @@ shared_examples_for "an adapter" do |adapter|
       begin
         MultiJson.load(data)
       rescue MultiJson::DecodeError => de
-        de.data.should eq data
+        expect(de.data).to eq data
       end
     end
 
     it 'stringifys symbol keys when encoding' do
       dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})
-      MultiJson.load(dumped_json).should eq({"a" => 1, "b" => {"c" => 2}})
+      expect(MultiJson.load(dumped_json)).to eq({"a" => 1, "b" => {"c" => 2}})
     end
 
     it 'properly loads valid JSON in StringIOs' do
       json = StringIO.new('{"abc":"def"}')
-      MultiJson.load(json).should eq({'abc' => 'def'})
+      expect(MultiJson.load(json)).to eq({'abc' => 'def'})
     end
 
     it 'allows for symbolization of keys' do
@@ -108,7 +106,7 @@ shared_examples_for "an adapter" do |adapter|
           {:abc => [{:def => 'hgi'}]},
         ],
       ].each do |example, expected|
-        MultiJson.load(example, :symbolize_keys => true).should eq expected
+        expect(MultiJson.load(example, :symbolize_keys => true)).to eq expected
       end
     end
   end

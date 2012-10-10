@@ -12,8 +12,15 @@ unless ENV['CI'] || macruby?
     add_filter 'spec'
   end
 end
+
 require 'multi_json'
 require 'rspec'
+
+RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+end
 
 class MockDecoder
   def self.load(string, options={})
