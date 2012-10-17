@@ -4,7 +4,11 @@ module MultiJson
   module Adapters
     # Use the Oj library to dump/load.
     class Oj
-      ParseError = SyntaxError
+      ParseError = if defined?(::Oj::ParseError)
+        ::Oj::ParseError
+      else
+        SyntaxError
+      end
 
       ::Oj.default_options = {:mode => :compat}
 
