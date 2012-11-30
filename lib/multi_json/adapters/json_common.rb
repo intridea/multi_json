@@ -4,7 +4,7 @@ module MultiJson
 
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
-        ::JSON.parse(string, :symbolize_names => options[:symbolize_keys])
+        ::JSON.parse(string, :symbolize_names => options[:symbolize_keys], :quirks_mode => true)
       end
 
       def dump(object, options={})
