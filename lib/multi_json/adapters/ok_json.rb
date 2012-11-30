@@ -7,7 +7,7 @@ module MultiJson
 
       def self.load(string, options={}) #:nodoc:
         string = string.read if string.respond_to?(:read)
-        result = ::MultiJson::OkJson.decode(string)
+        result = ::MultiJson::OkJson.decode("[#{string}]").first
         options[:symbolize_keys] ? symbolize_keys(result) : result
       end
 

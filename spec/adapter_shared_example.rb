@@ -61,6 +61,11 @@ shared_examples_for "an adapter" do |adapter|
     it 'dumps custom objects which implement as_json' do
       expect(MultiJson.dump(TimeWithZone.new)).to eq "\"2005-02-01T15:15:10Z\""
     end
+
+    it 'allow to dump JSON values' do
+      expect(MultiJson.dump(42)).to eq '42'
+    end
+
   end
 
   describe '.load' do
@@ -109,5 +114,10 @@ shared_examples_for "an adapter" do |adapter|
         expect(MultiJson.load(example, :symbolize_keys => true)).to eq expected
       end
     end
+
+    it 'allow to load JSON values' do
+      expect(MultiJson.load('42')).to eq 42
+    end
+
   end
 end
