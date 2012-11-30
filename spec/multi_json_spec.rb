@@ -41,6 +41,8 @@ describe 'MultiJson' do
     end
 
     it 'defaults to the best available gem' do
+      # Clear cache variable already set by previous tests
+      MultiJson.send(:remove_instance_variable, :@adapter)
       unless jruby?
         require 'oj'
         expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Oj'
