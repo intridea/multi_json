@@ -1,11 +1,11 @@
 1.4.0
 -----
-* [Allow to load and dump JSON fragments](https://github.com/intridea/multi_json/commit/707aae7d48d39c85b38febbd2c210ba87f6e4a36)
+* [Allow `load`/`dump` of JSON fragments](https://github.com/intridea/multi_json/commit/707aae7d48d39c85b38febbd2c210ba87f6e4a36)
 
 1.3.7
 -----
 * [Fix rescue clause for MagLev](https://github.com/intridea/multi_json/commit/39abdf50199828c50e85b2ce8f8ba31fcbbc9332)
-* [Remove unneeded check for string version of options key](https://github.com/intridea/multi_json/commit/660101b70e962b3c007d0b90d45944fa47d13ec4)
+* [Remove unnecessary check for string version of options key](https://github.com/intridea/multi_json/commit/660101b70e962b3c007d0b90d45944fa47d13ec4)
 * [Explicitly set default adapter when adapter is set to `nil` or `false`](https://github.com/intridea/multi_json/commit/a9e587d5a63eafb4baee9fb211265e4dd96a26bc)
 * [Fix Oj ParseError mapping for Oj 1.4.0](https://github.com/intridea/multi_json/commit/7d9045338cc9029401c16f3c409d54ce97f275e2)
 
@@ -45,35 +45,35 @@
 
 1.1.0
 -----
-* [NSJSONSerialization support for MacRuby](https://github.com/intridea/multi_json/commit/f862e2fc966cac8867fe7da3997fc76e8a6cf5d4)
+* [`NSJSONSerialization` support for MacRuby](https://github.com/intridea/multi_json/commit/f862e2fc966cac8867fe7da3997fc76e8a6cf5d4)
 
 1.0.4
 -----
 * [Set data context to `DecodeError` exception](https://github.com/intridea/multi_json/commit/19ddafd44029c6681f66fae2a0f6eabfd0f85176)
-* [Allow OkJson to fallback to `to_json`](https://github.com/intridea/multi_json/commit/c157240b1193b283d06d1bd4d4b5b06bcf3761f8)
-* [Add warning when using ok_json](https://github.com/intridea/multi_json/commit/dd4b68810c84f826fb98f9713bfb29ab96888d57)
+* [Allow `okjson` to fallback to `to_json`](https://github.com/intridea/multi_json/commit/c157240b1193b283d06d1bd4d4b5b06bcf3761f8)
+* [Add warning when using `okjson`](https://github.com/intridea/multi_json/commit/dd4b68810c84f826fb98f9713bfb29ab96888d57)
 * [Options can be passed to an engine on encode](https://github.com/intridea/multi_json/commit/e0a7ff5d5ff621ffccc61617ed8aeec5816e81f7)
 
 1.0.3
 -----
-* [`stringify_keys` supports Array](https://github.com/intridea/multi_json/commit/644d1c5c7c7f6a27663b11668527b346094e38b9)
-* [`symbolize_keys` supports Array](https://github.com/intridea/multi_json/commit/c885377d47a2aa39cb0d971fea78db2d2fa479a7)
+* [`Array` support for `stringify_keys`](https://github.com/intridea/multi_json/commit/644d1c5c7c7f6a27663b11668527b346094e38b9)
+* [`Array` support for `symbolize_keys`](https://github.com/intridea/multi_json/commit/c885377d47a2aa39cb0d971fea78db2d2fa479a7)
 
 1.0.2
 -----
-* [Allow encoding of rootless JSON when OkJson is used](https://github.com/intridea/multi_json/commit/d1cde7de97cb0f6152aef8daf14037521cdce8c6)
+* [Allow encoding of rootless JSON when `okjson` is used](https://github.com/intridea/multi_json/commit/d1cde7de97cb0f6152aef8daf14037521cdce8c6)
 
 1.0.1
 -----
-* [Correct an issue with ok_json not being returned as the default engine](https://github.com/intridea/multi_json/commit/d33c141619c54cccd770199694da8fd1bd8f449d)
+* [Correct an issue with `okjson` not being returned as the default engine](https://github.com/intridea/multi_json/commit/d33c141619c54cccd770199694da8fd1bd8f449d)
 
 1.0.0
 -----
 * [Remove `ActiveSupport::JSON` support](https://github.com/intridea/multi_json/commit/c2f4140141d785a24b3f56e58811b0e561b37f6a)
 * [Fix `@engine` ivar warning](https://github.com/intridea/multi_json/commit/3b978a8995721a8dffedc3b75a7f49e5494ec553)
 * [Only `rescue` from parsing errors during decoding, not any `StandardError`](https://github.com/intridea/multi_json/commit/391d00b5e85294d42d41347605d8d46b4a7f66cc)
-* [Rename okjson engine and vendored lib to ok_json](https://github.com/intridea/multi_json/commit/5bd1afc977a8208ddb0443e1d57cb79665c019f1)
-* [Add `StringIO` support to json gem and okjson](https://github.com/intridea/multi_json/commit/1706b11568db7f50af451fce5f4d679aeb3bbe8f)
+* [Rename `okjson` engine and vendored lib to `ok_json`](https://github.com/intridea/multi_json/commit/5bd1afc977a8208ddb0443e1d57cb79665c019f1)
+* [Add `StringIO` support to `json` gem and `okjson`](https://github.com/intridea/multi_json/commit/1706b11568db7f50af451fce5f4d679aeb3bbe8f)
 
 0.0.5
 -----
@@ -81,7 +81,7 @@
 
 0.0.4
 -----
-* [Fix Issue #1: default_engine check for json gem fails](https://github.com/intridea/multi_json/commit/caced0c4e8c795922a109ebc00c3c4fa8635bed8)
+* [Fix default_engine check for `json` gem](https://github.com/intridea/multi_json/commit/caced0c4e8c795922a109ebc00c3c4fa8635bed8)
 * [Make requirement mapper an `Array` to preserve order in Ruby versions < 1.9](https://github.com/intridea/multi_json/commit/526f5f29a42131574a088ad9bbb43d7f48439b2c)
 
 0.0.3
@@ -91,7 +91,7 @@
 0.0.2
 -----
 
-* [Rename to multi_json](https://github.com/sferik/twitter/commit/461ab89ce071c8c9fabfc183581e0ec523788b62)
+* [Rename to `multi_json`](https://github.com/sferik/twitter/commit/461ab89ce071c8c9fabfc183581e0ec523788b62)
 
 0.0.1
 -----
