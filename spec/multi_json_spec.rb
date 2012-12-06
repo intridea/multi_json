@@ -78,6 +78,16 @@ describe 'MultiJson' do
     end
   end
 
+  it "stringifies keys before coding with Oj adapter" do
+    MultiJson.use :oj
+    Oj.should_receive(:dump).with({"100" => "foo", "200" => "bar"}, {})
+    MultiJson.dump({100 => "foo", 200 => "bar"})
+    Oj.should_receive(:dump).with([{"100" => "foo"}, {"200" => "bar"}], {})
+    MultiJson.dump([{100 => "foo"}, {200 => "bar"}])
+    Oj.should_receive(:dump).with({"1" => {"2" => {"3" => "foobar"}}}, {})
+    MultiJson.dump({1 => {2 => {3 => "foobar"}}})
+  end
+
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
     next if !macruby? && adapter == 'nsjsonserialization'
     next if jruby? && (adapter == 'oj' || adapter == 'yajl')
