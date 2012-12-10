@@ -73,7 +73,7 @@ describe 'MultiJson' do
         MultiJson.use :json_gem
         expect(MultiJson.dump('', :adapter => :json_pure)).to eq 'dump_something'
         expect(MultiJson.load('', :adapter => :json_pure)).to eq 'load_something'
-        expect(MultiJson.adapter.to_s).to eq "MultiJson::Adapters::JsonGem"
+        expect(MultiJson.adapter.name).to eq "MultiJson::Adapters::JsonGem"
       end
     end
   end
