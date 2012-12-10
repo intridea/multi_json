@@ -1,7 +1,11 @@
-# MultiJSON [![Build Status](https://secure.travis-ci.org/intridea/multi_json.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
+# MultiJSON
+[![Build Status](https://secure.travis-ci.org/intridea/multi_json.png?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
+[![Code Climate](https://codeclimate.com/badge.png)][codeclimate]
 
 [travis]: http://travis-ci.org/intridea/multi_json
 [gemnasium]: https://gemnasium.com/intridea/multi_json
+[codeclimate]: https://codeclimate.com/github/intridea/multi_json
 
 Lots of Ruby libraries parse JSON and everyone has their favorite JSON coder.
 Instead of choosing a single JSON coder and forcing users of your library to be
