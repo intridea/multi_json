@@ -78,6 +78,14 @@ describe 'MultiJson' do
     end
   end
 
+  it 'can set adapter for a block' do
+    MultiJson.use :ok_json
+    MultiJson.with_adapter(:json_pure) do
+      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonPure'
+    end
+    expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
+  end
+
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
     next if !macruby? && adapter == 'nsjsonserialization'
     next if jruby? && (adapter == 'oj' || adapter == 'yajl')
