@@ -23,7 +23,7 @@ module MultiJson
 
       def self.stringify_keys(object) #:nodoc:
         modify_keys(object) do |key|
-          key.is_a?(Symbol) ? key.to_s : key
+          key.respond_to?(:to_s) ? key.to_s : key
         end
       end
 
