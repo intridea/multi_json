@@ -123,6 +123,7 @@ module MultiJson
     ensure
       self.adapter = old_adapter
     end
+    alias :with_engine :with_adapter
 
   end
 

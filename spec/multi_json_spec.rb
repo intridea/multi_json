@@ -83,6 +83,9 @@ describe 'MultiJson' do
     MultiJson.with_adapter(:json_pure) do
       expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonPure'
     end
+    MultiJson.with_engine(:yajl) do
+      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Yajl'
+    end
     expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
   end
 
