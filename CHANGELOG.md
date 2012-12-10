@@ -1,3 +1,8 @@
+1.5.0
+-----
+* [Add `MultiJson.with_adapter` method](https://github.com/intridea/multi_json/commit/d14c5d28cae96557a0421298621b9499e1f28104)
+* [Stringify all possible keys for `ok_json`](https://github.com/intridea/multi_json/commit/73998074058e1e58c557ffa7b9541d486d6041fa)
+
 1.4.0
 -----
 * [Allow `load`/`dump` of JSON fragments](https://github.com/intridea/multi_json/commit/707aae7d48d39c85b38febbd2c210ba87f6e4a36)
@@ -50,8 +55,8 @@
 1.0.4
 -----
 * [Set data context to `DecodeError` exception](https://github.com/intridea/multi_json/commit/19ddafd44029c6681f66fae2a0f6eabfd0f85176)
-* [Allow `okjson` to fallback to `to_json`](https://github.com/intridea/multi_json/commit/c157240b1193b283d06d1bd4d4b5b06bcf3761f8)
-* [Add warning when using `okjson`](https://github.com/intridea/multi_json/commit/dd4b68810c84f826fb98f9713bfb29ab96888d57)
+* [Allow `ok_json` to fallback to `to_json`](https://github.com/intridea/multi_json/commit/c157240b1193b283d06d1bd4d4b5b06bcf3761f8)
+* [Add warning when using `ok_json`](https://github.com/intridea/multi_json/commit/dd4b68810c84f826fb98f9713bfb29ab96888d57)
 * [Options can be passed to an engine on encode](https://github.com/intridea/multi_json/commit/e0a7ff5d5ff621ffccc61617ed8aeec5816e81f7)
 
 1.0.3
@@ -61,11 +66,11 @@
 
 1.0.2
 -----
-* [Allow encoding of rootless JSON when `okjson` is used](https://github.com/intridea/multi_json/commit/d1cde7de97cb0f6152aef8daf14037521cdce8c6)
+* [Allow encoding of rootless JSON when `ok_json` is used](https://github.com/intridea/multi_json/commit/d1cde7de97cb0f6152aef8daf14037521cdce8c6)
 
 1.0.1
 -----
-* [Correct an issue with `okjson` not being returned as the default engine](https://github.com/intridea/multi_json/commit/d33c141619c54cccd770199694da8fd1bd8f449d)
+* [Correct an issue with `ok_json` not being returned as the default engine](https://github.com/intridea/multi_json/commit/d33c141619c54cccd770199694da8fd1bd8f449d)
 
 1.0.0
 -----
@@ -73,7 +78,7 @@
 * [Fix `@engine` ivar warning](https://github.com/intridea/multi_json/commit/3b978a8995721a8dffedc3b75a7f49e5494ec553)
 * [Only `rescue` from parsing errors during decoding, not any `StandardError`](https://github.com/intridea/multi_json/commit/391d00b5e85294d42d41347605d8d46b4a7f66cc)
 * [Rename `okjson` engine and vendored lib to `ok_json`](https://github.com/intridea/multi_json/commit/5bd1afc977a8208ddb0443e1d57cb79665c019f1)
-* [Add `StringIO` support to `json` gem and `okjson`](https://github.com/intridea/multi_json/commit/1706b11568db7f50af451fce5f4d679aeb3bbe8f)
+* [Add `StringIO` support to `json` gem and `ok_json`](https://github.com/intridea/multi_json/commit/1706b11568db7f50af451fce5f4d679aeb3bbe8f)
 
 0.0.5
 -----
