@@ -18,7 +18,7 @@ shared_examples_for "an adapter" do |adapter|
       end
     end
 
-    it 'dumps symbol keys as strings' do
+    it 'dumps symbol and fixnum keys as strings' do
       [
         [
           {:foo => {:bar => 'baz'}},
@@ -31,6 +31,10 @@ shared_examples_for "an adapter" do |adapter|
         [
           {:foo => [{:bar => 'baz'}]},
           {'foo' => [{'bar' => 'baz'}]},
+        ],
+        [
+          {1 => {2 => {3 => 'bar'}}},
+          {'1' => {'2' => {'3' => 'bar'}}}
         ]
       ].each do |example, expected|
         dumped_json = MultiJson.dump(example)
