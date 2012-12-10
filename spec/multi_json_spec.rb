@@ -73,9 +73,20 @@ describe 'MultiJson' do
         MultiJson.use :json_gem
         expect(MultiJson.dump('', :adapter => :json_pure)).to eq 'dump_something'
         expect(MultiJson.load('', :adapter => :json_pure)).to eq 'load_something'
-        expect(MultiJson.adapter.to_s).to eq "MultiJson::Adapters::JsonGem"
+        expect(MultiJson.adapter.name).to eq "MultiJson::Adapters::JsonGem"
       end
     end
+  end
+
+  it 'can set adapter for a block' do
+    MultiJson.use :ok_json
+    MultiJson.with_adapter(:json_pure) do
+      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonPure'
+    end
+    MultiJson.with_engine(:yajl) do
+      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Yajl'
+    end
+    expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
   end
 
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
