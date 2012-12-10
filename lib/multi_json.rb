@@ -117,6 +117,14 @@ module MultiJson
     # :nodoc:
     alias :encode :dump
 
+    def with_adapter(new_adapter)
+      old_adapter, self.adapter = adapter, new_adapter
+      yield
+    ensure
+      self.adapter = old_adapter
+    end
+    alias :with_engine :with_adapter
+
   end
 
 end
