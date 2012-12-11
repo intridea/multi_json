@@ -45,7 +45,7 @@ module MultiJson
 
     # Get the current adapter class.
     def adapter
-      return @adapter if @adapter
+      return @adapter if instance_variable_defined?(:@adapter)
       self.use self.default_adapter
       @adapter
     end
