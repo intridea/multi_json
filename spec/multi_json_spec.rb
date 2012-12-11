@@ -43,13 +43,8 @@ describe 'MultiJson' do
     it 'defaults to the best available gem' do
       # Clear cache variable already set by previous tests
       MultiJson.send(:remove_instance_variable, :@adapter)
-      unless jruby?
-        require 'oj'
-        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Oj'
-      else
-        require 'json'
-        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
-      end
+      require 'oj'
+      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Oj'
     end
 
     it 'is settable via a symbol' do
@@ -83,16 +78,11 @@ describe 'MultiJson' do
     MultiJson.with_adapter(:json_pure) do
       expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonPure'
     end
-    MultiJson.with_engine(:yajl) do
-      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Yajl'
-    end
     expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
   end
 
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
-    next if !macruby? && adapter == 'nsjsonserialization'
-    next if jruby? && (adapter == 'oj' || adapter == 'yajl')
-
+    next if adapter == 'nsjsonserialization' && !macruby?
     context adapter do
       it_behaves_like "an adapter", adapter
     end

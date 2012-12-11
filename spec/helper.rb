@@ -1,16 +1,6 @@
-def jruby?
-  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
-end
-
-def macruby?
-  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
-end
-
-unless ENV['CI'] || macruby?
+unless ENV['CI']
   require 'simplecov'
-  SimpleCov.start do
-    add_filter 'spec'
-  end
+  SimpleCov.start
 end
 
 require 'multi_json'
@@ -20,6 +10,10 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+def macruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
 end
 
 class MockDecoder
