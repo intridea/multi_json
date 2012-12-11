@@ -75,7 +75,7 @@ module MultiJson
       MultiJson::Adapters.const_get(:"#{new_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
     when NilClass, FalseClass
       load_adapter default_adapter
-    when Class
+    when Class, Module
       new_adapter
     else
       raise "Did not recognize your adapter specification. Please specify either a symbol or a class."
