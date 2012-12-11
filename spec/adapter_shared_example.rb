@@ -18,6 +18,12 @@ shared_examples_for "an adapter" do |adapter|
       end
     end
 
+    it 'dumps time in correct format' do
+      time = Time.at(1355218745).utc
+      dumped_json = MultiJson.dump(time)
+      expect(MultiJson.load(dumped_json)).to eq '2012-12-11 09:39:05 UTC'
+    end
+
     it 'dumps symbol and fixnum keys as strings' do
       [
         [
