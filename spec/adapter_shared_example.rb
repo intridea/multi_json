@@ -20,6 +20,13 @@ shared_examples_for "an adapter" do |adapter|
 
     it 'dumps time in correct format' do
       time = Time.at(1355218745).utc
+
+      # time does not respond to to_json method
+      def time.respond_to?(method, *args)
+        return false if method == :to_json
+        super
+      end
+
       dumped_json = MultiJson.dump(time)
       expected = if RUBY_VERSION > '1.9'
         '2012-12-11 09:39:05 UTC'
