@@ -115,12 +115,14 @@ module MultiJson
   # :nodoc:
   alias :encode :dump
 
+  #  Executes passed block using specified adapter.
   def with_adapter(new_adapter)
     old_adapter, self.adapter = adapter, new_adapter
     yield
   ensure
     self.adapter = old_adapter
   end
+  # :nodoc:
   alias :with_engine :with_adapter
 
 end
