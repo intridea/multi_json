@@ -21,7 +21,12 @@ shared_examples_for "an adapter" do |adapter|
     it 'dumps time in correct format' do
       time = Time.at(1355218745).utc
       dumped_json = MultiJson.dump(time)
-      expect(MultiJson.load(dumped_json)).to eq '2012-12-11 09:39:05 UTC'
+      expected = if RUBY_VERSION > '1.9'
+        '2012-12-11 09:39:05 UTC'
+      else
+        'Tue Dec 11 09:39:05 UTC 2012'
+      end
+      expect(MultiJson.load(dumped_json)).to eq expected
     end
 
     it 'dumps symbol and fixnum keys as strings' do
