@@ -74,9 +74,7 @@ module MultiJson
         require "multi_json/adapters/#{new_adapter}"
         MultiJson::Adapters.const_get(:"#{new_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
       when NilClass, FalseClass
-        default_adapter = self.default_adapter
-        require "multi_json/adapters/#{default_adapter}"
-        MultiJson::Adapters.const_get(:"#{default_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
+        load_adapter default_adapter
       when Class
         new_adapter
       else
