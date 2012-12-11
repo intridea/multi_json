@@ -2,45 +2,55 @@ require 'multi_json/vendor/okjson'
 
 module MultiJson
   module Adapters
-    class OkJson
+    module OkJson
+      extend self
+
       ParseError = ::MultiJson::OkJson::Error
 
-      def self.load(string, options={}) #:nodoc:
+      def load(string, options={}) #:nodoc:
         string = string.read if string.respond_to?(:read)
         result = ::MultiJson::OkJson.decode("[#{string}]").first
         options[:symbolize_keys] ? symbolize_keys(result) : result
       end
 
-      def self.dump(object, options={}) #:nodoc:
+      def dump(object, options={}) #:nodoc:
         ::MultiJson::OkJson.valenc(stringify_keys(object))
       end
 
-      def self.symbolize_keys(object) #:nodoc:
-        modify_keys(object) do |key|
+      def symbolize_keys(object) #:nodoc:
+        prepare_object(object) do |key|
           key.is_a?(String) ? key.to_sym : key
         end
       end
 
-      def self.stringify_keys(object) #:nodoc:
-        modify_keys(object) do |key|
+      def stringify_keys(object) #:nodoc:
+        prepare_object(object) do |key|
           key.respond_to?(:to_s) ? key.to_s : key
         end
       end
 
-      def self.modify_keys(object, &modifier) #:nodoc:
+      def prepare_object(object, &key_modifier) #:nodoc:
         case object
         when Array
           object.map do |value|
-            modify_keys(value, &modifier)
+            prepare_object(value, &key_modifier)
           end
         when Hash
           object.inject({}) do |result, (key, value)|
-            new_key   = modifier.call(key)
-            new_value = modify_keys(value, &modifier)
+            new_key   = key_modifier.call(key)
+            new_value = prepare_object(value, &key_modifier)
             result.merge! new_key => new_value
           end
-        else
+        when String, Numeric, true, false, nil
           object
+        else
+          if object.respond_to?(:to_json)
+            object
+          elsif object.respond_to?(:to_s)
+            object.to_s
+          else
+            object
+          end
         end
       end
     end

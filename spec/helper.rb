@@ -1,6 +1,8 @@
-unless ENV['CI']
+if !ENV['CI'] && defined?(RUBY_ENGINE) && RUBY_ENGINE == 'ruby'
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start do
+    add_filter 'vendor'
+  end
 end
 
 require 'multi_json'
@@ -14,6 +16,10 @@ end
 
 def macruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
+end
+
+def jruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
 
 class MockDecoder
