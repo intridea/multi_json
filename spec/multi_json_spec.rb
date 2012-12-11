@@ -76,6 +76,9 @@ describe 'MultiJson' do
   it 'can set adapter for a block' do
     MultiJson.use :ok_json
     MultiJson.with_adapter(:json_pure) do
+      MultiJson.with_engine(:yajl) do
+        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Yajl'
+      end
       expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonPure'
     end
     expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
