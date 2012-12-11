@@ -18,31 +18,39 @@ module MultiJson
       end
 
       def symbolize_keys(object) #:nodoc:
-        modify_keys(object) do |key|
+        prepare_object(object) do |key|
           key.is_a?(String) ? key.to_sym : key
         end
       end
 
       def stringify_keys(object) #:nodoc:
-        modify_keys(object) do |key|
+        prepare_object(object) do |key|
           key.respond_to?(:to_s) ? key.to_s : key
         end
       end
 
-      def modify_keys(object, &modifier) #:nodoc:
+      def prepare_object(object, &key_modifier) #:nodoc:
         case object
         when Array
           object.map do |value|
-            modify_keys(value, &modifier)
+            prepare_object(value, &key_modifier)
           end
         when Hash
           object.inject({}) do |result, (key, value)|
-            new_key   = modifier.call(key)
-            new_value = modify_keys(value, &modifier)
+            new_key   = key_modifier.call(key)
+            new_value = prepare_object(value, &key_modifier)
             result.merge! new_key => new_value
           end
-        else
+        when String, Numeric, true, false, nil
           object
+        else
+          if object.respond_to?(:to_json)
+            object
+          elsif object.respond_to?(:to_s)
+            object.to_s
+          else
+            object
+          end
         end
       end
     end
