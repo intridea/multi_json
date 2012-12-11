@@ -12,7 +12,7 @@
 * [Fix rescue clause for MagLev](https://github.com/intridea/multi_json/commit/39abdf50199828c50e85b2ce8f8ba31fcbbc9332)
 * [Remove unnecessary check for string version of options key](https://github.com/intridea/multi_json/commit/660101b70e962b3c007d0b90d45944fa47d13ec4)
 * [Explicitly set default adapter when adapter is set to `nil` or `false`](https://github.com/intridea/multi_json/commit/a9e587d5a63eafb4baee9fb211265e4dd96a26bc)
-* [Fix Oj ParseError mapping for Oj 1.4.0](https://github.com/intridea/multi_json/commit/7d9045338cc9029401c16f3c409d54ce97f275e2)
+* [Fix Oj `ParseError` mapping for Oj 1.4.0](https://github.com/intridea/multi_json/commit/7d9045338cc9029401c16f3c409d54ce97f275e2)
 
 1.3.6
 -----
