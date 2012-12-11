@@ -6,7 +6,7 @@ module MultiJson
     module Oj
       extend self
 
-      DEFAULT_OPTIONS = {:mode => :compat}.freeze
+      DEFAULT_OPTIONS = {:mode => :compat, :time_format => :ruby}.freeze
 
       ParseError = if defined?(::Oj::ParseError)
         ::Oj::ParseError
