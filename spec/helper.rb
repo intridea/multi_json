@@ -24,6 +24,7 @@ end
 
 class MockDecoder
   def self.load(string, options={})
+    puts "hi"
     {'abc' => 'def'}
   end
 
