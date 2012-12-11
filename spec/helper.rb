@@ -18,6 +18,10 @@ def macruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
 end
 
+def jruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+end
+
 class MockDecoder
   def self.load(string, options={})
     {'abc' => 'def'}
