@@ -10,6 +10,9 @@ module MultiJson
     end
   end
 
+  @default_options = {}
+  attr_accessor :default_options
+
   @adapter = nil
 
   REQUIREMENT_MAP = [
@@ -109,6 +112,7 @@ module MultiJson
 
   # Encodes a Ruby object as JSON.
   def dump(object, options={})
+    options = default_options.merge(options)
     adapter = current_adapter(options)
     adapter.dump(object, options)
   end
