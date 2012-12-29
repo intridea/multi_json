@@ -12,12 +12,14 @@ Instead of choosing a single JSON coder and forcing users of your library to be
 stuck with it, you can use MultiJSON instead, which will simply choose the
 fastest available JSON coder. Here's how to use it:
 
-    require 'multi_json'
+```ruby
+require 'multi_json'
 
-    MultiJson.load('{"abc":"def"}') #=> {"abc" => "def"}
-    MultiJson.load('{"abc":"def"}', :symbolize_keys => true) #=> {:abc => "def"}
-    MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON
-    MultiJson.dump({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
+MultiJson.load('{"abc":"def"}') #=> {"abc" => "def"}
+MultiJson.load('{"abc":"def"}', :symbolize_keys => true) #=> {:abc => "def"}
+MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON
+MultiJson.dump({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
+```
 
 The `use` method, which sets the MultiJson adapter, takes either a symbol or a
 class (to allow for custom JSON parsers) that responds to both `.load` and `.dump`
@@ -80,7 +82,9 @@ introduced with new major versions. As a result of this policy, you can (and
 should) specify a dependency on this gem using the [Pessimistic Version
 Constraint][pvc] with two digits of precision. For example:
 
-    spec.add_dependency 'multi_json', '~> 1.0'
+```ruby
+spec.add_dependency 'multi_json', '~> 1.0'
+```
 
 [semver]: http://semver.org/
 [pvc]: http://docs.rubygems.org/read/chapter/16#page74
