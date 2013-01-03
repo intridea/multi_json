@@ -74,8 +74,8 @@ shared_examples_for "an adapter" do |adapter|
       describe 'with :pretty option set to true' do
         it 'passes default pretty options' do
           object = 'foo'
-          object.should_receive(:to_json).with(JSON::PRETTY_STATE_PROTOTYPE.to_h)
-          MultiJson.dump(object,:pretty => true)
+          ::JSON.should_receive(:generate).with(object, JSON::PRETTY_STATE_PROTOTYPE.to_h)
+          MultiJson.dump(object, :pretty => true)
         end
       end
     end
