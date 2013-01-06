@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 shared_examples_for "an adapter" do |adapter|
 
   before do
@@ -94,6 +96,9 @@ shared_examples_for "an adapter" do |adapter|
       expect(MultiJson.dump(42)).to eq '42'
     end
 
+    it 'allow to dump JSON with UTF-8 characters' do
+      expect(MultiJson.dump({'color' => 'żółć'})).to eq('{"color":"żółć"}')
+    end
   end
 
   describe '.load' do
@@ -147,5 +152,8 @@ shared_examples_for "an adapter" do |adapter|
       expect(MultiJson.load('42')).to eq 42
     end
 
+    it 'allow to load JSON with UTF-8 characters' do
+      expect(MultiJson.load('{"color":"żółć"}')).to eq({'color' => 'żółć'})
+    end
   end
 end
