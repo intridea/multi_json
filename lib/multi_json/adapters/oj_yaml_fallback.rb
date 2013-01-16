@@ -26,6 +26,7 @@ module MultiJson
             parsed_json = adapter.load(string, options)
           rescue adapter::ParseError
             has_failure = true
+            string.rewind if string.respond_to?(:rewind)
           else
             success = true
           end
