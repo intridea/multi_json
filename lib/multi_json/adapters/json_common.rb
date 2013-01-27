@@ -1,15 +1,13 @@
 module MultiJson
   module Adapters
     module JsonCommon
-      DEFAULT_OPTS = {:quirks_mode => true}
-
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
-        ::JSON.parse(string, DEFAULT_OPTS.merge(:symbolize_names => options[:symbolize_keys]))
+        ::JSON.parse("[#{string}]", {:symbolize_names => options[:symbolize_keys]}).first
       end
 
       def dump(object, options={})
-        ::JSON.generate(object, DEFAULT_OPTS.merge(process_options!(options)))
+        ::JSON.generate([object], process_options!(options)).strip[1..-2]
       end
 
     protected
