@@ -20,9 +20,11 @@ group :development do
   gem 'pry-debugger', :platforms => :mri_19
 end
 
+gemspec
+
 group :test do
   gem 'rspec', '>= 2.11'
   gem 'simplecov', '>= 0.4'
 end
 
-gemspec
+
