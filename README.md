@@ -92,7 +92,7 @@ spec.add_dependency 'multi_json', '~> 1.0'
 [pvc]: http://docs.rubygems.org/read/chapter/16#page74
 
 ## Copyright
-Copyright (c) 2010 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober, and Intridea, Inc.
-See [LICENSE][] for details.
+Copyright (c) 2010-2013 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
+and Intridea, Inc. See [LICENSE][] for details.
 
 [license]: LICENSE.md
