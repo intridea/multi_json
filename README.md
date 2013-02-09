@@ -95,4 +95,4 @@ spec.add_dependency 'multi_json', '~> 1.0'
 Copyright (c) 2010 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober, and Intridea, Inc.
 See [LICENSE][] for details.
 
-[license]: https://github.com/intridea/multi_json/blob/master/LICENSE.md
+[license]: LICENSE.md
