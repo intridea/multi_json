@@ -23,6 +23,12 @@ MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON
 MultiJson.dump({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
 ```
 
+When loading invalid JSON, multiJSON will throw a `MultiJson::LoadError`. `MultiJson::DecodeError` is an alias for backwards compatibility.
+
+```ruby
+MultiJson.load('invalid json') #=> MultiJson::LoadError
+```
+
 The `use` method, which sets the MultiJson adapter, takes either a symbol or a
 class (to allow for custom JSON parsers) that responds to both `.load` and `.dump`
 at the class level.
