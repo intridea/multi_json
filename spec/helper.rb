@@ -31,9 +31,3 @@ class MockDecoder
     '{"abc":"def"}'
   end
 end
-
-class TimeWithZone
-  def to_json(options={})
-    "\"2005-02-01T15:15:10Z\""
-  end
-end

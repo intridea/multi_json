@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 shared_examples_for "an adapter" do |adapter|
 
   before do
@@ -18,22 +20,23 @@ shared_examples_for "an adapter" do |adapter|
       end
     end
 
-    it 'dumps time in correct format' do
-      time = Time.at(1355218745).utc
+    unless 'json_pure' == adapter || 'json_gem' == adapter
+      it 'dumps time in correct format' do
+        time = Time.at(1355218745).utc
 
-      # time does not respond to to_json method
-      def time.respond_to?(method, *args)
-        return false if method == :to_json
-        super
-      end
+        # time does not respond to to_json method
+        class << time
+          undef_method :to_json
+        end
 
-      dumped_json = MultiJson.dump(time)
-      expected = if RUBY_VERSION > '1.9'
-        '2012-12-11 09:39:05 UTC'
-      else
-        'Tue Dec 11 09:39:05 UTC 2012'
+        dumped_json = MultiJson.dump(time)
+        expected = if RUBY_VERSION > '1.9'
+          '2012-12-11 09:39:05 UTC'
+        else
+          'Tue Dec 11 09:39:05 UTC 2012'
+        end
+        expect(MultiJson.load(dumped_json)).to eq expected
       end
-      expect(MultiJson.load(dumped_json)).to eq expected
     end
 
     it 'dumps symbol and fixnum keys as strings' do
@@ -73,21 +76,28 @@ shared_examples_for "an adapter" do |adapter|
     if adapter == 'json_gem' || adapter == 'json_pure'
       describe 'with :pretty option set to true' do
         it 'passes default pretty options' do
-          object = 'foo'
-          ::JSON.should_receive(:generate).with(object, JSON::PRETTY_STATE_PROTOTYPE.to_h)
-          MultiJson.dump(object, :pretty => true)
+          ::JSON.should_receive(:generate).with(['foo'], JSON::PRETTY_STATE_PROTOTYPE.to_h).and_return('["foo"]')
+          MultiJson.dump('foo', :pretty => true)
         end
       end
     end
 
-    it 'dumps custom objects which implement as_json' do
-      expect(MultiJson.dump(TimeWithZone.new)).to eq "\"2005-02-01T15:15:10Z\""
+    it 'dumps custom objects which implements to_json' do
+      klass = Class.new do
+        def to_json(*)
+          "\"foobar\""
+        end
+      end
+      expect(MultiJson.dump(klass.new)).to eq "\"foobar\""
     end
 
     it 'allow to dump JSON values' do
       expect(MultiJson.dump(42)).to eq '42'
     end
 
+    it 'allow to dump JSON with UTF-8 characters' do
+      expect(MultiJson.dump({'color' => 'żółć'})).to eq('{"color":"żółć"}')
+    end
   end
 
   describe '.load' do
@@ -141,5 +151,8 @@ shared_examples_for "an adapter" do |adapter|
       expect(MultiJson.load('42')).to eq 42
     end
 
+    it 'allow to load JSON with UTF-8 characters' do
+      expect(MultiJson.load('{"color":"żółć"}')).to eq({'color' => 'żółć'})
+    end
   end
 end
