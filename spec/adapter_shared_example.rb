@@ -82,15 +82,6 @@ shared_examples_for "an adapter" do |adapter|
       end
     end
 
-    it 'dumps custom objects which implements to_json' do
-      klass = Class.new do
-        def to_json(*)
-          "\"foobar\""
-        end
-      end
-      expect(MultiJson.dump(klass.new)).to eq "\"foobar\""
-    end
-
     it 'allow to dump JSON values' do
       expect(MultiJson.dump(42)).to eq '42'
     end
