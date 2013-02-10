@@ -13,6 +13,9 @@ platforms :ruby, :mswin, :mingw do
   gem 'oj', '~> 2.0', :require => nil
   gem 'yajl-ruby', '~> 1.0', :require => nil
 end
+platforms :jruby do
+  gem 'gson', '>= 0.6', :require => nil
+end
 
 group :development do
   gem 'kramdown', '>= 0.14'

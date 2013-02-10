@@ -19,6 +19,7 @@ module MultiJson
     ["oj", :oj],
     ["yajl", :yajl],
     ["json", :json_gem],
+    ["gson", :gson],
     ["json/pure", :json_pure]
   ]
 
@@ -30,6 +31,7 @@ module MultiJson
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
+    return :gson if defined?(::Gson)
 
     REQUIREMENT_MAP.each do |(library, adapter)|
       begin
@@ -64,6 +66,7 @@ module MultiJson
   # * <tt>:ok_json</tt>
   # * <tt>:yajl</tt>
   # * <tt>:nsjsonserialization</tt> (MacRuby only)
+  # * <tt>:gson</tt> (JRuby only)
   def use(new_adapter)
     @adapter = load_adapter(new_adapter)
   end
