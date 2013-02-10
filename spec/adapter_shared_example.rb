@@ -96,11 +96,20 @@ shared_examples_for "an adapter" do |adapter|
       expect(MultiJson.load('{"abc":"def"}')).to eq({'abc' => 'def'})
     end
 
-    it 'raises MultiJson::DecodeError on invalid JSON' do
-      expect{MultiJson.load('{"abc"}')}.to raise_error(MultiJson::DecodeError)
+    it 'raises MultiJson::LoadError on invalid JSON' do
+      expect{MultiJson.load('{"abc"}')}.to raise_error(MultiJson::LoadError)
     end
 
-    it 'raises MultiJson::DecodeError with data on invalid JSON' do
+    it 'raises MultiJson::LoadError with data on invalid JSON' do
+      data = '{invalid}'
+      begin
+        MultiJson.load(data)
+      rescue MultiJson::LoadError => le
+        expect(le.data).to eq data
+      end
+    end
+
+    it 'catches MultiJson::DecodeError for legacy support' do
       data = '{invalid}'
       begin
         MultiJson.load(data)
