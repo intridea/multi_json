@@ -56,6 +56,12 @@ describe 'MultiJson' do
       end
     end
 
+    it 'looks for adapter even if @adapter variable is nil' do
+      MultiJson.send(:instance_variable_set, :@adapter, nil)
+      MultiJson.should_receive(:default_adapter).and_return(:ok_json)
+      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
+    end
+
     it 'is settable via a symbol' do
       MultiJson.use :json_gem
       expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'

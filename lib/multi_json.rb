@@ -15,8 +15,6 @@ module MultiJson
   @default_options = {}
   attr_accessor :default_options
 
-  @adapter = nil
-
   REQUIREMENT_MAP = [
     ["oj", :oj],
     ["yajl", :yajl],
@@ -52,8 +50,10 @@ module MultiJson
 
   # Get the current adapter class.
   def adapter
-    return @adapter if instance_variable_defined?(:@adapter)
-    self.use self.default_adapter
+    return @adapter if defined?(@adapter) && @adapter
+
+    self.use nil # load default adapter
+
     @adapter
   end
   # :nodoc:
