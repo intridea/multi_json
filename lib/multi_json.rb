@@ -39,7 +39,7 @@ module MultiJson
       begin
         require library
         return adapter
-      rescue LoadError
+      rescue ::LoadError
         next
       end
     end
