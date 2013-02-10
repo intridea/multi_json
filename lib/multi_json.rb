@@ -1,7 +1,7 @@
 module MultiJson
   extend self
 
-  class DecodeError < StandardError
+  class LoadError < StandardError
     attr_reader :data
     def initialize(message="", backtrace=[], data="")
       super(message)
@@ -9,6 +9,8 @@ module MultiJson
       @data = data
     end
   end
+  DecodeError = LoadError # Legacy support
+
 
   @default_options = {}
   attr_accessor :default_options
@@ -99,7 +101,7 @@ module MultiJson
     begin
       adapter.load(string, options)
     rescue adapter::ParseError => exception
-      raise DecodeError.new(exception.message, exception.backtrace, string)
+      raise LoadError.new(exception.message, exception.backtrace, string)
     end
   end
   # :nodoc:
