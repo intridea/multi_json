@@ -44,9 +44,7 @@ module MultiJson
         when String, Numeric, true, false, nil
           object
         else
-          if object.respond_to?(:to_json)
-            object
-          elsif object.respond_to?(:to_s)
+          if object.respond_to?(:to_s)
             object.to_s
           else
             object
