@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-shared_examples_for "an adapter" do |adapter|
+shared_examples_for 'an adapter' do |adapter|
 
   before do
     begin
@@ -14,7 +14,7 @@ shared_examples_for "an adapter" do |adapter|
     it 'writes decodable JSON' do
       [
         {'abc' => 'def'},
-        [1, 2, 3, "4", true, false, nil]
+        [1, 2, 3, '4', true, false, nil]
       ].each do |example|
         expect(MultiJson.load(MultiJson.dump(example))).to eq example
       end
@@ -64,8 +64,8 @@ shared_examples_for "an adapter" do |adapter|
     end
 
     it 'dumps rootless JSON' do
-      expect(MultiJson.dump("random rootless string")).to eq "\"random rootless string\""
-      expect(MultiJson.dump(123)).to eq "123"
+      expect(MultiJson.dump('random rootless string')).to eq '"random rootless string"'
+      expect(MultiJson.dump(123)).to eq '123'
     end
 
     it 'passes options to the adapter' do
@@ -120,7 +120,7 @@ shared_examples_for "an adapter" do |adapter|
 
     it 'stringifys symbol keys when encoding' do
       dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})
-      expect(MultiJson.load(dumped_json)).to eq({"a" => 1, "b" => {"c" => 2}})
+      expect(MultiJson.load(dumped_json)).to eq({'a' => 1, 'b' => {'c' => 2}})
     end
 
     it 'properly loads valid JSON in StringIOs' do

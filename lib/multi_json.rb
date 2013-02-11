@@ -3,7 +3,7 @@ module MultiJson
 
   class LoadError < StandardError
     attr_reader :data
-    def initialize(message="", backtrace=[], data="")
+    def initialize(message='', backtrace=[], data='')
       super(message)
       self.set_backtrace(backtrace)
       @data = data
@@ -16,11 +16,11 @@ module MultiJson
   attr_accessor :default_options
 
   REQUIREMENT_MAP = [
-    ["oj", :oj],
-    ["yajl", :yajl],
-    ["json", :json_gem],
-    ["gson", :gson],
-    ["json/pure", :json_pure]
+    ['oj',        :oj],
+    ['yajl',      :yajl],
+    ['json',      :json_gem],
+    ['gson',      :gson],
+    ['json/pure', :json_pure]
   ]
 
   # The default adapter based on what you currently
@@ -42,7 +42,7 @@ module MultiJson
       end
     end
 
-    Kernel.warn "[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance."
+    Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance.'
     :ok_json
   end
   # :nodoc:

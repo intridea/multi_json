@@ -4,9 +4,8 @@ require 'stringio'
 
 describe 'MultiJson' do
   context 'adapters' do
-    before do
-      MultiJson.use nil
-    end
+    before{ MultiJson.use nil }
+
     context 'when no other json implementations are available' do
       before do
         @old_map = MultiJson::REQUIREMENT_MAP
@@ -72,18 +71,23 @@ describe 'MultiJson' do
       expect(MultiJson.adapter.name).to eq 'MockDecoder'
     end
 
-    context "using one-shot parser" do
-      before(:each) do
+    it 'is settable via a module' do
+      MultiJson.use MockModuleDecoder
+      expect(MultiJson.adapter.name).to eq 'MockModuleDecoder'
+    end
+
+    context 'using one-shot parser' do
+      before do
         require 'multi_json/adapters/json_pure'
         MultiJson::Adapters::JsonPure.should_receive(:dump).exactly(1).times.and_return('dump_something')
         MultiJson::Adapters::JsonPure.should_receive(:load).exactly(1).times.and_return('load_something')
       end
 
-      it "should use the defined parser just for the call" do
+      it 'should use the defined parser just for the call' do
         MultiJson.use :json_gem
         expect(MultiJson.dump('', :adapter => :json_pure)).to eq 'dump_something'
         expect(MultiJson.load('', :adapter => :json_pure)).to eq 'load_something'
-        expect(MultiJson.adapter.name).to eq "MultiJson::Adapters::JsonGem"
+        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
       end
     end
   end
@@ -112,7 +116,7 @@ describe 'MultiJson' do
     next if adapter == 'nsjsonserialization' && !macruby?
     next if jruby? && (adapter == 'oj' || adapter == 'yajl')
     context adapter do
-      it_behaves_like "an adapter", adapter
+      it_behaves_like 'an adapter', adapter
     end
   end
 end
