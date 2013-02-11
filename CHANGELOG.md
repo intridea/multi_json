@@ -1,3 +1,7 @@
+1.5.1
+-----
+* [Do not allow Oj or JSON to create symbols by searching for classes](https://github.com/intridea/multi_json/commit/193e28cf4dc61b6e7b7b7d80f06f74c76df65c41)
+
 1.5.0
 -----
 * [Add `MultiJson.with_adapter` method](https://github.com/intridea/multi_json/commit/d14c5d28cae96557a0421298621b9499e1f28104)
