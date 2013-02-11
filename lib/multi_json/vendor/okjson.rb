@@ -422,11 +422,7 @@ module MultiJson
       when false   then "false"
       when nil     then "null"
       else
-        if x.respond_to?(:to_json)
-          x.to_json
-        else
-          raise Error, "cannot encode #{x.class}: #{x.inspect}"
-        end
+        raise Error, "cannot encode #{x.class}: #{x.inspect}"
       end
     end
 
