@@ -89,6 +89,24 @@ describe 'MultiJson' do
     expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
   end
 
+  it 'does not create symbols on parse' do
+    MultiJson.with_engine(:json_gem) do
+      before = Symbol.all_symbols
+      MultiJson.load('{"json_class":"OMGOMG"}') rescue nil
+      after = Symbol.all_symbols - before
+      expect(after).to eq []
+    end
+  end
+
+  it 'oj does not create symbols on parse' do
+    MultiJson.with_engine(:oj) do
+      before = Symbol.all_symbols
+      MultiJson.load('{"json_class":"OMGOMG"}') rescue nil
+      after = Symbol.all_symbols - before
+      expect(after).to eq []
+    end
+  end
+
   %w(json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
     next if !macruby? && adapter == 'nsjsonserialization'
     next if jruby? && (adapter == 'oj' || adapter == 'yajl')
