@@ -80,6 +80,18 @@ shared_examples_for 'an adapter' do |adapter|
           MultiJson.dump('foo', :pretty => true)
         end
       end
+
+      describe 'with :quirks_mode option' do
+        it 'passes it on dump' do
+          ::JSON.should_receive(:generate).with(['foo'], {:quirks_mode => true}).and_return('["foo"]')
+          MultiJson.dump('foo', :quirks_mode => true)
+        end
+
+        it 'passes it on load' do
+          ::JSON.should_receive(:parse).with('["foo"]', {:quirks_mode => true}).and_return(['foo'])
+          MultiJson.load('"foo"', :quirks_mode => true)
+        end
+      end
     end
 
     it 'allow to dump JSON values' do
