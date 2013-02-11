@@ -105,8 +105,9 @@ describe 'MultiJson' do
 
   it 'JSON gem does not create symbols on parse' do
     MultiJson.with_engine(:json_gem) do
+      MultiJson.load('{"json_class":"ZOMG"}') rescue nil
       before = Symbol.all_symbols
-      MultiJson.load('{"json_class":"OMGOMG"}') rescue nil
+      MultiJson.load('{"json_class":"OMG"}') rescue nil
       after = Symbol.all_symbols - before
       expect(after).to eq []
     end
@@ -115,8 +116,9 @@ describe 'MultiJson' do
   unless jruby?
     it 'Oj does not create symbols on parse' do
       MultiJson.with_engine(:oj) do
+        MultiJson.load('{"json_class":"ZOMG"}') rescue nil
         before = Symbol.all_symbols
-        MultiJson.load('{"json_class":"OMGOMG"}') rescue nil
+        MultiJson.load('{"json_class":"OMG"}') rescue nil
         after = Symbol.all_symbols - before
         expect(after).to eq []
       end
