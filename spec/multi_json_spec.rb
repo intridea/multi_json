@@ -103,7 +103,7 @@ describe 'MultiJson' do
     expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
   end
 
-  it 'does not create symbols on parse' do
+  it 'JSON gem does not create symbols on parse' do
     MultiJson.with_engine(:json_gem) do
       before = Symbol.all_symbols
       MultiJson.load('{"json_class":"OMGOMG"}') rescue nil
@@ -112,12 +112,14 @@ describe 'MultiJson' do
     end
   end
 
-  it 'oj does not create symbols on parse' do
-    MultiJson.with_engine(:oj) do
-      before = Symbol.all_symbols
-      MultiJson.load('{"json_class":"OMGOMG"}') rescue nil
-      after = Symbol.all_symbols - before
-      expect(after).to eq []
+  unless jruby?
+    it 'Oj does not create symbols on parse' do
+      MultiJson.with_engine(:oj) do
+        before = Symbol.all_symbols
+        MultiJson.load('{"json_class":"OMGOMG"}') rescue nil
+        after = Symbol.all_symbols - before
+        expect(after).to eq []
+      end
     end
   end
 
