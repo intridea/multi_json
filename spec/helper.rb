@@ -31,3 +31,15 @@ class MockDecoder
     '{"abc":"def"}'
   end
 end
+
+module MockModuleDecoder
+  extend self
+
+  def load(string, options={})
+    {'abc' => 'def'}
+  end
+
+  def dump(string)
+    '{"abc":"def"}'
+  end
+end
