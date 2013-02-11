@@ -89,13 +89,17 @@ shared_examples_for 'an adapter' do |adapter|
       end
     end
 
-    it 'dumps custom objects which implements to_json' do
-      klass = Class.new do
-        def to_json(*)
-          "\"foobar\""
+    # This behavior is currently not supported by gson.rb
+    # See discussion at https://github.com/intridea/multi_json/pull/71
+    unless adapter == 'gson'
+      it 'dumps custom objects which implements to_json' do
+        klass = Class.new do
+          def to_json(*)
+            "\"foobar\""
+          end
         end
+        expect(MultiJson.dump(klass.new)).to eq "\"foobar\""
       end
-      expect(MultiJson.dump(klass.new)).to eq "\"foobar\""
     end
 
     it 'allow to dump JSON values' do
