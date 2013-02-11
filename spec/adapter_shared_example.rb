@@ -76,19 +76,20 @@ shared_examples_for 'an adapter' do |adapter|
     if adapter == 'json_gem' || adapter == 'json_pure'
       describe 'with :pretty option set to true' do
         it 'passes default pretty options' do
-          ::JSON.should_receive(:generate).with(['foo'], JSON::PRETTY_STATE_PROTOTYPE.to_h).and_return('["foo"]')
+          options = JSON::PRETTY_STATE_PROTOTYPE.to_h.merge(:create_additions => false)
+          ::JSON.should_receive(:generate).with(['foo'], options).and_return('["foo"]')
           MultiJson.dump('foo', :pretty => true)
         end
       end
 
       describe 'with :quirks_mode option' do
         it 'passes it on dump' do
-          ::JSON.should_receive(:generate).with(['foo'], {:quirks_mode => true}).and_return('["foo"]')
+          ::JSON.should_receive(:generate).with(['foo'], {:quirks_mode => true, :create_additions => false}).and_return('["foo"]')
           MultiJson.dump('foo', :quirks_mode => true)
         end
 
         it 'passes it on load' do
-          ::JSON.should_receive(:parse).with('["foo"]', {:quirks_mode => true}).and_return(['foo'])
+          ::JSON.should_receive(:parse).with('["foo"]', {:quirks_mode => true, :create_additions => false}).and_return(['foo'])
           MultiJson.load('"foo"', :quirks_mode => true)
         end
       end

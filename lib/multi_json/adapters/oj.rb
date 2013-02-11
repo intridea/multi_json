@@ -16,6 +16,7 @@ module MultiJson
 
       def load(string, options={}) #:nodoc:
         options.merge!(:symbol_keys => options[:symbolize_keys])
+        options[:mode] = :strict
         ::Oj.load(string, DEFAULT_OPTIONS.merge(options))
       end
 

@@ -13,8 +13,8 @@ module MultiJson
     protected
 
       def process_options!(options={})
-        return options if options.empty?
-        opts = {}
+        opts = {:create_additions => false}
+        return opts if options.empty?
         opts.merge!(:symbolize_names => true) if options.delete(:symbolize_keys)
         opts.merge!(::JSON::PRETTY_STATE_PROTOTYPE.to_h) if options.delete(:pretty)
         opts.merge!(options)
