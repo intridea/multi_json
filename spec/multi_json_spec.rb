@@ -1,5 +1,6 @@
 require 'helper'
 require 'adapter_shared_example'
+require 'json_common_shared_example'
 require 'stringio'
 
 describe 'MultiJson' do
@@ -106,10 +107,10 @@ describe 'MultiJson' do
   it 'JSON gem does not create symbols on parse' do
     MultiJson.with_engine(:json_gem) do
       MultiJson.load('{"json_class":"ZOMG"}') rescue nil
-      before = Symbol.all_symbols
-      MultiJson.load('{"json_class":"OMG"}') rescue nil
-      after = Symbol.all_symbols - before
-      expect(after).to eq []
+
+      expect{
+        MultiJson.load('{"json_class":"OMG"}') rescue nil
+      }.to_not change{Symbol.all_symbols.count}
     end
   end
 
@@ -117,10 +118,10 @@ describe 'MultiJson' do
     it 'Oj does not create symbols on parse' do
       MultiJson.with_engine(:oj) do
         MultiJson.load('{"json_class":"ZOMG"}') rescue nil
-        before = Symbol.all_symbols
-        MultiJson.load('{"json_class":"OMG"}') rescue nil
-        after = Symbol.all_symbols - before
-        expect(after).to eq []
+
+        expect{
+          MultiJson.load('{"json_class":"OMG"}') rescue nil
+        }.to_not change{Symbol.all_symbols.count}
       end
     end
   end
@@ -139,6 +140,12 @@ describe 'MultiJson' do
     next if jruby? && (adapter == 'oj' || adapter == 'yajl')
     context adapter do
       it_behaves_like 'an adapter', adapter
+    end
+  end
+
+  %w(json_gem json_pure).each do |adapter|
+    context adapter do
+      it_behaves_like 'JSON-like adapter', adapter
     end
   end
 end
