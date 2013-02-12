@@ -5,7 +5,7 @@ require 'multi_json/version'
 
 Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.0'
-  spec.authors       = ["Michael Bleigh", "Josh Kalderimis", "Erik Michaels-Ober"]
+  spec.authors       = ["Michael Bleigh", "Josh Kalderimis", "Erik Michaels-Ober", "Pavel Pravosud"]
   spec.cert_chain    = %w(certs/sferik.pem)
   spec.description   = %q{A gem to provide easy switching between different JSON backends, including Oj, Yajl, the JSON gem (with C-extensions), the pure-Ruby JSON gem, and OkJson.}
   spec.email         = ['michael@intridea.com', 'josh.kalderimis@gmail.com', 'sferik@gmail.com']

@@ -99,6 +99,6 @@ spec.add_dependency 'multi_json', '~> 1.0'
 
 ## Copyright
 Copyright (c) 2010-2013 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
-and Intridea, Inc. See [LICENSE][] for details.
+and Pavel Pravosud. See [LICENSE][] for details.
 
 [license]: LICENSE.md
