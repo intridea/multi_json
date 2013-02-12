@@ -1,3 +1,11 @@
+1.6.0
+-----
+* [Add gson.rb support](https://github.com/intridea/multi_json/pull/71)
+* [Add MultiJson.default_options](https://github.com/intridea/multi_json/pull/70)
+* [Add MultiJson.with_adapter](https://github.com/intridea/multi_json/pull/67)
+* [Stringify all possible keys for ok_json](https://github.com/intridea/multi_json/pull/66)
+* [Alias `MultiJson::DecodeError` to `MultiJson::LoadError`](https://github.com/intridea/multi_json/pull/79)
+
 1.5.1
 -----
 * [Do not allow Oj or JSON to create symbols by searching for classes](https://github.com/intridea/multi_json/commit/193e28cf4dc61b6e7b7b7d80f06f74c76df65c41)
