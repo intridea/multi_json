@@ -73,22 +73,6 @@ shared_examples_for 'an adapter' do |adapter|
       MultiJson.dump('foo', :bar => :baz)
     end
 
-    if adapter == 'json_gem' || adapter == 'json_pure'
-      describe 'with :pretty option set to true' do
-        it 'passes default pretty options' do
-          ::JSON.should_receive(:generate).with(['foo'], JSON::PRETTY_STATE_PROTOTYPE.to_h).and_return('["foo"]')
-          MultiJson.dump('foo', :pretty => true)
-        end
-      end
-
-      describe 'with :indent option' do
-        it 'passes it on dump' do
-          ::JSON.should_receive(:generate).with(['foo'], {:indent => "\t"}).and_return('["foo"]')
-          MultiJson.dump('foo', :indent => "\t")
-        end
-      end
-    end
-
     # This behavior is currently not supported by gson.rb
     # See discussion at https://github.com/intridea/multi_json/pull/71
     unless adapter == 'gson'
@@ -164,15 +148,6 @@ shared_examples_for 'an adapter' do |adapter|
         ],
       ].each do |example, expected|
         expect(MultiJson.load(example, :symbolize_keys => true)).to eq expected
-      end
-    end
-
-    if adapter == 'json_gem' || adapter == 'json_pure'
-      describe 'with :quirks_mode option' do
-        it 'passes it on load' do
-          ::JSON.should_receive(:parse).with('["foo"]', {:quirks_mode => true, :create_additions => false}).and_return(['foo'])
-          MultiJson.load('"foo"', :quirks_mode => true)
-        end
       end
     end
 

@@ -1,5 +1,6 @@
 require 'helper'
 require 'adapter_shared_example'
+require 'json_common_shared_example'
 require 'stringio'
 
 describe 'MultiJson' do
@@ -139,6 +140,12 @@ describe 'MultiJson' do
     next if jruby? && (adapter == 'oj' || adapter == 'yajl')
     context adapter do
       it_behaves_like 'an adapter', adapter
+    end
+  end
+
+  %w(json_gem json_pure).each do |adapter|
+    context adapter do
+      it_behaves_like 'JSON-like adapter', adapter
     end
   end
 end
