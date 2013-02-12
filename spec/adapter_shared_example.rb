@@ -92,21 +92,21 @@ shared_examples_for 'an adapter' do |adapter|
     # This behavior is currently not supported by gson.rb
     # See discussion at https://github.com/intridea/multi_json/pull/71
     unless adapter == 'gson'
-      it 'dumps custom objects which implements to_json' do
+      it 'dumps custom objects that implement to_json' do
         klass = Class.new do
           def to_json(*)
-            "\"foobar\""
+            '"foobar"'
           end
         end
-        expect(MultiJson.dump(klass.new)).to eq "\"foobar\""
+        expect(MultiJson.dump(klass.new)).to eq '"foobar"'
       end
     end
 
-    it 'allow to dump JSON values' do
+    it 'allows to dump JSON values' do
       expect(MultiJson.dump(42)).to eq '42'
     end
 
-    it 'allow to dump JSON with UTF-8 characters' do
+    it 'allows to dump JSON with UTF-8 characters' do
       expect(MultiJson.dump({'color' => 'żółć'})).to eq('{"color":"żółć"}')
     end
   end
@@ -176,11 +176,11 @@ shared_examples_for 'an adapter' do |adapter|
       end
     end
 
-    it 'allow to load JSON values' do
+    it 'allows to load JSON values' do
       expect(MultiJson.load('42')).to eq 42
     end
 
-    it 'allow to load JSON with UTF-8 characters' do
+    it 'allows to load JSON with UTF-8 characters' do
       expect(MultiJson.load('{"color":"żółć"}')).to eq({'color' => 'żółć'})
     end
   end
