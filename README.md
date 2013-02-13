@@ -48,6 +48,7 @@ MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 * [JSON](https://github.com/flori/json) The default JSON gem with C-extensions (ships with Ruby 1.9)
 * [JSON Pure](https://github.com/flori/json) A Ruby variant of the JSON gem
 * [NSJSONSerialization](https://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html) Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
+* [gson.rb](https://github.com/avsej/gson.rb) A Ruby wrapper for google-gson library (JRuby only)
 * [OkJson][okjson] A simple, vendorable JSON parser
 
 ## Supported Ruby Versions
