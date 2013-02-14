@@ -1,9 +1,14 @@
+1.6.1
+-----
+* [Revert "Use JSON.generate instead of #to_json"](https://github.com/intridea/multi_json/issues/86)
+
 1.6.0
 -----
 * [Add gson.rb support](https://github.com/intridea/multi_json/pull/71)
 * [Add MultiJson.default_options](https://github.com/intridea/multi_json/pull/70)
 * [Add MultiJson.with_adapter](https://github.com/intridea/multi_json/pull/67)
 * [Stringify all possible keys for ok_json](https://github.com/intridea/multi_json/pull/66)
+* [Use JSON.generate instead of #to_json](https://github.com/intridea/multi_json/issues/73)
 * [Alias `MultiJson::DecodeError` to `MultiJson::LoadError`](https://github.com/intridea/multi_json/pull/79)
 
 1.5.1
