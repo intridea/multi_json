@@ -44,6 +44,48 @@ describe 'MultiJson' do
       end
     end
 
+    context 'when JSON gem available, but older than 1.7.7' do
+      before do
+        @old_map = MultiJson::REQUIREMENT_MAP
+        @old_json = Object.const_get :JSON if Object.const_defined?(:JSON)
+        @old_oj = Object.const_get :Oj if Object.const_defined?(:Oj)
+        @old_yajl = Object.const_get :Yajl if Object.const_defined?(:Yajl)
+        @old_gson = Object.const_get :Gson if Object.const_defined?(:Gson)
+        MultiJson::REQUIREMENT_MAP.each_with_index do |(library, adapter), index|
+          MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", adapter]
+        end
+        Object.send :remove_const, :JSON if @old_json
+        Object.send :remove_const, :Oj if @old_oj
+        Object.send :remove_const, :Yajl if @old_yajl
+        Object.send :remove_const, :Gson if @old_gson
+        Object.const_set :JSON, Class.new
+        JSON.const_set :VERSION, '1.7.6'
+        Object.const_set :Gson, Class.new
+      end
+
+      after do
+        Object.send :remove_const, :Gson
+        Object.send :remove_const, :JSON
+        @old_map.each_with_index do |(library, adapter), index|
+          MultiJson::REQUIREMENT_MAP[index] = [library, adapter]
+        end
+        Object.const_set :JSON, @old_json if @old_json
+        Object.const_set :Oj, @old_oj if @old_oj
+        Object.const_set :Yajl, @old_yajl if @old_yajl
+        Object.const_set :Gson, @old_gson if @old_gson
+      end
+
+      it 'ignoes the JSON gem and use the next best choice' do
+        Kernel.stub(:warn)
+        expect(MultiJson.default_adapter).to eq :gson
+      end
+
+      it 'prints a warning' do
+        Kernel.should_receive(:warn).with(/skipping JSON version 1.7.6/i)
+        MultiJson.default_adapter
+      end
+    end
+
     it 'defaults to the best available gem' do
       # Clear cache variable already set by previous tests
       MultiJson.send(:remove_instance_variable, :@adapter)
