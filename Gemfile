@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'rake', '>= 0.9'
 gem 'yard', '>= 0.8'
