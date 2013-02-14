@@ -10,15 +10,17 @@ shared_examples_for 'JSON-like adapter' do |adapter|
   describe '.dump' do
     describe 'with :pretty option set to true' do
       it 'passes default pretty options' do
-        ::JSON.should_receive(:generate).with(['foo'], JSON::PRETTY_STATE_PROTOTYPE.to_h).and_return('["foo"]')
-        MultiJson.dump('foo', :pretty => true)
+        object = 'foo'
+        object.should_receive(:to_json).with(JSON::PRETTY_STATE_PROTOTYPE.to_h).and_return('["foo"]')
+        MultiJson.dump(object, :pretty => true)
       end
     end
 
     describe 'with :indent option' do
       it 'passes it on dump' do
-        ::JSON.should_receive(:generate).with(['foo'], {:indent => "\t"}).and_return('["foo"]')
-        MultiJson.dump('foo', :indent => "\t")
+        object = 'foo'
+        object.should_receive(:to_json).with(:indent => "\t").and_return('["foo"]')
+        MultiJson.dump(object, :indent => "\t")
       end
     end
   end

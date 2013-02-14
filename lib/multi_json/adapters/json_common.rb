@@ -7,7 +7,7 @@ module MultiJson
       end
 
       def dump(object, options={})
-        ::JSON.generate([object], process_dump_options!(options)).strip[1..-2]
+        object.to_json(process_dump_options!(options))
       end
 
     protected
