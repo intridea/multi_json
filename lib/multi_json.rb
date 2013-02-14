@@ -30,7 +30,15 @@ module MultiJson
   def default_adapter
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
-    return :json_gem if defined?(::JSON)
+
+    if defined?(::JSON)
+      if ::JSON::VERSION >= '1.7.7'
+        return :json_gem
+      else
+        Kernel.warn "[WARNING] MultiJson is skipping JSON version #{::JSON::VERSION} since it has a vulnerability. Please upgrade your JSON gem."
+      end
+    end
+
     return :gson if defined?(::Gson)
 
     REQUIREMENT_MAP.each do |(library, adapter)|
