@@ -107,8 +107,8 @@ module MultiJson
   # :nodoc:
   alias :decode :load
 
-  def current_adapter(options)
-    if new_adapter = (options || {}).delete(:adapter)
+  def current_adapter(options={})
+    if new_adapter = options.delete(:adapter)
       load_adapter(new_adapter)
     else
       adapter
