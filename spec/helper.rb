@@ -14,6 +14,13 @@ RSpec.configure do |config|
   end
 end
 
+def silence_warnings
+  old_verbose, $VERBOSE = $VERBOSE, nil
+  yield
+ensure
+  $VERBOSE = old_verbose
+end
+
 def macruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
 end

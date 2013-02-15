@@ -34,8 +34,9 @@ describe 'MultiJson' do
       end
 
       it 'defaults to ok_json if no other json implementions are available' do
-        Kernel.stub(:warn)
-        expect(MultiJson.default_adapter).to eq :ok_json
+        silence_warnings do
+          expect(MultiJson.default_adapter).to eq :ok_json
+        end
       end
 
       it 'prints a warning' do
