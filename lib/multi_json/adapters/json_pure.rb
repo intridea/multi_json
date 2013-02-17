@@ -4,9 +4,8 @@ require 'multi_json/adapters/json_common'
 module MultiJson
   module Adapters
     # Use JSON pure to dump/load.
-    module JsonPure
+    class JsonPure < JsonCommon
       ParseError = ::JSON::ParserError
-      extend JsonCommon
     end
   end
 end

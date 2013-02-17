@@ -1,11 +1,10 @@
 require 'oj' unless defined?(::Oj)
+require 'multi_json/adapter'
 
 module MultiJson
   module Adapters
     # Use the Oj library to dump/load.
-    module Oj
-      extend self
-
+    class Oj < Adapter
       DEFAULT_OPTIONS = {:mode => :compat, :time_format => :ruby}.freeze
 
       ParseError = if defined?(::Oj::ParseError)

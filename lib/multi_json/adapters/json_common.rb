@@ -1,6 +1,8 @@
+require 'multi_json/adapter'
+
 module MultiJson
   module Adapters
-    module JsonCommon
+    class JsonCommon < Adapter
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
         ::JSON.parse("[#{string}]", process_load_options!(options)).first
