@@ -23,11 +23,12 @@ log
 pkg
 Gemfile.lock
 
+## RBENV
+.ruby-version
+.rbenv*
+
 ## RCOV
 coverage.data
 
 ## RUBINIUS
 *.rbc
-
-## PROJECT::SPECIFIC
-.rbenv*
