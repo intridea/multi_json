@@ -5,7 +5,8 @@ module MultiJson
   module Adapters
     # Use the Oj library to dump/load.
     class Oj < Adapter
-      DEFAULT_OPTIONS = {:mode => :compat, :time_format => :ruby}.freeze
+      defaults :load, :mode => :strict
+      defaults :dump, :mode => :compat, :time_format => :ruby
 
       ParseError = if defined?(::Oj::ParseError)
         ::Oj::ParseError
@@ -14,14 +15,13 @@ module MultiJson
       end
 
       def load(string, options={}) #:nodoc:
-        options.merge!(:symbol_keys => options[:symbolize_keys])
-        options[:mode] = :strict
-        ::Oj.load(string, DEFAULT_OPTIONS.merge(options))
+        options[:symbol_keys] = true if options.delete(:symbolize_keys)
+        ::Oj.load(string, options)
       end
 
       def dump(object, options={}) #:nodoc:
         options.merge!(:indent => 2) if options[:pretty]
-        ::Oj.dump(object, DEFAULT_OPTIONS.merge(options))
+        ::Oj.dump(object, options)
       end
     end
   end
