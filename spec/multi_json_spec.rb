@@ -1,6 +1,7 @@
 require 'helper'
 require 'adapter_shared_example'
 require 'json_common_shared_example'
+require 'has_options'
 require 'stringio'
 
 describe 'MultiJson' do
@@ -127,13 +128,20 @@ describe 'MultiJson' do
     end
   end
 
-  it 'has default_options setter' do
-    MultiJson.use MockDecoder
-    MockDecoder.should_receive(:dump).with('123', :foo => 'lol', :bar => 'bar', :fizz => 'buzz')
-    MultiJson.default_options = { :foo => 'foo', :bar => 'bar' }
-    MultiJson.dump('123', :fizz => 'buzz', :foo => 'lol')
-    MultiJson.default_options = {}
+  describe 'default options' do
+    it 'is deprecated' do
+      Kernel.should_receive(:warn).with(/deprecated/i)
+      silence_warnings{ MultiJson.default_options = {:foo => 'bar'} }
+    end
+
+    it 'sets both load and dump options' do
+      MultiJson.should_receive(:dump_options=).with(:foo => 'bar')
+      MultiJson.should_receive(:load_options=).with(:foo => 'bar')
+      silence_warnings{ MultiJson.default_options = {:foo => 'bar'} }
+    end
   end
+
+  it_behaves_like 'has options', MultiJson
 
   %w(gson json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
     next if adapter == 'gson' && !jruby?
