@@ -1,6 +1,7 @@
 require 'helper'
 require 'adapter_shared_example'
 require 'json_common_shared_example'
+require 'has_options'
 require 'stringio'
 
 describe 'MultiJson' do
@@ -134,6 +135,8 @@ describe 'MultiJson' do
     MultiJson.dump('123', :fizz => 'buzz', :foo => 'lol')
     MultiJson.default_options = {}
   end
+
+  it_behaves_like 'has options', MultiJson
 
   %w(gson json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
     next if adapter == 'gson' && !jruby?

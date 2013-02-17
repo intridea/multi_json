@@ -1,4 +1,7 @@
+require 'multi_json/options'
+
 module MultiJson
+  include Options
   extend self
 
   class LoadError < StandardError
