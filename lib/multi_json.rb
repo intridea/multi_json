@@ -14,9 +14,17 @@ module MultiJson
   end
   DecodeError = LoadError # Legacy support
 
+  # Since `default_options` is deprecated, the
+  # reader is aliased to `dump_options` and the
+  # writer sets both `dump_options` and `load_options`
+  alias :default_options :dump_options
 
-  @default_options = {}
-  attr_accessor :default_options
+  def default_options=(value)
+    Kernel.warn "MultiJson.default_options setter is deprecated\n" +
+      "Use MultiJson.load_options and MultiJson.dump_options instead"
+
+    self.load_options = self.dump_options = value
+  end
 
   REQUIREMENT_MAP = [
     ['oj',        :oj],
@@ -120,9 +128,7 @@ module MultiJson
 
   # Encodes a Ruby object as JSON.
   def dump(object, options={})
-    options = default_options.merge(options)
-    adapter = current_adapter(options)
-    adapter.dump(object, options)
+    current_adapter(options).dump(object, options)
   end
   # :nodoc:
   alias :encode :dump
