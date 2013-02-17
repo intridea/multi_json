@@ -10,6 +10,8 @@ shared_examples_for 'an adapter' do |adapter|
     end
   end
 
+  it_behaves_like 'has options', lambda{ MultiJson.adapter }
+
   describe '.dump' do
     it 'writes decodable JSON' do
       [

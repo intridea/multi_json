@@ -1,6 +1,10 @@
 shared_examples_for 'has options' do |object|
 
-  subject{ object }
+  if object.respond_to?(:call)
+    subject{ object.call }
+  else
+    subject{ object }
+  end
 
   %w(dump_options load_options).each do |getter|
 
