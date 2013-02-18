@@ -1,11 +1,10 @@
 require 'yajl' unless defined?(::Yajl)
+require 'multi_json/adapter'
 
 module MultiJson
   module Adapters
     # Use the Yajl-Ruby library to dump/load.
-    module Yajl
-      extend self
-
+    class Yajl < Adapter
       ParseError = ::Yajl::ParseError
 
       def load(string, options={}) #:nodoc:

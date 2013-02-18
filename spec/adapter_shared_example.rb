@@ -10,7 +10,32 @@ shared_examples_for 'an adapter' do |adapter|
     end
   end
 
+  it_behaves_like 'has options', lambda{ MultiJson.adapter }
+
   describe '.dump' do
+    describe '#dump_options' do
+      before{ MultiJson.dump_options = MultiJson.adapter.dump_options = {} }
+
+      after do
+        MultiJson.adapter.instance.should_receive(:dump).with(1, :foo=>'bar', :fizz=>'buzz')
+        MultiJson.dump(1, :fizz => 'buzz')
+        MultiJson.dump_options = MultiJson.adapter.dump_options = nil
+      end
+
+      it 'respects global dump options' do
+        MultiJson.dump_options = {:foo => 'bar'}
+      end
+
+      it 'respects per-adapter dump options' do
+        MultiJson.adapter.dump_options = {:foo => 'bar'}
+      end
+
+      it 'overrides global options with adapter-specific' do
+        MultiJson.dump_options = {:foo => 'foo'}
+        MultiJson.adapter.dump_options = {:foo => 'bar'}
+      end
+    end
+
     it 'writes decodable JSON' do
       [
         {'abc' => 'def'},
@@ -96,6 +121,29 @@ shared_examples_for 'an adapter' do |adapter|
   end
 
   describe '.load' do
+    describe '#load_options' do
+      before{ MultiJson.load_options = MultiJson.adapter.load_options = {} }
+
+      after do
+        MultiJson.adapter.instance.should_receive(:load).with('1', :foo => 'bar', :fizz => 'buzz')
+        MultiJson.load('1', :fizz => 'buzz')
+        MultiJson.load_options = MultiJson.adapter.load_options = nil
+      end
+
+      it 'respects global load options' do
+        MultiJson.load_options = {:foo => 'bar'}
+      end
+
+      it 'respects per-adapter load options' do
+        MultiJson.adapter.load_options = {:foo => 'bar'}
+      end
+
+      it 'overrides global options with adapter-specific' do
+        MultiJson.load_options = {:foo => 'foo'}
+        MultiJson.adapter.load_options = {:foo => 'bar'}
+      end
+    end
+
     it 'properly loads valid JSON' do
       expect(MultiJson.load('{"abc":"def"}')).to eq({'abc' => 'def'})
     end

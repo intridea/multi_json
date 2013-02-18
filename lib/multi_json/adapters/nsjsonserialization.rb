@@ -3,8 +3,7 @@ require 'multi_json/adapters/ok_json'
 
 module MultiJson
   module Adapters
-    module Nsjsonserialization
-      extend self, MultiJson::Adapters::OkJson
+    class Nsjsonserialization < MultiJson::Adapters::OkJson
       ParseError = ::MultiJson::OkJson::Error
 
       def load(string, options={})

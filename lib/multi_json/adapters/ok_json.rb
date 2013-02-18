@@ -1,10 +1,9 @@
 require 'multi_json/vendor/okjson'
+require 'multi_json/adapter'
 
 module MultiJson
   module Adapters
-    module OkJson
-      extend self
-
+    class OkJson < Adapter
       ParseError = ::MultiJson::OkJson::Error
 
       def load(string, options={}) #:nodoc:
