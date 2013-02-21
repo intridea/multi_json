@@ -119,7 +119,7 @@ module MultiJson
   alias :decode :load
 
   def current_adapter(options={})
-    if new_adapter = options.delete(:adapter)
+    if new_adapter = options[:adapter]
       load_adapter(new_adapter)
     else
       adapter
