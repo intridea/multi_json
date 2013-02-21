@@ -81,7 +81,6 @@ describe 'MultiJson' do
 
     context 'using one-shot parser' do
       before do
-        require 'multi_json/adapters/json_pure'
         MultiJson::Adapters::JsonPure.should_receive(:dump).exactly(1).times.and_return('dump_something')
         MultiJson::Adapters::JsonPure.should_receive(:load).exactly(1).times.and_return('load_something')
       end
