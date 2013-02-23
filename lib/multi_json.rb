@@ -106,7 +106,7 @@ module MultiJson
   # <b>Options</b>
   #
   # <tt>:symbolize_keys</tt> :: If true, will use symbols instead of strings for the keys.
-  # <tt>:adapter</tt> :: If set, the selected engine will be used just for the call.
+  # <tt>:adapter</tt> :: If set, the selected adapter will be used for this call.
   def load(string, options={})
     adapter = current_adapter(options)
     begin
