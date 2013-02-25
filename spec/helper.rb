@@ -1,9 +1,11 @@
-if !ENV['CI'] && defined?(RUBY_ENGINE) && RUBY_ENGINE == 'ruby'
-  require 'simplecov'
-  SimpleCov.start do
-    add_filter 'vendor'
-  end
-end
+require 'simplecov'
+require 'coveralls'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start
 
 require 'multi_json'
 require 'rspec'
