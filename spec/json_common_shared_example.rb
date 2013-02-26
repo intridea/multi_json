@@ -32,7 +32,7 @@ shared_examples_for 'JSON-like adapter' do |adapter|
 
     describe 'with :quirks_mode option' do
       it 'passes it on load' do
-        ::JSON.should_receive(:parse).with('["foo"]', {:quirks_mode => true, :create_additions => false}).and_return(['foo'])
+        ::JSON.should_receive(:parse).with('"foo"', {:quirks_mode => true, :create_additions => false}).and_return(['foo'])
         MultiJson.load('"foo"', :quirks_mode => true)
       end
     end

@@ -8,7 +8,7 @@ module MultiJson
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
         options[:symbolize_names] = true if options.delete(:symbolize_keys)
-        ::JSON.parse("[#{string}]", options).first
+        ::JSON.parse(string, options)
       end
 
       def dump(object, options={})
