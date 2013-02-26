@@ -30,6 +30,11 @@ shared_examples_for 'JSON-like adapter' do |adapter|
   describe '.load' do
     before{ MultiJson.load_options = MultiJson.adapter.load_options = nil }
 
+    it "doesn't modify the passed-in JSON" do
+        ::JSON.should_receive(:parse).with('{"a": "b"}', {:create_additions => false}).and_return({"a" => "b"})
+        MultiJson.load('{"a": "b"}')
+    end
+
     describe 'with :quirks_mode option' do
       it 'passes it on load' do
         ::JSON.should_receive(:parse).with('"foo"', {:quirks_mode => true, :create_additions => false}).and_return(['foo'])
