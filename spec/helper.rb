@@ -30,25 +30,3 @@ end
 def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
-
-class MockDecoder
-  def self.load(string, options={})
-    {'abc' => 'def'}
-  end
-
-  def self.dump(string)
-    '{"abc":"def"}'
-  end
-end
-
-module MockModuleDecoder
-  extend self
-
-  def load(string, options={})
-    {'abc' => 'def'}
-  end
-
-  def dump(string)
-    '{"abc":"def"}'
-  end
-end

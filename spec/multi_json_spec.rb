@@ -50,33 +50,33 @@ describe 'MultiJson' do
       # Clear cache variable already set by previous tests
       MultiJson.send(:remove_instance_variable, :@adapter)
       unless jruby?
-        require 'oj'
-        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::Oj'
+        expect(MultiJson.adapter).to eq MultiJson::Adapters::Oj
       else
-        require 'json'
-        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
+        expect(MultiJson.adapter).to eq MultiJson::Adapters::JsonGem
       end
     end
 
     it 'looks for adapter even if @adapter variable is nil' do
       MultiJson.send(:instance_variable_set, :@adapter, nil)
       MultiJson.should_receive(:default_adapter).and_return(:ok_json)
-      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
+      expect(MultiJson.adapter).to eq MultiJson::Adapters::OkJson
     end
 
     it 'is settable via a symbol' do
       MultiJson.use :json_gem
-      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
+      expect(MultiJson.adapter).to eq MultiJson::Adapters::JsonGem
     end
 
     it 'is settable via a class' do
-      MultiJson.use MockDecoder
-      expect(MultiJson.adapter.name).to eq 'MockDecoder'
+      adapter = Class.new
+      MultiJson.use adapter
+      expect(MultiJson.adapter).to eq adapter
     end
 
     it 'is settable via a module' do
-      MultiJson.use MockModuleDecoder
-      expect(MultiJson.adapter.name).to eq 'MockModuleDecoder'
+      adapter =  Module.new
+      MultiJson.use adapter
+      expect(MultiJson.adapter).to eq adapter
     end
 
     context 'using one-shot parser' do
@@ -89,7 +89,7 @@ describe 'MultiJson' do
         MultiJson.use :json_gem
         expect(MultiJson.dump('', :adapter => :json_pure)).to eq 'dump_something'
         expect(MultiJson.load('', :adapter => :json_pure)).to eq 'load_something'
-        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
+        expect(MultiJson.adapter).to eq MultiJson::Adapters::JsonGem
       end
     end
   end
@@ -98,11 +98,11 @@ describe 'MultiJson' do
     MultiJson.use :ok_json
     MultiJson.with_adapter(:json_pure) do
       MultiJson.with_engine(:json_gem) do
-        expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonGem'
+        expect(MultiJson.adapter).to eq MultiJson::Adapters::JsonGem
       end
-      expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::JsonPure'
+      expect(MultiJson.adapter).to eq MultiJson::Adapters::JsonPure
     end
-    expect(MultiJson.adapter.name).to eq 'MultiJson::Adapters::OkJson'
+    expect(MultiJson.adapter).to eq MultiJson::Adapters::OkJson
   end
 
   it 'JSON gem does not create symbols on parse' do
