@@ -205,12 +205,14 @@ shared_examples_for 'an adapter' do |adapter|
       end
     end
 
-    it 'allows to load JSON values' do
-      expect(MultiJson.load('42')).to eq 42
-    end
-
     it 'allows to load JSON with UTF-8 characters' do
       expect(MultiJson.load('{"color":"żółć"}')).to eq({'color' => 'żółć'})
+    end
+
+    describe "options" do
+      it 'allows JSON fragment parsing with quirks_mode' do
+        expect(MultiJson.load('42', :quirks_mode => true)).to eq(42)
+      end
     end
   end
 end
