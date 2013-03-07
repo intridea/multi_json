@@ -128,6 +128,8 @@ describe 'MultiJson' do
   end
 
   describe 'default options' do
+    after(:all){ MultiJson.load_options = MultiJson.dump_options = nil }
+
     it 'is deprecated' do
       Kernel.should_receive(:warn).with(/deprecated/i)
       silence_warnings{ MultiJson.default_options = {:foo => 'bar'} }
