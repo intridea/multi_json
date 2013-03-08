@@ -1,11 +1,5 @@
 shared_examples_for 'JSON-like adapter' do |adapter|
-  before do
-    begin
-      MultiJson.use adapter
-    rescue LoadError
-      pending "Adapter #{adapter} couldn't be loaded (not installed?)"
-    end
-  end
+  before{ MultiJson.use adapter }
 
   describe '.dump' do
     before{ MultiJson.dump_options = MultiJson.adapter.dump_options = nil }
