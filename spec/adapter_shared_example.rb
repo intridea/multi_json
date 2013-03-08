@@ -36,9 +36,9 @@ shared_examples_for 'an adapter' do |adapter|
         MultiJson.adapter.dump_options = {:foo => 'bar'}
       end
 
-      it 'overrides global options with adapter-specific' do
-        MultiJson.dump_options = {:foo => 'foo'}
-        MultiJson.adapter.dump_options = {:foo => 'bar'}
+      it 'adapter-specific are overridden by global options' do
+        MultiJson.adapter.dump_options = {:foo => 'foo'}
+        MultiJson.dump_options = {:foo => 'bar'}
       end
     end
 
@@ -144,9 +144,9 @@ shared_examples_for 'an adapter' do |adapter|
         MultiJson.adapter.load_options = {:foo => 'bar'}
       end
 
-      it 'overrides global options with adapter-specific' do
-        MultiJson.load_options = {:foo => 'foo'}
-        MultiJson.adapter.load_options = {:foo => 'bar'}
+      it 'adapter-specific are overridden by global options' do
+        MultiJson.adapter.load_options = {:foo => 'foo'}
+        MultiJson.load_options = {:foo => 'bar'}
       end
     end
 
