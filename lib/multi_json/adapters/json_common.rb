@@ -3,12 +3,13 @@ require 'multi_json/adapter'
 module MultiJson
   module Adapters
     class JsonCommon < Adapter
-      defaults :load, :create_additions => false
+      defaults :load, :create_additions => false, :quirks_mode => true
 
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
+        string.force_encoding(::Encoding::ASCII_8BIT) if string.respond_to?(:force_encoding)
         options[:symbolize_names] = true if options.delete(:symbolize_keys)
-        ::JSON.parse("[#{string}]", options).first
+        ::JSON.parse(string, options)
       end
 
       def dump(object, options={})
