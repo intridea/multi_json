@@ -31,6 +31,7 @@ module MultiJson
     ['yajl',      :yajl],
     ['json',      :json_gem],
     ['gson',      :gson],
+    ['jrjackson', :jrjackson],
     ['json/pure', :json_pure]
   ]
 
