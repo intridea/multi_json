@@ -150,6 +150,24 @@ shared_examples_for 'an adapter' do |adapter|
       end
     end
 
+    it 'does not modify input' do
+      input = %Q{\n\n  {"foo":"bar"} \n\n\t}
+      expect{
+        MultiJson.load(input)
+      }.to_not change{ input }
+    end
+
+    it 'does not modify input encoding' do
+      pending 'only in 1.9' unless RUBY_VERSION > '1.9'
+
+      input = '[123]'
+      input.force_encoding('iso-8859-1')
+
+      expect{
+        MultiJson.load(input)
+      }.to_not change{ input.encoding }
+    end
+
     it 'properly loads valid JSON' do
       expect(MultiJson.load('{"abc":"def"}')).to eq({'abc' => 'def'})
     end
