@@ -7,7 +7,11 @@ module MultiJson
 
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
-        string.force_encoding(::Encoding::ASCII_8BIT) if string.respond_to?(:force_encoding)
+
+        if string.respond_to?(:force_encoding)
+          string = string.dup.force_encoding(::Encoding::ASCII_8BIT)
+        end
+
         options[:symbolize_names] = true if options.delete(:symbolize_keys)
         ::JSON.parse(string, options)
       end
