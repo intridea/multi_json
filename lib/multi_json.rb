@@ -98,8 +98,10 @@ module MultiJson
     when Class, Module
       new_adapter
     else
-      raise "Did not recognize your adapter specification. Please specify either a symbol or a class."
+      raise NameError
     end
+  rescue NameError, ::LoadError
+    raise ArgumentError, 'Did not recognize your adapter specification.'
   end
 
   # Decode a JSON string into Ruby.

@@ -74,9 +74,13 @@ describe 'MultiJson' do
     end
 
     it 'is settable via a module' do
-      adapter =  Module.new
+      adapter = Module.new
       MultiJson.use adapter
       expect(MultiJson.adapter).to eq adapter
+    end
+
+    it 'throws ArgumentError on bad input' do
+      expect{ MultiJson.use 'bad adapter' }.to raise_error(ArgumentError)
     end
 
     context 'using one-shot parser' do
