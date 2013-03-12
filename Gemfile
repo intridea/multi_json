@@ -15,6 +15,7 @@ platforms :ruby, :mswin, :mingw do
 end
 platforms :jruby do
   gem 'gson', '>= 0.6', :require => nil
+  gem 'jrjackson', :require => nil
 end
 
 group :development do
