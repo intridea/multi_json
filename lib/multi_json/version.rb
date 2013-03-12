@@ -1,3 +1,3 @@
 module MultiJson
-  VERSION = "1.6.1" unless defined?(MultiJson::VERSION)
+  VERSION = '1.7.0' unless defined?(MultiJson::VERSION)
 end
