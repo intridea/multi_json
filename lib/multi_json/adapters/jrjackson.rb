@@ -1,19 +1,19 @@
 require 'jrjackson_r' unless defined?(::JrJackson)
-require 'multi_json/adapters/ok_json'
+require 'multi_json/adapters/thick_adapter'
 
 module MultiJson
   module Adapters
-    class Jrjackson < MultiJson::Adapters::OkJson
+    class Jrjackson < ThickAdapter
       ParseError = ::Java::OrgCodehausJackson::JsonParseException
 
-      def load(string, options={}) #:nodoc:
-        string = string.read if string.respond_to?(:read)
-        result = ::JrJackson::Json.parse(string)
-        options[:symbolize_keys] ? symbolize_keys(result) : result
+      private
+
+      def load_json(string) #:nodoc:
+        ::JrJackson::Json.parse(string)
       end
 
-      def dump(object, options={}) #:nodoc:
-        ::JrJackson::Json.generate(prepare_object(object){ |value| value })
+      def dump_json(object) #:nodoc:
+        ::JrJackson::Json.generate(prepare_object(object))
       end
     end
   end
