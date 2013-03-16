@@ -1,9 +1,10 @@
 require 'jrjackson_r' unless defined?(::JrJackson)
+require 'multi_json/adapter'
 require 'multi_json/convertible_hash_keys'
 
 module MultiJson
   module Adapters
-    class Jrjackson < ThickAdapter
+    class Jrjackson < Adapter
       include ConvertibleHashKeys
       ParseError = ::Java::OrgCodehausJackson::JsonParseException
 
