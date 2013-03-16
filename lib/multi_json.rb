@@ -57,7 +57,6 @@ module MultiJson
     Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance.'
     :ok_json
   end
-  # :nodoc:
   alias :default_engine :default_adapter
 
   # Get the current adapter class.
@@ -68,7 +67,6 @@ module MultiJson
 
     @adapter
   end
-  # :nodoc:
   alias :engine :adapter
 
   # Set the JSON parser utilizing a symbol, string, or class.
@@ -85,7 +83,6 @@ module MultiJson
     @adapter = load_adapter(new_adapter)
   end
   alias :adapter= :use
-  # :nodoc:
   alias :engine= :use
 
   def load_adapter(new_adapter)
@@ -118,7 +115,6 @@ module MultiJson
       raise LoadError.new(exception.message, exception.backtrace, string)
     end
   end
-  # :nodoc:
   alias :decode :load
 
   def current_adapter(options={})
@@ -133,7 +129,6 @@ module MultiJson
   def dump(object, options={})
     current_adapter(options).dump(object, options)
   end
-  # :nodoc:
   alias :encode :dump
 
   #  Executes passed block using specified adapter.
@@ -143,7 +138,6 @@ module MultiJson
   ensure
     self.adapter = old_adapter
   end
-  # :nodoc:
   alias :with_engine :with_adapter
 
 end

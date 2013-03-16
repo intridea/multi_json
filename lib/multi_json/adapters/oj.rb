@@ -14,12 +14,12 @@ module MultiJson
         SyntaxError
       end
 
-      def load(string, options={}) #:nodoc:
+      def load(string, options={})
         options[:symbol_keys] = true if options.delete(:symbolize_keys)
         ::Oj.load(string, options)
       end
 
-      def dump(object, options={}) #:nodoc:
+      def dump(object, options={})
         options.merge!(:indent => 2) if options[:pretty]
         ::Oj.dump(object, options)
       end

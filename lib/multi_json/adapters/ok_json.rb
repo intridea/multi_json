@@ -8,11 +8,11 @@ module MultiJson
 
       private
 
-      def load_json(string) #:nodoc:
+      def load_json(string)
         ::MultiJson::OkJson.decode("[#{string}]").first
       end
 
-      def dump_json(object) #:nodoc:
+      def dump_json(object)
         ::MultiJson::OkJson.valenc(object)
       end
     end

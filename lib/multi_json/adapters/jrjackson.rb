@@ -8,11 +8,11 @@ module MultiJson
 
       private
 
-      def load_json(string) #:nodoc:
+      def load_json(string)
         ::JrJackson::Json.parse(string)
       end
 
-      def dump_json(object) #:nodoc:
+      def dump_json(object)
         ::JrJackson::Json.generate(prepare_object(object))
       end
     end

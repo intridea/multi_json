@@ -3,13 +3,13 @@ require 'multi_json/adapter'
 module MultiJson
   module Adapters
     class ThickAdapter < Adapter
-      def load(string, options={}) #:nodoc:
+      def load(string, options={})
         string = string.read if string.respond_to?(:read)
         result = load_json(string)
         options[:symbolize_keys] ? symbolize_keys(result) : result
       end
 
-      def dump(object, options={}) #:nodoc:
+      def dump(object, options={})
         dump_json(stringify_keys(object))
       end
 
@@ -17,19 +17,19 @@ module MultiJson
 
       NOOP = proc{ |value| value }
 
-      def symbolize_keys(object) #:nodoc:
+      def symbolize_keys(object)
         prepare_object(object) do |key|
           key.is_a?(String) ? key.to_sym : key
         end
       end
 
-      def stringify_keys(object) #:nodoc:
+      def stringify_keys(object)
         prepare_object(object) do |key|
           key.respond_to?(:to_s) ? key.to_s : key
         end
       end
 
-      def prepare_object(object, &key_modifier) #:nodoc:
+      def prepare_object(object, &key_modifier)
         key_modifier = NOOP unless block_given?
         case object
         when Array
