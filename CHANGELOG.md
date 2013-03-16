@@ -1,3 +1,11 @@
+1.7.0
+-----
+* [Add load_options/dump_options to MultiJson](https://github.com/intridea/multi_json/commit/a153956be6b0df06ea1705ce3c1ff0b5b0e27ea5)
+* [MultiJson does not modify arguments](https://github.com/intridea/multi_json/commit/58525b01c4c2f6635ba2ac13d6fd987b79f3962f)
+* [Enable quirks_mode by default for json_gem/json_pure adapters](https://github.com/intridea/multi_json/commit/1fd4e6635c436515b7d7d5a0bee4548de8571520)
+* [Add JrJackson adapter](https://github.com/intridea/multi_json/commit/4dd86fa96300aaaf6d762578b9b31ea82adb056d)
+* [Raise ArgumentError on bad adapter input](https://github.com/intridea/multi_json/commit/911a3756bdff2cb5ac06497da3fa3e72199cb7ad)
+
 1.6.1
 -----
 * [Revert "Use JSON.generate instead of #to_json"](https://github.com/intridea/multi_json/issues/86)
