@@ -17,7 +17,7 @@ module MultiJson
   # Since `default_options` is deprecated, the
   # reader is aliased to `dump_options` and the
   # writer sets both `dump_options` and `load_options`
-  alias :default_options :dump_options
+  alias default_options dump_options
 
   def default_options=(value)
     Kernel.warn "MultiJson.default_options setter is deprecated\n" +
@@ -57,7 +57,7 @@ module MultiJson
     Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance.'
     :ok_json
   end
-  alias :default_engine :default_adapter
+  alias default_engine default_adapter
 
   # Get the current adapter class.
   def adapter
@@ -67,7 +67,7 @@ module MultiJson
 
     @adapter
   end
-  alias :engine :adapter
+  alias engine adapter
 
   # Set the JSON parser utilizing a symbol, string, or class.
   # Supported by default are:
@@ -82,8 +82,8 @@ module MultiJson
   def use(new_adapter)
     @adapter = load_adapter(new_adapter)
   end
-  alias :adapter= :use
-  alias :engine= :use
+  alias adapter= use
+  alias engine= use
 
   def load_adapter(new_adapter)
     case new_adapter
@@ -115,7 +115,7 @@ module MultiJson
       raise LoadError.new(exception.message, exception.backtrace, string)
     end
   end
-  alias :decode :load
+  alias decode load
 
   def current_adapter(options={})
     if new_adapter = options[:adapter]
@@ -129,7 +129,7 @@ module MultiJson
   def dump(object, options={})
     current_adapter(options).dump(object, options)
   end
-  alias :encode :dump
+  alias encode dump
 
   #  Executes passed block using specified adapter.
   def with_adapter(new_adapter)
@@ -138,6 +138,6 @@ module MultiJson
   ensure
     self.adapter = old_adapter
   end
-  alias :with_engine :with_adapter
+  alias with_engine with_adapter
 
 end
