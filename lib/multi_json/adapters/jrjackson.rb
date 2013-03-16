@@ -15,7 +15,7 @@ module MultiJson
       end
 
       def dump(object, options={})
-        ::JrJackson::Json.generate(stringify_keys(prepare_object(object)))
+        ::JrJackson::Json.generate(stringify_keys(object))
       end
     end
   end
