@@ -1,3 +1,6 @@
+1.7.1
+* [Fix capitalization of JrJackson class](https://github.com/intridea/multi_json/commit/5373a5e38c647f02427a0477cb8e0e0dafad1b8d)
+
 1.7.0
 -----
 * [Add load_options/dump_options to MultiJson](https://github.com/intridea/multi_json/commit/a153956be6b0df06ea1705ce3c1ff0b5b0e27ea5)
