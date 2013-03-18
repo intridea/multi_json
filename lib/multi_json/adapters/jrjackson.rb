@@ -4,7 +4,7 @@ require 'multi_json/convertible_hash_keys'
 
 module MultiJson
   module Adapters
-    class Jrjackson < Adapter
+    class JrJackson < Adapter
       include ConvertibleHashKeys
       ParseError = ::Java::OrgCodehausJackson::JsonParseException
 
