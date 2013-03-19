@@ -106,7 +106,7 @@ shared_examples_for 'an adapter' do |adapter|
 
     # This behavior is currently not supported by gson.rb
     # See discussion at https://github.com/intridea/multi_json/pull/71
-    unless %w(gson jrjackson).include?(adapter)
+    unless %w(gson jr_jackson).include?(adapter)
       it 'dumps custom objects that implement to_json' do
         klass = Class.new do
           def to_json(*)

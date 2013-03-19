@@ -27,12 +27,12 @@ module MultiJson
   end
 
   REQUIREMENT_MAP = [
-    ['oj',        :oj],
-    ['yajl',      :yajl],
-    ['json',      :json_gem],
-    ['gson',      :gson],
-    ['jrjackson', :jrjackson],
-    ['json/pure', :json_pure]
+    ['oj',           :oj],
+    ['yajl',         :yajl],
+    ['json',         :json_gem],
+    ['gson',         :gson],
+    ['jrjackson_r',  :jr_jackson],
+    ['json/pure',    :json_pure]
   ]
 
   # The default adapter based on what you currently
