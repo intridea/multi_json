@@ -1,4 +1,11 @@
+1.7.2
+-----
+* [Renamed Jrjackson adapter to JrJackson](https://github.com/intridea/multi_json/commit/b36dc915fc0e6548cbad06b5db6f520e040c9c8b)
+* [Implemented jrjackson -> jr_jackson alias for back-compatability](https://github.com/intridea/multi_json/commit/aa50ab8b7bb646b8b75d5d65dfeadae8248a4f10)
+* [Update vendored OkJson module](https://github.com/intridea/multi_json/commit/30a3f474e17dd86a697c3fab04f468d1a4fd69d7)
+
 1.7.1
+-----
 * [Fix capitalization of JrJackson class](https://github.com/intridea/multi_json/commit/5373a5e38c647f02427a0477cb8e0e0dafad1b8d)
 
 1.7.0
