@@ -163,4 +163,21 @@ describe 'MultiJson' do
       it_behaves_like 'JSON-like adapter', adapter
     end
   end
+
+  describe 'aliases' do
+    if jruby?
+      describe 'jrjackson' do
+        after{ expect(MultiJson.adapter).to eq(MultiJson::Adapters::JrJackson) }
+
+        it 'allows jrjackson alias as symbol' do
+          expect{ MultiJson.use :jrjackson }.not_to raise_error
+        end
+
+        it 'allows jrjackson alias as string' do
+          expect{ MultiJson.use 'jrjackson' }.not_to raise_error
+        end
+
+      end
+    end
+  end
 end

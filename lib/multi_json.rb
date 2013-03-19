@@ -26,6 +26,10 @@ module MultiJson
     self.load_options = self.dump_options = value
   end
 
+  ALIASES = {
+    'jrjackson' => :jr_jackson
+  }
+
   REQUIREMENT_MAP = [
     ['oj',           :oj],
     ['yajl',         :yajl],
@@ -88,8 +92,10 @@ module MultiJson
   def load_adapter(new_adapter)
     case new_adapter
     when String, Symbol
+      new_adapter = ALIASES.fetch(new_adapter.to_s, new_adapter)
       require "multi_json/adapters/#{new_adapter}"
-      MultiJson::Adapters.const_get(:"#{new_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
+      klass_name = new_adapter.to_s.split('_').map(&:capitalize) * ''
+      MultiJson::Adapters.const_get(klass_name)
     when NilClass, FalseClass
       load_adapter default_adapter
     when Class, Module
