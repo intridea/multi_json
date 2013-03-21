@@ -1,4 +1,5 @@
 require 'multi_json/options'
+require 'multi_json/version'
 
 module MultiJson
   include Options
