@@ -15,7 +15,7 @@ module MultiJson
       end
 
       def dump(object, options={})
-        ::MultiJson::OkJson.encode(stringify_keys(object))
+        ::MultiJson::OkJson.valenc(stringify_keys(object))
       end
     end
   end

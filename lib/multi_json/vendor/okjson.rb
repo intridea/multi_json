@@ -29,7 +29,7 @@ require 'stringio'
 # http://golang.org/src/pkg/utf8/utf8.go
 module MultiJson
   module OkJson
-    Upstream = '41'
+    Upstream = '42'
     extend self
 
 
@@ -65,6 +65,25 @@ module MultiJson
       when Hash    then objenc(x)
       when Array   then arrenc(x)
       else valenc(x)
+      end
+    end
+
+
+    def valenc(x)
+      case x
+      when Hash    then objenc(x)
+      when Array   then arrenc(x)
+      when String  then strenc(x)
+      when Numeric then numenc(x)
+      when true    then "true"
+      when false   then "false"
+      when nil     then "null"
+      else
+        if x.respond_to?(:to_json)
+          x.to_json
+        else
+          raise Error, "cannot encode #{x.class}: #{x.inspect}"
+        end
       end
     end
 
@@ -404,25 +423,6 @@ module MultiJson
       elsif ?A <= c && c <= ?Z then c.ord - ?A.ord + 10
       else
         raise Error, "invalid hex code #{c}"
-      end
-    end
-
-
-    def valenc(x)
-      case x
-      when Hash    then objenc(x)
-      when Array   then arrenc(x)
-      when String  then strenc(x)
-      when Numeric then numenc(x)
-      when true    then "true"
-      when false   then "false"
-      when nil     then "null"
-      else
-        if x.respond_to?(:to_json)
-          x.to_json
-        else
-          raise Error, "cannot encode #{x.class}: #{x.inspect}"
-        end
       end
     end
 
