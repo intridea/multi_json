@@ -15,7 +15,7 @@ module MultiJson
       end
 
       def load(string, options={})
-        options[:symbol_keys] = true if options.delete(:symbolize_keys)
+        options[:symbol_keys] = options.delete(:symbolize_keys)
         ::Oj.load(string, options)
       end
 
