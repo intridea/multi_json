@@ -130,22 +130,21 @@ describe 'MultiJson' do
       end
     end
 
-    context 'with Oj set to symbol_keys by default' do
-      before(:each) do
-        @oj_options = Oj.default_options
+    context 'with Oj.default_settings' do
+
+      around do |example|
+        options = Oj.default_options
         Oj.default_options = { :symbol_keys => true }
+        MultiJson.with_engine(:oj){ example.call }
+        Oj.default_options = options
       end
 
-      it "doesn't symbolize keys with :symbolize_keys => false" do
+      it 'ignores global settings' do
         MultiJson.with_engine(:oj) do
           example = '{"a": 1, "b": 2}'
           expected = { 'a' => 1, 'b' => 2 }
-          expect(MultiJson.load(example, :symbolize_keys => false)).to eq expected
+          expect(MultiJson.load(example)).to eq expected
         end
-      end
-
-      after(:each) do
-        Oj.default_options = @oj_options
       end
     end
   end
