@@ -3,10 +3,7 @@ source 'https://rubygems.org'
 gem 'rake', '>= 0.9'
 gem 'yard', '>= 0.8'
 
-platforms :mri do
-  gem 'json', '~> 1.4', :require => nil
-end
-
+gem 'json',      '~> 1.4', :require => nil
 gem 'json_pure', '~> 1.4', :require => nil
 
 platforms :ruby, :mswin, :mingw do
