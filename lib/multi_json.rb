@@ -34,7 +34,7 @@ module MultiJson
   REQUIREMENT_MAP = [
     ['oj',           :oj],
     ['yajl',         :yajl],
-    ['json',         :json_gem],
+    ['json/ext',     :json_gem],
     ['gson',         :gson],
     ['jrjackson_r',  :jr_jackson],
     ['json/pure',    :json_pure]
