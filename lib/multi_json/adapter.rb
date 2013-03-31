@@ -35,7 +35,7 @@ module MultiJson
 
       def collect_options(method, overrides, args)
         global, local = *[MultiJson, self].map{ |r| r.send(method, *args) }
-        global.merge(local).merge(overrides)
+        local.merge(global).merge(overrides)
       end
 
     end

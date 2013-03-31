@@ -1,21 +1,21 @@
+require 'jrjackson_r' unless defined?(::JrJackson)
 require 'multi_json/adapter'
 require 'multi_json/convertible_hash_keys'
-require 'multi_json/vendor/okjson'
 
 module MultiJson
   module Adapters
-    class OkJson < Adapter
+    class JrJackson < Adapter
       include ConvertibleHashKeys
-      ParseError = ::MultiJson::OkJson::Error
+      ParseError = ::Java::OrgCodehausJackson::JsonParseException
 
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
-        result = ::MultiJson::OkJson.decode("[#{string}]").first
+        result = ::JrJackson::Json.parse(string)
         options[:symbolize_keys] ? symbolize_keys(result) : result
       end
 
       def dump(object, options={})
-        ::MultiJson::OkJson.valenc(stringify_keys(object))
+        ::JrJackson::Json.generate(stringify_keys(object))
       end
     end
   end

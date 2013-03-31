@@ -1,4 +1,5 @@
 require 'multi_json/options'
+require 'multi_json/version'
 
 module MultiJson
   include Options
@@ -17,7 +18,7 @@ module MultiJson
   # Since `default_options` is deprecated, the
   # reader is aliased to `dump_options` and the
   # writer sets both `dump_options` and `load_options`
-  alias :default_options :dump_options
+  alias default_options dump_options
 
   def default_options=(value)
     Kernel.warn "MultiJson.default_options setter is deprecated\n" +
@@ -26,12 +27,17 @@ module MultiJson
     self.load_options = self.dump_options = value
   end
 
+  ALIASES = {
+    'jrjackson' => :jr_jackson
+  }
+
   REQUIREMENT_MAP = [
-    ['oj',        :oj],
-    ['yajl',      :yajl],
-    ['json',      :json_gem],
-    ['gson',      :gson],
-    ['json/pure', :json_pure]
+    ['oj',           :oj],
+    ['yajl',         :yajl],
+    ['json/ext',     :json_gem],
+    ['gson',         :gson],
+    ['jrjackson_r',  :jr_jackson],
+    ['json/pure',    :json_pure]
   ]
 
   # The default adapter based on what you currently
@@ -56,8 +62,7 @@ module MultiJson
     Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance.'
     :ok_json
   end
-  # :nodoc:
-  alias :default_engine :default_adapter
+  alias default_engine default_adapter
 
   # Get the current adapter class.
   def adapter
@@ -67,8 +72,7 @@ module MultiJson
 
     @adapter
   end
-  # :nodoc:
-  alias :engine :adapter
+  alias engine adapter
 
   # Set the JSON parser utilizing a symbol, string, or class.
   # Supported by default are:
@@ -83,22 +87,25 @@ module MultiJson
   def use(new_adapter)
     @adapter = load_adapter(new_adapter)
   end
-  alias :adapter= :use
-  # :nodoc:
-  alias :engine= :use
+  alias adapter= use
+  alias engine= use
 
   def load_adapter(new_adapter)
     case new_adapter
     when String, Symbol
+      new_adapter = ALIASES.fetch(new_adapter.to_s, new_adapter)
       require "multi_json/adapters/#{new_adapter}"
-      MultiJson::Adapters.const_get(:"#{new_adapter.to_s.split('_').map{|s| s.capitalize}.join('')}")
+      klass_name = new_adapter.to_s.split('_').map(&:capitalize) * ''
+      MultiJson::Adapters.const_get(klass_name)
     when NilClass, FalseClass
       load_adapter default_adapter
     when Class, Module
       new_adapter
     else
-      raise "Did not recognize your adapter specification. Please specify either a symbol or a class."
+      raise NameError
     end
+  rescue NameError, ::LoadError
+    raise ArgumentError, 'Did not recognize your adapter specification.'
   end
 
   # Decode a JSON string into Ruby.
@@ -115,8 +122,7 @@ module MultiJson
       raise LoadError.new(exception.message, exception.backtrace, string)
     end
   end
-  # :nodoc:
-  alias :decode :load
+  alias decode load
 
   def current_adapter(options={})
     if new_adapter = options[:adapter]
@@ -130,8 +136,7 @@ module MultiJson
   def dump(object, options={})
     current_adapter(options).dump(object, options)
   end
-  # :nodoc:
-  alias :encode :dump
+  alias encode dump
 
   #  Executes passed block using specified adapter.
   def with_adapter(new_adapter)
@@ -140,7 +145,6 @@ module MultiJson
   ensure
     self.adapter = old_adapter
   end
-  # :nodoc:
-  alias :with_engine :with_adapter
+  alias with_engine with_adapter
 
 end

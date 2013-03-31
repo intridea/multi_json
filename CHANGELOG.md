@@ -1,3 +1,21 @@
+1.7.2
+-----
+* [Renamed Jrjackson adapter to JrJackson](https://github.com/intridea/multi_json/commit/b36dc915fc0e6548cbad06b5db6f520e040c9c8b)
+* [Implemented jrjackson -> jr_jackson alias for back-compatability](https://github.com/intridea/multi_json/commit/aa50ab8b7bb646b8b75d5d65dfeadae8248a4f10)
+* [Update vendored OkJson module](https://github.com/intridea/multi_json/commit/30a3f474e17dd86a697c3fab04f468d1a4fd69d7)
+
+1.7.1
+-----
+* [Fix capitalization of JrJackson class](https://github.com/intridea/multi_json/commit/5373a5e38c647f02427a0477cb8e0e0dafad1b8d)
+
+1.7.0
+-----
+* [Add load_options/dump_options to MultiJson](https://github.com/intridea/multi_json/commit/a153956be6b0df06ea1705ce3c1ff0b5b0e27ea5)
+* [MultiJson does not modify arguments](https://github.com/intridea/multi_json/commit/58525b01c4c2f6635ba2ac13d6fd987b79f3962f)
+* [Enable quirks_mode by default for json_gem/json_pure adapters](https://github.com/intridea/multi_json/commit/1fd4e6635c436515b7d7d5a0bee4548de8571520)
+* [Add JrJackson adapter](https://github.com/intridea/multi_json/commit/4dd86fa96300aaaf6d762578b9b31ea82adb056d)
+* [Raise ArgumentError on bad adapter input](https://github.com/intridea/multi_json/commit/911a3756bdff2cb5ac06497da3fa3e72199cb7ad)
+
 1.6.1
 -----
 * [Revert "Use JSON.generate instead of #to_json"](https://github.com/intridea/multi_json/issues/86)

@@ -74,15 +74,19 @@ describe 'MultiJson' do
     end
 
     it 'is settable via a module' do
-      adapter =  Module.new
+      adapter = Module.new
       MultiJson.use adapter
       expect(MultiJson.adapter).to eq adapter
     end
 
+    it 'throws ArgumentError on bad input' do
+      expect{ MultiJson.use 'bad adapter' }.to raise_error(ArgumentError)
+    end
+
     context 'using one-shot parser' do
       before do
-        MultiJson::Adapters::JsonPure.should_receive(:dump).exactly(1).times.and_return('dump_something')
-        MultiJson::Adapters::JsonPure.should_receive(:load).exactly(1).times.and_return('load_something')
+        MultiJson::Adapters::JsonPure.should_receive(:dump).once.and_return('dump_something')
+        MultiJson::Adapters::JsonPure.should_receive(:load).once.and_return('load_something')
       end
 
       it 'should use the defined parser just for the call' do
@@ -125,9 +129,29 @@ describe 'MultiJson' do
         }.to_not change{Symbol.all_symbols.count}
       end
     end
+
+    context 'with Oj.default_settings' do
+
+      around do |example|
+        options = Oj.default_options
+        Oj.default_options = { :symbol_keys => true }
+        MultiJson.with_engine(:oj){ example.call }
+        Oj.default_options = options
+      end
+
+      it 'ignores global settings' do
+        MultiJson.with_engine(:oj) do
+          example = '{"a": 1, "b": 2}'
+          expected = { 'a' => 1, 'b' => 2 }
+          expect(MultiJson.load(example)).to eq expected
+        end
+      end
+    end
   end
 
   describe 'default options' do
+    after(:all){ MultiJson.load_options = MultiJson.dump_options = nil }
+
     it 'is deprecated' do
       Kernel.should_receive(:warn).with(/deprecated/i)
       silence_warnings{ MultiJson.default_options = {:foo => 'bar'} }
@@ -141,11 +165,11 @@ describe 'MultiJson' do
   end
 
   it_behaves_like 'has options', MultiJson
+  %w(gson jr_jackson json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
+    next if !jruby? && %w(gson jr_jackson).include?(adapter)
+    next if !macruby? && adapter == 'nsjsonserialization'
+    next if jruby? && %w(oj yajl).include?(adapter)
 
-  %w(gson json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
-    next if adapter == 'gson' && !jruby?
-    next if adapter == 'nsjsonserialization' && !macruby?
-    next if jruby? && (adapter == 'oj' || adapter == 'yajl')
     context adapter do
       it_behaves_like 'an adapter', adapter
     end
@@ -154,6 +178,23 @@ describe 'MultiJson' do
   %w(json_gem json_pure).each do |adapter|
     context adapter do
       it_behaves_like 'JSON-like adapter', adapter
+    end
+  end
+
+  describe 'aliases' do
+    if jruby?
+      describe 'jrjackson' do
+        after{ expect(MultiJson.adapter).to eq(MultiJson::Adapters::JrJackson) }
+
+        it 'allows jrjackson alias as symbol' do
+          expect{ MultiJson.use :jrjackson }.not_to raise_error
+        end
+
+        it 'allows jrjackson alias as string' do
+          expect{ MultiJson.use 'jrjackson' }.not_to raise_error
+        end
+
+      end
     end
   end
 end

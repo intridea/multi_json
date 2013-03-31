@@ -13,7 +13,7 @@ shared_examples_for 'an adapter' do |adapter|
   it_behaves_like 'has options', lambda{ MultiJson.adapter }
 
   it 'does not modify argument hashes' do
-    options = { :symbolize_keys => true, :pretty => false, :adapter => :json_gem }
+    options = { :symbolize_keys => true, :pretty => false, :adapter => :json_pure }
     expect{MultiJson.load('{}', options)}.to_not change{options}
     expect{MultiJson.dump([42], options)}.to_not change{options}
   end
@@ -36,9 +36,9 @@ shared_examples_for 'an adapter' do |adapter|
         MultiJson.adapter.dump_options = {:foo => 'bar'}
       end
 
-      it 'overrides global options with adapter-specific' do
-        MultiJson.dump_options = {:foo => 'foo'}
-        MultiJson.adapter.dump_options = {:foo => 'bar'}
+      it 'adapter-specific are overridden by global options' do
+        MultiJson.adapter.dump_options = {:foo => 'foo'}
+        MultiJson.dump_options = {:foo => 'bar'}
       end
     end
 
@@ -106,7 +106,7 @@ shared_examples_for 'an adapter' do |adapter|
 
     # This behavior is currently not supported by gson.rb
     # See discussion at https://github.com/intridea/multi_json/pull/71
-    unless adapter == 'gson'
+    unless %w(gson jr_jackson).include?(adapter)
       it 'dumps custom objects that implement to_json' do
         klass = Class.new do
           def to_json(*)
@@ -144,10 +144,28 @@ shared_examples_for 'an adapter' do |adapter|
         MultiJson.adapter.load_options = {:foo => 'bar'}
       end
 
-      it 'overrides global options with adapter-specific' do
-        MultiJson.load_options = {:foo => 'foo'}
-        MultiJson.adapter.load_options = {:foo => 'bar'}
+      it 'adapter-specific are overridden by global options' do
+        MultiJson.adapter.load_options = {:foo => 'foo'}
+        MultiJson.load_options = {:foo => 'bar'}
       end
+    end
+
+    it 'does not modify input' do
+      input = %Q{\n\n  {"foo":"bar"} \n\n\t}
+      expect{
+        MultiJson.load(input)
+      }.to_not change{ input }
+    end
+
+    it 'does not modify input encoding' do
+      pending 'only in 1.9' unless RUBY_VERSION > '1.9'
+
+      input = '[123]'
+      input.force_encoding('iso-8859-1')
+
+      expect{
+        MultiJson.load(input)
+      }.to_not change{ input.encoding }
     end
 
     it 'properly loads valid JSON' do
