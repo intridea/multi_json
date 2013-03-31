@@ -106,7 +106,7 @@ shared_examples_for 'an adapter' do |adapter|
 
     # This behavior is currently not supported by gson.rb
     # See discussion at https://github.com/intridea/multi_json/pull/71
-    unless adapter == 'gson'
+    unless adapter == 'gson' || adapter == 'jr_jackson'
       it 'dumps custom objects that implement to_json' do
         klass = Class.new do
           def to_json(*)
@@ -178,7 +178,8 @@ shared_examples_for 'an adapter' do |adapter|
 
     it 'stringifys symbol keys when encoding' do
       dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})
-      expect(MultiJson.load(dumped_json)).to eq({'a' => 1, 'b' => {'c' => 2}})
+      loaded_json = MultiJson.load(dumped_json)
+      expect(loaded_json).to eq({'a' => 1, 'b' => {'c' => 2}})
     end
 
     it 'properly loads valid JSON in StringIOs' do
