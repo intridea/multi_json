@@ -196,7 +196,8 @@ shared_examples_for 'an adapter' do |adapter|
 
     it 'stringifys symbol keys when encoding' do
       dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})
-      expect(MultiJson.load(dumped_json)).to eq({'a' => 1, 'b' => {'c' => 2}})
+      loaded_json = MultiJson.load(dumped_json)
+      expect(loaded_json).to eq({'a' => 1, 'b' => {'c' => 2}})
     end
 
     it 'properly loads valid JSON in StringIOs' do

@@ -1,21 +1,18 @@
-require 'jrjackson_r' unless defined?(::JrJackson)
+require 'jrjackson' unless defined?(::JrJackson)
 require 'multi_json/adapter'
-require 'multi_json/convertible_hash_keys'
 
 module MultiJson
   module Adapters
+    # Use the jrjackson.rb library to dump/load.
     class JrJackson < Adapter
-      include ConvertibleHashKeys
-      ParseError = ::Java::OrgCodehausJackson::JsonParseException
+      ParseError = ::JrJackson::ParseError
 
-      def load(string, options={})
-        string = string.read if string.respond_to?(:read)
-        result = ::JrJackson::Json.parse(string)
-        options[:symbolize_keys] ? symbolize_keys(result) : result
+      def load(string, options={}) #:nodoc:
+        ::JrJackson::Json.load(string, options)
       end
 
-      def dump(object, options={})
-        ::JrJackson::Json.generate(stringify_keys(object))
+      def dump(object, options={}) #:nodoc:
+        ::JrJackson::Json.dump(object)
       end
     end
   end
