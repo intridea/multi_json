@@ -13,7 +13,7 @@ end
 
 platforms :jruby do
   gem 'gson', '>= 0.6', :require => nil
-  gem 'jrjackson', :require => nil
+  gem 'jrjackson', '~> 0.1.0', :require => nil
 end
 
 group :development do

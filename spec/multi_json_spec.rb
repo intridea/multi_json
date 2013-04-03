@@ -15,6 +15,8 @@ describe 'MultiJson' do
         @old_oj = Object.const_get :Oj if Object.const_defined?(:Oj)
         @old_yajl = Object.const_get :Yajl if Object.const_defined?(:Yajl)
         @old_gson = Object.const_get :Gson if Object.const_defined?(:Gson)
+        @old_jrjackson = Object.const_get :JrJackson if Object.const_defined?(:JrJackson)
+
         MultiJson::REQUIREMENT_MAP.each_with_index do |(library, adapter), index|
           MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", adapter]
         end
@@ -22,6 +24,7 @@ describe 'MultiJson' do
         Object.send :remove_const, :Oj if @old_oj
         Object.send :remove_const, :Yajl if @old_yajl
         Object.send :remove_const, :Gson if @old_gson
+        Object.send :remove_const, :JrJackson if @old_jrjackson
       end
 
       after do
@@ -32,6 +35,7 @@ describe 'MultiJson' do
         Object.const_set :Oj, @old_oj if @old_oj
         Object.const_set :Yajl, @old_yajl if @old_yajl
         Object.const_set :Gson, @old_gson if @old_gson
+        Object.const_set :JrJackson, @old_jrjackson if @old_jrjackson
       end
 
       it 'defaults to ok_json if no other json implementions are available' do
@@ -165,12 +169,11 @@ describe 'MultiJson' do
   end
 
   it_behaves_like 'has options', MultiJson
-
   %w(gson jr_jackson json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
     next if !jruby? && %w(gson jr_jackson).include?(adapter)
     next if !macruby? && adapter == 'nsjsonserialization'
     next if jruby? && %w(oj yajl).include?(adapter)
-
+    
     context adapter do
       it_behaves_like 'an adapter', adapter
     end

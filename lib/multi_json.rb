@@ -36,7 +36,7 @@ module MultiJson
     ['yajl',         :yajl],
     ['json/ext',     :json_gem],
     ['gson',         :gson],
-    ['jrjackson_r',  :jr_jackson],
+    ['jrjackson',    :jr_jackson],
     ['json/pure',    :json_pure]
   ]
 
@@ -48,6 +48,7 @@ module MultiJson
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
     return :json_gem if defined?(::JSON)
+    return :jr_jackson if defined?(::JrJackson)
     return :gson if defined?(::Gson)
 
     REQUIREMENT_MAP.each do |(library, adapter)|
