@@ -173,7 +173,7 @@ describe 'MultiJson' do
     next if !jruby? && %w(gson jr_jackson).include?(adapter)
     next if !macruby? && adapter == 'nsjsonserialization'
     next if jruby? && %w(oj yajl).include?(adapter)
-    
+
     context adapter do
       it_behaves_like 'an adapter', adapter
     end
