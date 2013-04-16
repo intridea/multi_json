@@ -169,7 +169,6 @@ describe 'MultiJson' do
   end
 
   it_behaves_like 'has options', MultiJson
-
   %w(gson jr_jackson json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
     next if !jruby? && %w(gson jr_jackson).include?(adapter)
     next if !macruby? && adapter == 'nsjsonserialization'
