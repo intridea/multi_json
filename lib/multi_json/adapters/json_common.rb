@@ -5,6 +5,16 @@ module MultiJson
     class JsonCommon < Adapter
       defaults :load, :create_additions => false, :quirks_mode => true
 
+      GEM_VERSION = '1.7.7'
+
+      def self.activate!
+        if JSON::VERSION < GEM_VERSION
+          Kernel.warn "You are using an old or stdlib version of #{gem_name} gem\n" +
+            "Please upgrade to the recent version by adding this to your Gemfile:\n\n" +
+            "  gem '#{gem_name}', '~> #{GEM_VERSION}'\n"
+        end
+      end
+
       def load(string, options={})
         string = string.read if string.respond_to?(:read)
 
