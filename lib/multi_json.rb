@@ -87,7 +87,9 @@ module MultiJson
   # * <tt>:gson</tt> (JRuby only)
   # * <tt>:jr_jackson</tt> (JRuby only)
   def use(new_adapter)
-    @adapter = load_adapter(new_adapter)
+    adapter = load_adapter(new_adapter)
+    adapter.activate! if adapter.respond_to?(:activate!)
+    @adapter = adapter
   end
   alias adapter= use
   alias engine= use
