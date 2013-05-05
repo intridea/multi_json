@@ -1,3 +1,11 @@
+1.7.3
+-----
+* [Require json/ext to ensure extension version gets loaded for json_gem](https://github.com/intridea/multi_json/commit/942686f7e8597418c6f90ee69e1d45242fac07b1)
+* [Rename JrJackson](https://github.com/intridea/multi_json/commit/078de7ba8b6035343c3e96b4767549e9ec43369a)
+* [Prefer JrJackson to JSON gem if present](https://github.com/intridea/multi_json/commit/af8bd9799a66855f04b3aff1c488485950cec7bf)
+* [Print a warning if outdated gem versions are used](https://github.com/intridea/multi_json/commit/e7438e7ba2be0236cfa24c2bb9ad40ee821286d1)
+* [Loosen required_rubygems_version for compatibility with Ubuntu 10.04](https://github.com/intridea/multi_json/commit/59fad014e8fe41dbc6f09485ea0dc21fc42fd7a7)
+
 1.7.2
 -----
 * [Renamed Jrjackson adapter to JrJackson](https://github.com/intridea/multi_json/commit/b36dc915fc0e6548cbad06b5db6f520e040c9c8b)
