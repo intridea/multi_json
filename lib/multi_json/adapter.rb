@@ -15,27 +15,33 @@ module MultiJson
         end
       end
 
+      def activate!
+        @load_options_cache = {}
+        @dump_options_cache = {}
+        instance.activate if instance.respond_to?(:activate)
+      end
+
       def load(string, options={})
-        instance.load(string, collect_load_options(string, options))
+        instance.load(string, collect_load_options(string, options).clone)
       end
 
       def dump(object, options={})
-        instance.dump(object, collect_dump_options(object, options))
+        instance.dump(object, collect_dump_options(object, options).clone)
       end
 
     protected
 
       def collect_load_options(string, options)
-        collect_options :load_options, options, [ string, options ]
+        @load_options_cache[options] ||= collect_options(:load_options, options).merge(options)
       end
 
       def collect_dump_options(object, options)
-        collect_options :dump_options, options, [ object, options ]
+        @dump_options_cache[options] ||= collect_options(:dump_options, options).merge(options)
       end
 
-      def collect_options(method, overrides, args)
+      def collect_options(method, *args)
         global, local = *[MultiJson, self].map{ |r| r.send(method, *args) }
-        local.merge(global).merge(overrides)
+        local.merge(global)
       end
 
     end
