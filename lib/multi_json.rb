@@ -27,6 +27,14 @@ module MultiJson
     self.load_options = self.dump_options = value
   end
 
+  # cache busting
+  %w(load_options= dump_options=).each do |method|
+    define_method method do |*args|
+      use current_adapter
+      super *args
+    end
+  end
+
   ALIASES = {
     'jrjackson' => :jr_jackson
   }

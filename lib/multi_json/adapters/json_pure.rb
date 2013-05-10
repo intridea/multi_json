@@ -7,7 +7,7 @@ module MultiJson
     class JsonPure < JsonCommon
       ParseError = ::JSON::ParserError
 
-      def self.gem_name
+      def gem_name
         'json_pure'
       end
     end

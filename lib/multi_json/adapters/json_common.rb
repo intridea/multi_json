@@ -7,7 +7,7 @@ module MultiJson
 
       GEM_VERSION = '1.7.7'
 
-      def self.activate!
+      def activate
         if JSON::VERSION < GEM_VERSION
           Kernel.warn "You are using an old or stdlib version of #{gem_name} gem\n" +
             "Please upgrade to the recent version by adding this to your Gemfile:\n\n" +

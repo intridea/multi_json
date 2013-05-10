@@ -50,6 +50,18 @@ describe 'MultiJson' do
       end
     end
 
+    context 'caching' do
+      before{ MultiJson.use :json_gem }
+      let(:json_string){ '{"abc":"def"}' }
+
+      it 'busts options caches on change' do
+        MultiJson.load_options = { :symbolize_keys => true }
+        expect(MultiJson.load(json_string)).to eq(:abc => 'def')
+        MultiJson.load_options = nil
+        expect(MultiJson.load(json_string)).to eq('abc' => 'def')
+      end
+    end
+
     context 'with stdlib version' do
       around do |example|
         version = JSON::VERSION
