@@ -7,7 +7,7 @@ module MultiJson
     class JsonGem < JsonCommon
       ParseError = ::JSON::ParserError
 
-      def self.gem_name
+      def gem_name
         'json'
       end
     end
