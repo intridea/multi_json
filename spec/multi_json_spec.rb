@@ -63,7 +63,7 @@ describe 'MultiJson' do
         MultiJson.use :json_gem
       end
 
-      it 'should warb about json/pure' do
+      it 'should warn about json/pure' do
         Kernel.should_receive(:warn).with(/'json_pure', '~> 1.7.7'/)
         MultiJson.use :json_pure
       end
