@@ -59,7 +59,7 @@ module MultiJson
     return :gson if defined?(::Gson)
     return :jr_jackson if defined?(::JrJackson)
 
-    REQUIREMENT_MAP.each do |(library, adapter)|
+    REQUIREMENT_MAP.each do |library, adapter|
       begin
         require library
         return adapter
