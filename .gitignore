@@ -30,5 +30,7 @@ Gemfile.lock
 ## RCOV
 coverage.data
 
+tmp
+
 ## RUBINIUS
 *.rbc
