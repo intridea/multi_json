@@ -1,3 +1,7 @@
+1.7.4
+-----
+* [Cache options for better performance](https://github.com/intridea/multi_json/commit/8a26ee93140c4bed36194ed9fb887a1b6919257b)
+
 1.7.3
 -----
 * [Require json/ext to ensure extension version gets loaded for json_gem](https://github.com/intridea/multi_json/commit/942686f7e8597418c6f90ee69e1d45242fac07b1)
