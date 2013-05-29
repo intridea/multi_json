@@ -31,7 +31,7 @@ module MultiJson
   %w(load_options= dump_options=).each do |method|
     define_method method do |*args|
       use current_adapter
-      super *args
+      super(*args)
     end
   end
 
