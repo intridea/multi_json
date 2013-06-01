@@ -6,10 +6,6 @@ module MultiJson
     # Use the JSON gem to dump/load.
     class JsonGem < JsonCommon
       ParseError = ::JSON::ParserError
-
-      def gem_name
-        'json'
-      end
     end
   end
 end
