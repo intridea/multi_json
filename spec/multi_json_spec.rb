@@ -62,25 +62,6 @@ describe 'MultiJson' do
       end
     end
 
-    context 'with stdlib version' do
-      around do |example|
-        version = JSON::VERSION
-        silence_warnings{ JSON::VERSION = '1.5.5' }
-        example.call
-        silence_warnings{ JSON::VERSION = version }
-      end
-
-      it 'should warn about json' do
-        Kernel.should_receive(:warn).with(/'json', '~> 1.7.7'/)
-        MultiJson.use :json_gem
-      end
-
-      it 'should warn about json/pure' do
-        Kernel.should_receive(:warn).with(/'json_pure', '~> 1.7.7'/)
-        MultiJson.use :json_pure
-      end
-    end
-
     it 'defaults to the best available gem' do
       # Clear cache variable already set by previous tests
       MultiJson.send(:remove_instance_variable, :@adapter)
