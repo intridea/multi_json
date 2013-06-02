@@ -1,3 +1,8 @@
+1.7.5
+-----
+* [Fix warning '*' interpreted as argument prefix](https://github.com/intridea/multi_json/commit/b698962c7f64430222a1f06430669706a47aff89)
+* [Remove stdlib warning](https://github.com/intridea/multi_json/commit/d06eec6b7996ac8b4ff0e2229efd835379b0c30f)
+
 1.7.4
 -----
 * [Cache options for better performance](https://github.com/intridea/multi_json/commit/8a26ee93140c4bed36194ed9fb887a1b6919257b)
@@ -12,8 +17,8 @@
 
 1.7.2
 -----
-* [Renamed Jrjackson adapter to JrJackson](https://github.com/intridea/multi_json/commit/b36dc915fc0e6548cbad06b5db6f520e040c9c8b)
-* [Implemented jrjackson -> jr_jackson alias for back-compatability](https://github.com/intridea/multi_json/commit/aa50ab8b7bb646b8b75d5d65dfeadae8248a4f10)
+* [Rename Jrjackson adapter to JrJackson](https://github.com/intridea/multi_json/commit/b36dc915fc0e6548cbad06b5db6f520e040c9c8b)
+* [Implement jrjackson -> jr_jackson alias for back-compatability](https://github.com/intridea/multi_json/commit/aa50ab8b7bb646b8b75d5d65dfeadae8248a4f10)
 * [Update vendored OkJson module](https://github.com/intridea/multi_json/commit/30a3f474e17dd86a697c3fab04f468d1a4fd69d7)
 
 1.7.1
@@ -138,7 +143,7 @@
 
 0.0.3
 -----
-* [Improved defaulting and documentation](https://github.com/sferik/twitter/commit/3a0e41b9e4b0909201045fa47704b78c9d949b73)
+* [Improve defaulting and documentation](https://github.com/sferik/twitter/commit/3a0e41b9e4b0909201045fa47704b78c9d949b73)
 
 0.0.2
 -----
