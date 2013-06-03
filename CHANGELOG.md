@@ -1,3 +1,7 @@
+1.7.6
+-----
+* [Bring back MultiJson::VERSION constant](https://github.com/intridea/multi_json/commit/31b990c2725e6673bf8ce57540fe66b57a751a72)
+
 1.7.5
 -----
 * [Fix warning '*' interpreted as argument prefix](https://github.com/intridea/multi_json/commit/b698962c7f64430222a1f06430669706a47aff89)
