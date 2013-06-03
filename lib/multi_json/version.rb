@@ -15,4 +15,6 @@ module MultiJson
     end
 
   end
+
+  VERSION = Version.to_s.freeze
 end
