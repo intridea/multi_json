@@ -8,11 +8,7 @@ module MultiJson
       defaults :load, :mode => :strict, :symbolize_keys => false
       defaults :dump, :mode => :compat, :time_format => :ruby
 
-      ParseError = if defined?(::Oj::ParseError)
-        ::Oj::ParseError
-      else
-        SyntaxError
-      end
+      ParseError = defined?(::Oj::ParseError) ? ::Oj::ParseError : SyntaxError
 
       def load(string, options={})
         options[:symbol_keys] = options.delete(:symbolize_keys)
