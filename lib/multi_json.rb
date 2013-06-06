@@ -138,7 +138,9 @@ module MultiJson
 
   def current_adapter(options={})
     if new_adapter = options[:adapter]
-      load_adapter(new_adapter)
+      a = load_adapter(new_adapter)
+      a.activate!
+      a
     else
       adapter
     end
