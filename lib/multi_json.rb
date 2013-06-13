@@ -5,6 +5,16 @@ module MultiJson
   include Options
   extend self
 
+  class << self
+    def cached_options
+      @cached_options || reset_cached_options!
+    end
+
+    def reset_cached_options!
+      @cached_options = {}
+    end
+  end
+
   class LoadError < StandardError
     attr_reader :data
     def initialize(message='', backtrace=[], data='')
@@ -27,17 +37,7 @@ module MultiJson
     self.load_options = self.dump_options = value
   end
 
-  # cache busting
-  %w(load_options= dump_options=).each do |method|
-    define_method method do |*args|
-      use current_adapter
-      super(*args)
-    end
-  end
-
-  ALIASES = {
-    'jrjackson' => :jr_jackson
-  }
+  ALIASES = { 'jrjackson' => :jr_jackson }
 
   REQUIREMENT_MAP = [
     ['oj',           :oj],
@@ -95,9 +95,7 @@ module MultiJson
   # * <tt>:gson</tt> (JRuby only)
   # * <tt>:jr_jackson</tt> (JRuby only)
   def use(new_adapter)
-    adapter = load_adapter(new_adapter)
-    adapter.activate! if adapter.respond_to?(:activate!)
-    @adapter = adapter
+    @adapter = load_adapter(new_adapter)
   end
   alias adapter= use
   alias engine= use

@@ -15,33 +15,32 @@ module MultiJson
         end
       end
 
-      def activate!
-        @load_options_cache = {}
-        @dump_options_cache = {}
-        instance.activate if instance.respond_to?(:activate)
-      end
-
       def load(string, options={})
-        instance.load(string, collect_load_options(string, options).clone)
+        instance.load(string, collect_load_options(options).clone)
       end
 
       def dump(object, options={})
-        instance.dump(object, collect_dump_options(object, options).clone)
+        instance.dump(object, collect_dump_options(options).clone)
       end
 
     protected
 
-      def collect_load_options(string, options)
-        @load_options_cache[options] ||= collect_options(:load_options, options).merge(options)
+      def collect_load_options(options)
+        cache('load', options){ collect_options(:load_options, options).merge(options) }
       end
 
-      def collect_dump_options(object, options)
-        @dump_options_cache[options] ||= collect_options(:dump_options, options).merge(options)
+      def collect_dump_options(options)
+        cache('dump', options){ collect_options(:dump_options, options).merge(options) }
       end
 
       def collect_options(method, *args)
         global, local = *[MultiJson, self].map{ |r| r.send(method, *args) }
         local.merge(global)
+      end
+
+      def cache(method, options)
+        cache_key = [self, options].map(&:hash).join + method
+        MultiJson.cached_options[cache_key] ||= yield
       end
 
     end

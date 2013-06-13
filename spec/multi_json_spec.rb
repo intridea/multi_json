@@ -51,15 +51,24 @@ describe 'MultiJson' do
     end
 
     context 'caching' do
-      before{ MultiJson.use :json_gem }
+      before{ MultiJson.use adapter }
+      let(:adapter){ MultiJson::Adapters::JsonGem }
       let(:json_string){ '{"abc":"def"}' }
 
-      it 'busts options caches on change' do
+      it 'busts caches on global options change' do
         MultiJson.load_options = { :symbolize_keys => true }
         expect(MultiJson.load(json_string)).to eq(:abc => 'def')
         MultiJson.load_options = nil
         expect(MultiJson.load(json_string)).to eq('abc' => 'def')
       end
+
+      it 'busts caches on per-adapter options change' do
+        adapter.load_options = { :symbolize_keys => true }
+        expect(MultiJson.load(json_string)).to eq(:abc => 'def')
+        adapter.load_options = nil
+        expect(MultiJson.load(json_string)).to eq('abc' => 'def')
+      end
+
     end
 
     it 'defaults to the best available gem' do
