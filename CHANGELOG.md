@@ -1,3 +1,7 @@
+1.7.7
+-----
+* [Fix options caching issues](https://github.com/intridea/multi_json/commit/a3f14c3661688c5927638fa6088c7b46a67e875e)
+
 1.7.6
 -----
 * [Bring back MultiJson::VERSION constant](https://github.com/intridea/multi_json/commit/31b990c2725e6673bf8ce57540fe66b57a751a72)
