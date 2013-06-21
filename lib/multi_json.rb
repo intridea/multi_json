@@ -42,9 +42,9 @@ module MultiJson
   REQUIREMENT_MAP = [
     ['oj',           :oj],
     ['yajl',         :yajl],
+    ['jrjackson',    :jr_jackson],
     ['json/ext',     :json_gem],
     ['gson',         :gson],
-    ['jrjackson',    :jr_jackson],
     ['json/pure',    :json_pure]
   ]
 
@@ -55,9 +55,9 @@ module MultiJson
   def default_adapter
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
+    return :jr_jackson if defined?(::JrJackson)
     return :json_gem if defined?(::JSON)
     return :gson if defined?(::Gson)
-    return :jr_jackson if defined?(::JrJackson)
 
     REQUIREMENT_MAP.each do |library, adapter|
       begin
