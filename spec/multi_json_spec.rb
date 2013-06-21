@@ -77,7 +77,7 @@ describe 'MultiJson' do
       unless jruby?
         expect(MultiJson.adapter).to eq MultiJson::Adapters::Oj
       else
-        expect(MultiJson.adapter).to eq MultiJson::Adapters::JsonGem
+        expect(MultiJson.adapter).to eq MultiJson::Adapters::JrJackson
       end
     end
 
