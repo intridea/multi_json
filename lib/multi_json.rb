@@ -7,7 +7,7 @@ module MultiJson
 
   class << self
     def cached_options
-      @cached_options || reset_cached_options!
+      @cached_options ||= reset_cached_options!
     end
 
     def reset_cached_options!
