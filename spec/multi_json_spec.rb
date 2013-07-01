@@ -75,9 +75,9 @@ describe 'MultiJson' do
       # Clear cache variable already set by previous tests
       MultiJson.send(:remove_instance_variable, :@adapter)
       if jruby?
-        expect(MultiJson.adapter).to eq MultiJson::Adapters::JrJackson
+        expect(MultiJson.adapter.to_s).to eq 'MultiJson::Adapters::JrJackson'
       else
-        expect(MultiJson.adapter).to eq MultiJson::Adapters::Oj
+        expect(MultiJson.adapter.to_s).to eq 'MultiJson::Adapters::Oj'
       end
     end
 
