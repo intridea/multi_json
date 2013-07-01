@@ -1,5 +1,6 @@
 require 'multi_json/options'
 require 'multi_json/version'
+require 'multi_json/load_error'
 
 module MultiJson
   include Options
@@ -14,16 +15,6 @@ module MultiJson
       @cached_options = {}
     end
   end
-
-  class LoadError < StandardError
-    attr_reader :data
-    def initialize(message='', backtrace=[], data='')
-      super(message)
-      self.set_backtrace(backtrace)
-      @data = data
-    end
-  end
-  DecodeError = LoadError # Legacy support
 
   # Since `default_options` is deprecated, the
   # reader is aliased to `dump_options` and the
