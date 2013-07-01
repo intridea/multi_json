@@ -100,9 +100,9 @@ module MultiJson
     when Class, Module
       new_adapter
     else
-      raise NameError
+      raise ::LoadError
     end
-  rescue NameError, ::LoadError
+  rescue ::LoadError
     raise ArgumentError, 'Did not recognize your adapter specification.'
   end
 
