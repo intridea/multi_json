@@ -45,7 +45,7 @@ describe 'MultiJson' do
       end
 
       it 'prints a warning' do
-        Kernel.should_receive(:warn).with(/warning/i)
+        expect(Kernel).to receive(:warn).with(/warning/i)
         MultiJson.default_adapter
       end
     end
@@ -83,7 +83,7 @@ describe 'MultiJson' do
 
     it 'looks for adapter even if @adapter variable is nil' do
       MultiJson.send(:instance_variable_set, :@adapter, nil)
-      MultiJson.should_receive(:default_adapter).and_return(:ok_json)
+      expect(MultiJson).to receive(:default_adapter).and_return(:ok_json)
       expect(MultiJson.adapter).to eq MultiJson::Adapters::OkJson
     end
 
@@ -110,8 +110,8 @@ describe 'MultiJson' do
 
     context 'using one-shot parser' do
       before do
-        MultiJson::Adapters::JsonPure.should_receive(:dump).once.and_return('dump_something')
-        MultiJson::Adapters::JsonPure.should_receive(:load).once.and_return('load_something')
+        expect(MultiJson::Adapters::JsonPure).to receive(:dump).once.and_return('dump_something')
+        expect(MultiJson::Adapters::JsonPure).to receive(:load).once.and_return('load_something')
       end
 
       it 'should use the defined parser just for the call' do
@@ -178,13 +178,13 @@ describe 'MultiJson' do
     after(:all){ MultiJson.load_options = MultiJson.dump_options = nil }
 
     it 'is deprecated' do
-      Kernel.should_receive(:warn).with(/deprecated/i)
+      expect(Kernel).to receive(:warn).with(/deprecated/i)
       silence_warnings{ MultiJson.default_options = {:foo => 'bar'} }
     end
 
     it 'sets both load and dump options' do
-      MultiJson.should_receive(:dump_options=).with(:foo => 'bar')
-      MultiJson.should_receive(:load_options=).with(:foo => 'bar')
+      expect(MultiJson).to receive(:dump_options=).with(:foo => 'bar')
+      expect(MultiJson).to receive(:load_options=).with(:foo => 'bar')
       silence_warnings{ MultiJson.default_options = {:foo => 'bar'} }
     end
   end

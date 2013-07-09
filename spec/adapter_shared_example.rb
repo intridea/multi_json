@@ -23,7 +23,7 @@ shared_examples_for 'an adapter' do |adapter|
       before{ MultiJson.dump_options = MultiJson.adapter.dump_options = {} }
 
       after do
-        MultiJson.adapter.instance.should_receive(:dump).with(1, :foo=>'bar', :fizz=>'buzz')
+        expect(MultiJson.adapter.instance).to receive(:dump).with(1, :foo => 'bar', :fizz => 'buzz')
         MultiJson.dump(1, :fizz => 'buzz')
         MultiJson.dump_options = MultiJson.adapter.dump_options = nil
       end
@@ -100,7 +100,7 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'passes options to the adapter' do
-      MultiJson.adapter.should_receive(:dump).with('foo', {:bar => :baz})
+      expect(MultiJson.adapter).to receive(:dump).with('foo', {:bar => :baz})
       MultiJson.dump('foo', :bar => :baz)
     end
 
@@ -131,7 +131,7 @@ shared_examples_for 'an adapter' do |adapter|
       before{ MultiJson.load_options = MultiJson.adapter.load_options = {} }
 
       after do
-        MultiJson.adapter.instance.should_receive(:load).with('1', :foo => 'bar', :fizz => 'buzz')
+        expect(MultiJson.adapter.instance).to receive(:load).with('1', :foo => 'bar', :fizz => 'buzz')
         MultiJson.load('1', :fizz => 'buzz')
         MultiJson.load_options = MultiJson.adapter.load_options = nil
       end
