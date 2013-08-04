@@ -1,3 +1,8 @@
+1.7.8
+-----
+* [Reorder JrJackson before json_gem](https://github.com/intridea/multi_json/commit/315b6e460b6e4dcdb6c82e04e4be8ee975d395da)
+* [Update vendored OkJson to version 43](https://github.com/intridea/multi_json/commit/99a6b662f6ef4036e3ee94d7eb547fa72fb2ab50)
+
 1.7.7
 -----
 * [Fix options caching issues](https://github.com/intridea/multi_json/commit/a3f14c3661688c5927638fa6088c7b46a67e875e)
