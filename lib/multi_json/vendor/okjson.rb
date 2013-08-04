@@ -24,12 +24,12 @@
 
 require 'stringio'
 
-# Some parts adapted from
-# http://golang.org/src/pkg/json/decode.go and
-# http://golang.org/src/pkg/utf8/utf8.go
 module MultiJson
+  # Some parts adapted from
+  # http://golang.org/src/pkg/json/decode.go and
+  # http://golang.org/src/pkg/utf8/utf8.go
   module OkJson
-    Upstream = '42'
+    Upstream = '43'
     extend self
 
 
@@ -64,7 +64,8 @@ module MultiJson
       case x
       when Hash    then objenc(x)
       when Array   then arrenc(x)
-      else valenc(x)
+      else
+        raise Error, 'root value must be an Array or a Hash'
       end
     end
 
@@ -465,11 +466,16 @@ module MultiJson
           # In ruby >= 1.9, s[r] is a codepoint, not a byte.
           if rubydoesenc?
             begin
-              c.ord # will raise an error if c is invalid UTF-8
+              # c.ord will raise an error if c is invalid UTF-8
+              if c.ord < Spc.ord
+                c = "\\u%04x" % [c.ord]
+              end
               t.write(c)
             rescue
               t.write(Ustrerr)
             end
+          elsif c < Spc
+            t.write("\\u%04x" % c)
           elsif Spc <= c && c <= ?~
             t.putc(c)
           else
