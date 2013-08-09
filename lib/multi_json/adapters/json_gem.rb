@@ -1,4 +1,4 @@
-require 'json' unless defined?(::JSON)
+require 'json/ext'
 require 'multi_json/adapters/json_common'
 
 module MultiJson

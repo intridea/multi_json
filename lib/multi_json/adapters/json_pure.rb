@@ -1,4 +1,4 @@
-require 'json/pure' unless defined?(::JSON)
+require 'json/pure'
 require 'multi_json/adapters/json_common'
 
 module MultiJson
