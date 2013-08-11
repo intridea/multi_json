@@ -6,7 +6,7 @@ require 'multi_json/version'
 Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.0'
   spec.authors       = ["Michael Bleigh", "Josh Kalderimis", "Erik Michaels-Ober", "Pavel Pravosud"]
-  spec.cert_chain    = %w(certs/sferik.pem)
+  spec.cert_chain    = %w(certs/rwz.pem)
   spec.description   = %q{A common interface to multiple JSON libraries, including Oj, Yajl, the JSON gem (with C-extensions), the pure-Ruby JSON gem, NSJSONSerialization, gson.rb, JrJackson, and OkJson.}
   spec.email         = ['michael@intridea.com', 'josh.kalderimis@gmail.com', 'sferik@gmail.com']
   spec.files         = Dir['.yardopts', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE.md', 'README.md', 'Rakefile', 'multi_json.gemspec', 'Gemfile', '.document', '.rspec', '.travis.yml' ,'spec/**/*', 'lib/**/*']
