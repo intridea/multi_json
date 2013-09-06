@@ -33,3 +33,41 @@ end
 def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
+
+def undefine_constants(*consts)
+  values = {}
+  consts.each do |const|
+    if Object.const_defined?(const)
+      values[const] = Object.const_get(const)
+      Object.send :remove_const, const
+    end
+  end
+
+  yield
+
+ensure
+  values.each do |const, value|
+    Object.const_set const, value
+  end
+end
+
+def break_requirements
+  requirements = MultiJson::REQUIREMENT_MAP
+  MultiJson::REQUIREMENT_MAP.each_with_index do |(library, adapter), index|
+    MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", adapter]
+  end
+
+  yield
+ensure
+  requirements.each_with_index do |(library, adapter), index|
+    MultiJson::REQUIREMENT_MAP[index] = [library, adapter]
+  end
+end
+
+def simulate_no_adapters
+  break_requirements do
+    undefine_constants :JSON, :Oj, :Yajl, :Gson, :JrJackson do
+      yield
+    end
+  end
+end

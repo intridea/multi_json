@@ -9,33 +9,8 @@ describe 'MultiJson' do
     before{ MultiJson.use nil }
 
     context 'when no other json implementations are available' do
-      before do
-        @old_map = MultiJson::REQUIREMENT_MAP
-        @old_json = Object.const_get :JSON if Object.const_defined?(:JSON)
-        @old_oj = Object.const_get :Oj if Object.const_defined?(:Oj)
-        @old_yajl = Object.const_get :Yajl if Object.const_defined?(:Yajl)
-        @old_gson = Object.const_get :Gson if Object.const_defined?(:Gson)
-        @old_jrjackson = Object.const_get :JrJackson if Object.const_defined?(:JrJackson)
-
-        MultiJson::REQUIREMENT_MAP.each_with_index do |(library, adapter), index|
-          MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", adapter]
-        end
-        Object.send :remove_const, :JSON if instance_variable_defined?(:@old_json)
-        Object.send :remove_const, :Oj if instance_variable_defined?(:@old_oj)
-        Object.send :remove_const, :Yajl if instance_variable_defined?(:@old_yajl)
-        Object.send :remove_const, :Gson if instance_variable_defined?(:@old_gson)
-        Object.send :remove_const, :JrJackson if instance_variable_defined?(:@old_jrjackson)
-      end
-
-      after do
-        @old_map.each_with_index do |(library, adapter), index|
-          MultiJson::REQUIREMENT_MAP[index] = [library, adapter]
-        end
-        Object.const_set :JSON, @old_json if instance_variable_defined?(:@old_json)
-        Object.const_set :Oj, @old_oj if instance_variable_defined?(:@old_oj)
-        Object.const_set :Yajl, @old_yajl if instance_variable_defined?(:@old_yajl)
-        Object.const_set :Gson, @old_gson if instance_variable_defined?(:@old_gson)
-        Object.const_set :JrJackson, @old_jrjackson if instance_variable_defined?(:@old_jrjackson)
+      around do |example|
+        simulate_no_adapters{ example.call }
       end
 
       it 'defaults to ok_json if no other json implementions are available' do
