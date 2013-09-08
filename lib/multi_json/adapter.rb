@@ -16,6 +16,7 @@ module MultiJson
       end
 
       def load(string, options={})
+        raise self::ParseError if blank?(string)
         instance.load(string, collect_load_options(options).clone)
       end
 
@@ -41,6 +42,12 @@ module MultiJson
       def cache(method, options)
         cache_key = [self, options].map(&:hash).join + method
         MultiJson.cached_options[cache_key] ||= yield
+      end
+
+    private
+
+      def blank?(input)
+        input.nil? || /\A\s*\z/ === input
       end
 
     end
