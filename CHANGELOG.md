@@ -1,3 +1,11 @@
+1.8.0
+-----
+* [Raise MultiJson::LoadError on blank input](https://github.com/intridea/multi_json/commit/c44f9c928bb25fe672246ad394b3e5b991be32e6)
+
+1.7.9
+-----
+* [Explicitly require json gem code even when constant is defined](https://github.com/intridea/multi_json/commit/36f7906c66477eb4b55b7afeaa3684b6db69eff2)
+
 1.7.8
 -----
 * [Reorder JrJackson before json_gem](https://github.com/intridea/multi_json/commit/315b6e460b6e4dcdb6c82e04e4be8ee975d395da)
