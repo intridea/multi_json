@@ -19,7 +19,7 @@ end
 group :development do
   gem 'kramdown', '>= 0.14'
   gem 'pry'
-  gem 'pry-debugger', :platforms => :mri_19
+  gem 'pry-debugger', :platforms => :mri
 end
 
 group :test do

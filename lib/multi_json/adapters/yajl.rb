@@ -1,4 +1,4 @@
-require 'yajl' unless defined?(::Yajl)
+require 'yajl'
 require 'multi_json/adapter'
 
 module MultiJson

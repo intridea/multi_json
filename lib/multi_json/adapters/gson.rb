@@ -1,4 +1,4 @@
-require 'gson' unless defined?(::Gson)
+require 'gson'
 require 'multi_json/adapter'
 
 module MultiJson

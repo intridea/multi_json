@@ -1,4 +1,4 @@
-require 'oj' unless defined?(::Oj)
+require 'oj'
 require 'multi_json/adapter'
 
 module MultiJson

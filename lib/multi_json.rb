@@ -59,7 +59,9 @@ module MultiJson
       end
     end
 
-    Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance.'
+    Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json).' +
+      'We recommend loading a different JSON library to improve performance.'
+
     :ok_json
   end
   alias default_engine default_adapter

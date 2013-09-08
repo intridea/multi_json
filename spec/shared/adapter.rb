@@ -1,19 +1,15 @@
 # encoding: UTF-8
 
+require 'shared/options'
+
 shared_examples_for 'an adapter' do |adapter|
 
-  before do
-    begin
-      MultiJson.use adapter
-    rescue LoadError
-      pending "Adapter #{adapter} couldn't be loaded (not installed?)"
-    end
-  end
+  before{ MultiJson.use adapter }
 
-  it_behaves_like 'has options', lambda{ MultiJson.adapter }
+  it_behaves_like 'has options', adapter
 
   it 'does not modify argument hashes' do
-    options = { :symbolize_keys => true, :pretty => false, :adapter => :json_pure }
+    options = { :symbolize_keys => true, :pretty => false, :adapter => :ok_json }
     expect{MultiJson.load('{}', options)}.to_not change{options}
     expect{MultiJson.dump([42], options)}.to_not change{options}
   end
@@ -54,11 +50,6 @@ shared_examples_for 'an adapter' do |adapter|
     unless 'json_pure' == adapter || 'json_gem' == adapter
       it 'dumps time in correct format' do
         time = Time.at(1355218745).utc
-
-        # time does not respond to to_json method
-        class << time
-          undef_method :to_json
-        end
 
         dumped_json = MultiJson.dump(time)
         expected = if RUBY_VERSION > '1.9'
