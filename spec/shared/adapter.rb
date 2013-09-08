@@ -148,15 +148,17 @@ shared_examples_for 'an adapter' do |adapter|
       }.to_not change{ input }
     end
 
-    it 'does not modify input encoding' do
-      pending 'only in 1.9' unless RUBY_VERSION > '1.9'
+    # Ruby 1.8 doesn't support String encodings
+    if RUBY_VERSION > '1.9'
+      it 'does not modify input encoding' do
 
-      input = '[123]'
-      input.force_encoding('iso-8859-1')
+        input = '[123]'
+        input.force_encoding('iso-8859-1')
 
-      expect{
-        MultiJson.load(input)
-      }.to_not change{ input.encoding }
+        expect{
+          MultiJson.load(input)
+        }.to_not change{ input.encoding }
+      end
     end
 
     it 'properly loads valid JSON' do
