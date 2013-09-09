@@ -12,7 +12,7 @@ module MultiJson
           string = string.dup.force_encoding(::Encoding::ASCII_8BIT)
         end
 
-        options[:symbolize_names] = true if options.delete(:symbolize_keys)
+        options[:symbolize_names] = true if options[:symbolize_keys]
         ::JSON.parse(string, options)
       end
 
