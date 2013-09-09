@@ -1,4 +1,7 @@
 require 'spec_helper'
+
+exit true if jruby?
+
 require 'shared/adapter'
 require 'shared/json_common_adapter'
 require 'multi_json/adapters/json_pure'
