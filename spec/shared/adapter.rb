@@ -113,7 +113,7 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'allows to dump JSON with UTF-8 characters' do
-      expect(MultiJson.dump({'color' => 'żółć'})).to eq('{"color":"żółć"}')
+      expect(MultiJson.dump('color' => 'żółć')).to eq('{"color":"żółć"}')
     end
   end
 
@@ -162,15 +162,11 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'properly loads valid JSON' do
-      expect(MultiJson.load('{"abc":"def"}')).to eq({'abc' => 'def'})
+      expect(MultiJson.load('{"abc":"def"}')).to eq('abc' => 'def')
     end
 
-    it 'raises MultiJson::LoadError on invalid JSON' do
-      expect{MultiJson.load('{"abc"}')}.to raise_error(MultiJson::LoadError)
-    end
-
-    it 'raises MultiJson::LoadError on blank input' do
-      [nil, ' ', "\t\t\t", "\n"].each do |input|
+    it 'raises MultiJson::LoadError on blank input or invalid input' do
+      [nil, '{"abc"}', ' ', "\t\t\t", "\n"].each do |input|
         expect{MultiJson.load(input)}.to raise_error(MultiJson::LoadError)
       end
     end
@@ -196,12 +192,12 @@ shared_examples_for 'an adapter' do |adapter|
     it 'stringifys symbol keys when encoding' do
       dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})
       loaded_json = MultiJson.load(dumped_json)
-      expect(loaded_json).to eq({'a' => 1, 'b' => {'c' => 2}})
+      expect(loaded_json).to eq('a' => 1, 'b' => {'c' => 2})
     end
 
     it 'properly loads valid JSON in StringIOs' do
       json = StringIO.new('{"abc":"def"}')
-      expect(MultiJson.load(json)).to eq({'abc' => 'def'})
+      expect(MultiJson.load(json)).to eq('abc' => 'def')
     end
 
     it 'allows for symbolization of keys' do
@@ -228,7 +224,7 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'allows to load JSON with UTF-8 characters' do
-      expect(MultiJson.load('{"color":"żółć"}')).to eq({'color' => 'żółć'})
+      expect(MultiJson.load('{"color":"żółć"}')).to eq('color' => 'żółć')
     end
   end
 end
