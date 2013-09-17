@@ -166,7 +166,7 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'raises MultiJson::LoadError on blank input or invalid input' do
-      [nil, '{"abc"}', ' ', "\t\t\t", "\n"].each do |input|
+      [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF"].each do |input|
         expect{MultiJson.load(input)}.to raise_error(MultiJson::LoadError)
       end
     end

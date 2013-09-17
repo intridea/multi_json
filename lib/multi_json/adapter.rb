@@ -48,6 +48,8 @@ module MultiJson
 
       def blank?(input)
         input.nil? || /\A\s*\z/ === input
+      rescue ArgumentError # invalid byte sequence in UTF-8
+        false
       end
 
     end
