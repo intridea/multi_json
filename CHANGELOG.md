@@ -1,3 +1,7 @@
+1.8.1
+-----
+* [Let the adapter handle strings with invalid encoding](https://github.com/intridea/multi_json/commit/6af2bf87b89f44eabf2ae9ca96779febc65ea94b)
+
 1.8.0
 -----
 * [Raise MultiJson::LoadError on blank input](https://github.com/intridea/multi_json/commit/c44f9c928bb25fe672246ad394b3e5b991be32e6)
