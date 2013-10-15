@@ -169,22 +169,6 @@ describe MultiJson do
 
   it_behaves_like 'has options', MultiJson
 
-  # %w(gson jr_jackson json_gem json_pure nsjsonserialization oj ok_json yajl).each do |adapter|
-  #   next if !jruby? && %w(gson jr_jackson).include?(adapter)
-  #   next if !macruby? && adapter == 'nsjsonserialization'
-  #   next if jruby? && %w(oj yajl).include?(adapter)
-
-  #   context adapter do
-  #     it_behaves_like 'an adapter', adapter
-  #   end
-  # end
-
-  # %w(json_gem json_pure).each do |adapter|
-  #   context adapter do
-  #     it_behaves_like 'JSON-like adapter', adapter
-  #   end
-  # end
-
   describe 'aliases' do
     if jruby?
       describe 'jrjackson' do
