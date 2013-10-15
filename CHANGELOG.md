@@ -1,3 +1,7 @@
+1.8.2
+-----
+* [Downcase adapter string name for OS compatibility](https://github.com/intridea/multi_json/commit/b8e15a032247a63f1410d21a18add05035f3fa66)
+
 1.8.1
 -----
 * [Let the adapter handle strings with invalid encoding](https://github.com/intridea/multi_json/commit/6af2bf87b89f44eabf2ae9ca96779febc65ea94b)
