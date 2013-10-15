@@ -72,6 +72,11 @@ describe MultiJson do
     expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonGem)
   end
 
+  it 'is settable via a case-insensitive string' do
+    MultiJson.use 'Json_Gem'
+    expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonGem)
+  end
+
   it 'is settable via a class' do
     adapter = Class.new
     MultiJson.use adapter
