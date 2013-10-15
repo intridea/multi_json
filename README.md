@@ -10,7 +10,6 @@
 [travis]: http://travis-ci.org/intridea/multi_json
 [gemnasium]: https://gemnasium.com/intridea/multi_json
 [codeclimate]: https://codeclimate.com/github/intridea/multi_json
-[coveralls]: https://coveralls.io/r/intridea/multi_json
 
 Lots of Ruby libraries parse JSON and everyone has their favorite JSON coder.
 Instead of choosing a single JSON coder and forcing users of your library to be
