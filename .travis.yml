@@ -9,3 +9,8 @@ rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
+
+matrix:
+  allow_failures:
+    - rvm: jruby-18mode
+    - rvm: jruby-19mode
