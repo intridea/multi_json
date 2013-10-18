@@ -28,7 +28,7 @@ module MultiJson
     self.load_options = self.dump_options = value
   end
 
-  ALIASES = { 'jrjackson' => :jr_jackson }
+  ALIASES = { 'jrjackson' => 'jr_jackson' }
 
   REQUIREMENT_MAP = [
     ['oj',           :oj],
