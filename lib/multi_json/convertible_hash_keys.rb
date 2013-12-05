@@ -2,40 +2,40 @@ module MultiJson
   module ConvertibleHashKeys
     private
 
-    def symbolize_keys(object)
-      prepare_object(object) do |key|
+    def symbolize_keys(hash)
+      prepare_hash(hash) do |key|
         key.respond_to?(:to_sym) ? key.to_sym : key
       end
     end
 
-    def stringify_keys(object)
-      prepare_object(object) do |key|
+    def stringify_keys(hash)
+      prepare_hash(hash) do |key|
         key.respond_to?(:to_s) ? key.to_s : key
       end
     end
 
-    def prepare_object(object, &key_modifier)
-      return object unless block_given?
-      case object
+    def prepare_hash(hash, &key_modifier)
+      return hash unless block_given?
+      case hash
       when Array
-        object.map do |value|
-          prepare_object(value, &key_modifier)
+        hash.map do |value|
+          prepare_hash(value, &key_modifier)
         end
       when Hash
-        object.inject({}) do |result, (key, value)|
+        hash.inject({}) do |result, (key, value)|
           new_key   = key_modifier.call(key)
-          new_value = prepare_object(value, &key_modifier)
+          new_value = prepare_hash(value, &key_modifier)
           result.merge! new_key => new_value
         end
       when String, Numeric, true, false, nil
-        object
+        hash
       else
-        if object.respond_to?(:to_json)
-          object
-        elsif object.respond_to?(:to_s)
-          object.to_s
+        if hash.respond_to?(:to_json)
+          hash
+        elsif hash.respond_to?(:to_s)
+          hash.to_s
         else
-          object
+          hash
         end
       end
     end
