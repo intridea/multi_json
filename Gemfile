@@ -28,8 +28,7 @@ platforms :mingw, :mswin, :ruby do
 end
 
 platforms :rbx do
-  gem 'rubysl-singleton', '~> 2.0'
-  gem 'rubysl-bigdecimal', '~> 2.0'
+  gem 'rubysl', '~> 2.0'
 end
 
 gemspec
