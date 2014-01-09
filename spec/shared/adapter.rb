@@ -95,17 +95,14 @@ shared_examples_for 'an adapter' do |adapter|
       MultiJson.dump('foo', :bar => :baz)
     end
 
-    # This behavior is currently not supported by gson.rb
-    # See discussion at https://github.com/intridea/multi_json/pull/71
-    unless adapter.name == 'MultiJson::Adapters::Gson'
-      it 'dumps custom objects that implement to_json' do
-        klass = Class.new do
-          def to_json(*)
-            '"foobar"'
-          end
+    it 'dumps custom objects that implement to_json' do
+      pending 'not supported' if adapter.name == 'MultiJson::Adapters::Gson'
+      klass = Class.new do
+        def to_json(*)
+          '"foobar"'
         end
-        expect(MultiJson.dump(klass.new)).to eq('"foobar"')
       end
+      expect(MultiJson.dump(klass.new)).to eq('"foobar"')
     end
 
     it 'allows to dump JSON values' do
@@ -167,6 +164,7 @@ shared_examples_for 'an adapter' do |adapter|
 
     it 'raises MultiJson::LoadError on blank input or invalid input' do
       [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF"].each do |input|
+        pending 'GSON bug: https://github.com/avsej/gson.rb/issues/3' if adapter.name =~ /Gson/ && input == "\x82\xAC\xEF"
         expect{MultiJson.load(input)}.to raise_error(MultiJson::LoadError)
       end
     end
