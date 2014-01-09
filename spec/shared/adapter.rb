@@ -43,7 +43,7 @@ shared_examples_for 'an adapter' do |adapter|
         {'abc' => 'def'},
         [1, 2, 3, '4', true, false, nil]
       ].each do |example|
-        expect(MultiJson.load(MultiJson.dump(example))).to eq example
+        expect(MultiJson.load(MultiJson.dump(example))).to eq(example)
       end
     end
 
@@ -57,7 +57,7 @@ shared_examples_for 'an adapter' do |adapter|
         else
           'Tue Dec 11 09:39:05 UTC 2012'
         end
-        expect(MultiJson.load(dumped_json)).to eq expected
+        expect(MultiJson.load(dumped_json)).to eq(expected)
       end
     end
 
@@ -81,13 +81,13 @@ shared_examples_for 'an adapter' do |adapter|
         ]
       ].each do |example, expected|
         dumped_json = MultiJson.dump(example)
-        expect(MultiJson.load(dumped_json)).to eq expected
+        expect(MultiJson.load(dumped_json)).to eq(expected)
       end
     end
 
     it 'dumps rootless JSON' do
-      expect(MultiJson.dump('random rootless string')).to eq '"random rootless string"'
-      expect(MultiJson.dump(123)).to eq '123'
+      expect(MultiJson.dump('random rootless string')).to eq('"random rootless string"')
+      expect(MultiJson.dump(123)).to eq('123')
     end
 
     it 'passes options to the adapter' do
@@ -104,12 +104,12 @@ shared_examples_for 'an adapter' do |adapter|
             '"foobar"'
           end
         end
-        expect(MultiJson.dump(klass.new)).to eq '"foobar"'
+        expect(MultiJson.dump(klass.new)).to eq('"foobar"')
       end
     end
 
     it 'allows to dump JSON values' do
-      expect(MultiJson.dump(42)).to eq '42'
+      expect(MultiJson.dump(42)).to eq('42')
     end
 
     it 'allows to dump JSON with UTF-8 characters' do
@@ -176,7 +176,7 @@ shared_examples_for 'an adapter' do |adapter|
       begin
         MultiJson.load(data)
       rescue MultiJson::LoadError => le
-        expect(le.data).to eq data
+        expect(le.data).to eq(data)
       end
     end
 
@@ -185,7 +185,7 @@ shared_examples_for 'an adapter' do |adapter|
       begin
         MultiJson.load(data)
       rescue MultiJson::DecodeError => de
-        expect(de.data).to eq data
+        expect(de.data).to eq(data)
       end
     end
 
@@ -213,14 +213,14 @@ shared_examples_for 'an adapter' do |adapter|
         [
           '{"abc":[{"def":"hgi"}]}',
           {:abc => [{:def => 'hgi'}]},
-        ],
+        ]
       ].each do |example, expected|
-        expect(MultiJson.load(example, :symbolize_keys => true)).to eq expected
+        expect(MultiJson.load(example, :symbolize_keys => true)).to eq(expected)
       end
     end
 
     it 'allows to load JSON values' do
-      expect(MultiJson.load('42')).to eq 42
+      expect(MultiJson.load('42')).to eq(42)
     end
 
     it 'allows to load JSON with UTF-8 characters' do
