@@ -1,3 +1,8 @@
+1.8.3
+-----
+* [Make JrJackson explicitly read StringIO objects](https://github.com/intridea/multi_json/commit/e1f162d5b668e5e4db5afa175361a601a8aa2b05)
+* [Prevent calling #downcase on alias symbols](https://github.com/intridea/multi_json/commit/c1cf075453ce0110f7decc4f906444b1233bb67c)
+
 1.8.2
 -----
 * [Downcase adapter string name for OS compatibility](https://github.com/intridea/multi_json/commit/b8e15a032247a63f1410d21a18add05035f3fa66)
