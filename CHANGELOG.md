@@ -1,3 +1,7 @@
+1.8.4
+-----
+* [Make Gson adapter explicitly read StringIO object](https://github.com/intridea/multi_json/commit/b58b498747ff6e94f41488c971b2a30a98760ef2)
+
 1.8.3
 -----
 * [Make JrJackson explicitly read StringIO objects](https://github.com/intridea/multi_json/commit/e1f162d5b668e5e4db5afa175361a601a8aa2b05)
