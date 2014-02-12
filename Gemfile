@@ -27,8 +27,4 @@ platforms :mingw, :mswin, :ruby do
   gem 'yajl-ruby', '~> 1.0', :require => nil
 end
 
-platforms :rbx do
-  gem 'rubysl', '~> 2.0'
-end
-
 gemspec
