@@ -1,14 +1,15 @@
 # MultiJSON
 
-[![Gem Version](https://badge.fury.io/rb/multi_json.png)][gem]
-[![Build Status](https://secure.travis-ci.org/intridea/multi_json.png?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/intridea/multi_json.png?travis)][gemnasium]
-[![Code Climate](https://codeclimate.com/github/intridea/multi_json.png)][codeclimate]
+[![Gem Version](http://img.shields.io/gem/v/multi_json.svg)][gem]
+[![Build Status](http://img.shields.io/travis/intridea/multi_json.svg)][travis]
+[![Dependency Status](http://img.shields.io/gemnasium/intridea/multi_json.svg)][gemnasium]
+[![Code Climate](http://img.shields.io/codeclimate/github/intridea/multi_json.svg)][codeclimate]
 
 [gem]: https://rubygems.org/gems/multi_json
 [travis]: http://travis-ci.org/intridea/multi_json
 [gemnasium]: https://gemnasium.com/intridea/multi_json
 [codeclimate]: https://codeclimate.com/github/intridea/multi_json
+
 Lots of Ruby libraries parse JSON and everyone has their favorite JSON coder.
 Instead of choosing a single JSON coder and forcing users of your library to be
 stuck with it, you can use MultiJSON instead, which will simply choose the
