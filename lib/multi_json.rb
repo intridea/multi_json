@@ -104,8 +104,8 @@ module MultiJson
     else
       raise ::LoadError
     end
-  rescue ::LoadError
-    raise ArgumentError, 'Did not recognize your adapter specification.'
+  rescue ::LoadError => e
+    raise ArgumentError, "Did not recognize your adapter specification (#{e.message})."
   end
 
   # Decode a JSON string into Ruby.
