@@ -90,7 +90,7 @@ describe MultiJson do
   end
 
   it 'throws ArgumentError on bad input' do
-    expect{ MultiJson.use 'bad adapter' }.to raise_error(ArgumentError)
+    expect{ MultiJson.use 'bad adapter' }.to raise_error(ArgumentError, /bad adapter/)
   end
 
   context 'using one-shot parser' do
