@@ -1,7 +1,7 @@
 require 'multi_json/options'
 require 'multi_json/version'
 require 'multi_json/adapter_error'
-require 'multi_json/load_error'
+require 'multi_json/parse_error'
 
 module MultiJson
   include Options
@@ -120,7 +120,7 @@ module MultiJson
     begin
       adapter.load(string, options)
     rescue adapter::ParseError => exception
-      raise LoadError.new(exception.message, exception.backtrace, string)
+      raise ParseError.build(exception, string)
     end
   end
   alias decode load

@@ -162,34 +162,38 @@ shared_examples_for 'an adapter' do |adapter|
       expect(MultiJson.load('{"abc":"def"}')).to eq('abc' => 'def')
     end
 
-    it 'raises MultiJson::LoadError on blank input or invalid input' do
+    it 'raises MultiJson::ParseError on blank input or invalid input' do
       [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF"].each do |input|
         if input == "\x82\xAC\xEF"
           pending 'GSON bug: https://github.com/avsej/gson.rb/issues/3' if adapter.name =~ /Gson/
           pending 'JrJackson bug: https://github.com/guyboertje/jrjackson/issues/21' if adapter.name =~ /JrJackson/
         end
 
-        expect{MultiJson.load(input)}.to raise_error(MultiJson::LoadError)
+        expect{MultiJson.load(input)}.to raise_error(MultiJson::ParseError)
       end
     end
 
-    it 'raises MultiJson::LoadError with data on invalid JSON' do
+    it 'raises MultiJson::ParseError with data on invalid JSON' do
       data = '{invalid}'
-      begin
-        MultiJson.load(data)
-      rescue MultiJson::LoadError => le
-        expect(le.data).to eq(data)
-      end
+      exception = get_exception(MultiJson::ParseError){ MultiJson.load data }
+      expect(exception.data).to eq(data)
+      expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
     end
 
     it 'catches MultiJson::DecodeError for legacy support' do
       data = '{invalid}'
-      begin
-        MultiJson.load(data)
-      rescue MultiJson::DecodeError => de
-        expect(de.data).to eq(data)
-      end
+      exception = get_exception(MultiJson::DecodeError){ MultiJson.load data }
+      expect(exception.data).to eq(data)
+      expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
     end
+
+    it 'catches MultiJson::LoadError for legacy support' do
+      data = '{invalid}'
+      exception = get_exception(MultiJson::LoadError){ MultiJson.load data }
+      expect(exception.data).to eq(data)
+      expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
+    end
+
 
     it 'stringifys symbol keys when encoding' do
       dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})

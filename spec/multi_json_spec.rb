@@ -94,13 +94,7 @@ describe MultiJson do
   end
 
   it 'gives access to original error when raising AdapterError' do
-    exception = nil
-    begin
-      MultiJson.use 'foobar'
-    rescue MultiJson::AdapterError => e
-      exception = e
-    end
-
+    exception = get_exception(MultiJson::AdapterError){ MultiJson.use 'foobar' }
     expect(exception.cause).to be_instance_of(::LoadError)
     expect(exception.message).to include("-- multi_json/adapters/foobar")
     expect(exception.message).to include("Did not recognize your adapter specification")
