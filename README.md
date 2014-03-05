@@ -37,6 +37,9 @@ The `use` method, which sets the MultiJson adapter, takes either a symbol or a
 class (to allow for custom JSON parsers) that responds to both `.load` and `.dump`
 at the class level.
 
+When MultiJson fails to load the specified adapter, it'll throw `MultiJson::AdapterError`
+which inherits from `ArgumentError`.
+
 MultiJSON tries to have intelligent defaulting. That is, if you have any of the
 supported engines already loaded, it will utilize them before attempting to
 load any. When loading, libraries are ordered by speed. First Oj, then Yajl,
