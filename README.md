@@ -24,10 +24,15 @@ MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON
 MultiJson.dump({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
 ```
 
-When loading invalid JSON, multiJSON will throw a `MultiJson::ParseError`. `MultiJson::DecodeError` and `MultiJson::LoadError` are aliases for backwards compatibility.
+When loading invalid JSON, MultiJson will throw a `MultiJson::ParseError`. `MultiJson::DecodeError` and `MultiJson::LoadError` are aliases for backwards compatibility.
 
 ```ruby
-MultiJson.load('invalid json') #=> MultiJson::ParseError
+begin
+  MultiJson.load('{invalid json}')
+rescue MultiJson::ParseError => exception
+  exception.data # => "{invalid json}"
+  exception.cause # => JSON::ParserError: 795: unexpected token at '{invalid json}'
+end
 ```
 
 `ParseError` instance has `cause` reader which contains the original exception.
