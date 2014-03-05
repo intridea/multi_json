@@ -1,3 +1,8 @@
+1.9.0
+----
+* [Rename LoadError to ParseError](https://github.com/intridea/multi_json/commit/4abb98fe3a90b2a7b3d1594515c8a06042b4a27d)
+* [Adapter load failure throws AdapterError instead of ArgumentError](https://github.com/intridea/multi_json/commit/4da612b617bd932bb6fa1cc4c43210327f98f271)
+
 1.8.4
 -----
 * [Make Gson adapter explicitly read StringIO object](https://github.com/intridea/multi_json/commit/b58b498747ff6e94f41488c971b2a30a98760ef2)
