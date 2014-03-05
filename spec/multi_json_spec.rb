@@ -89,8 +89,21 @@ describe MultiJson do
     expect(MultiJson.adapter).to eq(adapter)
   end
 
-  it 'throws ArgumentError on bad input' do
-    expect{ MultiJson.use 'bad adapter' }.to raise_error(ArgumentError, /bad adapter/)
+  it 'throws AdapterError on bad input' do
+    expect{ MultiJson.use 'bad adapter' }.to raise_error(MultiJson::AdapterError, /bad adapter/)
+  end
+
+  it 'gives access to original error when raising AdapterError' do
+    exception = nil
+    begin
+      MultiJson.use 'foobar'
+    rescue MultiJson::AdapterError => e
+      exception = e
+    end
+
+    expect(exception.cause).to be_instance_of(::LoadError)
+    expect(exception.message).to include("-- multi_json/adapters/foobar")
+    expect(exception.message).to include("Did not recognize your adapter specification")
   end
 
   context 'using one-shot parser' do

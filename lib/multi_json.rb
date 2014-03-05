@@ -1,5 +1,6 @@
 require 'multi_json/options'
 require 'multi_json/version'
+require 'multi_json/adapter_error'
 require 'multi_json/load_error'
 
 module MultiJson
@@ -104,8 +105,8 @@ module MultiJson
     else
       raise ::LoadError, new_adapter
     end
-  rescue ::LoadError => e
-    raise ArgumentError, "Did not recognize your adapter specification (#{e.message})."
+  rescue ::LoadError => exception
+    raise AdapterError.build(exception)
   end
 
   # Decode a JSON string into Ruby.
