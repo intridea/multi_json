@@ -1,3 +1,7 @@
+1.9.1
+-----
+* [Remove unused LoadError file](https://github.com/intridea/multi_json/commit/65dedd84d59baeefc25c477fedf0bbe85e7ce2cd)
+
 1.9.0
 ----
 * [Rename LoadError to ParseError](https://github.com/intridea/multi_json/commit/4abb98fe3a90b2a7b3d1594515c8a06042b4a27d)
