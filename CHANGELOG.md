@@ -1,3 +1,7 @@
+1.9.2
+-----
+* [Enable use_to_json option for Oj adapter by default](https://github.com/intridea/multi_json/commit/76a4aaf697b10bbabd5d535d83cf1149efcfe5c7)
+
 1.9.1
 -----
 * [Remove unused LoadError file](https://github.com/intridea/multi_json/commit/65dedd84d59baeefc25c477fedf0bbe85e7ce2cd)
