@@ -6,7 +6,7 @@ module MultiJson
     # Use the Oj library to dump/load.
     class Oj < Adapter
       defaults :load, :mode => :strict, :symbolize_keys => false
-      defaults :dump, :mode => :compat, :time_format => :ruby
+      defaults :dump, :mode => :compat, :time_format => :ruby, :use_to_json => true
 
       ParseError = defined?(::Oj::ParseError) ? ::Oj::ParseError : SyntaxError
 
