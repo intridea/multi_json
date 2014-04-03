@@ -17,6 +17,7 @@ module MultiJson
 
       def dump(object, options={})
         options.merge!(:indent => 2) if options[:pretty]
+        options[:indent] = options[:indent].to_i if options[:indent]
         ::Oj.dump(object, options)
       end
     end
