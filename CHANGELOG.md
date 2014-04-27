@@ -1,3 +1,7 @@
+1.9.3
+-----
+* [Convert indent option to Fixnum before passing to Oj](https://github.com/intridea/multi_json/commit/826fc5535b863b74fc9f981dfdda3e26f1ee4e5b)
+
 1.9.2
 -----
 * [Enable use_to_json option for Oj adapter by default](https://github.com/intridea/multi_json/commit/76a4aaf697b10bbabd5d535d83cf1149efcfe5c7)
