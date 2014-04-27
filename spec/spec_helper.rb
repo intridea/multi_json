@@ -79,3 +79,11 @@ def get_exception(exception_class = StandardError)
     exception
   end
 end
+
+def with_default_options
+  adapter = MultiJson.adapter
+  adapter.load_options = adapter.dump_options = MultiJson.load_options = MultiJson.dump_options = nil
+  yield
+ensure
+  adapter.load_options = adapter.dump_options = MultiJson.load_options = MultiJson.dump_options = nil
+end
