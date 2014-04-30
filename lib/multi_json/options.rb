@@ -2,12 +2,10 @@ module MultiJson
   module Options
 
     def load_options=(options)
-      MultiJson.reset_cached_options!
       @load_options = options
     end
 
     def dump_options=(options)
-      MultiJson.reset_cached_options!
       @dump_options = options
     end
 
