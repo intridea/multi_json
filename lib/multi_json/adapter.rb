@@ -27,16 +27,11 @@ module MultiJson
     protected
 
       def collect_load_options(options)
-        cache('load', options){ collect_options(:load_options, options).merge(options) }
+        cache('load', options){ load_options(options).merge(MultiJson.load_options(options)).merge!(options) }
       end
 
       def collect_dump_options(options)
-        cache('dump', options){ collect_options(:dump_options, options).merge(options) }
-      end
-
-      def collect_options(method, *args)
-        global, local = *[MultiJson, self].map{ |r| r.send(method, *args) }
-        local.merge(global)
+        cache('dump', options){ dump_options(options).merge(MultiJson.dump_options(options)).merge!(options) }
       end
 
       def cache(method, options)
