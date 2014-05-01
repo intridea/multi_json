@@ -7,16 +7,6 @@ module MultiJson
   include Options
   extend self
 
-  class << self
-    def cached_options
-      @cached_options ||= {}
-    end
-
-    def reset_cached_options!
-      @cached_options = {}
-    end
-  end
-
   # Since `default_options` is deprecated, the
   # reader is aliased to `dump_options` and the
   # writer sets both `dump_options` and `load_options`

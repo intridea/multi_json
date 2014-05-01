@@ -2,21 +2,19 @@ module MultiJson
   module Options
 
     def load_options=(options)
-      MultiJson.reset_cached_options!
       @load_options = options
     end
 
     def dump_options=(options)
-      MultiJson.reset_cached_options!
       @dump_options = options
     end
 
     def load_options(*args)
-      get_options :load_options, *args
+      defined?(@load_options) && get_options(@load_options, *args) || default_load_options
     end
 
     def dump_options(*args)
-      get_options :dump_options, *args
+      defined?(@dump_options) && get_options(@dump_options, *args) || default_dump_options
     end
 
     def default_load_options
@@ -29,19 +27,11 @@ module MultiJson
 
     private
 
-    def get_options(ivar, *args)
-      defaults = send("default_#{ivar}")
-
-      return defaults unless instance_variable_defined?("@#{ivar}")
-
-      value = instance_variable_get("@#{ivar}")
-
-      if value.respond_to?(:call) and value.arity
-        value.arity == 0 ? value[] : value[*args]
-      elsif Hash === value or value.respond_to?(:to_hash)
-        value.to_hash
-      else
-        defaults
+    def get_options(options, *args)
+      if options.respond_to?(:call) and options.arity
+        options.arity == 0 ? options[] : options[*args]
+      elsif Hash === options or options.respond_to?(:to_hash)
+        options.to_hash
       end
     end
   end
