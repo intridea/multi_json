@@ -14,7 +14,6 @@ end
 
 group :test do
   gem 'rspec', '>= 2.14'
-  gem 'simplecov', :require => false
 end
 
 platforms :jruby do
