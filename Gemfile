@@ -22,7 +22,7 @@ platforms :jruby do
 end
 
 platforms :mingw, :mswin, :ruby do
-  gem 'oj', '~> 2.8', :require => nil
+  gem 'oj', '~> 2.9', :require => nil
   gem 'yajl-ruby', '~> 1.0', :require => nil
 end
 
