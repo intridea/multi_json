@@ -7,16 +7,24 @@ module MultiJson
   include Options
   extend self
 
-  # Since `default_options` is deprecated, the
-  # reader is aliased to `dump_options` and the
-  # writer sets both `dump_options` and `load_options`
-  alias default_options dump_options
-
   def default_options=(value)
     Kernel.warn "MultiJson.default_options setter is deprecated\n" +
       "Use MultiJson.load_options and MultiJson.dump_options instead"
 
     self.load_options = self.dump_options = value
+  end
+
+  def default_options
+    Kernel.warn "MultiJson.default_options is deprecated\n" +
+      "Use MultiJson.load_options or MultiJson.dump_options instead"
+
+    self.load_options
+  end
+
+  %w[cached_options reset_cached_options!].each do |method_name|
+    define_method method_name do |*|
+      Kernel.warn "MultiJson.#{method_name} method is deprecated and no longer used."
+    end
   end
 
   ALIASES = { 'jrjackson' => 'jr_jackson' }
