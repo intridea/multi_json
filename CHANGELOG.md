@@ -1,3 +1,7 @@
+1.10.0
+------
+* [Performance tweaks](https://github.com/intridea/multi_json/commit/58724acfed31866d079eaafb1cd824e341ade287)
+
 1.9.3
 -----
 * [Convert indent option to Fixnum before passing to Oj](https://github.com/intridea/multi_json/commit/826fc5535b863b74fc9f981dfdda3e26f1ee4e5b)
