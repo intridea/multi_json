@@ -1,9 +1,9 @@
 module MultiJson
   class Version
-    MAJOR = 1 unless defined? MultiJson::Version::MAJOR
-    MINOR = 9 unless defined? MultiJson::Version::MINOR
-    PATCH = 3 unless defined? MultiJson::Version::PATCH
-    PRE = nil unless defined? MultiJson::Version::PRE
+    MAJOR =  1 unless defined? MultiJson::Version::MAJOR
+    MINOR = 10 unless defined? MultiJson::Version::MINOR
+    PATCH =  0 unless defined? MultiJson::Version::PATCH
+    PRE =  nil unless defined? MultiJson::Version::PRE
 
     class << self
 
