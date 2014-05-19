@@ -1,4 +1,5 @@
 require 'gson'
+require 'stringio'
 require 'multi_json/adapter'
 
 module MultiJson
