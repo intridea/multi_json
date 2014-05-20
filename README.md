@@ -1,7 +1,7 @@
 # MultiJSON
 
 [![Gem Version](http://img.shields.io/gem/v/multi_json.svg)][gem]
-[![Build Status](http://img.shields.io/travis/intridea/multi_json.svg)][travis]
+[![Build Status](http://travis-ci.org/intridea/multi_json.svg)][travis]
 [![Dependency Status](http://img.shields.io/gemnasium/intridea/multi_json.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/intridea/multi_json.svg)][codeclimate]
 
