@@ -8,8 +8,6 @@ module MultiJson
       ParseError = ::JrJackson::ParseError
 
       def load(string, options={}) #:nodoc:
-        # https://github.com/guyboertje/jrjackson/issues/20
-        string = string.read if StringIO === string
         ::JrJackson::Json.load(string, options)
       end
 
