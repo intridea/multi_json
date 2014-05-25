@@ -1,7 +1,7 @@
 1.10.1
 ------
 * [Explicitly require stringio for Gson adapter](https://github.com/intridea/multi_json/commit/623ec8142d4a212fa0db763bb71295789a119929)
-* [Do not read StrignIO object before passing it to JrJackson](https://github.com/intridea/multi_json/commit/a6dc935df08e7b3d5d701fbb9298384c96df0fde)
+* [Do not read StringIO object before passing it to JrJackson](https://github.com/intridea/multi_json/commit/a6dc935df08e7b3d5d701fbb9298384c96df0fde)
 
 1.10.0
 ------
