@@ -166,7 +166,6 @@ shared_examples_for 'an adapter' do |adapter|
       [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF"].each do |input|
         if input == "\x82\xAC\xEF"
           pending 'GSON bug: https://github.com/avsej/gson.rb/issues/3' if adapter.name =~ /Gson/
-          pending 'JrJackson bug: https://github.com/guyboertje/jrjackson/issues/21' if adapter.name =~ /JrJackson/
         end
 
         expect{MultiJson.load(input)}.to raise_error(MultiJson::ParseError)
