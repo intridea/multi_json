@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.cert_chain    = %w(certs/rwz.pem)
   spec.description   = %q{A common interface to multiple JSON libraries, including Oj, Yajl, the JSON gem (with C-extensions), the pure-Ruby JSON gem, NSJSONSerialization, gson.rb, JrJackson, and OkJson.}
   spec.email         = ['michael@intridea.com', 'josh.kalderimis@gmail.com', 'sferik@gmail.com']
-  spec.files         = Dir['.yardopts', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE.md', 'README.md', 'Rakefile', 'multi_json.gemspec', 'Gemfile', '.document', '.rspec', '.travis.yml' ,'spec/**/*', 'lib/**/*']
+  spec.files         = Dir['.document .yardopts', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE.md', 'README.md', 'multi_json.gemspec', 'lib/**/*']
   spec.homepage      = 'http://github.com/intridea/multi_json'
   spec.licenses      = ['MIT']
   spec.name          = 'multi_json'
@@ -17,6 +17,5 @@ Gem::Specification.new do |spec|
   spec.required_rubygems_version = '>= 1.3.5'
   spec.signing_key   = File.expand_path("~/.gem/private_key.pem") if $0 =~ /gem\z/
   spec.summary       = %q{A common interface to multiple JSON libraries.}
-  spec.test_files    = Dir['spec/**/*']
   spec.version       = MultiJson::Version
 end
