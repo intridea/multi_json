@@ -112,6 +112,10 @@ shared_examples_for 'an adapter' do |adapter|
     it 'allows to dump JSON with UTF-8 characters' do
       expect(MultiJson.dump('color' => 'żółć')).to eq('{"color":"żółć"}')
     end
+
+    it 'dumps nil when nil is provided' do
+      expect(MultiJson.dump(nil)).to eq(nil)
+    end
   end
 
   describe '.load' do
@@ -162,8 +166,12 @@ shared_examples_for 'an adapter' do |adapter|
       expect(MultiJson.load('{"abc":"def"}')).to eq('abc' => 'def')
     end
 
-    it 'raises MultiJson::ParseError on blank input or invalid input' do
-      [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF"].each do |input|
+    it 'returns nil on nil input' do
+      expect(MultiJson.load(nil)).to eq(nil)
+    end
+
+    it 'returns MultiJson::ParseError on blank input or invalid input' do
+      ['{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF"].each do |input|
         if input == "\x82\xAC\xEF"
           pending 'GSON bug: https://github.com/avsej/gson.rb/issues/3' if adapter.name =~ /Gson/
         end

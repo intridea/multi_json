@@ -114,6 +114,8 @@ module MultiJson
   # <tt>:symbolize_keys</tt> :: If true, will use symbols instead of strings for the keys.
   # <tt>:adapter</tt> :: If set, the selected adapter will be used for this call.
   def load(string, options={})
+    return nil unless string
+
     adapter = current_adapter(options)
     begin
       adapter.load(string, options)
@@ -133,6 +135,8 @@ module MultiJson
 
   # Encodes a Ruby object as JSON.
   def dump(object, options={})
+    return nil unless object
+
     current_adapter(options).dump(object, options)
   end
   alias encode dump
