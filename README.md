@@ -19,8 +19,10 @@ fastest available JSON coder. Here's how to use it:
 require 'multi_json'
 
 MultiJson.load('{"abc":"def"}') #=> {"abc" => "def"}
+MultiJson.load('{"abc":123}') #=> {"abc" => 123}
 MultiJson.load('{"abc":"def"}', :symbolize_keys => true) #=> {:abc => "def"}
-MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON
+MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON {"abc" => "def"}
+MultiJson.dump({:abc => 123}) # convert Ruby back to JSON {"abc" => 123}
 MultiJson.dump({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
 ```
 
