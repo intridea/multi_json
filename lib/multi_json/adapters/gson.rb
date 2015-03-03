@@ -9,7 +9,6 @@ module MultiJson
       ParseError = ::Gson::DecodeError
 
       def load(string, options={})
-        string = string.read if StringIO === string
         ::Gson::Decoder.new(options).decode(string)
       end
 

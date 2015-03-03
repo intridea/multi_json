@@ -7,7 +7,6 @@ module MultiJson
       ParseError = ::MultiJson::OkJson::Error
 
       def load(string, options={})
-        string = string.read if string.respond_to?(:read)
         data = string.dataUsingEncoding(NSUTF8StringEncoding)
         object = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves, error: nil)
         if object

@@ -17,6 +17,7 @@ module MultiJson
 
       def load(string, options={})
         raise self::ParseError if blank?(string)
+        string = string.read if string.respond_to?(:read)
         instance.load(string, load_options(options).merge(MultiJson.load_options(options)).merge!(options))
       end
 

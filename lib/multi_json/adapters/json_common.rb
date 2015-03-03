@@ -6,8 +6,6 @@ module MultiJson
       defaults :load, :create_additions => false, :quirks_mode => true
 
       def load(string, options={})
-        string = string.read if string.respond_to?(:read)
-
         if string.respond_to?(:force_encoding)
           string = string.dup.force_encoding(::Encoding::ASCII_8BIT)
         end

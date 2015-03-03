@@ -9,7 +9,6 @@ module MultiJson
       ParseError = ::MultiJson::OkJson::Error
 
       def load(string, options={})
-        string = string.read if string.respond_to?(:read)
         result = ::MultiJson::OkJson.decode("[#{string}]").first
         options[:symbolize_keys] ? symbolize_keys(result) : result
       rescue ArgumentError # invalid byte sequence in UTF-8
