@@ -1,3 +1,8 @@
+1.11.0
+------
+
+* [Make all adapters read IO object before load](https://github.com/intridea/multi_json/commit/167f559e18d4efee05e1f160a2661d16dbb215d4)
+
 1.10.1
 ------
 * [Explicitly require stringio for Gson adapter](https://github.com/intridea/multi_json/commit/623ec8142d4a212fa0db763bb71295789a119929)
