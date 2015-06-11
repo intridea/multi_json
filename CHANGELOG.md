@@ -1,3 +1,8 @@
+1.11.1
+------
+
+* [Dump method passes options throught for JrJackson adapter](https://github.com/intridea/multi_json/commit/3c730fd12135c3e7bf212f878958004908f13909)
+
 1.11.0
 ------
 
