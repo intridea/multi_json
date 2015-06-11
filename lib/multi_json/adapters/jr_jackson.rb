@@ -12,7 +12,7 @@ module MultiJson
       end
 
       def dump(object, options={}) #:nodoc:
-        ::JrJackson::Json.dump(object)
+        ::JrJackson::Json.dump(object, options)
       end
     end
   end
