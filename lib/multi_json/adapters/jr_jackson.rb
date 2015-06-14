@@ -11,8 +11,14 @@ module MultiJson
         ::JrJackson::Json.load(string, options)
       end
 
-      def dump(object, options={}) #:nodoc:
-        ::JrJackson::Json.dump(object, options)
+      if ::JrJackson::Json.method(:dump).arity == 1
+        def dump(object, _)
+          ::JrJackson::Json.dump(object)
+        end
+      else
+        def dump(object, options={})
+          ::JrJackson::Json.dump(object, options)
+        end
       end
     end
   end
