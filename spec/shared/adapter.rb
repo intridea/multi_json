@@ -39,10 +39,17 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'writes decodable JSON' do
-      [
+      examples = [
         {'abc' => 'def'},
-        [1, 2, 3, '4', true, false, nil]
-      ].each do |example|
+        [],
+        1,
+        '2',
+        true,
+        false,
+        nil
+      ]
+
+      examples.each do |example|
         expect(MultiJson.load(MultiJson.dump(example))).to eq(example)
       end
     end
