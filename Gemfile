@@ -9,7 +9,6 @@ gem 'json_pure', '~> 1.4', :require => nil
 group :development do
   gem 'kramdown', '>= 0.14'
   gem 'pry'
-  gem 'pry-debugger', :platforms => :mri
 end
 
 group :test do
