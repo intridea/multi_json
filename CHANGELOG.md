@@ -1,3 +1,8 @@
+1.11.2
+------
+
+* [Only pass one argument to JrJackson when two is not supported](https://github.com/intridea/multi_json/commit/e798fa517c817fc706982d3f3c61129b6651d601)
+
 1.11.1
 ------
 
