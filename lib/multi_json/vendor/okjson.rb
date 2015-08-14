@@ -29,7 +29,7 @@ module MultiJson
   # https://golang.org/src/encoding/json/decode.go and
   # https://golang.org/src/unicode/utf8/utf8.go
   module OkJson
-    Upstream = '44'
+    Upstream = '45'
     extend self
 
 
@@ -266,7 +266,7 @@ module MultiJson
 
 
     def numtok(s)
-      m = /-?([1-9][0-9]+|[0-9])([.][0-9]+)?([eE][+-]?[0-9]+)?/.match(s)
+      m = /(-?(?:[1-9][0-9]+|[0-9]))([.][0-9]+)?([eE][+-]?[0-9]+)?/.match(s)
       if m && m.begin(0) == 0
         if !m[2] && !m[3]
           [:val, m[0], Integer(m[0])]
