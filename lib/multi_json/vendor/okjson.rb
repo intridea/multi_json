@@ -26,10 +26,10 @@ require 'stringio'
 
 module MultiJson
   # Some parts adapted from
-  # http://golang.org/src/pkg/json/decode.go and
-  # http://golang.org/src/pkg/utf8/utf8.go
+  # https://golang.org/src/encoding/json/decode.go and
+  # https://golang.org/src/unicode/utf8/utf8.go
   module OkJson
-    Upstream = '43'
+    Upstream = '44'
     extend self
 
 
@@ -273,7 +273,7 @@ module MultiJson
         elsif m[2]
           [:val, m[0], Float(m[0])]
         else
-          [:val, m[0], Integer(m[1])*(10**Integer(m[3][1..-1]))]
+          [:val, m[0], Integer(m[1])*(10**m[3][1..-1].to_i(10))]
         end
       else
         []
