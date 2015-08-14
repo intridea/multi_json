@@ -41,14 +41,14 @@ end
 
 def break_requirements
   requirements = MultiJson::REQUIREMENT_MAP
-  MultiJson::REQUIREMENT_MAP.each_with_index do |(library, adapter), index|
-    MultiJson::REQUIREMENT_MAP[index] = ["foo/#{library}", adapter]
+  MultiJson::REQUIREMENT_MAP.each_with_index do |(adapter, library), index|
+    MultiJson::REQUIREMENT_MAP[index] = [adapter, "foo/#{library}"]
   end
 
   yield
 ensure
-  requirements.each_with_index do |(library, adapter), index|
-    MultiJson::REQUIREMENT_MAP[index] = [library, adapter]
+  requirements.each_with_index do |(adapter, library), index|
+    MultiJson::REQUIREMENT_MAP[index] = [adapter, library]
   end
 end
 

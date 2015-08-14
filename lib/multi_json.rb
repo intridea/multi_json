@@ -30,12 +30,12 @@ module MultiJson
   ALIASES = {'jrjackson' => 'jr_jackson'}
 
   REQUIREMENT_MAP = [
-    ['oj',           :oj],
-    ['yajl',         :yajl],
-    ['jrjackson',    :jr_jackson],
-    ['json/ext',     :json_gem],
-    ['gson',         :gson],
-    ['json/pure',    :json_pure],
+    [:oj,         'oj'],
+    [:yajl,       'yajl'],
+    [:jr_jackson, 'jrjackson'],
+    [:json_gem,   'json/ext'],
+    [:gson,       'gson'],
+    [:json_pure,  'json/pure'],
   ]
 
   # The default adapter based on what you currently
@@ -49,7 +49,7 @@ module MultiJson
     return :json_gem if defined?(::JSON::JSON_LOADED)
     return :gson if defined?(::Gson)
 
-    REQUIREMENT_MAP.each do |library, adapter|
+    REQUIREMENT_MAP.each do |adapter, library|
       begin
         require library
         return adapter
