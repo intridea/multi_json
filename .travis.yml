@@ -1,4 +1,5 @@
 bundler_args: --without development
+cache: bundler
 language: ruby
 rvm:
   - jruby-18mode
