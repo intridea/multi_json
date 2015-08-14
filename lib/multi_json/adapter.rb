@@ -6,22 +6,21 @@ module MultiJson
     extend Options
     include Singleton
     class << self
-
       def defaults(action, value)
         metaclass = class << self; self; end
 
         metaclass.instance_eval do
-          define_method("default_#{action}_options"){ value }
+          define_method("default_#{action}_options") { value }
         end
       end
 
-      def load(string, options={})
-        raise self::ParseError if blank?(string)
+      def load(string, options = {})
+        fail self::ParseError if blank?(string)
         string = string.read if string.respond_to?(:read)
         instance.load(string, load_options(options).merge(MultiJson.load_options(options)).merge!(options))
       end
 
-      def dump(object, options={})
+      def dump(object, options = {})
         instance.dump(object, dump_options(options).merge(MultiJson.dump_options(options)).merge!(options))
       end
 
@@ -32,7 +31,6 @@ module MultiJson
       rescue ArgumentError # invalid byte sequence in UTF-8
         false
       end
-
     end
   end
 end

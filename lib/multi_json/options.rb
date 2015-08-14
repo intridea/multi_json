@@ -1,6 +1,5 @@
 module MultiJson
   module Options
-
     def load_options=(options)
       @load_options = options
     end
@@ -25,12 +24,12 @@ module MultiJson
       @default_dump_options ||= {}
     end
 
-    private
+  private
 
     def get_options(options, *args)
-      if options.respond_to?(:call) and options.arity
+      if options.respond_to?(:call) && options.arity
         options.arity == 0 ? options[] : options[*args]
-      elsif Hash === options or options.respond_to?(:to_hash)
+      elsif options.respond_to?(:to_hash)
         options.to_hash
       end
     end

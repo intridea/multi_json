@@ -10,12 +10,12 @@ module MultiJson
 
       ParseError = defined?(::Oj::ParseError) ? ::Oj::ParseError : SyntaxError
 
-      def load(string, options={})
+      def load(string, options = {})
         options[:symbol_keys] = options.delete(:symbolize_keys)
         ::Oj.load(string, options)
       end
 
-      def dump(object, options={})
+      def dump(object, options = {})
         options.merge!(:indent => 2) if options[:pretty]
         options[:indent] = options[:indent].to_i if options[:indent]
         ::Oj.dump(object, options)

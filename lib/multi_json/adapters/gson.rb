@@ -8,11 +8,11 @@ module MultiJson
     class Gson < Adapter
       ParseError = ::Gson::DecodeError
 
-      def load(string, options={})
+      def load(string, options = {})
         ::Gson::Decoder.new(options).decode(string)
       end
 
-      def dump(object, options={})
+      def dump(object, options = {})
         ::Gson::Encoder.new(options).encode(object)
       end
     end

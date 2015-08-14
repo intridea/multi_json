@@ -61,11 +61,9 @@ def simulate_no_adapters
 end
 
 def get_exception(exception_class = StandardError)
-  begin
-    yield
-  rescue exception_class => exception
-    exception
-  end
+  yield
+rescue exception_class => exception
+  exception
 end
 
 def with_default_options

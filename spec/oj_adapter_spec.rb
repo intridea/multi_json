@@ -10,10 +10,10 @@ describe MultiJson::Adapters::Oj do
 
   describe '.dump' do
     describe '#dump_options' do
-      around{ |example| with_default_options(&example) }
+      around { |example| with_default_options(&example) }
 
       it 'ensures indent is a Fixnum' do
-        expect{ MultiJson.dump(42, :indent => '')}.not_to raise_error
+        expect { MultiJson.dump(42, :indent => '') }.not_to raise_error
       end
     end
   end

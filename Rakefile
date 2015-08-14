@@ -16,7 +16,7 @@ namespace :adapters do
   end
 end
 
-task :spec => %w[base_spec adapters:oj adapters:yajl adapters:json_gem adapters:json_pure adapters:ok_json adapters:gson adapters:jr_jackson adapters:nsjsonserialization]
+task :spec => %w(base_spec adapters:oj adapters:yajl adapters:json_gem adapters:json_pure adapters:ok_json adapters:gson adapters:jr_jackson adapters:nsjsonserialization)
 
 task :default => :spec
 task :test => :spec

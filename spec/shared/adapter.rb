@@ -3,20 +3,19 @@
 require 'shared/options'
 
 shared_examples_for 'an adapter' do |adapter|
-
-  before{ MultiJson.use adapter }
+  before { MultiJson.use adapter }
 
   it_behaves_like 'has options', adapter
 
   it 'does not modify argument hashes' do
-    options = { :symbolize_keys => true, :pretty => false, :adapter => :ok_json }
-    expect{MultiJson.load('{}', options)}.to_not change{options}
-    expect{MultiJson.dump([42], options)}.to_not change{options}
+    options = {:symbolize_keys => true, :pretty => false, :adapter => :ok_json}
+    expect { MultiJson.load('{}', options) }.to_not change { options }
+    expect { MultiJson.dump([42], options) }.to_not change { options }
   end
 
   describe '.dump' do
     describe '#dump_options' do
-      before{ MultiJson.dump_options = MultiJson.adapter.dump_options = {} }
+      before { MultiJson.dump_options = MultiJson.adapter.dump_options = {} }
 
       after do
         expect(MultiJson.adapter.instance).to receive(:dump).with(1, :foo => 'bar', :fizz => 'buzz')
@@ -46,7 +45,7 @@ shared_examples_for 'an adapter' do |adapter|
         '2',
         true,
         false,
-        nil
+        nil,
       ]
 
       examples.each do |example|
@@ -56,13 +55,15 @@ shared_examples_for 'an adapter' do |adapter|
 
     unless 'json_pure' == adapter || 'json_gem' == adapter
       it 'dumps time in correct format' do
-        time = Time.at(1355218745).utc
+        time = Time.at(1_355_218_745).utc
 
         dumped_json = MultiJson.dump(time)
-        expected = if RUBY_VERSION > '1.9'
-          '2012-12-11 09:39:05 UTC'
-        else
-          'Tue Dec 11 09:39:05 UTC 2012'
+        expected = begin
+          if RUBY_VERSION > '1.9'
+            '2012-12-11 09:39:05 UTC'
+          else
+            'Tue Dec 11 09:39:05 UTC 2012'
+          end
         end
         expect(MultiJson.load(dumped_json)).to eq(expected)
       end
@@ -84,8 +85,8 @@ shared_examples_for 'an adapter' do |adapter|
         ],
         [
           {1 => {2 => {3 => 'bar'}}},
-          {'1' => {'2' => {'3' => 'bar'}}}
-        ]
+          {'1' => {'2' => {'3' => 'bar'}}},
+        ],
       ].each do |example, expected|
         dumped_json = MultiJson.dump(example)
         expect(MultiJson.load(dumped_json)).to eq(expected)
@@ -98,7 +99,7 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'passes options to the adapter' do
-      expect(MultiJson.adapter).to receive(:dump).with('foo', {:bar => :baz})
+      expect(MultiJson.adapter).to receive(:dump).with('foo', :bar => :baz)
       MultiJson.dump('foo', :bar => :baz)
     end
 
@@ -123,7 +124,7 @@ shared_examples_for 'an adapter' do |adapter|
 
   describe '.load' do
     describe '#load_options' do
-      before{ MultiJson.load_options = MultiJson.adapter.load_options = {} }
+      before { MultiJson.load_options = MultiJson.adapter.load_options = {} }
 
       after do
         expect(MultiJson.adapter.instance).to receive(:load).with('1', :foo => 'bar', :fizz => 'buzz')
@@ -146,22 +147,21 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'does not modify input' do
-      input = %Q{\n\n  {"foo":"bar"} \n\n\t}
-      expect{
+      input = %(\n\n  {"foo":"bar"} \n\n\t)
+      expect do
         MultiJson.load(input)
-      }.to_not change{ input }
+      end.to_not change { input }
     end
 
     # Ruby 1.8 doesn't support String encodings
     if RUBY_VERSION > '1.9'
       it 'does not modify input encoding' do
-
         input = '[123]'
         input.force_encoding('iso-8859-1')
 
-        expect{
+        expect do
           MultiJson.load(input)
-        }.to_not change{ input.encoding }
+        end.to_not change { input.encoding }
       end
     end
 
@@ -175,31 +175,30 @@ shared_examples_for 'an adapter' do |adapter|
           pending 'GSON bug: https://github.com/avsej/gson.rb/issues/3' if adapter.name =~ /Gson/
         end
 
-        expect{MultiJson.load(input)}.to raise_error(MultiJson::ParseError)
+        expect { MultiJson.load(input) }.to raise_error(MultiJson::ParseError)
       end
     end
 
     it 'raises MultiJson::ParseError with data on invalid JSON' do
       data = '{invalid}'
-      exception = get_exception(MultiJson::ParseError){ MultiJson.load data }
+      exception = get_exception(MultiJson::ParseError) { MultiJson.load data }
       expect(exception.data).to eq(data)
       expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
     end
 
     it 'catches MultiJson::DecodeError for legacy support' do
       data = '{invalid}'
-      exception = get_exception(MultiJson::DecodeError){ MultiJson.load data }
+      exception = get_exception(MultiJson::DecodeError) { MultiJson.load data }
       expect(exception.data).to eq(data)
       expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
     end
 
     it 'catches MultiJson::LoadError for legacy support' do
       data = '{invalid}'
-      exception = get_exception(MultiJson::LoadError){ MultiJson.load data }
+      exception = get_exception(MultiJson::LoadError) { MultiJson.load data }
       expect(exception.data).to eq(data)
       expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
     end
-
 
     it 'stringifys symbol keys when encoding' do
       dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})
@@ -225,7 +224,7 @@ shared_examples_for 'an adapter' do |adapter|
         [
           '{"abc":[{"def":"hgi"}]}',
           {:abc => [{:def => 'hgi'}]},
-        ]
+        ],
       ].each do |example, expected|
         expect(MultiJson.load(example, :symbolize_keys => true)).to eq(expected)
       end

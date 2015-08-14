@@ -1,8 +1,8 @@
 shared_examples_for 'JSON-like adapter' do |adapter|
-  before{ MultiJson.use adapter }
+  before { MultiJson.use adapter }
 
   describe '.dump' do
-    before{ MultiJson.dump_options = MultiJson.adapter.dump_options = nil }
+    before { MultiJson.dump_options = MultiJson.adapter.dump_options = nil }
 
     describe 'with :pretty option set to true' do
       it 'passes default pretty options' do
@@ -23,7 +23,7 @@ shared_examples_for 'JSON-like adapter' do |adapter|
 
   describe '.load' do
     it 'passes :quirks_mode option' do
-      expect(::JSON).to receive(:parse).with('[123]', {:quirks_mode => false, :create_additions => false})
+      expect(::JSON).to receive(:parse).with('[123]', :quirks_mode => false, :create_additions => false)
       MultiJson.load('[123]', :quirks_mode => false)
     end
   end
