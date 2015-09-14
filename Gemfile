@@ -17,7 +17,7 @@ end
 
 platforms :jruby do
   gem 'gson', '>= 0.6', :require => nil
-  gem 'jrjackson', '~> 0.3.2', :require => nil
+  gem 'jrjackson', '~> 0.3.4', :require => nil
 end
 
 platforms :mingw, :mswin, :ruby do
