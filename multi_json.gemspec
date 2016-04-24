@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
   spec.name          = 'multi_json'
   spec.require_path  = 'lib'
-  spec.signing_key   = File.expand_path('~/.gem/private_key.pem') if $PROGRAM_NAME =~ /gem\z/
+  spec.signing_key   = File.expand_path('~/.ssh/gem-private_key.pem') if $PROGRAM_NAME =~ /gem\z/
   spec.version       = MultiJson::Version
 
   spec.required_rubygems_version = '>= 1.3.5'
