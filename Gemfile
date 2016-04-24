@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rake', '>= 0.9'
+gem 'rake', '~> 10.5'
 gem 'yard', '>= 0.8'
 
 gem 'json',      '~> 1.4', :require => nil
