@@ -72,7 +72,7 @@ implementations:
 * Ruby 1.9.2
 * Ruby 1.9.3
 * Ruby 2.0.0
-* Ruby 2.1.9
+* Ruby 2.1
 * Ruby 2.2.4
 * Ruby 2.3.0
 * [JRuby][]
