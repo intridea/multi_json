@@ -74,6 +74,7 @@ implementations:
 * Ruby 2.0.0
 * Ruby 2.1.1
 * Ruby 2.2.0
+* Ruby 2.3.0
 * [JRuby][]
 * [Rubinius][]
 * [MacRuby][] (not tested on Travis CI)
