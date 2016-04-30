@@ -141,6 +141,7 @@ module MultiJson
   def with_adapter(new_adapter)
     old_adapter = adapter
     self.adapter = new_adapter
+    self.adapter.clear_cached_options
     yield
   ensure
     self.adapter = old_adapter

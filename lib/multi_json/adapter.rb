@@ -5,6 +5,11 @@ module MultiJson
   class Adapter
     extend Options
     include Singleton
+
+    def initialize
+      Adapter.clear_cached_options
+    end
+
     class << self
       def defaults(action, value)
         metaclass = class << self; self; end
@@ -17,11 +22,16 @@ module MultiJson
       def load(string, options = {})
         fail self::ParseError if blank?(string)
         string = string.read if string.respond_to?(:read)
-        instance.load(string, load_options(options).merge(MultiJson.load_options(options)).merge!(options))
+        instance.load(string, cached_load_options(options))
       end
 
       def dump(object, options = {})
-        instance.dump(object, dump_options(options).merge(MultiJson.dump_options(options)).merge!(options))
+        instance.dump(object, cached_dump_options(options))
+      end
+
+      def clear_cached_options
+        @@cached_dump_options = {}
+        @@cached_load_options = {}
       end
 
     private
@@ -30,6 +40,14 @@ module MultiJson
         input.nil? || /\A\s*\z/ === input
       rescue ArgumentError # invalid byte sequence in UTF-8
         false
+      end
+
+      def cached_dump_options(options)
+        @@cached_dump_options[options] ||= @@cached_dump_options[options] = dump_options(options).merge(MultiJson.dump_options(options)).merge!(options)
+      end
+
+      def cached_load_options(options)
+        @@cached_load_options[options] ||= @@cached_load_options[options] = load_options(options).merge(MultiJson.load_options(options)).merge!(options)
       end
     end
   end
