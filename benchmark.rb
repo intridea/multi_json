@@ -1,4 +1,3 @@
-# x.rb
 require 'oj'
 require 'multi_json'
 require 'benchmark/ips'
