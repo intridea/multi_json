@@ -7,6 +7,7 @@ gem 'json',      '~> 1.4', :require => nil
 gem 'json_pure', '~> 1.4', :require => nil
 
 group :development do
+  gem 'benchmark-ips'
   gem 'kramdown', '>= 0.14'
   gem 'pry'
 end
