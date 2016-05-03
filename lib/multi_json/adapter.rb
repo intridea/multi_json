@@ -6,10 +6,6 @@ module MultiJson
     extend Options
     include Singleton
 
-    def initialize
-      Adapter.clear_cached_options
-    end
-
     class << self
       def defaults(action, value)
         metaclass = class << self; self; end
@@ -29,11 +25,6 @@ module MultiJson
         instance.dump(object, cached_dump_options(options))
       end
 
-      def clear_cached_options
-        @@cached_dump_options = {}
-        @@cached_load_options = {}
-      end
-
     private
 
       def blank?(input)
@@ -43,11 +34,15 @@ module MultiJson
       end
 
       def cached_dump_options(options)
-        @@cached_dump_options[options] ||= @@cached_dump_options[options] = dump_options(options).merge(MultiJson.dump_options(options)).merge!(options)
+        OptionsCache.fetch(:dump, options) do
+          dump_options(options).merge(MultiJson.dump_options(options)).merge!(options)
+        end
       end
 
       def cached_load_options(options)
-        @@cached_load_options[options] ||= @@cached_load_options[options] = load_options(options).merge(MultiJson.load_options(options)).merge!(options)
+        OptionsCache.fetch(:load, options) do
+          load_options(options).merge(MultiJson.load_options(options)).merge!(options)
+        end
       end
     end
   end

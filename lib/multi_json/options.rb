@@ -1,13 +1,13 @@
 module MultiJson
   module Options
     def load_options=(options)
+      OptionsCache.reset
       @load_options = options
-      MultiJson::Adapter.clear_cached_options
     end
 
     def dump_options=(options)
+      OptionsCache.reset
       @dump_options = options
-      MultiJson::Adapter.clear_cached_options
     end
 
     def load_options(*args)

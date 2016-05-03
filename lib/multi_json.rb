@@ -2,6 +2,7 @@ require 'multi_json/options'
 require 'multi_json/version'
 require 'multi_json/adapter_error'
 require 'multi_json/parse_error'
+require 'multi_json/options_cache'
 
 module MultiJson
   include Options
@@ -88,6 +89,8 @@ module MultiJson
   # * <tt>:jr_jackson</tt> (JRuby only)
   def use(new_adapter)
     @adapter = load_adapter(new_adapter)
+  ensure
+    OptionsCache.reset
   end
   alias_method :adapter=, :use
   alias_method :engine=, :use
@@ -141,7 +144,6 @@ module MultiJson
   def with_adapter(new_adapter)
     old_adapter = adapter
     self.adapter = new_adapter
-    self.adapter.clear_cached_options
     yield
   ensure
     self.adapter = old_adapter
