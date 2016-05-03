@@ -1,3 +1,8 @@
+1.12.0
+------
+
+* [Introduce global options cache to improve peroformance](https://github.com/intridea/multi_json/commit/7aaef2a1bc2b83c95e4208b12dad5d1d87ff20a6)
+
 1.11.2
 ------
 
