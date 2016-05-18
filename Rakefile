@@ -3,7 +3,7 @@ Bundler::GemHelper.install_tasks
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:base_spec) do |task|
-  task.pattern = 'spec/multi_json_spec.rb'
+  task.pattern = 'spec/multi_json_spec.rb,spec/options_cache_spec.rb'
 end
 
 namespace :adapters do
