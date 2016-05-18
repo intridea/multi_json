@@ -1,3 +1,8 @@
+1.12.1
+------
+
+* [Prevent meory leak in OptionsCache](https://github.com/intridea/multi_json/commit/aa7498199ad272f3d4a13750d7c568a66047e2ee)
+
 1.12.0
 ------
 
