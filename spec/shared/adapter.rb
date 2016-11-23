@@ -170,7 +170,7 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'raises MultiJson::ParseError on blank input or invalid input' do
-      [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF"].each do |input|
+      [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF", StringIO.new('')].each do |input|
         if input == "\x82\xAC\xEF"
           pending 'GSON bug: https://github.com/avsej/gson.rb/issues/3' if adapter.name =~ /Gson/
         end
