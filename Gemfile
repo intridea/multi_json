@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'rake', '~> 10.5'
 gem 'yard', '>= 0.8'
 
-gem 'json',      '~> 1.4', :require => nil
-gem 'json_pure', '~> 1.4', :require => nil
+gem 'json',      '~> 2.0', :require => nil
+gem 'json_pure', '~> 2.0', :require => nil
 
 group :development do
   gem 'benchmark-ips'
@@ -22,8 +22,8 @@ platforms :jruby do
 end
 
 platforms :mingw, :mswin, :ruby do
-  gem 'oj', '~> 2.9', :require => nil
-  gem 'yajl-ruby', '~> 1.0', :require => nil
+  gem 'oj', '~> 2.18', :require => nil
+  gem 'yajl-ruby', '~> 1.3', :require => nil
 end
 
 gemspec
