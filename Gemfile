@@ -3,8 +3,13 @@ source 'https://rubygems.org'
 gem 'rake', '~> 10.5'
 gem 'yard', '>= 0.8'
 
-gem 'json',      '~> 2.0', :require => nil
-gem 'json_pure', '~> 2.0', :require => nil
+if RUBY_VERSION > '2.0'
+  gem 'json',      '~> 2.0', :require => nil
+  gem 'json_pure', '~> 2.0', :require => nil
+else
+  gem 'json',      '~> 1.8', :require => nil
+  gem 'json_pure', '~> 1.8', :require => nil
+end
 
 group :development do
   gem 'benchmark-ips'
