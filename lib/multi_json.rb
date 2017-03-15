@@ -3,10 +3,13 @@ require 'multi_json/version'
 require 'multi_json/adapter_error'
 require 'multi_json/parse_error'
 require 'multi_json/options_cache'
+require 'thread'
 
 module MultiJson
   include Options
   extend self
+
+  @@require_mutex = Mutex.new
 
   def default_options=(value)
     Kernel.warn "MultiJson.default_options setter is deprecated\n" \
@@ -154,7 +157,9 @@ private
 
   def load_adapter_from_string_name(name)
     name = ALIASES.fetch(name, name)
-    require "multi_json/adapters/#{name.downcase}"
+    @@require_mutex.synchronize do
+      require "multi_json/adapters/#{name.downcase}"
+    end
     klass_name = name.to_s.split('_').map(&:capitalize) * ''
     MultiJson::Adapters.const_get(klass_name)
   end
