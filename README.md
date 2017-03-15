@@ -24,7 +24,7 @@ MultiJson.dump({:abc => 'def'}) # convert Ruby back to JSON
 MultiJson.dump({:abc => 'def'}, :pretty => true) # encoded in a pretty form (if supported by the coder)
 ```
 
-When loading invalid JSON, MultiJson will throw a `MultiJson::ParseError`. `MultiJson::DecodeError` and `MultiJson::LoadError` are aliases for backwards compatibility.
+When loading invalid JSON, MultiJSON will throw a `MultiJson::ParseError`. `MultiJson::DecodeError` and `MultiJson::LoadError` are aliases for backwards compatibility.
 
 ```ruby
 begin
@@ -38,11 +38,11 @@ end
 `ParseError` instance has `cause` reader which contains the original exception.
 It also has `data` reader with the input that caused the problem.
 
-The `use` method, which sets the MultiJson adapter, takes either a symbol or a
+The `use` method, which sets the MultiJSON adapter, takes either a symbol or a
 class (to allow for custom JSON parsers) that responds to both `.load` and `.dump`
 at the class level.
 
-When MultiJson fails to load the specified adapter, it'll throw `MultiJson::AdapterError`
+When MultiJSON fails to load the specified adapter, it'll throw `MultiJson::AdapterError`
 which inherits from `ArgumentError`.
 
 MultiJSON tries to have intelligent defaulting. That is, if you have any of the
@@ -75,6 +75,7 @@ implementations:
 * Ruby 2.1
 * Ruby 2.2.4
 * Ruby 2.3.1
+* Ruby 2.4.0
 * [JRuby][]
 * [Rubinius][]
 * [MacRuby][] (not tested on Travis CI)
@@ -83,7 +84,7 @@ implementations:
 [rubinius]: http://rubini.us/
 [macruby]: http://www.macruby.org/
 
-If something doesn't work on one of these interpreters, it's a bug.
+If something doesn't work in one of these implementations, it's a bug.
 
 This library may inadvertently work (or seem to work) on other Ruby
 implementations, however support will only be provided for the versions listed
