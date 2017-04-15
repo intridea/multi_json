@@ -17,6 +17,8 @@ group :development do
   gem 'pry'
 end
 
+gemspec
+
 group :test do
   gem 'rspec', '>= 2.14'
 end
@@ -31,4 +33,4 @@ platforms :mingw, :mswin, :ruby do
   gem 'yajl-ruby', '~> 1.3', :require => nil
 end
 
-gemspec
+
