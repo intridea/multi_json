@@ -1,3 +1,8 @@
+1.12.2
+------
+
+* [Renew gem certificate](https://github.com/intridea/multi_json/commit/57922d898c6eb587cc9a28ba5724c11e81724700)
+
 1.12.1
 ------
 
