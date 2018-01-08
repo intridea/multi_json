@@ -169,12 +169,13 @@ shared_examples_for 'an adapter' do |adapter|
       expect(MultiJson.load('{"abc":"def"}')).to eq('abc' => 'def')
     end
 
-    it 'raises MultiJson::ParseError on blank input or invalid input' do
-      [nil, '{"abc"}', ' ', "\t\t\t", "\n", "\x82\xAC\xEF", StringIO.new('')].each do |input|
-        if input == "\x82\xAC\xEF"
-          pending 'GSON bug: https://github.com/avsej/gson.rb/issues/3' if adapter.name =~ /Gson/
-        end
+    examples = [nil, '{"abc"}', ' ', "\t\t\t", "\n", StringIO.new('')]
+    #
+    # GSON bug: https://github.com/avsej/gson.rb/issues/3
+    examples << "\x82\xAC\xEF" unless adapter.name =~ /Gson/
 
+    examples.each do |input|
+      it "raises MultiJson::ParseError on invalid input: #{input.inspect}" do
         expect { MultiJson.load(input) }.to raise_error(MultiJson::ParseError)
       end
     end
@@ -183,21 +184,21 @@ shared_examples_for 'an adapter' do |adapter|
       data = '{invalid}'
       exception = get_exception(MultiJson::ParseError) { MultiJson.load data }
       expect(exception.data).to eq(data)
-      expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
+      expect(exception.cause).to match(MultiJson.adapter::ParseError)
     end
 
     it 'catches MultiJson::DecodeError for legacy support' do
       data = '{invalid}'
       exception = get_exception(MultiJson::DecodeError) { MultiJson.load data }
       expect(exception.data).to eq(data)
-      expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
+      expect(exception.cause).to match(MultiJson.adapter::ParseError)
     end
 
     it 'catches MultiJson::LoadError for legacy support' do
       data = '{invalid}'
       exception = get_exception(MultiJson::LoadError) { MultiJson.load data }
       expect(exception.data).to eq(data)
-      expect(exception.cause).to be_kind_of(MultiJson.adapter::ParseError)
+      expect(exception.cause).to match(MultiJson.adapter::ParseError)
     end
 
     it 'stringifys symbol keys when encoding' do
