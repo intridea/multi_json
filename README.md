@@ -72,10 +72,10 @@ implementations:
 * Ruby 1.9.2
 * Ruby 1.9.3
 * Ruby 2.0.0
-* Ruby 2.1
-* Ruby 2.2.8
-* Ruby 2.3.5
-* Ruby 2.4.2
+* Ruby 2.1.10
+* Ruby 2.2.9
+* Ruby 2.4.3
+* Ruby 2.5.0
 * [JRuby][]
 * [Rubinius][]
 * [MacRuby][] (not tested on Travis CI)
