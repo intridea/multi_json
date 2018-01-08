@@ -102,7 +102,7 @@ spec.add_dependency 'multi_json', '~> 1.0'
 ```
 
 ## Copyright
-Copyright (c) 2010-2013 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
+Copyright (c) 2010-2018 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
 and Pavel Pravosud. See [LICENSE][] for details.
 
 [codeclimate]: https://codeclimate.com/github/intridea/multi_json
