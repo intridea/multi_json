@@ -52,7 +52,7 @@ MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 * [Yajl][yajl] Yet Another JSON Library by Brian Lopez
 * [JSON][json-gem] The default JSON gem with C-extensions (ships with Ruby 1.9+)
 * [JSON Pure][json-gem] A Ruby variant of the JSON gem
-* [NSJSONSerialization][nsjon] Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
+* [NSJSONSerialization][nsjson] Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
 * [gson.rb][gson] A Ruby wrapper for google-gson library (JRuby only)
 * [JrJackson][jrjackson] JRuby wrapper for Jackson (JRuby only)
 * [OkJson][okjson] A simple, vendorable JSON parser
