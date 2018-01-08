@@ -5,11 +5,6 @@
 [![Dependency Status](http://img.shields.io/gemnasium/intridea/multi_json.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/intridea/multi_json.svg)][codeclimate]
 
-[gem]: https://rubygems.org/gems/multi_json
-[travis]: http://travis-ci.org/intridea/multi_json
-[gemnasium]: https://gemnasium.com/intridea/multi_json
-[codeclimate]: https://codeclimate.com/github/intridea/multi_json
-
 Lots of Ruby libraries parse JSON and everyone has their favorite JSON coder.
 Instead of choosing a single JSON coder and forcing users of your library to be
 stuck with it, you can use MultiJSON instead, which will simply choose the
@@ -51,17 +46,15 @@ load any. When loading, libraries are ordered by speed. First Oj, then Yajl,
 then the JSON gem, then JSON pure. If no other JSON library is available,
 MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 
-[okjson]: https://github.com/kr/okjson
-
 ## Supported JSON Engines
 
-* [Oj](https://github.com/ohler55/oj) Optimized JSON by Peter Ohler
-* [Yajl](https://github.com/brianmario/yajl-ruby) Yet Another JSON Library by Brian Lopez
-* [JSON](https://github.com/flori/json) The default JSON gem with C-extensions (ships with Ruby 1.9)
-* [JSON Pure](https://github.com/flori/json) A Ruby variant of the JSON gem
-* [NSJSONSerialization](https://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html) Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
-* [gson.rb](https://github.com/avsej/gson.rb) A Ruby wrapper for google-gson library (JRuby only)
-* [JrJackson](https://github.com/guyboertje/jrjackson) JRuby wrapper for Jackson (JRuby only)
+* [Oj][oj] Optimized JSON by Peter Ohler
+* [Yajl][yajl] Yet Another JSON Library by Brian Lopez
+* [JSON][json-gem] The default JSON gem with C-extensions (ships with Ruby 1.9+)
+* [JSON Pure][json-gem] A Ruby variant of the JSON gem
+* [NSJSONSerialization][nsjon] Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
+* [gson.rb][gson] A Ruby wrapper for google-gson library (JRuby only)
+* [JrJackson][jrjackson] JRuby wrapper for Jackson (JRuby only)
 * [OkJson][okjson] A simple, vendorable JSON parser
 
 ## Supported Ruby Versions
@@ -79,10 +72,6 @@ implementations:
 * [JRuby][]
 * [Rubinius][]
 * [MacRuby][] (not tested on Travis CI)
-
-[jruby]: http://www.jruby.org/
-[rubinius]: http://rubini.us/
-[macruby]: http://www.macruby.org/
 
 If something doesn't work in one of these implementations, it's a bug.
 
@@ -112,11 +101,25 @@ Constraint][pvc] with two digits of precision. For example:
 spec.add_dependency 'multi_json', '~> 1.0'
 ```
 
-[semver]: http://semver.org/
-[pvc]: http://docs.rubygems.org/read/chapter/16#page74
-
 ## Copyright
 Copyright (c) 2010-2013 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
 and Pavel Pravosud. See [LICENSE][] for details.
 
+[codeclimate]: https://codeclimate.com/github/intridea/multi_json
+[gem]: https://rubygems.org/gems/multi_json
+[gemnasium]: https://gemnasium.com/intridea/multi_json
+[gson]: https://github.com/avsej/gson.rb
+[jrjackson]: https://github.com/guyboertje/jrjackson
+[jruby]: http://www.jruby.org/
+[json-gem]: https://github.com/flori/json
+[json-pure]: https://github.com/flori/json
 [license]: LICENSE.md
+[macruby]: http://www.macruby.org/
+[nsjson]: https://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html
+[oj]: https://github.com/ohler55/oj
+[okjson]: https://github.com/kr/okjson
+[pvc]: http://docs.rubygems.org/read/chapter/16#page74
+[rubinius]: http://rubini.us/
+[semver]: http://semver.org/
+[travis]: http://travis-ci.org/intridea/multi_json
+[yajl]: https://github.com/brianmario/yajl-ruby
