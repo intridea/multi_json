@@ -122,6 +122,8 @@ module MultiJson
       adapter.load(string, options)
     rescue adapter::ParseError => exception
       raise ParseError.build(exception, string)
+    rescue JSON::ParserError => exception
+      raise ParseError.build(exception, string)
     end
   end
   alias_method :decode, :load
