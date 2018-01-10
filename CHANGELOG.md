@@ -1,3 +1,8 @@
+1.13.1
+------
+
+* [Fix missing stdlib set dependency in oj adapter](https://github.com/intridea/multi_json/commit/c4ff66e7bee6fb4f45e54429813d7fada1c152b8)
+
 1.13.0
 -----
 
