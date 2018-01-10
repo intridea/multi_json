@@ -1,3 +1,8 @@
+1.13.0
+-----
+
+* [Make Oj adapter handle JSON::ParseError correctly](https://github.com/intridea/multi_json/commit/275e3ffd8169797c510d23d9ef5b8b07e64c3b42)
+
 1.12.2
 ------
 
