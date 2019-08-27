@@ -23,28 +23,28 @@ matrix:
     dist: trusty
     env: SKIP_ADAPTERS=oj,yajl,nsjsonserialization
   - rvm: 2.0
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-0
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: 2.1
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-0
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: 2.2
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-0
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: 2.3
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: 2.4
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: 2.5
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: 2.6
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: ruby-head
-    gemfile: gemfiles/gemfile-2
+    gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: jruby-9000
     gemfile: gemfiles/gemfile-2-jruby

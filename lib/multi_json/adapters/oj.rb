@@ -34,10 +34,29 @@ module MultiJson
         ::Oj.load(string, options)
       end
 
-      def dump(object, options = {})
-        options.merge!(:indent => 2) if options[:pretty]
-        options[:indent] = options[:indent].to_i if options[:indent]
-        ::Oj.dump(object, options)
+      case ::Oj::VERSION
+      when /\A2\./
+        def dump(object, options = {})
+          options.merge!(:indent => 2) if options[:pretty]
+          options[:indent] = options[:indent].to_i if options[:indent]
+          ::Oj.dump(object, options)
+        end
+      when /\A3\./
+        PRETTY_STATE_PROTOTYPE = {
+          :indent                => "  ",
+          :space                 => " ",
+          :space_before          => "",
+          :object_nl             => "\n",
+          :array_nl              => "\n",
+          :ascii_only            => false,
+        }
+
+        def dump(object, options = {})
+          options.merge!(PRETTY_STATE_PROTOTYPE.dup) if options.delete(:pretty)
+          ::Oj.dump(object, options)
+        end
+      else
+        fail "Unsupported Oj version: #{::Oj::VERSION}"
       end
     end
   end
