@@ -16,5 +16,5 @@ Gem::Specification.new do |spec|
   spec.version       = MultiJson::Version
 
   spec.required_rubygems_version = ">= 1.3.5"
-  spec.add_development_dependency "bundler", "~> 1.0"
+  spec.add_development_dependency "bundler", "> 1.0"
 end
