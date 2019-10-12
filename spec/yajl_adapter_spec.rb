@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-exit true if jruby?
+exit 0 if skip_adapter?('yajl')
 
 require 'shared/adapter'
 require 'multi_json/adapters/yajl'

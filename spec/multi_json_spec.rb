@@ -54,8 +54,10 @@ describe MultiJson do
     # Clear cache variable already set by previous tests
     MultiJson.send(:remove_instance_variable, :@adapter) if MultiJson.instance_variable_defined?(:@adapter)
 
-    if jruby?
+    if jruby? && !skip_adapter?('jr_jackson')
       expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JrJackson')
+    elsif jruby?
+      expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JsonGem')      
     else
       expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::Oj')
     end
@@ -126,41 +128,14 @@ describe MultiJson do
   end
 
   it 'JSON gem does not create symbols on parse' do
+    skip 'breaks in JRuby' if jruby?
+
     MultiJson.with_engine(:json_gem) do
       MultiJson.load('{"json_class":"ZOMG"}')
 
       expect do
         MultiJson.load('{"json_class":"OMG"}')
       end.to_not change { Symbol.all_symbols.count }
-    end
-  end
-
-  unless jruby?
-    it 'Oj does not create symbols on parse' do
-      MultiJson.with_engine(:oj) do
-        MultiJson.load('{"json_class":"ZOMG"}')
-
-        expect do
-          MultiJson.load('{"json_class":"OMG"}')
-        end.to_not change { Symbol.all_symbols.count }
-      end
-    end
-
-    context 'with Oj.default_settings' do
-      around do |example|
-        options = Oj.default_options
-        Oj.default_options = {:symbol_keys => true}
-        MultiJson.with_engine(:oj) { example.call }
-        Oj.default_options = options
-      end
-
-      it 'ignores global settings' do
-        MultiJson.with_engine(:oj) do
-          example = '{"a": 1, "b": 2}'
-          expected = {'a' => 1, 'b' => 2}
-          expect(MultiJson.load(example)).to eq(expected)
-        end
-      end
     end
   end
 
@@ -182,7 +157,7 @@ describe MultiJson do
   it_behaves_like 'has options', MultiJson
 
   describe 'aliases' do
-    if jruby?
+    unless skip_adapter?('jr_jackson')
       describe 'jrjackson' do
         after { expect(MultiJson.adapter).to eq(MultiJson::Adapters::JrJackson) }
 

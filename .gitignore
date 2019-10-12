@@ -21,7 +21,7 @@ log
 *.gem
 .bundle
 pkg
-Gemfile.lock
+gemfiles/*.lock
 
 ## RBENV
 .ruby-version

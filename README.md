@@ -60,17 +60,15 @@ MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 This library aims to support and is [tested against][travis] the following Ruby
 implementations:
 
-* Ruby 1.8.7
-* Ruby 1.9.2
-* Ruby 1.9.3
-* Ruby 2.0.0
-* Ruby 2.1.10
-* Ruby 2.2.9
-* Ruby 2.4.3
-* Ruby 2.5.0
+* Ruby 1.8
+* Ruby 1.9
+* Ruby 2.0
+* Ruby 2.1
+* Ruby 2.2
+* Ruby 2.4
+* Ruby 2.5
+* Ruby 2.6
 * [JRuby][]
-* [Rubinius][]
-* [MacRuby][] (not tested on Travis CI)
 
 If something doesn't work in one of these implementations, it's a bug.
 
@@ -106,7 +104,6 @@ and Pavel Pravosud. See [LICENSE][] for details.
 
 [codeclimate]: https://codeclimate.com/github/intridea/multi_json
 [gem]: https://rubygems.org/gems/multi_json
-[gemnasium]: https://gemnasium.com/intridea/multi_json
 [gson]: https://github.com/avsej/gson.rb
 [jrjackson]: https://github.com/guyboertje/jrjackson
 [jruby]: http://www.jruby.org/
@@ -118,7 +115,6 @@ and Pavel Pravosud. See [LICENSE][] for details.
 [oj]: https://github.com/ohler55/oj
 [okjson]: https://github.com/kr/okjson
 [pvc]: http://docs.rubygems.org/read/chapter/16#page74
-[rubinius]: http://rubini.us/
 [semver]: http://semver.org/
 [travis]: http://travis-ci.org/intridea/multi_json
 [yajl]: https://github.com/brianmario/yajl-ruby

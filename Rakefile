@@ -3,7 +3,7 @@ Bundler::GemHelper.install_tasks
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:base_spec) do |task|
-  task.pattern = 'spec/multi_json_spec.rb,spec/options_cache_spec.rb'
+  task.pattern = 'spec/{multi_json,options_cache}_spec.rb'
 end
 
 namespace :adapters do
@@ -16,10 +16,17 @@ namespace :adapters do
   end
 end
 
-task :spec => %w(base_spec adapters:oj adapters:yajl adapters:json_gem adapters:json_pure adapters:ok_json adapters:gson adapters:jr_jackson adapters:nsjsonserialization)
+task :spec => %w[
+  base_spec
+  adapters:oj
+  adapters:yajl
+  adapters:json_gem
+  adapters:json_pure
+  adapters:ok_json
+  adapters:gson
+  adapters:jr_jackson
+  adapters:nsjsonserialization
+]
 
 task :default => :spec
 task :test => :spec
-
-require 'yard'
-YARD::Rake::YardocTask.new

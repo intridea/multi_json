@@ -22,6 +22,10 @@ def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
 
+def skip_adapter?(adapter_name)
+  ENV.fetch("SKIP_ADAPTERS", "").split(",").include?(adapter_name)
+end
+
 def undefine_constants(*consts)
   values = {}
   consts.each do |const|

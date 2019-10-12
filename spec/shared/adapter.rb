@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'shared/options'
+require 'stringio'
 
 shared_examples_for 'an adapter' do |adapter|
   before { MultiJson.use adapter }
@@ -184,21 +185,21 @@ shared_examples_for 'an adapter' do |adapter|
       data = '{invalid}'
       exception = get_exception(MultiJson::ParseError) { MultiJson.load data }
       expect(exception.data).to eq(data)
-      expect(exception.cause).to match(MultiJson.adapter::ParseError)
+      expect(exception.cause).to match(adapter::ParseError)
     end
 
     it 'catches MultiJson::DecodeError for legacy support' do
       data = '{invalid}'
       exception = get_exception(MultiJson::DecodeError) { MultiJson.load data }
       expect(exception.data).to eq(data)
-      expect(exception.cause).to match(MultiJson.adapter::ParseError)
+      expect(exception.cause).to match(adapter::ParseError)
     end
 
     it 'catches MultiJson::LoadError for legacy support' do
       data = '{invalid}'
       exception = get_exception(MultiJson::LoadError) { MultiJson.load data }
       expect(exception.data).to eq(data)
-      expect(exception.cause).to match(MultiJson.adapter::ParseError)
+      expect(exception.cause).to match(adapter::ParseError)
     end
 
     it 'stringifys symbol keys when encoding' do

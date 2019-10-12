@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+gem "json",      "~> 2.0",  require: false
+gem "json_pure", "~> 2.0",  require: false
+gem "gson",      ">= 0.6",   require: false
+
+gemspec path: ".."

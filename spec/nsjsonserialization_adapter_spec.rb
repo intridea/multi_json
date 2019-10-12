@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-exit true unless macruby?
+exit 0 if skip_adapter?("nsjsonserialization")
 
 require 'shared/adapter'
 require 'multi_json/adapters/nsjsonserialization'

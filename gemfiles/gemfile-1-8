@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+gem "json",      "~> 1.8",  :require => false
+gem "json_pure", "~> 1.8",  :require => false
+gem "oj",        "~> 2.18", :require => false
+
+gemspec :path => ".."

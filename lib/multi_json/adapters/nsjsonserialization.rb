@@ -1,3 +1,6 @@
+# This adapter is here for legacy reasons. We can't really test it, so it's hard
+# to tell if it's even working properly. If you're still using it, please
+# consider migrating to any other adapter out there.
 framework 'Foundation'
 require 'multi_json/adapters/ok_json'
 
