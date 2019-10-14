@@ -1,3 +1,9 @@
+1.14.0
+------
+
+* [Fix a warning in Ruby 2.7](https://github.com/intridea/multi_json/commit/5d8febdbebc428882811b90d514f3628617a61d5)
+* [Support Oj 3.x gem](https://github.com/intridea/multi_json/commit/5d8febdbebc428882811b90d514f3628617a61d5)
+
 1.13.1
 ------
 
