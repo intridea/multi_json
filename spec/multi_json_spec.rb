@@ -30,6 +30,24 @@ describe MultiJson do
     end
   end
 
+  context 'when JSON pure is already loaded' do
+    it 'default_adapter tries to require each adapter in turn and does not assume :json_gem is already loaded' do
+      require 'json/pure'
+      expect(JSON::JSON_LOADED).to be_truthy
+
+      undefine_constants :Oj, :Yajl, :Gson, :JrJackson do
+        # simulate that the json_gem is not loaded
+        ext = defined?(JSON::Ext::Parser) ? JSON::Ext.send(:remove_const, :Parser) : nil
+        begin
+          expect(MultiJson).to receive(:require)
+          MultiJson.default_adapter
+        ensure
+          JSON::Ext::Parser = ext if ext
+        end
+      end
+    end
+  end
+
   context 'caching' do
     before { MultiJson.use adapter }
     let(:adapter) { MultiJson::Adapters::JsonGem }
