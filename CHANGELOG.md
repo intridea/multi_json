@@ -1,4 +1,4 @@
-1.14.2
+1.15.0
 ------
 
 * [Improve detection of json_gem adapter](https://github.com/intridea/multi_json/commit/62d54019b17ebf83b28c8deb871a02a122e7d9cf)
