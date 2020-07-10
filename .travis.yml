@@ -43,6 +43,9 @@ matrix:
   - rvm: 2.6
     gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
+  - rvm: 2.7
+    gemfile: gemfiles/gemfile-2-3
+    env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: ruby-head
     gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
