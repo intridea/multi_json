@@ -47,7 +47,7 @@ module MultiJson
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
     return :jr_jackson if defined?(::JrJackson)
-    return :json_gem if defined?(::JSON::JSON_LOADED)
+    return :json_gem if defined?(::JSON::Ext::Parser)
     return :gson if defined?(::Gson)
 
     REQUIREMENT_MAP.each do |adapter, library|
