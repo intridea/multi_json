@@ -10,6 +10,9 @@ tmtags
 ## VIM
 *.swp
 
+## IDEA
+.idea
+
 ## PROJECT::GENERAL
 .yardoc
 coverage

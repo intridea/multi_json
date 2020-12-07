@@ -31,6 +31,7 @@ module MultiJson
   ALIASES = {'jrjackson' => 'jr_jackson'}
 
   REQUIREMENT_MAP = [
+    [:fast_jsonparser,  'fast_jsonparser'],
     [:oj,         'oj'],
     [:yajl,       'yajl'],
     [:jr_jackson, 'jrjackson'],
@@ -44,6 +45,7 @@ module MultiJson
   # if any adapters are already loaded, then checks
   # to see which are installed if none are loaded.
   def default_adapter
+    return :fast_jsonparser if defined?(::FastJsonparser)
     return :oj if defined?(::Oj)
     return :yajl if defined?(::Yajl)
     return :jr_jackson if defined?(::JrJackson)
@@ -79,6 +81,7 @@ module MultiJson
   # Set the JSON parser utilizing a symbol, string, or class.
   # Supported by default are:
   #
+  # * <tt>:fast_jsonparser</tt>
   # * <tt>:oj</tt>
   # * <tt>:json_gem</tt>
   # * <tt>:json_pure</tt>
