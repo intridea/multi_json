@@ -75,7 +75,7 @@ describe MultiJson do
     if jruby? && !skip_adapter?('jr_jackson')
       expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JrJackson')
     elsif jruby?
-      expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JsonGem')      
+      expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JsonGem')
     else
       expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::Oj')
     end
@@ -166,8 +166,8 @@ describe MultiJson do
     end
 
     it 'sets both load and dump options' do
-      expect(MultiJson).to receive(:dump_options=).with(:foo => 'bar')
-      expect(MultiJson).to receive(:load_options=).with(:foo => 'bar')
+      expect(MultiJson).to receive(:dump_options=).with({:foo => 'bar'})
+      expect(MultiJson).to receive(:load_options=).with({:foo => 'bar'})
       silence_warnings { MultiJson.default_options = {:foo => 'bar'} }
     end
   end
