@@ -15,7 +15,7 @@ shared_examples_for 'JSON-like adapter' do |adapter|
     describe 'with :indent option' do
       it 'passes it on dump' do
         object = 'foo'
-        expect(object).to receive(:to_json).with(:indent => "\t")
+        expect(object).to receive(:to_json).with({:indent => "\t"})
         MultiJson.dump(object, :indent => "\t")
       end
     end
@@ -23,7 +23,7 @@ shared_examples_for 'JSON-like adapter' do |adapter|
 
   describe '.load' do
     it 'passes :quirks_mode option' do
-      expect(::JSON).to receive(:parse).with('[123]', :quirks_mode => false, :create_additions => false)
+      expect(::JSON).to receive(:parse).with('[123]', {:quirks_mode => false, :create_additions => false})
       MultiJson.load('[123]', :quirks_mode => false)
     end
   end

@@ -166,8 +166,8 @@ describe MultiJson do
     end
 
     it 'sets both load and dump options' do
-      expect(MultiJson).to receive(:dump_options=).with(:foo => 'bar')
-      expect(MultiJson).to receive(:load_options=).with(:foo => 'bar')
+      expect(MultiJson).to receive(:dump_options=).with({:foo => 'bar'})
+      expect(MultiJson).to receive(:load_options=).with({:foo => 'bar'})
       silence_warnings { MultiJson.default_options = {:foo => 'bar'} }
     end
   end
