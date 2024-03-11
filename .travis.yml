@@ -2,48 +2,16 @@ language: ruby
 
 matrix:
   include:
-  - rvm: 1.8
-    gemfile: gemfiles/gemfile-1-8
-    os: linux
-    dist: trusty
-    env: SKIP_ADAPTERS=yajl,gson,jr_jackson,nsjsonserialization
-  - rvm: jruby-18mode
-    gemfile: gemfiles/gemfile-1-8-jruby
-    os: linux
-    dist: trusty
-    env: SKIP_ADAPTERS=oj,yajl,nsjsonserialization
-  - rvm: 1.9
-    gemfile: gemfiles/gemfile-1-9
-    os: linux
-    dist: trusty
-    env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: jruby-19mode
-    gemfile: gemfiles/gemfile-1-9-jruby
-    os: linux
-    dist: trusty
-    env: SKIP_ADAPTERS=oj,yajl,nsjsonserialization
-  - rvm: 2.0
-    gemfile: gemfiles/gemfile-2-0
-    env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: 2.1
-    gemfile: gemfiles/gemfile-2-0
-    env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: 2.2
-    gemfile: gemfiles/gemfile-2-0
-    env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: 2.3
+  - rvm: '3.0'
     gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: 2.4
+  - rvm: '3.1'
     gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: 2.5
+  - rvm: '3.2'
     gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: 2.6
-    gemfile: gemfiles/gemfile-2-3
-    env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
-  - rvm: 2.7
+  - rvm: '3.3'
     gemfile: gemfiles/gemfile-2-3
     env: SKIP_ADAPTERS=gson,jr_jackson,nsjsonserialization
   - rvm: ruby-head
