@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-exit 0 if skip_adapter?("nsjsonserialization")
+return if skip_adapter?("nsjsonserialization")
 
 require 'shared/adapter'
 require 'multi_json/adapters/nsjsonserialization'
