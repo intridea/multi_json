@@ -22,12 +22,9 @@ module MultiJson
     MAX_CACHE_SIZE = 1000
 
     def write(cache, key)
-      if cache
-        cache.clear if cache.length >= MAX_CACHE_SIZE
-        cache[key] = yield
-      else
-        reset
-      end
+      reset unless cache
+      cache.clear if cache.length >= MAX_CACHE_SIZE
+      cache[key] = yield
     end
   end
 end
