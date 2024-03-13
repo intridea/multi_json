@@ -234,7 +234,7 @@ module MultiJson
         elsif m[2]
           [:val, m[0], Float(m[0])]
         else
-          [:val, m[0], Integer(m[1])*(10**m[3][1..].to_i(10))]
+          [:val, m[0], Integer(m[1]) * (10**m[3][1..].to_i(10))]
         end
       else
         []
@@ -289,8 +289,8 @@ module MultiJson
               raise Error, "invalid escape sequence \\u#{q[r, 4]}: #{e}"
             end
             r += 4
-            if surrogate?(uchar) && (q.length >= r+6)
-              uchar1 = hexdec4(q[r+2, 4])
+            if surrogate?(uchar) && (q.length >= r + 6)
+              uchar1 = hexdec4(q[r + 2, 4])
               uchar = subst(uchar, uchar1)
               if uchar != Ucharerr
                 # A valid pair; consume.
@@ -330,19 +330,19 @@ module MultiJson
         a[i] = (u & 0xff).chr
         1
       elsif u <= Uchar2max
-        a[i+0] = (Utag2 | ((u>>6)&0xff)).chr
-        a[i+1] = (Utagx | (u&Umaskx)).chr
+        a[i + 0] = (Utag2 | ((u >> 6) & 0xff)).chr
+        a[i + 1] = (Utagx | (u & Umaskx)).chr
         2
       elsif u <= Uchar3max
-        a[i+0] = (Utag3 | ((u>>12)&0xff)).chr
-        a[i+1] = (Utagx | ((u>>6)&Umaskx)).chr
-        a[i+2] = (Utagx | (u&Umaskx)).chr
+        a[i + 0] = (Utag3 | ((u >> 12) & 0xff)).chr
+        a[i + 1] = (Utagx | ((u >> 6) & Umaskx)).chr
+        a[i + 2] = (Utagx | (u & Umaskx)).chr
         3
       else
-        a[i+0] = (Utag4 | ((u>>18)&0xff)).chr
-        a[i+1] = (Utagx | ((u>>12)&Umaskx)).chr
-        a[i+2] = (Utagx | ((u>>6)&Umaskx)).chr
-        a[i+3] = (Utagx | (u&Umaskx)).chr
+        a[i + 0] = (Utag4 | ((u >> 18) & 0xff)).chr
+        a[i + 1] = (Utagx | ((u >> 12) & Umaskx)).chr
+        a[i + 2] = (Utagx | ((u >> 6) & Umaskx)).chr
+        a[i + 3] = (Utagx | (u & Umaskx)).chr
         4
       end
     end
@@ -350,11 +350,11 @@ module MultiJson
     def hexdec4(s)
       raise Error, 'short' if s.length != 4
 
-      (nibble(s[0])<<12) | (nibble(s[1])<<8) | (nibble(s[2])<<4) | nibble(s[3])
+      (nibble(s[0]) << 12) | (nibble(s[1]) << 8) | (nibble(s[2]) << 4) | nibble(s[3])
     end
 
     def subst(u1, u2)
-      return ((u1-Usurr1)<<10) | (u2-Usurr2) + Usurrself if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
+      return ((u1 - Usurr1) << 10) | (u2 - Usurr2) + Usurrself if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
 
       Ucharerr
     end
@@ -455,12 +455,12 @@ module MultiJson
 
       raise Utf8Error if n < 2 # need continuation byte
 
-      c1 = s[i+1].ord
+      c1 = s[i + 1].ord
       raise Utf8Error if c1 < Utagx || Utag2 <= c1
 
       # 2-byte, 11-bit sequence?
       if c0 < Utag3
-        raise Utf8Error if ((c0&Umask2)<<6 | (c1&Umaskx)) <= Uchar1max
+        raise Utf8Error if ((c0 & Umask2) << 6 | (c1 & Umaskx)) <= Uchar1max
 
         t.putc(c0)
         t.putc(c1)
@@ -470,12 +470,12 @@ module MultiJson
       # need second continuation byte
       raise Utf8Error if n < 3
 
-      c2 = s[i+2].ord
+      c2 = s[i + 2].ord
       raise Utf8Error if c2 < Utagx || Utag2 <= c2
 
       # 3-byte, 16-bit sequence?
       if c0 < Utag4
-        u = (c0&Umask3)<<12 | (c1&Umaskx)<<6 | (c2&Umaskx)
+        u = (c0 & Umask3) << 12 | (c1 & Umaskx) << 6 | (c2 & Umaskx)
         raise Utf8Error if u <= Uchar2max
 
         t.putc(c0)
@@ -487,12 +487,12 @@ module MultiJson
       # need third continuation byte
       raise Utf8Error if n < 4
 
-      c3 = s[i+3].ord
+      c3 = s[i + 3].ord
       raise Utf8Error if c3 < Utagx || Utag2 <= c3
 
       # 4-byte, 21-bit sequence?
       if c0 < Utag5
-        u = (c0&Umask4)<<18 | (c1&Umaskx)<<12 | (c2&Umaskx)<<6 | (c3&Umaskx)
+        u = (c0 & Umask4) << 18 | (c1 & Umaskx) << 12 | (c2 & Umaskx) << 6 | (c3 & Umaskx)
         raise Utf8Error if u <= Uchar3max
 
         t.putc(c0)
@@ -527,9 +527,9 @@ module MultiJson
     Umask2 = 0b0001_1111
     Umask3 = 0b0000_1111
     Umask4 = 0b0000_0111
-    Uchar1max = (1<<7) - 1
-    Uchar2max = (1<<11) - 1
-    Uchar3max = (1<<16) - 1
+    Uchar1max = (1 << 7) - 1
+    Uchar2max = (1 << 11) - 1
+    Uchar3max = (1 << 16) - 1
     Ucharerr = 0xFFFD # unicode "replacement char"
     Ustrerr = "\xef\xbf\xbd" # unicode "replacement char"
     Usurrself = 0x10000
@@ -538,6 +538,6 @@ module MultiJson
     Usurr3 = 0xe000
 
     Spc = ' '[0]
-    Unesc = {'b'=>"\b", 'f'=>"\f", 'n'=>"\n", 'r'=>"\r", 't'=>"\t"}
+    Unesc = {'b' => "\b", 'f' => "\f", 'n' => "\n", 'r' => "\r", 't' => "\t"}
   end
 end

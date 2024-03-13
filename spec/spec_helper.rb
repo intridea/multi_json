@@ -24,7 +24,7 @@ def jruby?
 end
 
 def skip_adapter?(adapter_name)
-  @skip||=
+  @skip ||=
     ENV.fetch('SKIP_ADAPTERS', '')
     .split(',')
     .then do |skip|
