@@ -228,7 +228,7 @@ module MultiJson
 
     def numtok(s)
       m = /(-?(?:[1-9][0-9]+|[0-9]))([.][0-9]+)?([eE][+-]?[0-9]+)?/.match(s)
-      if m && m.begin(0).zero?
+      if m&.begin(0)&.zero?
         if !m[2] && !m[3]
           [:val, m[0], Integer(m[0])]
         elsif m[2]
