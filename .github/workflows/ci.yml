@@ -1,0 +1,44 @@
+name: Test
+
+on:
+  push:
+    branches: [main, master] # TODO: rename and get rid of 'master'
+  # Triggers the workflow on pull request events.
+  pull_request:
+    types: [opened, reopened, synchronize]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# This allows a subsequently queued workflow run to interrupt previous runs.
+concurrency:
+  group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby:
+          # https://www.ruby-lang.org/en/downloads/branches/
+          - "ruby-3.0"
+          - "ruby-3.1"
+          - "ruby-3.2"
+          - "ruby-3.3"
+          - "ruby-head"
+          # https://github.com/jruby/jruby/discussions/7915
+          - "jruby-9.3"
+          - "jruby-9.4"
+          - "jruby-head"
+    name: "Test (Ruby ${{ matrix.ruby }})"
+    env:
+      SKIP_ADAPTERS: jr_jackson,nsjsonserialization,json_pure
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - run: bundle install
+      - run: bundle exec rake

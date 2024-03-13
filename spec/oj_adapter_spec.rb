@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-exit 0 if skip_adapter?('oj')
+return if skip_adapter?('oj')
 
 require 'shared/adapter'
 require 'multi_json/adapters/oj'

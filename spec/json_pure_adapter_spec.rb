@@ -1,4 +1,7 @@
 require 'spec_helper'
+
+return if skip_adapter?('json_pure')
+
 require 'shared/adapter'
 require 'shared/json_common_adapter'
 require 'multi_json/adapters/json_pure'

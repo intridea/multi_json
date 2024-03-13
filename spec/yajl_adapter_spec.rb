@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-exit 0 if skip_adapter?('yajl')
+return if skip_adapter?('yajl')
 
 require 'shared/adapter'
 require 'multi_json/adapters/yajl'
