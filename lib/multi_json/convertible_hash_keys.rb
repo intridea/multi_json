@@ -16,6 +16,7 @@ module MultiJson
 
     def prepare_hash(hash, &key_modifier)
       return hash unless key_modifier
+
       case hash
       when Array
         hash.map do |value|

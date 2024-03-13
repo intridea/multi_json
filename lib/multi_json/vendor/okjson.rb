@@ -45,6 +45,7 @@ module MultiJson
       unless ts.empty?
         raise Error, 'trailing garbage'
       end
+
       v
     end
 
@@ -79,6 +80,7 @@ module MultiJson
       when nil     then "null"
       else
         raise Error, "cannot encode #{x.class}: #{x.inspect}" unless x.respond_to?(:to_json)
+
         x.to_json
       end
     end
@@ -162,6 +164,7 @@ module MultiJson
       if typ != :str
         raise Error, "unexpected #{k.inspect}"
       end
+
       ts = eat(':', ts)
       v, ts = valparse(ts)
       [k, v, ts]
@@ -202,6 +205,7 @@ module MultiJson
       if ts[0][0] != typ
         raise Error, "expected #{typ} (got #{ts[0].inspect})"
       end
+
       ts[1..]
     end
 
@@ -215,6 +219,7 @@ module MultiJson
         if typ.nil?
           raise Error, "invalid character at #{s[0,10].inspect}"
         end
+
         if typ != :space
           ts << [typ, lexeme, val]
         end
@@ -282,6 +287,7 @@ module MultiJson
       unless m
         raise Error, "invalid string literal at #{abbrev(s)}"
       end
+
       [:str, m[0], unquote(m[0])]
     end
 
@@ -396,6 +402,7 @@ module MultiJson
       if s.length != 4
         raise Error, 'short'
       end
+
       (nibble(s[0])<<12) | (nibble(s[1])<<8) | (nibble(s[2])<<4) | nibble(s[3])
     end
 
@@ -404,6 +411,7 @@ module MultiJson
       if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
         return ((u1-Usurr1)<<10) | (u2-Usurr2) + Usurrself
       end
+
       Ucharerr
     end
 
@@ -489,6 +497,7 @@ module MultiJson
       if (x.nan? || x.infinite? rescue false)
         raise Error, "Numeric cannot be represented: #{x}"
       end
+
       x.to_s
     end
 
@@ -513,12 +522,14 @@ module MultiJson
       raise Utf8Error if c0 < Utag2 # unexpected continuation byte?
 
       raise Utf8Error if n < 2 # need continuation byte
+
       c1 = s[i+1].ord
       raise Utf8Error if c1 < Utagx || Utag2 <= c1
 
       # 2-byte, 11-bit sequence?
       if c0 < Utag3
         raise Utf8Error if ((c0&Umask2)<<6 | (c1&Umaskx)) <= Uchar1max
+
         t.putc(c0)
         t.putc(c1)
         return 2
@@ -534,6 +545,7 @@ module MultiJson
       if c0 < Utag4
         u = (c0&Umask3)<<12 | (c1&Umaskx)<<6 | (c2&Umaskx)
         raise Utf8Error if u <= Uchar2max
+
         t.putc(c0)
         t.putc(c1)
         t.putc(c2)
@@ -542,6 +554,7 @@ module MultiJson
 
       # need third continuation byte
       raise Utf8Error if n < 4
+
       c3 = s[i+3].ord
       raise Utf8Error if c3 < Utagx || Utag2 <= c3
 
@@ -549,6 +562,7 @@ module MultiJson
       if c0 < Utag5
         u = (c0&Umask4)<<18 | (c1&Umaskx)<<12 | (c2&Umaskx)<<6 | (c3&Umaskx)
         raise Utf8Error if u <= Uchar3max
+
         t.putc(c0)
         t.putc(c1)
         t.putc(c2)
