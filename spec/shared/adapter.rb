@@ -59,13 +59,7 @@ shared_examples_for 'an adapter' do |adapter|
         time = Time.at(1_355_218_745).utc
 
         dumped_json = MultiJson.dump(time)
-        expected = begin
-          if RUBY_VERSION > '1.9'
-            '2012-12-11 09:39:05 UTC'
-          else
-            'Tue Dec 11 09:39:05 UTC 2012'
-          end
-        end
+        expected = '2012-12-11 09:39:05 UTC'
         expect(MultiJson.load(dumped_json)).to eq(expected)
       end
     end
