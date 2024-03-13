@@ -57,8 +57,8 @@ module MultiJson
     # Strings contained in x must be valid UTF-8.
     def encode(x)
       case x
-      when Hash    then objenc(x)
-      when Array   then arrenc(x)
+      when Hash then objenc(x)
+      when Array then arrenc(x)
       else
         raise Error, "root value must be an Array or a Hash"
       end
@@ -66,13 +66,13 @@ module MultiJson
 
     def valenc(x)
       case x
-      when Hash    then objenc(x)
-      when Array   then arrenc(x)
-      when String  then strenc(x)
+      when Hash then objenc(x)
+      when Array then arrenc(x)
+      when String then strenc(x)
       when Numeric then numenc(x)
-      when true    then "true"
-      when false   then "false"
-      when nil     then "null"
+      when true then "true"
+      when false then "false"
+      when nil then "null"
       else
         raise Error, "cannot encode #{x.class}: #{x.inspect}" unless x.respond_to?(:to_json)
 
@@ -222,8 +222,8 @@ module MultiJson
       end
     end
 
-    def nulltok(s) = s[0, 4] == "null" ? [:val, "null",  nil] : []
-    def truetok(s) = s[0, 4] == "true" ? [:val, "true",  true] : []
+    def nulltok(s) = s[0, 4] == "null" ? [:val, "null", nil] : []
+    def truetok(s) = s[0, 4] == "true" ? [:val, "true", true] : []
     def falsetok(s) = s[0, 5] == "false" ? [:val, "false", false] : []
 
     def numtok(s)
@@ -395,7 +395,7 @@ module MultiJson
 
       while r < s.length
         case s[r]
-        when '"'  then t.print('\\"')
+        when '"' then t.print('\\"')
         when "\\" then t.print("\\\\")
         when "\b" then t.print('\\b')
         when "\f" then t.print('\\f')

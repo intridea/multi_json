@@ -31,12 +31,12 @@ module MultiJson
   ALIASES = {"jrjackson" => "jr_jackson"}
 
   REQUIREMENT_MAP = [
-    [:oj,         "oj"],
-    [:yajl,       "yajl"],
+    [:oj, "oj"],
+    [:yajl, "yajl"],
     [:jr_jackson, "jrjackson"],
-    [:json_gem,   "json/ext"],
-    [:gson,       "gson"],
-    [:json_pure,  "json/pure"]
+    [:json_gem, "json/ext"],
+    [:gson, "gson"],
+    [:json_pure, "json/pure"]
   ]
 
   # The default adapter based on what you currently

@@ -19,6 +19,9 @@ Layout/CaseIndentation:
 Layout/EndAlignment:
   EnforcedStyleAlignWith: start_of_line
 
+Layout/ExtraSpacing:
+  AllowForAlignment: false
+
 Layout/LineLength:
   Max: 140
 
