@@ -1,4 +1,3 @@
-# coding: utf-8
 require File.expand_path('lib/multi_json/version.rb', __dir__)
 
 Gem::Specification.new do |spec|
