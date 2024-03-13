@@ -66,11 +66,9 @@ ensure
   end
 end
 
-def simulate_no_adapters
+def simulate_no_adapters(&block)
   break_requirements do
-    undefine_constants :JSON, :Oj, :Yajl, :Gson, :JrJackson do
-      yield
-    end
+    undefine_constants :JSON, :Oj, :Yajl, :Gson, :JrJackson, &block
   end
 end
 
