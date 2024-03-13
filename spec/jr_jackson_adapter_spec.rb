@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-return if skip_adapter?('jr_jackson')
+return if !jruby? || skip_adapter?('jr_jackson')
 
 require 'shared/adapter'
 require 'multi_json/adapters/jr_jackson'

@@ -24,7 +24,7 @@ end
 
 def skip_adapter?(adapter_name)
   @skip||=
-    ENV.fetch('SKIP_ADAPTERS', '')
+    ENV.fetch('SKIP_ADAPTERS', 'nsjsonserialization')
     .split(',')
     .then do |skip|
       if jruby?
