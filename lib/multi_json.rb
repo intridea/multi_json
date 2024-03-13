@@ -22,7 +22,7 @@ module MultiJson
     load_options
   end
 
-  %w(cached_options reset_cached_options!).each do |method_name|
+  %w[cached_options reset_cached_options!].each do |method_name|
     define_method method_name do |*|
       Kernel.warn "MultiJson.#{method_name} method is deprecated and no longer used."
     end
