@@ -21,7 +21,12 @@ Gem::Specification.new do |spec|
     'wiki_uri'          => 'https://github.com/intridea/multi_json/wiki'
   }
 
-  spec.required_rubygems_version = ">= 1.3.5"
-  spec.add_development_dependency "rake", "~> 13.1"
-  spec.add_development_dependency "rspec", "~> 3.13"
+  spec.required_rubygems_version = ">= 3.5.6"
+  spec.add_development_dependency "rake", ">= 13.1"
+  spec.add_development_dependency "rspec", ">= 3.13"
+  spec.add_development_dependency "rubocop", ">= 1.62.1"
+  spec.add_development_dependency "rubocop-performance", ">= 1.20.2"
+  spec.add_development_dependency "rubocop-rake", ">= 0.6.0"
+  spec.add_development_dependency "rubocop-rspec", ">= 2.27.1"
+  spec.add_development_dependency "standard", ">= 1.35.1"
 end

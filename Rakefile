@@ -1,6 +1,9 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
+require "standard/rake"
+require "rubocop/rake_task"
+
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:base_spec) do |task|
   task.pattern = 'spec/{multi_json,options_cache}_spec.rb'
