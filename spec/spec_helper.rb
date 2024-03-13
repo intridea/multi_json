@@ -26,8 +26,8 @@ end
 def skip_adapter?(adapter_name)
   @skip ||=
     ENV.fetch("SKIP_ADAPTERS", "")
-    .split(",")
-    .then do |skip|
+      .split(",")
+      .then do |skip|
       if jruby?
         %w[oj yajl] + skip
       else

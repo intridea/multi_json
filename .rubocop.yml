@@ -25,6 +25,9 @@ Layout/ExtraSpacing:
 Layout/LineLength:
   Max: 140
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
 Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
   IndentationWidth: 2
