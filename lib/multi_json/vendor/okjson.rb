@@ -492,7 +492,7 @@ module MultiJson
       if (x.nan? || x.infinite? rescue false)
         raise Error, "Numeric cannot be represented: #{x}"
       end
-      "#{x}"
+      x.to_s
     end
 
 
