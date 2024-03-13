@@ -35,12 +35,12 @@ shared_examples_for 'has options' do |object|
     end
 
     it 'evaluates lambda returning options (with args)' do
-      subject.dump_options = lambda { |a1, a2| {a1 => a2} }
+      subject.dump_options = ->(a1, a2) { {a1 => a2} }
       expect(subject.dump_options('1', '2')).to eq('1' => '2')
     end
 
     it 'evaluates lambda returning options (with no args)' do
-      subject.dump_options = lambda { {:foo => 'bar'} }
+      subject.dump_options = -> { {:foo => 'bar'} }
       expect(subject.dump_options).to eq(:foo => 'bar')
     end
 
@@ -89,12 +89,12 @@ shared_examples_for 'has options' do |object|
     end
 
     it 'evaluates lambda returning options (with args)' do
-      subject.load_options = lambda { |a1, a2| {a1 => a2} }
+      subject.load_options = ->(a1, a2) { {a1 => a2} }
       expect(subject.load_options('1', '2')).to eq('1' => '2')
     end
 
     it 'evaluates lambda returning options (with no args)' do
-      subject.load_options = lambda { {:foo => 'bar'} }
+      subject.load_options = -> { {:foo => 'bar'} }
       expect(subject.load_options).to eq(:foo => 'bar')
     end
 
