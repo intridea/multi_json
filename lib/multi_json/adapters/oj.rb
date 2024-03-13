@@ -48,7 +48,7 @@ module MultiJson
           :space_before          => "",
           :object_nl             => "\n",
           :array_nl              => "\n",
-          :ascii_only            => false,
+          :ascii_only            => false
         }
 
         def dump(object, options = {})
