@@ -42,9 +42,7 @@ module MultiJson
     def decode(s)
       ts = lex(s)
       v, ts = textparse(ts)
-      unless ts.empty?
-        raise Error, 'trailing garbage'
-      end
+      raise Error, 'trailing garbage' unless ts.empty?
 
       v
     end
@@ -94,9 +92,7 @@ module MultiJson
     # Note: this is almost the same as valparse,
     # except that it does not accept atomic values.
     def textparse(ts)
-      if ts.length <= 0
-        raise Error, 'empty'
-      end
+      raise Error, 'empty' if ts.length <= 0
 
       typ, _, val = ts[0]
       case typ
@@ -111,9 +107,7 @@ module MultiJson
     # Parses a "value" in the sense of RFC 4627.
     # Returns the parsed value and any trailing tokens.
     def valparse(ts)
-      if ts.length <= 0
-        raise Error, 'empty'
-      end
+      raise Error, 'empty' if ts.length <= 0
 
       typ, _, val = ts[0]
       case typ
@@ -132,16 +126,12 @@ module MultiJson
       ts = eat('{', ts)
       obj = {}
 
-      if ts[0][0] == '}'
-        return obj, ts[1..]
-      end
+      return obj, ts[1..] if ts[0][0] == '}'
 
       k, v, ts = pairparse(ts)
       obj[k] = v
 
-      if ts[0][0] == '}'
-        return obj, ts[1..]
-      end
+      return obj, ts[1..] if ts[0][0] == '}'
 
       loop do
         ts = eat(',', ts)
@@ -149,9 +139,7 @@ module MultiJson
         k, v, ts = pairparse(ts)
         obj[k] = v
 
-        if ts[0][0] == '}'
-          return obj, ts[1..]
-        end
+        return obj, ts[1..] if ts[0][0] == '}'
       end
     end
 
@@ -161,9 +149,7 @@ module MultiJson
     def pairparse(ts)
       (typ, _, k) = ts[0]
       ts = ts[1..]
-      if typ != :str
-        raise Error, "unexpected #{k.inspect}"
-      end
+      raise Error, "unexpected #{k.inspect}" if typ != :str
 
       ts = eat(':', ts)
       v, ts = valparse(ts)
@@ -177,16 +163,12 @@ module MultiJson
       ts = eat('[', ts)
       arr = []
 
-      if ts[0][0] == ']'
-        return arr, ts[1..]
-      end
+      return arr, ts[1..] if ts[0][0] == ']'
 
       v, ts = valparse(ts)
       arr << v
 
-      if ts[0][0] == ']'
-        return arr, ts[1..]
-      end
+      return arr, ts[1..] if ts[0][0] == ']'
 
       loop do
         ts = eat(',', ts)
@@ -194,17 +176,13 @@ module MultiJson
         v, ts = valparse(ts)
         arr << v
 
-        if ts[0][0] == ']'
-          return arr, ts[1..]
-        end
+        return arr, ts[1..] if ts[0][0] == ']'
       end
     end
 
 
     def eat(typ, ts)
-      if ts[0][0] != typ
-        raise Error, "expected #{typ} (got #{ts[0].inspect})"
-      end
+      raise Error, "expected #{typ} (got #{ts[0].inspect})" if ts[0][0] != typ
 
       ts[1..]
     end
@@ -216,13 +194,9 @@ module MultiJson
       ts = []
       until s.empty?
         typ, lexeme, val = tok(s)
-        if typ.nil?
-          raise Error, "invalid character at #{s[0,10].inspect}"
-        end
+        raise Error, "invalid character at #{s[0,10].inspect}" if typ.nil?
 
-        if typ != :space
-          ts << [typ, lexeme, val]
-        end
+        ts << [typ, lexeme, val] if typ != :space
         s = s[lexeme.length..]
       end
       ts
@@ -284,9 +258,7 @@ module MultiJson
 
     def strtok(s)
       m = %r{"([^"\\]|\\["/\\bfnrt]|\\u[0-9a-fA-F]{4})*"}.match(s)
-      unless m
-        raise Error, "invalid string literal at #{abbrev(s)}"
-      end
+      raise Error, "invalid string literal at #{abbrev(s)}" unless m
 
       [:str, m[0], unquote(m[0])]
     end
@@ -308,18 +280,14 @@ module MultiJson
       q = q[1...-1]
       a = q.dup # allocate a big enough string
       # In ruby >= 1.9, a[w] is a codepoint, not a byte.
-      if rubydoesenc?
-        a.force_encoding('UTF-8')
-      end
+      a.force_encoding('UTF-8') if rubydoesenc?
       r = 0
       w = 0
       while r < q.length
         c = q[r]
         if c == ?\\
           r += 1
-          if r >= q.length
-            raise Error, "string literal ends with a \"\\\": \"#{q}\""
-          end
+          raise Error, "string literal ends with a \"\\\": \"#{q}\"" if r >= q.length
 
           case q[r]
           when ?",?\\,?/,?'
@@ -399,18 +367,14 @@ module MultiJson
 
 
     def hexdec4(s)
-      if s.length != 4
-        raise Error, 'short'
-      end
+      raise Error, 'short' if s.length != 4
 
       (nibble(s[0])<<12) | (nibble(s[1])<<8) | (nibble(s[2])<<4) | nibble(s[3])
     end
 
 
     def subst(u1, u2)
-      if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
-        return ((u1-Usurr1)<<10) | (u2-Usurr2) + Usurrself
-      end
+      return ((u1-Usurr1)<<10) | (u2-Usurr2) + Usurrself if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
 
       Ucharerr
     end
@@ -470,9 +434,7 @@ module MultiJson
           if rubydoesenc?
             begin
               # c.ord will raise an error if c is invalid UTF-8
-              if c.ord < Spc.ord
-                c = "\\u%04x" % [c.ord]
-              end
+              c = "\\u%04x" % [c.ord] if c.ord < Spc.ord
               t.write(c)
             rescue
               t.write(Ustrerr)
@@ -494,9 +456,7 @@ module MultiJson
 
 
     def numenc(x)
-      if (x.nan? || x.infinite? rescue false)
-        raise Error, "Numeric cannot be represented: #{x}"
-      end
+      raise Error, "Numeric cannot be represented: #{x}" if (x.nan? || x.infinite? rescue false)
 
       x.to_s
     end
