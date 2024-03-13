@@ -75,7 +75,7 @@ describe MultiJson do
     if jruby? && !skip_adapter?('jr_jackson')
       expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JrJackson')
     elsif jruby?
-      expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JsonGem')      
+      expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::JsonGem')
     else
       expect(MultiJson.adapter.to_s).to eq('MultiJson::Adapters::Oj')
     end
@@ -175,7 +175,7 @@ describe MultiJson do
   it_behaves_like 'has options', MultiJson
 
   describe 'aliases' do
-    unless skip_adapter?('jr_jackson')
+    if jruby? && !skip_adapter?('jr_jackson')
       describe 'jrjackson' do
         after { expect(MultiJson.adapter).to eq(MultiJson::Adapters::JrJackson) }
 
