@@ -51,12 +51,10 @@ module MultiJson
     return :gson if defined?(::Gson)
 
     REQUIREMENT_MAP.each do |adapter, library|
-      begin
-        require library
-        return adapter
-      rescue ::LoadError
-        next
-      end
+      require library
+      return adapter
+    rescue ::LoadError
+      next
     end
 
     Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json). ' \
