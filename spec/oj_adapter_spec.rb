@@ -23,7 +23,7 @@ describe MultiJson::Adapters::Oj do
 
     expect do
       MultiJson.load('{"json_class":"OMG"}')
-    end.not_to change { Symbol.all_symbols.count }
+    end.not_to(change { Symbol.all_symbols.count })
   end
 
   context 'with Oj.default_settings' do
