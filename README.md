@@ -1,7 +1,7 @@
 # MultiJSON
 
 [![Gem Version](http://img.shields.io/gem/v/multi_json.svg)][gem]
-[![Build Status](https://github.com/intridea/multi_json/workflows/Test/badge.svg)][action]
+[![Build Status](https://github.com/intridea/multi_json/workflows/Test/badge.svg)][build]
 [![Code Climate](https://codeclimate.com/github/intridea/multi_json.svg)][codeclimate]
 
 Lots of Ruby libraries parse JSON and everyone has their favorite JSON coder.
@@ -101,7 +101,7 @@ Copyright (c) 2010-2018 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
 and Pavel Pravosud. See [LICENSE][] for details.
 
 <!-- TODO: on main renaming, change this link -->
-[action]: https://github.com/intridea/_multijson/actions?query=workflow%3ATest+branch%3Amaster+event%3Apush
+[build]: https://github.com/intridea/multi_json/actions?query=workflow%3ATest+branch%3Amaster+event%3Apush
 [codeclimate]: https://codeclimate.com/github/intridea/multi_json
 [gem]: https://rubygems.org/gems/multi_json
 [gson]: https://github.com/avsej/gson.rb
