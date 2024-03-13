@@ -11,7 +11,7 @@ module MultiJson
         metaclass = class << self; self; end
 
         metaclass.instance_eval do
-          define_method("default_#{action}_options") { value }
+          define_method(:"default_#{action}_options") { value }
         end
       end
 
