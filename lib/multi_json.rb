@@ -1,8 +1,8 @@
-require 'multi_json/options'
-require 'multi_json/version'
-require 'multi_json/adapter_error'
-require 'multi_json/parse_error'
-require 'multi_json/options_cache'
+require "multi_json/options"
+require "multi_json/version"
+require "multi_json/adapter_error"
+require "multi_json/parse_error"
+require "multi_json/options_cache"
 
 module MultiJson
   include Options
@@ -10,14 +10,14 @@ module MultiJson
 
   def default_options=(value)
     Kernel.warn "MultiJson.default_options setter is deprecated\n" \
-      'Use MultiJson.load_options and MultiJson.dump_options instead'
+      "Use MultiJson.load_options and MultiJson.dump_options instead"
 
     self.load_options = self.dump_options = value
   end
 
   def default_options
     Kernel.warn "MultiJson.default_options is deprecated\n" \
-      'Use MultiJson.load_options or MultiJson.dump_options instead'
+      "Use MultiJson.load_options or MultiJson.dump_options instead"
 
     load_options
   end
@@ -28,15 +28,15 @@ module MultiJson
     end
   end
 
-  ALIASES = {'jrjackson' => 'jr_jackson'}
+  ALIASES = {"jrjackson" => "jr_jackson"}
 
   REQUIREMENT_MAP = [
-    [:oj,         'oj'],
-    [:yajl,       'yajl'],
-    [:jr_jackson, 'jrjackson'],
-    [:json_gem,   'json/ext'],
-    [:gson,       'gson'],
-    [:json_pure,  'json/pure']
+    [:oj,         "oj"],
+    [:yajl,       "yajl"],
+    [:jr_jackson, "jrjackson"],
+    [:json_gem,   "json/ext"],
+    [:gson,       "gson"],
+    [:json_pure,  "json/pure"]
   ]
 
   # The default adapter based on what you currently
@@ -57,8 +57,8 @@ module MultiJson
       next
     end
 
-    Kernel.warn '[WARNING] MultiJson is using the default adapter (ok_json). ' \
-      'We recommend loading a different JSON library to improve performance.'
+    Kernel.warn "[WARNING] MultiJson is using the default adapter (ok_json). " \
+      "We recommend loading a different JSON library to improve performance."
 
     :ok_json
   end
@@ -153,7 +153,7 @@ module MultiJson
   def load_adapter_from_string_name(name)
     name = ALIASES.fetch(name, name)
     require "multi_json/adapters/#{name.downcase}"
-    klass_name = name.to_s.split('_').map(&:capitalize) * ''
+    klass_name = name.to_s.split("_").map(&:capitalize) * ""
     MultiJson::Adapters.const_get(klass_name)
   end
 end

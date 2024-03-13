@@ -20,14 +20,14 @@
 
 # See https://github.com/kr/okjson for updates.
 
-require 'stringio'
+require "stringio"
 
 module MultiJson
   # Some parts adapted from
   # https://golang.org/src/encoding/json/decode.go and
   # https://golang.org/src/unicode/utf8/utf8.go
   module OkJson
-    Upstream = '45'
+    Upstream = "45"
     extend self
 
     # Decodes a json document in string s and
@@ -41,7 +41,7 @@ module MultiJson
     def decode(s)
       ts = lex(s)
       v, ts = textparse(ts)
-      raise Error, 'trailing garbage' unless ts.empty?
+      raise Error, "trailing garbage" unless ts.empty?
 
       v
     end
@@ -60,7 +60,7 @@ module MultiJson
       when Hash    then objenc(x)
       when Array   then arrenc(x)
       else
-        raise Error, 'root value must be an Array or a Hash'
+        raise Error, "root value must be an Array or a Hash"
       end
     end
 
@@ -87,12 +87,12 @@ module MultiJson
     # Note: this is almost the same as valparse,
     # except that it does not accept atomic values.
     def textparse(ts)
-      raise Error, 'empty' if ts.length <= 0
+      raise Error, "empty" if ts.length <= 0
 
       typ, _, val = ts[0]
       case typ
-      when '{' then objparse(ts)
-      when '[' then arrparse(ts)
+      when "{" then objparse(ts)
+      when "[" then arrparse(ts)
       else
         raise Error, "unexpected #{val.inspect}"
       end
@@ -101,12 +101,12 @@ module MultiJson
     # Parses a "value" in the sense of RFC 4627.
     # Returns the parsed value and any trailing tokens.
     def valparse(ts)
-      raise Error, 'empty' if ts.length <= 0
+      raise Error, "empty" if ts.length <= 0
 
       typ, _, val = ts[0]
       case typ
-      when '{' then objparse(ts)
-      when '[' then arrparse(ts)
+      when "{" then objparse(ts)
+      when "[" then arrparse(ts)
       when :val, :str then [val, ts[1..]]
       else
         raise Error, "unexpected #{val.inspect}"
@@ -116,23 +116,23 @@ module MultiJson
     # Parses an "object" in the sense of RFC 4627.
     # Returns the parsed value and any trailing tokens.
     def objparse(ts)
-      ts = eat('{', ts)
+      ts = eat("{", ts)
       obj = {}
 
-      return obj, ts[1..] if ts[0][0] == '}'
+      return obj, ts[1..] if ts[0][0] == "}"
 
       k, v, ts = pairparse(ts)
       obj[k] = v
 
-      return obj, ts[1..] if ts[0][0] == '}'
+      return obj, ts[1..] if ts[0][0] == "}"
 
       loop do
-        ts = eat(',', ts)
+        ts = eat(",", ts)
 
         k, v, ts = pairparse(ts)
         obj[k] = v
 
-        return obj, ts[1..] if ts[0][0] == '}'
+        return obj, ts[1..] if ts[0][0] == "}"
       end
     end
 
@@ -143,7 +143,7 @@ module MultiJson
       ts = ts[1..]
       raise Error, "unexpected #{k.inspect}" if typ != :str
 
-      ts = eat(':', ts)
+      ts = eat(":", ts)
       v, ts = valparse(ts)
       [k, v, ts]
     end
@@ -151,23 +151,23 @@ module MultiJson
     # Parses an "array" in the sense of RFC 4627.
     # Returns the parsed value and any trailing tokens.
     def arrparse(ts)
-      ts = eat('[', ts)
+      ts = eat("[", ts)
       arr = []
 
-      return arr, ts[1..] if ts[0][0] == ']'
+      return arr, ts[1..] if ts[0][0] == "]"
 
       v, ts = valparse(ts)
       arr << v
 
-      return arr, ts[1..] if ts[0][0] == ']'
+      return arr, ts[1..] if ts[0][0] == "]"
 
       loop do
-        ts = eat(',', ts)
+        ts = eat(",", ts)
 
         v, ts = valparse(ts)
         arr << v
 
-        return arr, ts[1..] if ts[0][0] == ']'
+        return arr, ts[1..] if ts[0][0] == "]"
       end
     end
 
@@ -206,15 +206,15 @@ module MultiJson
     # it is the lexeme.
     def tok(s)
       case s[0]
-      when '{' then ['{', s[0, 1], s[0, 1]]
-      when '}' then ['}', s[0, 1], s[0, 1]]
-      when ':' then [':', s[0, 1], s[0, 1]]
-      when ',' then [',', s[0, 1], s[0, 1]]
-      when '[' then ['[', s[0, 1], s[0, 1]]
-      when ']' then [']', s[0, 1], s[0, 1]]
-      when 'n' then nulltok(s)
-      when 't' then truetok(s)
-      when 'f' then falsetok(s)
+      when "{" then ["{", s[0, 1], s[0, 1]]
+      when "}" then ["}", s[0, 1], s[0, 1]]
+      when ":" then [":", s[0, 1], s[0, 1]]
+      when "," then [",", s[0, 1], s[0, 1]]
+      when "[" then ["[", s[0, 1], s[0, 1]]
+      when "]" then ["]", s[0, 1], s[0, 1]]
+      when "n" then nulltok(s)
+      when "t" then truetok(s)
+      when "f" then falsetok(s)
       when '"' then strtok(s)
       when Spc, "\t", "\n", "\r" then [:space, s[0, 1], s[0, 1]]
       else
@@ -222,9 +222,9 @@ module MultiJson
       end
     end
 
-    def nulltok(s) = s[0, 4] == 'null'  ? [:val, 'null',  nil]   : []
-    def truetok(s) = s[0, 4] == 'true'  ? [:val, 'true',  true]  : []
-    def falsetok(s) = s[0, 5] == 'false' ? [:val, 'false', false] : []
+    def nulltok(s) = s[0, 4] == "null" ? [:val, "null",  nil] : []
+    def truetok(s) = s[0, 4] == "true" ? [:val, "true",  true] : []
+    def falsetok(s) = s[0, 5] == "false" ? [:val, "false", false] : []
 
     def numtok(s)
       m = /(-?(?:[1-9][0-9]+|[0-9]))([.][0-9]+)?([eE][+-]?[0-9]+)?/.match(s)
@@ -250,10 +250,10 @@ module MultiJson
 
     def abbrev(s)
       t = s[0, 10]
-      p = t['`']
+      p = t["`"]
       t = t[0, p] if p
-      t += '...' if t.length < s.length
-      '`' + t + '`'
+      t += "..." if t.length < s.length
+      "`" + t + "`"
     end
 
     # Converts a quoted json string literal q into a UTF-8-encoded string.
@@ -263,7 +263,7 @@ module MultiJson
       q = q[1...-1]
       a = q.dup # allocate a big enough string
       # In ruby >= 1.9, a[w] is a codepoint, not a byte.
-      a.force_encoding('UTF-8') if rubydoesenc?
+      a.force_encoding("UTF-8") if rubydoesenc?
       r = 0
       w = 0
       while r < q.length
@@ -273,15 +273,15 @@ module MultiJson
           raise Error, "string literal ends with a \"\\\": \"#{q}\"" if r >= q.length
 
           case q[r]
-          when '"', "\\", '/', "'"
+          when '"', "\\", "/", "'"
             a[w] = q[r]
             r += 1
             w += 1
-          when 'b', 'f', 'n', 'r', 't'
+          when "b", "f", "n", "r", "t"
             a[w] = Unesc[q[r]]
             r += 1
             w += 1
-          when 'u'
+          when "u"
             r += 1
             uchar = begin
               hexdec4(q[r, 4])
@@ -298,7 +298,7 @@ module MultiJson
               end
             end
             if rubydoesenc?
-              a[w] = '' << uchar
+              a[w] = "" << uchar
               w += 1
             else
               w += ucharenc(a, w, uchar)
@@ -348,7 +348,7 @@ module MultiJson
     end
 
     def hexdec4(s)
-      raise Error, 'short' if s.length != 4
+      raise Error, "short" if s.length != 4
 
       (nibble(s[0]) << 12) | (nibble(s[1]) << 8) | (nibble(s[2]) << 4) | nibble(s[3])
     end
@@ -364,20 +364,20 @@ module MultiJson
     end
 
     def nibble(c)
-      if c >= '0' && c <= '9' then c.ord - '0'.ord
-      elsif c >= 'a' && c <= 'z' then c.ord - 'a'.ord + 10
-      elsif c >= 'A' && c <= 'Z' then c.ord - 'A'.ord + 10
+      if c >= "0" && c <= "9" then c.ord - "0".ord
+      elsif c >= "a" && c <= "z" then c.ord - "a".ord + 10
+      elsif c >= "A" && c <= "Z" then c.ord - "A".ord + 10
       else
         raise Error, "invalid hex code #{c}"
       end
     end
 
     def objenc(x)
-      '{' + x.map { |k, v| keyenc(k) + ':' + valenc(v) }.join(',') + '}'
+      "{" + x.map { |k, v| keyenc(k) + ":" + valenc(v) }.join(",") + "}"
     end
 
     def arrenc(a)
-      '[' + a.map { |x| valenc(x) }.join(',') + ']'
+      "[" + a.map { |x| valenc(x) }.join(",") + "]"
     end
 
     def keyenc(k)
@@ -396,7 +396,7 @@ module MultiJson
       while r < s.length
         case s[r]
         when '"'  then t.print('\\"')
-        when "\\" then t.print('\\\\')
+        when "\\" then t.print("\\\\")
         when "\b" then t.print('\\b')
         when "\f" then t.print('\\f')
         when "\n" then t.print('\\n')
@@ -415,7 +415,7 @@ module MultiJson
             end
           elsif c < Spc
             t.write("\\u%04x" % c)
-          elsif c >= Spc && c <= '~'
+          elsif c >= Spc && c <= "~"
             t.putc(c)
           else
             n = ucharcopy(t, s, r) # ensure valid UTF-8 output
@@ -537,7 +537,7 @@ module MultiJson
     Usurr2 = 0xdc00
     Usurr3 = 0xe000
 
-    Spc = ' '[0]
-    Unesc = {'b' => "\b", 'f' => "\f", 'n' => "\n", 'r' => "\r", 't' => "\t"}
+    Spc = " "[0]
+    Unesc = {"b" => "\b", "f" => "\f", "n" => "\n", "r" => "\r", "t" => "\t"}
   end
 end

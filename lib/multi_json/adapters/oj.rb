@@ -1,6 +1,6 @@
-require 'set'
-require 'oj'
-require 'multi_json/adapter'
+require "set"
+require "oj"
+require "multi_json/adapter"
 
 module MultiJson
   module Adapters

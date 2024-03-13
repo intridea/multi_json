@@ -1,5 +1,5 @@
-require 'multi_json'
-require 'rspec'
+require "multi_json"
+require "rspec"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
@@ -16,17 +16,17 @@ ensure
 end
 
 def macruby?
-  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'macruby'
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == "macruby"
 end
 
 def jruby?
-  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == "jruby"
 end
 
 def skip_adapter?(adapter_name)
   @skip ||=
-    ENV.fetch('SKIP_ADAPTERS', '')
-    .split(',')
+    ENV.fetch("SKIP_ADAPTERS", "")
+    .split(",")
     .then do |skip|
       if jruby?
         %w[oj yajl] + skip

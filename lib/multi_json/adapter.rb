@@ -1,5 +1,5 @@
-require 'singleton'
-require 'multi_json/options'
+require "singleton"
+require "multi_json/options"
 
 module MultiJson
   class Adapter

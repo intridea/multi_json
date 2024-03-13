@@ -1,6 +1,6 @@
-require 'multi_json/adapter'
-require 'multi_json/convertible_hash_keys'
-require 'multi_json/vendor/okjson'
+require "multi_json/adapter"
+require "multi_json/convertible_hash_keys"
+require "multi_json/vendor/okjson"
 
 module MultiJson
   module Adapters

@@ -1,5 +1,5 @@
-require 'jrjackson' unless defined?(::JrJackson)
-require 'multi_json/adapter'
+require "jrjackson" unless defined?(::JrJackson)
+require "multi_json/adapter"
 
 module MultiJson
   module Adapters

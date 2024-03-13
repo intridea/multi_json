@@ -1,4 +1,4 @@
-require 'multi_json/adapter'
+require "multi_json/adapter"
 
 module MultiJson
   module Adapters

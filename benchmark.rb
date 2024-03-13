@@ -1,6 +1,6 @@
-require 'oj'
-require 'multi_json'
-require 'benchmark/ips'
+require "oj"
+require "multi_json"
+require "benchmark/ips"
 
 MultiJson.use :oj
 
