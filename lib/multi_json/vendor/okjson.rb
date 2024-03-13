@@ -117,7 +117,7 @@ module MultiJson
       case typ
       when '{' then objparse(ts)
       when '[' then arrparse(ts)
-      when :val,:str then [val, ts[1..-1]]
+      when :val,:str then [val, ts[1..]]
       else
         raise Error, "unexpected #{val.inspect}"
       end
@@ -131,14 +131,14 @@ module MultiJson
       obj = {}
 
       if ts[0][0] == '}'
-        return obj, ts[1..-1]
+        return obj, ts[1..]
       end
 
       k, v, ts = pairparse(ts)
       obj[k] = v
 
       if ts[0][0] == '}'
-        return obj, ts[1..-1]
+        return obj, ts[1..]
       end
 
       loop do
@@ -148,7 +148,7 @@ module MultiJson
         obj[k] = v
 
         if ts[0][0] == '}'
-          return obj, ts[1..-1]
+          return obj, ts[1..]
         end
       end
     end
@@ -158,7 +158,7 @@ module MultiJson
     # Returns the parsed values and any trailing tokens.
     def pairparse(ts)
       (typ, _, k) = ts[0]
-      ts = ts[1..-1]
+      ts = ts[1..]
       if typ != :str
         raise Error, "unexpected #{k.inspect}"
       end
@@ -175,14 +175,14 @@ module MultiJson
       arr = []
 
       if ts[0][0] == ']'
-        return arr, ts[1..-1]
+        return arr, ts[1..]
       end
 
       v, ts = valparse(ts)
       arr << v
 
       if ts[0][0] == ']'
-        return arr, ts[1..-1]
+        return arr, ts[1..]
       end
 
       loop do
@@ -192,7 +192,7 @@ module MultiJson
         arr << v
 
         if ts[0][0] == ']'
-          return arr, ts[1..-1]
+          return arr, ts[1..]
         end
       end
     end
@@ -202,7 +202,7 @@ module MultiJson
       if ts[0][0] != typ
         raise Error, "expected #{typ} (got #{ts[0].inspect})"
       end
-      ts[1..-1]
+      ts[1..]
     end
 
 
@@ -218,7 +218,7 @@ module MultiJson
         if typ != :space
           ts << [typ, lexeme, val]
         end
-        s = s[lexeme.length..-1]
+        s = s[lexeme.length..]
       end
       ts
     end
@@ -269,7 +269,7 @@ module MultiJson
         elsif m[2]
           [:val, m[0], Float(m[0])]
         else
-          [:val, m[0], Integer(m[1])*(10**m[3][1..-1].to_i(10))]
+          [:val, m[0], Integer(m[1])*(10**m[3][1..].to_i(10))]
         end
       else
         []
