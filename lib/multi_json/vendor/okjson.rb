@@ -432,12 +432,12 @@ module MultiJson
 
 
     def objenc(x)
-      '{' + x.map {|k,v| keyenc(k) + ':' + valenc(v)}.join(',') + '}'
+      '{' + x.map { |k,v| keyenc(k) + ':' + valenc(v) }.join(',') + '}'
     end
 
 
     def arrenc(a)
-      '[' + a.map {|x| valenc(x)}.join(',') + ']'
+      '[' + a.map { |x| valenc(x) }.join(',') + ']'
     end
 
 
