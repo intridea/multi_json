@@ -209,7 +209,7 @@ module MultiJson
     # excluding white space (as defined in RFC 4627).
     def lex(s)
       ts = []
-      while !s.empty?
+      until s.empty?
         typ, lexeme, val = tok(s)
         if typ.nil?
           raise Error, "invalid character at #{s[0,10].inspect}"
