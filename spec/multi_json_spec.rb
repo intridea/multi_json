@@ -18,13 +18,13 @@ describe MultiJson do
 
     it "defaults to ok_json if no other json implementions are available" do
       silence_warnings do
-        expect(MultiJson.default_adapter).to eq(:ok_json)
+        expect(described_class.default_adapter).to eq(:ok_json)
       end
     end
 
     it "prints a warning" do
       expect(Kernel).to receive(:warn).with(/warning/i)
-      MultiJson.default_adapter
+      described_class.default_adapter
     end
   end
 
@@ -37,8 +37,8 @@ describe MultiJson do
         # simulate that the json_gem is not loaded
         ext = defined?(JSON::Ext::Parser) ? JSON::Ext.send(:remove_const, :Parser) : nil
         begin
-          expect(MultiJson).to receive(:require)
-          MultiJson.default_adapter
+          expect(described_class).to receive(:require)
+          described_class.default_adapter
         ensure
           JSON::Ext::Parser = ext if ext
         end
@@ -47,73 +47,73 @@ describe MultiJson do
   end
 
   context "caching" do
-    before { MultiJson.use adapter }
+    before { described_class.use adapter }
 
     let(:adapter) { MultiJson::Adapters::JsonGem }
     let(:json_string) { '{"abc":"def"}' }
 
     it "busts caches on global options change" do
-      MultiJson.load_options = {symbolize_keys: true}
-      expect(MultiJson.load(json_string)).to eq(abc: "def")
-      MultiJson.load_options = nil
-      expect(MultiJson.load(json_string)).to eq("abc" => "def")
+      described_class.load_options = {symbolize_keys: true}
+      expect(described_class.load(json_string)).to eq(abc: "def")
+      described_class.load_options = nil
+      expect(described_class.load(json_string)).to eq("abc" => "def")
     end
 
     it "busts caches on per-adapter options change" do
       adapter.load_options = {symbolize_keys: true}
-      expect(MultiJson.load(json_string)).to eq(abc: "def")
+      expect(described_class.load(json_string)).to eq(abc: "def")
       adapter.load_options = nil
-      expect(MultiJson.load(json_string)).to eq("abc" => "def")
+      expect(described_class.load(json_string)).to eq("abc" => "def")
     end
   end
 
   it "defaults to the best available gem" do
     # Clear cache variable already set by previous tests
-    MultiJson.send(:remove_instance_variable, :@adapter) if MultiJson.instance_variable_defined?(:@adapter)
+    described_class.send(:remove_instance_variable, :@adapter) if described_class.instance_variable_defined?(:@adapter)
 
     if jruby? && !skip_adapter?("jr_jackson")
-      expect(MultiJson.adapter.to_s).to eq("MultiJson::Adapters::JrJackson")
+      expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JrJackson")
     elsif jruby?
-      expect(MultiJson.adapter.to_s).to eq("MultiJson::Adapters::JsonGem")
+      expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JsonGem")
     else
-      expect(MultiJson.adapter.to_s).to eq("MultiJson::Adapters::Oj")
+      expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::Oj")
     end
   end
 
   it "looks for adapter even if @adapter variable is nil" do
-    MultiJson.send(:instance_variable_set, :@adapter, nil)
-    expect(MultiJson).to receive(:default_adapter).and_return(:ok_json)
-    expect(MultiJson.adapter).to eq(MultiJson::Adapters::OkJson)
+    described_class.send(:instance_variable_set, :@adapter, nil)
+    expect(described_class).to receive(:default_adapter).and_return(:ok_json)
+    expect(described_class.adapter).to eq(MultiJson::Adapters::OkJson)
   end
 
   it "is settable via a symbol" do
-    MultiJson.use :json_gem
-    expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonGem)
+    described_class.use :json_gem
+    expect(described_class.adapter).to eq(MultiJson::Adapters::JsonGem)
   end
 
   it "is settable via a case-insensitive string" do
-    MultiJson.use "Json_Gem"
-    expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonGem)
+    described_class.use "Json_Gem"
+    expect(described_class.adapter).to eq(MultiJson::Adapters::JsonGem)
   end
 
   it "is settable via a class" do
     adapter = Class.new
-    MultiJson.use adapter
-    expect(MultiJson.adapter).to eq(adapter)
+    described_class.use adapter
+    expect(described_class.adapter).to eq(adapter)
   end
 
   it "is settable via a module" do
     adapter = Module.new
-    MultiJson.use adapter
-    expect(MultiJson.adapter).to eq(adapter)
+    described_class.use adapter
+    expect(described_class.adapter).to eq(adapter)
   end
 
   it "throws AdapterError on bad input" do
-    expect { MultiJson.use "bad adapter" }.to raise_error(MultiJson::AdapterError, /bad adapter/)
+    expect { described_class.use "bad adapter" }.to raise_error(MultiJson::AdapterError, /bad adapter/)
   end
 
   it "gives access to original error when raising AdapterError" do
-    exception = get_exception(MultiJson::AdapterError) { MultiJson.use "foobar" }
+    exception = get_exception(MultiJson::AdapterError) { described_class.use "foobar" }
     expect(exception.cause).to be_instance_of(::LoadError)
     expect(exception.message).to include("-- multi_json/adapters/foobar")
     expect(exception.message).to include("Did not recognize your adapter specification")
@@ -126,64 +126,64 @@ describe MultiJson do
     end
 
     it "uses the defined parser just for the call" do
-      MultiJson.use :json_gem
-      expect(MultiJson.dump("", adapter: :json_pure)).to eq("dump_something")
-      expect(MultiJson.load("", adapter: :json_pure)).to eq("load_something")
-      expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonGem)
+      described_class.use :json_gem
+      expect(described_class.dump("", adapter: :json_pure)).to eq("dump_something")
+      expect(described_class.load("", adapter: :json_pure)).to eq("load_something")
+      expect(described_class.adapter).to eq(MultiJson::Adapters::JsonGem)
     end
   end
 
   it "can set adapter for a block" do
-    MultiJson.use :ok_json
-    MultiJson.with_adapter(:json_pure) do
-      MultiJson.with_engine(:json_gem) do
-        expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonGem)
+    described_class.use :ok_json
+    described_class.with_adapter(:json_pure) do
+      described_class.with_engine(:json_gem) do
+        expect(described_class.adapter).to eq(MultiJson::Adapters::JsonGem)
       end
-      expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonPure)
+      expect(described_class.adapter).to eq(MultiJson::Adapters::JsonPure)
     end
-    expect(MultiJson.adapter).to eq(MultiJson::Adapters::OkJson)
+    expect(described_class.adapter).to eq(MultiJson::Adapters::OkJson)
   end
 
   it "JSON gem does not create symbols on parse" do
     skip "breaks in JRuby" if jruby?
 
-    MultiJson.with_engine(:json_gem) do
-      MultiJson.load('{"json_class":"ZOMG"}')
+    described_class.with_engine(:json_gem) do
+      described_class.load('{"json_class":"ZOMG"}')
 
       expect do
-        MultiJson.load('{"json_class":"OMG"}')
+        described_class.load('{"json_class":"OMG"}')
       end.not_to(change { Symbol.all_symbols.count })
     end
   end
 
   describe "default options" do
-    after(:all) { MultiJson.load_options = MultiJson.dump_options = nil }
+    after(:all) { described_class.load_options = described_class.dump_options = nil }
 
     it "is deprecated" do
       expect(Kernel).to receive(:warn).with(/deprecated/i)
-      silence_warnings { MultiJson.default_options = {foo: "bar"} }
+      silence_warnings { described_class.default_options = {foo: "bar"} }
     end
 
     it "sets both load and dump options" do
-      expect(MultiJson).to receive(:dump_options=).with({foo: "bar"})
-      expect(MultiJson).to receive(:load_options=).with({foo: "bar"})
-      silence_warnings { MultiJson.default_options = {foo: "bar"} }
+      expect(described_class).to receive(:dump_options=).with({foo: "bar"})
+      expect(described_class).to receive(:load_options=).with({foo: "bar"})
+      silence_warnings { described_class.default_options = {foo: "bar"} }
     end
   end
 
-  it_behaves_like "has options", MultiJson
+  it_behaves_like "has options", described_class
 
   describe "aliases" do
     unless skip_adapter?("jr_jackson")
       describe "jrjackson" do
-        after { expect(MultiJson.adapter).to eq(MultiJson::Adapters::JrJackson) }
+        after { expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson) }
 
         it "allows jrjackson alias as symbol" do
-          expect { MultiJson.use :jrjackson }.not_to raise_error
+          expect { described_class.use :jrjackson }.not_to raise_error
         end
 
         it "allows jrjackson alias as string" do
-          expect { MultiJson.use "jrjackson" }.not_to raise_error
+          expect { described_class.use "jrjackson" }.not_to raise_error
         end
       end
     end
