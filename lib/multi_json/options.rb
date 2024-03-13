@@ -30,7 +30,7 @@ module MultiJson
 
     def get_options(options, *args)
       if options.respond_to?(:call) && options.arity
-        options.arity == 0 ? options[] : options[*args]
+        options.arity.zero? ? options[] : options[*args]
       elsif options.respond_to?(:to_hash)
         options.to_hash
       end
