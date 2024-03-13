@@ -126,7 +126,7 @@ describe MultiJson do
       expect(MultiJson::Adapters::JsonPure).to receive(:load).once.and_return('load_something')
     end
 
-    it 'should use the defined parser just for the call' do
+    it 'uses the defined parser just for the call' do
       MultiJson.use :json_gem
       expect(MultiJson.dump('', :adapter => :json_pure)).to eq('dump_something')
       expect(MultiJson.load('', :adapter => :json_pure)).to eq('load_something')
