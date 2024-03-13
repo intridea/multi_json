@@ -54,7 +54,7 @@ shared_examples_for 'an adapter' do |adapter|
       end
     end
 
-    unless ['json_pure', 'json_gem'].include?(adapter)
+    unless %w[json_pure json_gem].include?(adapter)
       it 'dumps time in correct format' do
         time = Time.at(1_355_218_745).utc
 
