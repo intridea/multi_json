@@ -43,12 +43,12 @@ module MultiJson
         end
       when /\A3\./
         PRETTY_STATE_PROTOTYPE = {
-          :indent                => "  ",
-          :space                 => " ",
-          :space_before          => "",
-          :object_nl             => "\n",
-          :array_nl              => "\n",
-          :ascii_only            => false
+          :indent => "  ",
+          :space => " ",
+          :space_before => "",
+          :object_nl => "\n",
+          :array_nl => "\n",
+          :ascii_only => false
         }
 
         def dump(object, options = {})

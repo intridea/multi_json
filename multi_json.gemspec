@@ -13,11 +13,11 @@ Gem::Specification.new do |spec|
   spec.version       = MultiJson::Version
 
   spec.metadata = {
-    'bug_tracker_uri'   => 'https://github.com/intridea/multi_json/issues',
-    'changelog_uri'     => "https://github.com/intridea/multi_json/blob/v#{spec.version}/CHANGELOG.md",
+    'bug_tracker_uri' => 'https://github.com/intridea/multi_json/issues',
+    'changelog_uri' => "https://github.com/intridea/multi_json/blob/v#{spec.version}/CHANGELOG.md",
     'documentation_uri' => "https://www.rubydoc.info/gems/multi_json/#{spec.version}",
-    'source_code_uri'   => "https://github.com/intridea/multi_json/tree/v#{spec.version}",
-    'wiki_uri'          => 'https://github.com/intridea/multi_json/wiki'
+    'source_code_uri' => "https://github.com/intridea/multi_json/tree/v#{spec.version}",
+    'wiki_uri' => 'https://github.com/intridea/multi_json/wiki'
   }
 
   spec.required_rubygems_version = ">= 3.5.6"
