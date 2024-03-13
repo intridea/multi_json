@@ -23,7 +23,7 @@ module MultiJson
         end
       when Hash
         hash.inject({}) do |result, (key, value)|
-          new_key   = key_modifier.call(key)
+          new_key   = yield(key)
           new_value = prepare_hash(value, &key_modifier)
           result.merge! new_key => new_value
         end
