@@ -1,6 +1,6 @@
 module MultiJson
   module ConvertibleHashKeys
-  private
+    private
 
     def symbolize_keys(hash)
       prepare_hash(hash) do |key|

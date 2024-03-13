@@ -25,7 +25,7 @@ module MultiJson
         instance.dump(object, cached_dump_options(options))
       end
 
-    private
+      private
 
       def blank?(input)
         input.nil? || /\A\s*\z/ === input

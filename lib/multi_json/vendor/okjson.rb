@@ -84,7 +84,7 @@ module MultiJson
     end
 
 
-  private
+    private
 
 
     # Parses a "json text" in the sense of RFC 4627.

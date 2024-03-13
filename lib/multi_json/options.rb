@@ -26,7 +26,7 @@ module MultiJson
       @default_dump_options ||= {}
     end
 
-  private
+    private
 
     def get_options(options, *args)
       if options.respond_to?(:call) && options.arity
