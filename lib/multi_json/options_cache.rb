@@ -9,7 +9,7 @@ module MultiJson
 
     def fetch(type, key, &block)
       cache = instance_variable_get(:"@#{type}_cache")
-      (cache&.key?(key)) ? cache[key] : write(cache, key, &block)
+      cache&.key?(key) ? cache[key] : write(cache, key, &block)
     end
 
     private
