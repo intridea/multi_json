@@ -50,6 +50,7 @@ describe MultiJson do
 
   context 'caching' do
     before { MultiJson.use adapter }
+
     let(:adapter) { MultiJson::Adapters::JsonGem }
     let(:json_string) { '{"abc":"def"}' }
 
