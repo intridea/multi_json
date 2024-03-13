@@ -113,7 +113,7 @@ module MultiJson
       case typ
       when '{' then objparse(ts)
       when '[' then arrparse(ts)
-      when :val,:str then [val, ts[1..]]
+      when :val, :str then [val, ts[1..]]
       else
         raise Error, "unexpected #{val.inspect}"
       end
@@ -194,7 +194,7 @@ module MultiJson
       ts = []
       until s.empty?
         typ, lexeme, val = tok(s)
-        raise Error, "invalid character at #{s[0,10].inspect}" if typ.nil?
+        raise Error, "invalid character at #{s[0, 10].inspect}" if typ.nil?
 
         ts << [typ, lexeme, val] if typ != :space
         s = s[lexeme.length..]
@@ -218,26 +218,26 @@ module MultiJson
     # it is the lexeme.
     def tok(s)
       case s[0]
-      when ?{ then ['{', s[0,1], s[0,1]]
-      when ?} then ['}', s[0,1], s[0,1]]
-      when ?: then [':', s[0,1], s[0,1]]
-      when ?, then [',', s[0,1], s[0,1]]
-      when ?[ then ['[', s[0,1], s[0,1]]
-      when ?] then [']', s[0,1], s[0,1]]
+      when ?{ then ['{', s[0, 1], s[0, 1]]
+      when ?} then ['}', s[0, 1], s[0, 1]]
+      when ?: then [':', s[0, 1], s[0, 1]]
+      when ?, then [',', s[0, 1], s[0, 1]]
+      when ?[ then ['[', s[0, 1], s[0, 1]]
+      when ?] then [']', s[0, 1], s[0, 1]]
       when ?n then nulltok(s)
       when ?t then truetok(s)
       when ?f then falsetok(s)
       when ?" then strtok(s)
-      when Spc, ?\t, ?\n, ?\r then [:space, s[0,1], s[0,1]]
+      when Spc, ?\t, ?\n, ?\r then [:space, s[0, 1], s[0, 1]]
       else
         numtok(s)
       end
     end
 
 
-    def nulltok(s) = s[0,4] == 'null'  ? [:val, 'null',  nil]   : []
-    def truetok(s) = s[0,4] == 'true'  ? [:val, 'true',  true]  : []
-    def falsetok(s) = s[0,5] == 'false' ? [:val, 'false', false] : []
+    def nulltok(s) = s[0, 4] == 'null'  ? [:val, 'null',  nil]   : []
+    def truetok(s) = s[0, 4] == 'true'  ? [:val, 'true',  true]  : []
+    def falsetok(s) = s[0, 5] == 'false' ? [:val, 'false', false] : []
 
 
     def numtok(s)
@@ -265,9 +265,9 @@ module MultiJson
 
 
     def abbrev(s)
-      t = s[0,10]
+      t = s[0, 10]
       p = t['`']
-      t = t[0,p] if p
+      t = t[0, p] if p
       t += '...' if t.length < s.length
       '`' + t + '`'
     end
@@ -290,24 +290,24 @@ module MultiJson
           raise Error, "string literal ends with a \"\\\": \"#{q}\"" if r >= q.length
 
           case q[r]
-          when ?",?\\,?/,?'
+          when ?", ?\\, ?/, ?'
             a[w] = q[r]
             r += 1
             w += 1
-          when ?b,?f,?n,?r,?t
+          when ?b, ?f, ?n, ?r, ?t
             a[w] = Unesc[q[r]]
             r += 1
             w += 1
           when ?u
             r += 1
             uchar = begin
-              hexdec4(q[r,4])
+              hexdec4(q[r, 4])
             rescue RuntimeError => e
-              raise Error, "invalid escape sequence \\u#{q[r,4]}: #{e}"
+              raise Error, "invalid escape sequence \\u#{q[r, 4]}: #{e}"
             end
             r += 4
             if surrogate?(uchar) && (q.length >= r+6)
-              uchar1 = hexdec4(q[r+2,4])
+              uchar1 = hexdec4(q[r+2, 4])
               uchar = subst(uchar, uchar1)
               if uchar != Ucharerr
                 # A valid pair; consume.
@@ -336,7 +336,7 @@ module MultiJson
           w += 1
         end
       end
-      a[0,w]
+      a[0, w]
     end
 
 
@@ -396,7 +396,7 @@ module MultiJson
 
 
     def objenc(x)
-      '{' + x.map { |k,v| keyenc(k) + ':' + valenc(v) }.join(',') + '}'
+      '{' + x.map { |k, v| keyenc(k) + ':' + valenc(v) }.join(',') + '}'
     end
 
 
