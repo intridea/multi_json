@@ -11,11 +11,11 @@ module MultiJson
     end
 
     def load_options(*args)
-      defined?(@load_options) && get_options(@load_options, *args) || default_load_options
+      (defined?(@load_options) && get_options(@load_options, *args)) || default_load_options
     end
 
     def dump_options(*args)
-      defined?(@dump_options) && get_options(@dump_options, *args) || default_dump_options
+      (defined?(@dump_options) && get_options(@dump_options, *args)) || default_dump_options
     end
 
     def default_load_options

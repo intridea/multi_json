@@ -354,7 +354,7 @@ module MultiJson
     end
 
     def subst(u1, u2)
-      return ((u1 - Usurr1) << 10) | (u2 - Usurr2) + Usurrself if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
+      return ((u1 - Usurr1) << 10) | ((u2 - Usurr2) + Usurrself) if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
 
       Ucharerr
     end
@@ -460,7 +460,7 @@ module MultiJson
 
       # 2-byte, 11-bit sequence?
       if c0 < Utag3
-        raise Utf8Error if ((c0 & Umask2) << 6 | (c1 & Umaskx)) <= Uchar1max
+        raise Utf8Error if (((c0 & Umask2) << 6) | (c1 & Umaskx)) <= Uchar1max
 
         t.putc(c0)
         t.putc(c1)
@@ -475,7 +475,7 @@ module MultiJson
 
       # 3-byte, 16-bit sequence?
       if c0 < Utag4
-        u = (c0 & Umask3) << 12 | (c1 & Umaskx) << 6 | (c2 & Umaskx)
+        u = ((c0 & Umask3) << 12) | ((c1 & Umaskx) << 6) | (c2 & Umaskx)
         raise Utf8Error if u <= Uchar2max
 
         t.putc(c0)
@@ -492,7 +492,7 @@ module MultiJson
 
       # 4-byte, 21-bit sequence?
       if c0 < Utag5
-        u = (c0 & Umask4) << 18 | (c1 & Umaskx) << 12 | (c2 & Umaskx) << 6 | (c3 & Umaskx)
+        u = ((c0 & Umask4) << 18) | ((c1 & Umaskx) << 12) | ((c2 & Umaskx) << 6) | (c3 & Umaskx)
         raise Utf8Error if u <= Uchar3max
 
         t.putc(c0)
