@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
     'bug_tracker_uri' => 'https://github.com/intridea/multi_json/issues',
     'changelog_uri' => "https://github.com/intridea/multi_json/blob/v#{spec.version}/CHANGELOG.md",
     'documentation_uri' => "https://www.rubydoc.info/gems/multi_json/#{spec.version}",
+    'rubygems_mfa_required' => 'true',
     'source_code_uri' => "https://github.com/intridea/multi_json/tree/v#{spec.version}",
     'wiki_uri' => 'https://github.com/intridea/multi_json/wiki'
   }
