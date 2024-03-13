@@ -42,7 +42,7 @@ module MultiJson
     def decode(s)
       ts = lex(s)
       v, ts = textparse(ts)
-      if !ts.empty?
+      unless ts.empty?
         raise Error, 'trailing garbage'
       end
       v
@@ -278,7 +278,7 @@ module MultiJson
 
     def strtok(s)
       m = %r{"([^"\\]|\\["/\\bfnrt]|\\u[0-9a-fA-F]{4})*"}.match(s)
-      if ! m
+      unless m
         raise Error, "invalid string literal at #{abbrev(s)}"
       end
       [:str, m[0], unquote(m[0])]
