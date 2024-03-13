@@ -106,8 +106,8 @@ module MultiJson
     else
       fail ::LoadError, new_adapter
     end
-  rescue ::LoadError => exception
-    raise AdapterError.build(exception)
+  rescue ::LoadError => e
+    raise AdapterError.build(e)
   end
 
   # Decode a JSON string into Ruby.
@@ -120,8 +120,8 @@ module MultiJson
     adapter = current_adapter(options)
     begin
       adapter.load(string, options)
-    rescue adapter::ParseError => exception
-      raise ParseError.build(exception, string)
+    rescue adapter::ParseError => e
+      raise ParseError.build(e, string)
     end
   end
   alias_method :decode, :load

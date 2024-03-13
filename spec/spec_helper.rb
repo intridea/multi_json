@@ -74,8 +74,8 @@ end
 
 def get_exception(exception_class = StandardError)
   yield
-rescue exception_class => exception
-  exception
+rescue exception_class => e
+  e
 end
 
 def with_default_options
