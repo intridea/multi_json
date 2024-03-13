@@ -167,7 +167,7 @@ shared_examples_for 'an adapter' do |adapter|
     examples = [nil, '{"abc"}', ' ', "\t\t\t", "\n", StringIO.new('')]
     #
     # GSON bug: https://github.com/avsej/gson.rb/issues/3
-    examples << "\x82\xAC\xEF" unless adapter.name =~ /Gson/
+    examples << "\x82\xAC\xEF" unless adapter.name.include?('Gson')
 
     examples.each do |input|
       it "raises MultiJson::ParseError on invalid input: #{input.inspect}" do
