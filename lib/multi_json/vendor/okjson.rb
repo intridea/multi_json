@@ -354,19 +354,19 @@ module MultiJson
     end
 
     def subst(u1, u2)
-      return ((u1 - Usurr1) << 10) | ((u2 - Usurr2) + Usurrself) if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
+      return ((u1 - Usurr1) << 10) | ((u2 - Usurr2) + Usurrself) if u1 >= Usurr1 && u1 < Usurr2 && u2 >= Usurr2 && u2 < Usurr3
 
       Ucharerr
     end
 
     def surrogate?(u)
-      Usurr1 <= u && u < Usurr3
+      u >= Usurr1 && u < Usurr3
     end
 
     def nibble(c)
-      if '0' <= c && c <= '9' then c.ord - '0'.ord
-      elsif 'a' <= c && c <= 'z' then c.ord - 'a'.ord + 10
-      elsif 'A' <= c && c <= 'Z' then c.ord - 'A'.ord + 10
+      if c >= '0' && c <= '9' then c.ord - '0'.ord
+      elsif c >= 'a' && c <= 'z' then c.ord - 'a'.ord + 10
+      elsif c >= 'A' && c <= 'Z' then c.ord - 'A'.ord + 10
       else
         raise Error, "invalid hex code #{c}"
       end
@@ -415,7 +415,7 @@ module MultiJson
             end
           elsif c < Spc
             t.write("\\u%04x" % c)
-          elsif Spc <= c && c <= '~'
+          elsif c >= Spc && c <= '~'
             t.putc(c)
           else
             n = ucharcopy(t, s, r) # ensure valid UTF-8 output
@@ -456,7 +456,7 @@ module MultiJson
       raise Utf8Error if n < 2 # need continuation byte
 
       c1 = s[i + 1].ord
-      raise Utf8Error if c1 < Utagx || Utag2 <= c1
+      raise Utf8Error if c1 < Utagx || c1 >= Utag2
 
       # 2-byte, 11-bit sequence?
       if c0 < Utag3
@@ -471,7 +471,7 @@ module MultiJson
       raise Utf8Error if n < 3
 
       c2 = s[i + 2].ord
-      raise Utf8Error if c2 < Utagx || Utag2 <= c2
+      raise Utf8Error if c2 < Utagx || c2 >= Utag2
 
       # 3-byte, 16-bit sequence?
       if c0 < Utag4
@@ -488,7 +488,7 @@ module MultiJson
       raise Utf8Error if n < 4
 
       c3 = s[i + 3].ord
-      raise Utf8Error if c3 < Utagx || Utag2 <= c3
+      raise Utf8Error if c3 < Utagx || c3 >= Utag2
 
       # 4-byte, 21-bit sequence?
       if c0 < Utag5
