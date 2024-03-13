@@ -9,7 +9,7 @@ module MultiJson
 
     def fetch(type, key, &block)
       cache = instance_variable_get("@#{type}_cache")
-      cache.key?(key) ? cache[key] : write(cache, key, &block)
+      (cache && cache.key?(key)) ? cache[key] : write(cache, key, &block)
     end
 
     private
@@ -22,6 +22,7 @@ module MultiJson
     MAX_CACHE_SIZE = 1000
 
     def write(cache, key)
+      reset unless cache
       cache.clear if cache.length >= MAX_CACHE_SIZE
       cache[key] = yield
     end
