@@ -18,6 +18,7 @@ rdoc
 log
 
 ## BUNDLER
+Gemfile.lock
 *.gem
 .bundle
 pkg
