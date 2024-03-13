@@ -44,7 +44,7 @@ module MultiJson
     def decode(s)
       ts = lex(s)
       v, ts = textparse(ts)
-      if ts.length > 0
+      if !ts.empty?
         raise Error, 'trailing garbage'
       end
       v
@@ -211,7 +211,7 @@ module MultiJson
     # excluding white space (as defined in RFC 4627).
     def lex(s)
       ts = []
-      while s.length > 0
+      while !s.empty?
         typ, lexeme, val = tok(s)
         if typ.nil?
           raise Error, "invalid character at #{s[0,10].inspect}"
