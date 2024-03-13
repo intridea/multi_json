@@ -50,6 +50,9 @@ Style/FrozenStringLiteralComment:
 Style/OpenStructUse:
   Enabled: false
 
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
