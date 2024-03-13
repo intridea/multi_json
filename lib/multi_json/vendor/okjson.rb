@@ -282,7 +282,7 @@ module MultiJson
 
 
     def strtok(s)
-      m = /"([^"\\]|\\["\/\\bfnrt]|\\u[0-9a-fA-F]{4})*"/.match(s)
+      m = %r{"([^"\\]|\\["/\\bfnrt]|\\u[0-9a-fA-F]{4})*"}.match(s)
       if ! m
         raise Error, "invalid string literal at #{abbrev(s)}"
       end
