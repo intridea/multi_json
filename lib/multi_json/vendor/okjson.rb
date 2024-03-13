@@ -216,7 +216,7 @@ module MultiJson
       ts = []
       while s.length > 0
         typ, lexeme, val = tok(s)
-        if typ == nil
+        if typ.nil?
           raise Error, "invalid character at #{s[0,10].inspect}"
         end
         if typ != :space
