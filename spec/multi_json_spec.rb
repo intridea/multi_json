@@ -154,7 +154,7 @@ describe MultiJson do
 
       expect do
         MultiJson.load('{"json_class":"OMG"}')
-      end.to_not change { Symbol.all_symbols.count }
+      end.not_to change { Symbol.all_symbols.count }
     end
   end
 

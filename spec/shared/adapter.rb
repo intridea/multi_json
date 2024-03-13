@@ -8,8 +8,8 @@ shared_examples_for 'an adapter' do |adapter|
 
   it 'does not modify argument hashes' do
     options = {:symbolize_keys => true, :pretty => false, :adapter => :ok_json}
-    expect { MultiJson.load('{}', options) }.to_not change { options }
-    expect { MultiJson.dump([42], options) }.to_not change { options }
+    expect { MultiJson.load('{}', options) }.not_to change { options }
+    expect { MultiJson.dump([42], options) }.not_to change { options }
   end
 
   describe '.dump' do
@@ -143,7 +143,7 @@ shared_examples_for 'an adapter' do |adapter|
       input = %(\n\n  {"foo":"bar"} \n\n\t)
       expect do
         MultiJson.load(input)
-      end.to_not change { input }
+      end.not_to change { input }
     end
 
     # Ruby 1.8 doesn't support String encodings
@@ -154,7 +154,7 @@ shared_examples_for 'an adapter' do |adapter|
 
         expect do
           MultiJson.load(input)
-        end.to_not change { input.encoding }
+        end.not_to change { input.encoding }
       end
     end
 
