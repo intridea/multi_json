@@ -335,14 +335,12 @@ module MultiJson
               raise Error, "invalid escape sequence \\u#{q[r,4]}: #{e}"
             end
             r += 4
-            if surrogate? uchar
-              if q.length >= r+6
-                uchar1 = hexdec4(q[r+2,4])
-                uchar = subst(uchar, uchar1)
-                if uchar != Ucharerr
-                  # A valid pair; consume.
-                  r += 6
-                end
+            if surrogate?(uchar) && (q.length >= r+6)
+              uchar1 = hexdec4(q[r+2,4])
+              uchar = subst(uchar, uchar1)
+              if uchar != Ucharerr
+                # A valid pair; consume.
+                r += 6
               end
             end
             if rubydoesenc?
