@@ -1,7 +1,7 @@
 # MultiJSON
 
 [![Gem Version](http://img.shields.io/gem/v/multi_json.svg)][gem]
-[![Build Status](http://travis-ci.org/intridea/multi_json.svg)][travis]
+[![Build Status](https://github.com/intridea/multi_json/workflows/Test/badge.svg)][action]
 [![Code Climate](https://codeclimate.com/github/intridea/multi_json.svg)][codeclimate]
 
 Lots of Ruby libraries parse JSON and everyone has their favorite JSON coder.
@@ -47,25 +47,25 @@ MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 
 ## Supported JSON Engines
 
-* [Oj][oj] Optimized JSON by Peter Ohler
-* [Yajl][yajl] Yet Another JSON Library by Brian Lopez
-* [JSON][json-gem] The default JSON gem with C-extensions (ships with Ruby 1.9+)
-* [JSON Pure][json-gem] A Ruby variant of the JSON gem
-* [NSJSONSerialization][nsjson] Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
-* [gson.rb][gson] A Ruby wrapper for google-gson library (JRuby only)
-* [JrJackson][jrjackson] JRuby wrapper for Jackson (JRuby only)
-* [OkJson][okjson] A simple, vendorable JSON parser
+- [Oj][oj] Optimized JSON by Peter Ohler
+- [Yajl][yajl] Yet Another JSON Library by Brian Lopez
+- [JSON][json-gem] The default JSON gem with C-extensions (ships with Ruby 1.9+)
+- [JSON Pure][json-gem] A Ruby variant of the JSON gem
+- [NSJSONSerialization][nsjson] Wrapper for Apple's NSJSONSerialization in the Cocoa Framework (MacRuby only)
+- [gson.rb][gson] A Ruby wrapper for google-gson library (JRuby only)
+- [JrJackson][jrjackson] JRuby wrapper for Jackson (JRuby only)
+- [OkJson][okjson] A simple, vendorable JSON parser
 
 ## Supported Ruby Versions
-This library aims to support and is [tested against][travis] the following Ruby
+
+This library aims to support and is [tested against][action] the following Ruby
 implementations:
 
-
-* Ruby 3.0
-* Ruby 3.1
-* Ruby 3.2
-* Ruby 3.3
-* [JRuby][]
+- Ruby 3.0
+- Ruby 3.1
+- Ruby 3.2
+- Ruby 3.3
+- [JRuby][]
 
 If something doesn't work in one of these implementations, it's a bug.
 
@@ -96,9 +96,12 @@ spec.add_dependency 'multi_json', '~> 1.0'
 ```
 
 ## Copyright
+
 Copyright (c) 2010-2018 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
 and Pavel Pravosud. See [LICENSE][] for details.
 
+<!-- TODO: on main renaming, change this link -->
+[action]: https://github.com/intridea/_multijson/actions?query=workflow%3ATest+branch%3Amaster+event%3Apush
 [codeclimate]: https://codeclimate.com/github/intridea/multi_json
 [gem]: https://rubygems.org/gems/multi_json
 [gson]: https://github.com/avsej/gson.rb
@@ -113,5 +116,4 @@ and Pavel Pravosud. See [LICENSE][] for details.
 [okjson]: https://github.com/kr/okjson
 [pvc]: http://docs.rubygems.org/read/chapter/16#page74
 [semver]: http://semver.org/
-[travis]: http://travis-ci.org/intridea/multi_json
 [yajl]: https://github.com/brianmario/yajl-ruby
