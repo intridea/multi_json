@@ -6,8 +6,8 @@ module MultiJson
   module Adapters
     # Use the Oj library to dump/load.
     class Oj < Adapter
-      defaults :load, :mode => :strict, :symbolize_keys => false
-      defaults :dump, :mode => :compat, :time_format => :ruby, :use_to_json => true
+      defaults :load, mode: :strict, symbolize_keys: false
+      defaults :dump, mode: :compat, time_format: :ruby, use_to_json: true
 
       # In certain cases OJ gem may throw JSON::ParserError exception instead
       # of its own class. Also, we can't expect ::JSON::ParserError and
@@ -43,12 +43,12 @@ module MultiJson
         end
       when /\A3\./
         PRETTY_STATE_PROTOTYPE = {
-          :indent => "  ",
-          :space => " ",
-          :space_before => "",
-          :object_nl => "\n",
-          :array_nl => "\n",
-          :ascii_only => false
+          indent: "  ",
+          space: " ",
+          space_before: "",
+          object_nl: "\n",
+          array_nl: "\n",
+          ascii_only: false
         }
 
         def dump(object, options = {})

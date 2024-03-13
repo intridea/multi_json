@@ -8,23 +8,23 @@ shared_examples_for 'JSON-like adapter' do |adapter|
       it 'passes default pretty options' do
         object = 'foo'
         expect(object).to receive(:to_json).with(JSON::PRETTY_STATE_PROTOTYPE.to_h)
-        MultiJson.dump(object, :pretty => true)
+        MultiJson.dump(object, pretty: true)
       end
     end
 
     describe 'with :indent option' do
       it 'passes it on dump' do
         object = 'foo'
-        expect(object).to receive(:to_json).with({:indent => "\t"})
-        MultiJson.dump(object, :indent => "\t")
+        expect(object).to receive(:to_json).with({indent: "\t"})
+        MultiJson.dump(object, indent: "\t")
       end
     end
   end
 
   describe '.load' do
     it 'passes :quirks_mode option' do
-      expect(::JSON).to receive(:parse).with('[123]', {:quirks_mode => false, :create_additions => false})
-      MultiJson.load('[123]', :quirks_mode => false)
+      expect(::JSON).to receive(:parse).with('[123]', {quirks_mode: false, create_additions: false})
+      MultiJson.load('[123]', quirks_mode: false)
     end
   end
 end

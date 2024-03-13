@@ -19,19 +19,19 @@ shared_examples_for 'has options' do |object|
     end
 
     it 'allows hashes' do
-      subject.dump_options = {:foo => 'bar'}
-      expect(subject.dump_options).to eq(:foo => 'bar')
+      subject.dump_options = {foo: 'bar'}
+      expect(subject.dump_options).to eq(foo: 'bar')
     end
 
     it 'allows objects that implement #to_hash' do
       value = Class.new do
         def to_hash
-          {:foo => 'bar'}
+          {foo: 'bar'}
         end
       end.new
 
       subject.dump_options = value
-      expect(subject.dump_options).to eq(:foo => 'bar')
+      expect(subject.dump_options).to eq(foo: 'bar')
     end
 
     it 'evaluates lambda returning options (with args)' do
@@ -40,8 +40,8 @@ shared_examples_for 'has options' do |object|
     end
 
     it 'evaluates lambda returning options (with no args)' do
-      subject.dump_options = -> { {:foo => 'bar'} }
-      expect(subject.dump_options).to eq(:foo => 'bar')
+      subject.dump_options = -> { {foo: 'bar'} }
+      expect(subject.dump_options).to eq(foo: 'bar')
     end
 
     it 'returns empty hash in all other cases' do
@@ -73,19 +73,19 @@ shared_examples_for 'has options' do |object|
     end
 
     it 'allows hashes' do
-      subject.load_options = {:foo => 'bar'}
-      expect(subject.load_options).to eq(:foo => 'bar')
+      subject.load_options = {foo: 'bar'}
+      expect(subject.load_options).to eq(foo: 'bar')
     end
 
     it 'allows objects that implement #to_hash' do
       value = Class.new do
         def to_hash
-          {:foo => 'bar'}
+          {foo: 'bar'}
         end
       end.new
 
       subject.load_options = value
-      expect(subject.load_options).to eq(:foo => 'bar')
+      expect(subject.load_options).to eq(foo: 'bar')
     end
 
     it 'evaluates lambda returning options (with args)' do
@@ -94,8 +94,8 @@ shared_examples_for 'has options' do |object|
     end
 
     it 'evaluates lambda returning options (with no args)' do
-      subject.load_options = -> { {:foo => 'bar'} }
-      expect(subject.load_options).to eq(:foo => 'bar')
+      subject.load_options = -> { {foo: 'bar'} }
+      expect(subject.load_options).to eq(foo: 'bar')
     end
 
     it 'returns empty hash in all other cases' do

@@ -19,7 +19,7 @@ namespace :adapters do
   end
 end
 
-task :spec => %w[
+task spec: %w[
   base_spec
   adapters:oj
   adapters:yajl
@@ -31,5 +31,5 @@ task :spec => %w[
   adapters:nsjsonserialization
 ]
 
-task :default => :spec
-task :test => :spec
+task default: :spec
+task test: :spec

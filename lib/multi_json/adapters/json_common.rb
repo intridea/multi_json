@@ -3,7 +3,7 @@ require 'multi_json/adapter'
 module MultiJson
   module Adapters
     class JsonCommon < Adapter
-      defaults :load, :create_additions => false, :quirks_mode => true
+      defaults :load, create_additions: false, quirks_mode: true
 
       def load(string, options = {})
         string = string.dup.force_encoding(::Encoding::ASCII_8BIT) if string.respond_to?(:force_encoding)

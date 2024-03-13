@@ -7,7 +7,7 @@ shared_examples_for 'an adapter' do |adapter|
   it_behaves_like 'has options', adapter
 
   it 'does not modify argument hashes' do
-    options = {:symbolize_keys => true, :pretty => false, :adapter => :ok_json}
+    options = {symbolize_keys: true, pretty: false, adapter: :ok_json}
     expect { MultiJson.load('{}', options) }.not_to(change { options })
     expect { MultiJson.dump([42], options) }.not_to(change { options })
   end
@@ -17,22 +17,22 @@ shared_examples_for 'an adapter' do |adapter|
       before { MultiJson.dump_options = MultiJson.adapter.dump_options = {} }
 
       after do
-        expect(MultiJson.adapter.instance).to receive(:dump).with(1, {:foo => 'bar', :fizz => 'buzz'})
-        MultiJson.dump(1, :fizz => 'buzz')
+        expect(MultiJson.adapter.instance).to receive(:dump).with(1, {foo: 'bar', fizz: 'buzz'})
+        MultiJson.dump(1, fizz: 'buzz')
         MultiJson.dump_options = MultiJson.adapter.dump_options = nil
       end
 
       it 'respects global dump options' do
-        MultiJson.dump_options = {:foo => 'bar'}
+        MultiJson.dump_options = {foo: 'bar'}
       end
 
       it 'respects per-adapter dump options' do
-        MultiJson.adapter.dump_options = {:foo => 'bar'}
+        MultiJson.adapter.dump_options = {foo: 'bar'}
       end
 
       it 'adapter-specific are overridden by global options' do
-        MultiJson.adapter.dump_options = {:foo => 'foo'}
-        MultiJson.dump_options = {:foo => 'bar'}
+        MultiJson.adapter.dump_options = {foo: 'foo'}
+        MultiJson.dump_options = {foo: 'bar'}
       end
     end
 
@@ -65,15 +65,15 @@ shared_examples_for 'an adapter' do |adapter|
     it 'dumps symbol and fixnum keys as strings' do
       [
         [
-          {:foo => {:bar => 'baz'}},
+          {foo: {bar: 'baz'}},
           {'foo' => {'bar' => 'baz'}}
         ],
         [
-          [{:foo => {:bar => 'baz'}}],
+          [{foo: {bar: 'baz'}}],
           [{'foo' => {'bar' => 'baz'}}]
         ],
         [
-          {:foo => [{:bar => 'baz'}]},
+          {foo: [{bar: 'baz'}]},
           {'foo' => [{'bar' => 'baz'}]}
         ],
         [
@@ -92,8 +92,8 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'passes options to the adapter' do
-      expect(MultiJson.adapter).to receive(:dump).with('foo', {:bar => :baz})
-      MultiJson.dump('foo', {:bar => :baz})
+      expect(MultiJson.adapter).to receive(:dump).with('foo', {bar: :baz})
+      MultiJson.dump('foo', {bar: :baz})
     end
 
     it 'dumps custom objects that implement to_json' do
@@ -120,22 +120,22 @@ shared_examples_for 'an adapter' do |adapter|
       before { MultiJson.load_options = MultiJson.adapter.load_options = {} }
 
       after do
-        expect(MultiJson.adapter.instance).to receive(:load).with('1', {:foo => 'bar', :fizz => 'buzz'})
-        MultiJson.load('1', :fizz => 'buzz')
+        expect(MultiJson.adapter.instance).to receive(:load).with('1', {foo: 'bar', fizz: 'buzz'})
+        MultiJson.load('1', fizz: 'buzz')
         MultiJson.load_options = MultiJson.adapter.load_options = nil
       end
 
       it 'respects global load options' do
-        MultiJson.load_options = {:foo => 'bar'}
+        MultiJson.load_options = {foo: 'bar'}
       end
 
       it 'respects per-adapter load options' do
-        MultiJson.adapter.load_options = {:foo => 'bar'}
+        MultiJson.adapter.load_options = {foo: 'bar'}
       end
 
       it 'adapter-specific are overridden by global options' do
-        MultiJson.adapter.load_options = {:foo => 'foo'}
-        MultiJson.load_options = {:foo => 'bar'}
+        MultiJson.adapter.load_options = {foo: 'foo'}
+        MultiJson.load_options = {foo: 'bar'}
       end
     end
 
@@ -195,7 +195,7 @@ shared_examples_for 'an adapter' do |adapter|
     end
 
     it 'stringifys symbol keys when encoding' do
-      dumped_json = MultiJson.dump(:a => 1, :b => {:c => 2})
+      dumped_json = MultiJson.dump(a: 1, b: {c: 2})
       loaded_json = MultiJson.load(dumped_json)
       expect(loaded_json).to eq('a' => 1, 'b' => {'c' => 2})
     end
@@ -209,18 +209,18 @@ shared_examples_for 'an adapter' do |adapter|
       [
         [
           '{"abc":{"def":"hgi"}}',
-          {:abc => {:def => 'hgi'}}
+          {abc: {def: 'hgi'}}
         ],
         [
           '[{"abc":{"def":"hgi"}}]',
-          [{:abc => {:def => 'hgi'}}]
+          [{abc: {def: 'hgi'}}]
         ],
         [
           '{"abc":[{"def":"hgi"}]}',
-          {:abc => [{:def => 'hgi'}]}
+          {abc: [{def: 'hgi'}]}
         ]
       ].each do |example, expected|
-        expect(MultiJson.load(example, :symbolize_keys => true)).to eq(expected)
+        expect(MultiJson.load(example, symbolize_keys: true)).to eq(expected)
       end
     end
 

@@ -53,15 +53,15 @@ describe MultiJson do
     let(:json_string) { '{"abc":"def"}' }
 
     it 'busts caches on global options change' do
-      MultiJson.load_options = {:symbolize_keys => true}
-      expect(MultiJson.load(json_string)).to eq(:abc => 'def')
+      MultiJson.load_options = {symbolize_keys: true}
+      expect(MultiJson.load(json_string)).to eq(abc: 'def')
       MultiJson.load_options = nil
       expect(MultiJson.load(json_string)).to eq('abc' => 'def')
     end
 
     it 'busts caches on per-adapter options change' do
-      adapter.load_options = {:symbolize_keys => true}
-      expect(MultiJson.load(json_string)).to eq(:abc => 'def')
+      adapter.load_options = {symbolize_keys: true}
+      expect(MultiJson.load(json_string)).to eq(abc: 'def')
       adapter.load_options = nil
       expect(MultiJson.load(json_string)).to eq('abc' => 'def')
     end
@@ -127,8 +127,8 @@ describe MultiJson do
 
     it 'uses the defined parser just for the call' do
       MultiJson.use :json_gem
-      expect(MultiJson.dump('', :adapter => :json_pure)).to eq('dump_something')
-      expect(MultiJson.load('', :adapter => :json_pure)).to eq('load_something')
+      expect(MultiJson.dump('', adapter: :json_pure)).to eq('dump_something')
+      expect(MultiJson.load('', adapter: :json_pure)).to eq('load_something')
       expect(MultiJson.adapter).to eq(MultiJson::Adapters::JsonGem)
     end
   end
@@ -161,13 +161,13 @@ describe MultiJson do
 
     it 'is deprecated' do
       expect(Kernel).to receive(:warn).with(/deprecated/i)
-      silence_warnings { MultiJson.default_options = {:foo => 'bar'} }
+      silence_warnings { MultiJson.default_options = {foo: 'bar'} }
     end
 
     it 'sets both load and dump options' do
-      expect(MultiJson).to receive(:dump_options=).with({:foo => 'bar'})
-      expect(MultiJson).to receive(:load_options=).with({:foo => 'bar'})
-      silence_warnings { MultiJson.default_options = {:foo => 'bar'} }
+      expect(MultiJson).to receive(:dump_options=).with({foo: 'bar'})
+      expect(MultiJson).to receive(:load_options=).with({foo: 'bar'})
+      silence_warnings { MultiJson.default_options = {foo: 'bar'} }
     end
   end
 

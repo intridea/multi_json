@@ -8,7 +8,7 @@ module MultiJson
       ParseError = ::Yajl::ParseError
 
       def load(string, options = {})
-        ::Yajl::Parser.new(:symbolize_keys => options[:symbolize_keys]).parse(string)
+        ::Yajl::Parser.new(symbolize_keys: options[:symbolize_keys]).parse(string)
       end
 
       def dump(object, options = {})

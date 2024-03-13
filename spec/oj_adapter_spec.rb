@@ -13,7 +13,7 @@ describe MultiJson::Adapters::Oj do
       around { |example| with_default_options(&example) }
 
       it 'ensures indent is a Fixnum' do
-        expect { MultiJson.dump(42, :indent => '') }.not_to raise_error
+        expect { MultiJson.dump(42, indent: '') }.not_to raise_error
       end
     end
   end
@@ -29,7 +29,7 @@ describe MultiJson::Adapters::Oj do
   context 'with Oj.default_settings' do
     around do |example|
       options = Oj.default_options
-      Oj.default_options = {:symbol_keys => true}
+      Oj.default_options = {symbol_keys: true}
       example.call
       Oj.default_options = options
     end
