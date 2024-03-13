@@ -56,7 +56,7 @@ module MultiJson
           ::Oj.dump(object, options)
         end
       else
-        fail "Unsupported Oj version: #{::Oj::VERSION}"
+        raise "Unsupported Oj version: #{::Oj::VERSION}"
       end
     end
   end

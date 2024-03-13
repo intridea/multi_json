@@ -102,7 +102,7 @@ module MultiJson
     when Class, Module
       new_adapter
     else
-      fail ::LoadError, new_adapter
+      raise ::LoadError, new_adapter
     end
   rescue ::LoadError => e
     raise AdapterError.build(e)
