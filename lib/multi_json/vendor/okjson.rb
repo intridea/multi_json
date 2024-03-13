@@ -489,7 +489,7 @@ module MultiJson
 
 
     def numenc(x)
-      if ((x.nan? || x.infinite?) rescue false)
+      if (x.nan? || x.infinite? rescue false)
         raise Error, "Numeric cannot be represented: #{x}"
       end
       "#{x}"
