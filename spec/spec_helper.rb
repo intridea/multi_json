@@ -46,7 +46,6 @@ def undefine_constants(*consts)
   end
 
   yield
-
 ensure
   values.each do |const, value|
     Object.const_set const, value
