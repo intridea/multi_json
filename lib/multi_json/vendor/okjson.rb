@@ -404,7 +404,7 @@ module MultiJson
       if Usurr1 <= u1 && u1 < Usurr2 && Usurr2 <= u2 && u2 < Usurr3
         return ((u1-Usurr1)<<10) | (u2-Usurr2) + Usurrself
       end
-      return Ucharerr
+      Ucharerr
     end
 
 
@@ -559,7 +559,7 @@ module MultiJson
       raise Utf8Error
     rescue Utf8Error
       t.write(Ustrerr)
-      return 1
+      1
     end
 
 
