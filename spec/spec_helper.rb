@@ -8,7 +8,8 @@ RSpec.configure do |config|
 end
 
 def silence_warnings
-  old_verbose, $VERBOSE = $VERBOSE, nil
+  old_verbose = $VERBOSE
+  $VERBOSE = nil
   yield
 ensure
   $VERBOSE = old_verbose

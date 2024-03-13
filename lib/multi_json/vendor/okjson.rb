@@ -157,7 +157,8 @@ module MultiJson
     # Parses a "member" in the sense of RFC 4627.
     # Returns the parsed values and any trailing tokens.
     def pairparse(ts)
-      (typ, _, k), ts = ts[0], ts[1..-1]
+      (typ, _, k) = ts[0]
+      ts = ts[1..-1]
       if typ != :str
         raise Error, "unexpected #{k.inspect}"
       end
@@ -304,7 +305,8 @@ module MultiJson
       if rubydoesenc?
         a.force_encoding('UTF-8')
       end
-      r, w = 0, 0
+      r = 0
+      w = 0
       while r < q.length
         c = q[r]
         if c == ?\\
