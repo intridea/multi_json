@@ -36,7 +36,7 @@ module MultiJson
     [:jr_jackson, 'jrjackson'],
     [:json_gem,   'json/ext'],
     [:gson,       'gson'],
-    [:json_pure,  'json/pure'],
+    [:json_pure,  'json/pure']
   ]
 
   # The default adapter based on what you currently

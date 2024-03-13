@@ -44,7 +44,7 @@ shared_examples_for 'an adapter' do |adapter|
         '2',
         true,
         false,
-        nil,
+        nil
       ]
 
       examples.each do |example|
@@ -66,20 +66,20 @@ shared_examples_for 'an adapter' do |adapter|
       [
         [
           {:foo => {:bar => 'baz'}},
-          {'foo' => {'bar' => 'baz'}},
+          {'foo' => {'bar' => 'baz'}}
         ],
         [
           [{:foo => {:bar => 'baz'}}],
-          [{'foo' => {'bar' => 'baz'}}],
+          [{'foo' => {'bar' => 'baz'}}]
         ],
         [
           {:foo => [{:bar => 'baz'}]},
-          {'foo' => [{'bar' => 'baz'}]},
+          {'foo' => [{'bar' => 'baz'}]}
         ],
         [
           {1 => {2 => {3 => 'bar'}}},
-          {'1' => {'2' => {'3' => 'bar'}}},
-        ],
+          {'1' => {'2' => {'3' => 'bar'}}}
+        ]
       ].each do |example, expected|
         dumped_json = MultiJson.dump(example)
         expect(MultiJson.load(dumped_json)).to eq(expected)
@@ -209,16 +209,16 @@ shared_examples_for 'an adapter' do |adapter|
       [
         [
           '{"abc":{"def":"hgi"}}',
-          {:abc => {:def => 'hgi'}},
+          {:abc => {:def => 'hgi'}}
         ],
         [
           '[{"abc":{"def":"hgi"}}]',
-          [{:abc => {:def => 'hgi'}}],
+          [{:abc => {:def => 'hgi'}}]
         ],
         [
           '{"abc":[{"def":"hgi"}]}',
-          {:abc => [{:def => 'hgi'}]},
-        ],
+          {:abc => [{:def => 'hgi'}]}
+        ]
       ].each do |example, expected|
         expect(MultiJson.load(example, :symbolize_keys => true)).to eq(expected)
       end
