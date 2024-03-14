@@ -5,7 +5,10 @@ require:
  - standard
  - standard-performance
 
+
 AllCops:
+  Exclude:
+    - "lib/multi_json/vendor/okjson.rb"
   NewCops: enable
   TargetRubyVersion: 3.0
 
