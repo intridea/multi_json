@@ -24,15 +24,19 @@ shared_examples_for "an adapter" do |adapter|
 
       it "respects global dump options" do
         MultiJson.dump_options = {foo: "bar"}
+        expect(MultiJson.dump_options).to eq({foo: "bar"})
       end
 
       it "respects per-adapter dump options" do
         MultiJson.adapter.dump_options = {foo: "bar"}
+        expect(MultiJson.adapter.dump_options).to eq({foo: "bar"})
       end
 
       it "adapter-specific are overridden by global options" do
         MultiJson.adapter.dump_options = {foo: "foo"}
         MultiJson.dump_options = {foo: "bar"}
+        expect(MultiJson.adapter.dump_options).to eq({foo: "foo"})
+        expect(MultiJson.dump_options).to eq({foo: "bar"})
       end
     end
 
@@ -127,15 +131,19 @@ shared_examples_for "an adapter" do |adapter|
 
       it "respects global load options" do
         MultiJson.load_options = {foo: "bar"}
+        expect(MultiJson.load_options).to eq({foo: "bar"})
       end
 
       it "respects per-adapter load options" do
         MultiJson.adapter.load_options = {foo: "bar"}
+        expect(MultiJson.adapter.load_options).to eq({foo: "bar"})
       end
 
       it "adapter-specific are overridden by global options" do
         MultiJson.adapter.load_options = {foo: "foo"}
         MultiJson.load_options = {foo: "bar"}
+        expect(MultiJson.adapter.load_options).to eq({foo: "foo"})
+        expect(MultiJson.load_options).to eq({foo: "bar"})
       end
     end
 
