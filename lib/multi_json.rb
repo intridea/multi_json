@@ -38,27 +38,16 @@ module MultiJson
   }
 
   # The default adapter based on what you currently
-  # have loaded and installed. First checks to see
-  # if any adapters are already loaded, then checks
-  # to see which are installed if none are loaded.
+  # have loaded and installed.
   def default_adapter
-    return :oj if defined?(::Oj)
-    return :yajl if defined?(::Yajl)
-    return :jr_jackson if defined?(::JrJackson)
-    return :json_gem if defined?(::JSON::Ext::Parser)
-    return :gson if defined?(::Gson)
-
-    REQUIREMENT_MAP.each do |adapter, library|
-      require library
-      return adapter
-    rescue ::LoadError
-      next
-    end
+    adapter = loaded_adapter || installable_adapter
+    return adapter if adapter
 
     Kernel.warn "[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance."
 
     :ok_json
   end
+
   alias_method :default_engine, :default_adapter
 
   # Get the current adapter class.
@@ -146,6 +135,28 @@ module MultiJson
   alias_method :with_engine, :with_adapter
 
   private
+
+  # Checks for already loaded adapters and returns the first match
+  def loaded_adapter
+    return :oj if defined?(::Oj)
+    return :yajl if defined?(::Yajl)
+    return :jr_jackson if defined?(::JrJackson)
+    return :json_gem if defined?(::JSON::Ext::Parser)
+    return :gson if defined?(::Gson)
+
+    nil
+  end
+
+  # Attempts to load and return the first installable adapter
+  def installable_adapter
+    REQUIREMENT_MAP.each do |adapter, library|
+      require library
+      return adapter
+    rescue ::LoadError
+      next
+    end
+    nil
+  end
 
   def load_adapter_from_string_name(name)
     name = ALIASES.fetch(name, name)
