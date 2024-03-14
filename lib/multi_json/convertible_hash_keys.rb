@@ -15,30 +15,31 @@ module MultiJson
     end
 
     def prepare_hash(hash, &key_modifier)
-      return hash unless key_modifier
+      return handle_simple_objects(hash) unless hash.is_a?(Array) || hash.is_a?(Hash)
+      return handle_array(hash, &key_modifier) if hash.is_a?(Array)
 
-      case hash
-      when Array
-        hash.map do |value|
-          prepare_hash(value, &key_modifier)
-        end
-      when Hash
-        hash.inject({}) do |result, (key, value)|
-          new_key = yield(key)
-          new_value = prepare_hash(value, &key_modifier)
-          result.merge! new_key => new_value
-        end
-      when String, Numeric, true, false, nil
-        hash
-      else
-        if hash.respond_to?(:to_json)
-          hash
-        elsif hash.respond_to?(:to_s)
-          hash.to_s
-        else
-          hash
-        end
+      handle_hash(hash, &key_modifier)
+    end
+
+    def handle_simple_objects(obj)
+      return obj if simple_object?(obj) || obj.respond_to?(:to_json)
+
+      obj.respond_to?(:to_s) ? obj.to_s : obj
+    end
+
+    def handle_array(array, &key_modifier)
+      array.map { |value| prepare_hash(value, &key_modifier) }
+    end
+
+    def handle_hash(original_hash, &key_modifier)
+      original_hash.each_with_object({}) do |(key, value), result|
+        modified_key = yield(key)
+        result[modified_key] = prepare_hash(value, &key_modifier)
       end
+    end
+
+    def simple_object?(obj)
+      obj.is_a?(String) || obj.is_a?(Numeric) || obj == true || obj == false || obj.nil?
     end
   end
 end
