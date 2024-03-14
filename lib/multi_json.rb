@@ -9,15 +9,13 @@ module MultiJson
   extend self
 
   def default_options=(value)
-    Kernel.warn "MultiJson.default_options setter is deprecated\n" \
-      "Use MultiJson.load_options and MultiJson.dump_options instead"
+    Kernel.warn "MultiJson.default_options setter is deprecated\nUse MultiJson.load_options and MultiJson.dump_options instead"
 
     self.load_options = self.dump_options = value
   end
 
   def default_options
-    Kernel.warn "MultiJson.default_options is deprecated\n" \
-      "Use MultiJson.load_options or MultiJson.dump_options instead"
+    Kernel.warn "MultiJson.default_options is deprecated\nUse MultiJson.load_options or MultiJson.dump_options instead"
 
     load_options
   end
@@ -57,8 +55,7 @@ module MultiJson
       next
     end
 
-    Kernel.warn "[WARNING] MultiJson is using the default adapter (ok_json). " \
-      "We recommend loading a different JSON library to improve performance."
+    Kernel.warn "[WARNING] MultiJson is using the default adapter (ok_json). We recommend loading a different JSON library to improve performance."
 
     :ok_json
   end

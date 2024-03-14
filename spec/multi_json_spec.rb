@@ -40,7 +40,7 @@ describe MultiJson do
           expect(described_class).to receive(:require)
           described_class.default_adapter
         ensure
-          JSON::Ext::Parser = ext if ext
+          stub_const("JSON::Ext::Parser", ext) if ext
         end
       end
     end
