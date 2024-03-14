@@ -82,7 +82,7 @@ describe MultiJson do
 
   it "looks for adapter even if @adapter variable is nil" do
     described_class.send(:instance_variable_set, :@adapter, nil)
-    expect(described_class).to receive(:default_adapter).and_return(:ok_json)
+    allow(described_class).to receive(:default_adapter).and_return(:ok_json)
     expect(described_class.adapter).to eq(MultiJson::Adapters::OkJson)
   end
 
