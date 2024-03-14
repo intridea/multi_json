@@ -46,7 +46,7 @@ describe MultiJson do
     end
   end
 
-  context "caching" do
+  context "when caching" do
     before { described_class.use adapter }
 
     let(:adapter) { MultiJson::Adapters::JsonGem }
@@ -119,7 +119,7 @@ describe MultiJson do
     expect(exception.message).to include("Did not recognize your adapter specification")
   end
 
-  context "using one-shot parser" do
+  context "with one-shot parser" do
     before do
       expect(MultiJson::Adapters::JsonPure).to receive(:dump).once.and_return("dump_something")
       expect(MultiJson::Adapters::JsonPure).to receive(:load).once.and_return("load_something")
