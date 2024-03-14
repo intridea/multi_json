@@ -97,7 +97,7 @@ spec.add_dependency 'multi_json', '~> 1.0'
 
 ## Copyright
 
-Copyright (c) 2010-2018 Michael Bleigh, Josh Kalderimis, Erik Michaels-Ober,
+Copyright (c) 2010-2024 Michael Bleigh, Josh Kalderimis, Erik Berlin,
 and Pavel Pravosud. See [LICENSE][] for details.
 
 <!-- TODO: on main renaming, change this link -->
