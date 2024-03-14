@@ -10,8 +10,8 @@ RSpec::Core::RakeTask.new(:base_spec) do |task|
 end
 
 namespace :adapters do
-  Dir["spec/*_adapter_spec.rb"].each do |adapter_spec|
-    adapter_name = adapter_spec[/(\w+)_adapter_spec/, 1]
+  Dir["spec/multi_json/adapters/*_spec.rb"].each do |adapter_spec|
+    adapter_name = adapter_spec[/(\w+)_spec/, 1]
     desc "Run #{adapter_name} adapter specs"
     RSpec::Core::RakeTask.new(adapter_name) do |task|
       task.pattern = adapter_spec
