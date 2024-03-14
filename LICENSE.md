@@ -1,4 +1,4 @@
-Copyright (c) 2010-2013 Michael Bleigh, Josh Kalderimis, Erik Berlin, Pavel Pravosud
+Copyright (c) 2010-2024 Michael Bleigh, Josh Kalderimis, Erik Berlin, Pavel Pravosud
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
