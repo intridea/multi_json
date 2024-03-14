@@ -120,12 +120,9 @@ describe MultiJson do
   end
 
   context "with one-shot parser" do
-    before do
+    it "uses the defined parser just for the call" do
       expect(MultiJson::Adapters::JsonPure).to receive(:dump).once.and_return("dump_something")
       expect(MultiJson::Adapters::JsonPure).to receive(:load).once.and_return("load_something")
-    end
-
-    it "uses the defined parser just for the call" do
       described_class.use :json_gem
       expect(described_class.dump("", adapter: :json_pure)).to eq("dump_something")
       expect(described_class.load("", adapter: :json_pure)).to eq("load_something")
@@ -176,14 +173,14 @@ describe MultiJson do
   describe "aliases" do
     unless skip_adapter?("jr_jackson")
       describe "jrjackson" do
-        after { expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson) }
-
         it "allows jrjackson alias as symbol" do
           expect { described_class.use :jrjackson }.not_to raise_error
+          expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson)
         end
 
         it "allows jrjackson alias as string" do
           expect { described_class.use "jrjackson" }.not_to raise_error
+          expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson)
         end
       end
     end

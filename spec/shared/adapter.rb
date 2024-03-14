@@ -17,7 +17,6 @@ shared_examples_for "an adapter" do |adapter|
       before { MultiJson.dump_options = MultiJson.adapter.dump_options = {} }
 
       after do
-        expect(MultiJson.adapter.instance).to receive(:dump).with(1, {foo: "bar", fizz: "buzz"})
         MultiJson.dump(1, fizz: "buzz")
         MultiJson.dump_options = MultiJson.adapter.dump_options = nil
       end
@@ -25,11 +24,13 @@ shared_examples_for "an adapter" do |adapter|
       it "respects global dump options" do
         MultiJson.dump_options = {foo: "bar"}
         expect(MultiJson.dump_options).to eq({foo: "bar"})
+        expect(MultiJson.adapter.instance).to receive(:dump).with(1, {foo: "bar", fizz: "buzz"})
       end
 
       it "respects per-adapter dump options" do
         MultiJson.adapter.dump_options = {foo: "bar"}
         expect(MultiJson.adapter.dump_options).to eq({foo: "bar"})
+        expect(MultiJson.adapter.instance).to receive(:dump).with(1, {foo: "bar", fizz: "buzz"})
       end
 
       it "adapter-specific are overridden by global options" do
@@ -37,6 +38,7 @@ shared_examples_for "an adapter" do |adapter|
         MultiJson.dump_options = {foo: "bar"}
         expect(MultiJson.adapter.dump_options).to eq({foo: "foo"})
         expect(MultiJson.dump_options).to eq({foo: "bar"})
+        expect(MultiJson.adapter.instance).to receive(:dump).with(1, {foo: "bar", fizz: "buzz"})
       end
     end
 
@@ -124,7 +126,6 @@ shared_examples_for "an adapter" do |adapter|
       before { MultiJson.load_options = MultiJson.adapter.load_options = {} }
 
       after do
-        expect(MultiJson.adapter.instance).to receive(:load).with("1", {foo: "bar", fizz: "buzz"})
         MultiJson.load("1", fizz: "buzz")
         MultiJson.load_options = MultiJson.adapter.load_options = nil
       end
@@ -132,11 +133,13 @@ shared_examples_for "an adapter" do |adapter|
       it "respects global load options" do
         MultiJson.load_options = {foo: "bar"}
         expect(MultiJson.load_options).to eq({foo: "bar"})
+        expect(MultiJson.adapter.instance).to receive(:load).with("1", {foo: "bar", fizz: "buzz"})
       end
 
       it "respects per-adapter load options" do
         MultiJson.adapter.load_options = {foo: "bar"}
         expect(MultiJson.adapter.load_options).to eq({foo: "bar"})
+        expect(MultiJson.adapter.instance).to receive(:load).with("1", {foo: "bar", fizz: "buzz"})
       end
 
       it "adapter-specific are overridden by global options" do
@@ -144,6 +147,7 @@ shared_examples_for "an adapter" do |adapter|
         MultiJson.load_options = {foo: "bar"}
         expect(MultiJson.adapter.load_options).to eq({foo: "foo"})
         expect(MultiJson.load_options).to eq({foo: "bar"})
+        expect(MultiJson.adapter.instance).to receive(:load).with("1", {foo: "bar", fizz: "buzz"})
       end
     end
 
