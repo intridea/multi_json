@@ -4,7 +4,7 @@ require "shared/options"
 describe MultiJson do
   before(:all) do
     # make sure all available libs are required
-    MultiJson::REQUIREMENT_MAP.each do |_, library|
+    MultiJson::REQUIREMENT_MAP.each_value do |library|
       require library
     rescue ::LoadError
       next
