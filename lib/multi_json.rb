@@ -26,7 +26,7 @@ module MultiJson
     end
   end
 
-  ALIASES = {"jrjackson" => "jr_jackson"}
+  ALIASES = {"jrjackson" => "jr_jackson"}.freeze
 
   REQUIREMENT_MAP = {
     oj: "oj",

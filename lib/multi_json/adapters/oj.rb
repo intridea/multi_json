@@ -49,7 +49,7 @@ module MultiJson
           object_nl: "\n",
           array_nl: "\n",
           ascii_only: false
-        }
+        }.freeze
 
         def dump(object, options = {})
           options.merge!(PRETTY_STATE_PROTOTYPE.dup) if options.delete(:pretty)
