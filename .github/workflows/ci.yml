@@ -27,7 +27,6 @@ jobs:
           - "ruby-3.3"
           - "ruby-head"
           # https://github.com/jruby/jruby/discussions/7915
-          - "jruby-9.3"
           - "jruby-9.4"
           - "jruby-head"
     name: "Test (Ruby ${{ matrix.ruby }})"
