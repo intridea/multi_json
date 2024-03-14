@@ -29,11 +29,21 @@ module MultiJson
     private
 
     def get_options(options, *args)
-      if options.respond_to?(:call) && options.arity
-        options.arity.zero? ? options[] : options[*args]
-      elsif options.respond_to?(:to_hash)
-        options.to_hash
-      end
+      return handle_callable_options(options, *args) if options_responds_to_call?(options)
+
+      handle_hashable_options(options)
+    end
+
+    def options_responds_to_call?(options)
+      options.respond_to?(:call)
+    end
+
+    def handle_callable_options(options, *args)
+      options.arity.zero? ? options[] : options[*args]
+    end
+
+    def handle_hashable_options(options)
+      options.respond_to?(:to_hash) ? options.to_hash : nil
     end
   end
 end
