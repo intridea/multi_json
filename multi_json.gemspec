@@ -2,7 +2,7 @@ require File.expand_path("lib/multi_json/version.rb", __dir__)
 
 Gem::Specification.new do |spec|
   spec.authors = ["Michael Bleigh", "Josh Kalderimis", "Erik Berlin", "Pavel Pravosud"]
-  spec.description = "A common interface to multiple JSON libraries, including Oj, Yajl, the JSON gem (with C-extensions), the pure-Ruby JSON gem, NSJSONSerialization, gson.rb, JrJackson, and OkJson."
+  spec.description = "A common interface to multiple JSON libraries, including Oj, Yajl, the JSON gem (with C-extensions), the pure-Ruby JSON gem, gson, JrJackson, and OkJson."
   spec.email = %w[michael@intridea.com josh.kalderimis@gmail.com sferik@gmail.com pavel@pravosud.com]
   spec.files = Dir["*.md", "lib/**/*"]
   spec.homepage = "https://github.com/intridea/multi_json"

@@ -68,7 +68,6 @@ module MultiJson
   # * <tt>:json_pure</tt>
   # * <tt>:ok_json</tt>
   # * <tt>:yajl</tt>
-  # * <tt>:nsjsonserialization</tt> (MacRuby only)
   # * <tt>:gson</tt> (JRuby only)
   # * <tt>:jr_jackson</tt> (JRuby only)
   def use(new_adapter)
