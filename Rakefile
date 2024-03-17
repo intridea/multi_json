@@ -28,7 +28,6 @@ task spec: %w[
   adapters:ok_json
   adapters:gson
   adapters:jr_jackson
-  adapters:nsjsonserialization
 ]
 
 task default: :spec
