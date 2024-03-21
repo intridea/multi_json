@@ -18,16 +18,16 @@ RSpec.configure do |config|
   config.add_setting :oj, :default => loaded_specs.has_key?('oj')
   config.add_setting :yajl, :default => loaded_specs.has_key?('yajl')
 
-  config.filter_run_excluding(:gson) unless config.gson?
+  config.filter_run_excluding(:jrjackson) unless config.jrjackson?
   config.filter_run_excluding(:json) unless config.json?
   config.filter_run_excluding(:json_pure) unless config.json_pure?
   config.filter_run_excluding(:ok_json) unless config.ok_json?
   config.filter_run_excluding(:oj) unless config.oj?
   config.filter_run_excluding(:yajl) unless config.yajl?
 
-  unless config.java
+  unless config.java?
     config.filter_run_excluding(:java)
-    config.filter_run_excluding(:jrjackson) unless config.jrjackson
+    config.filter_run_excluding(:gson) unless config.gson?
   end
 end
 
