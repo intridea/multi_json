@@ -1,11 +1,8 @@
 require "spec_helper"
-
-return if skip_adapter?("oj")
-
 require "shared/adapter"
 require "multi_json/adapters/oj"
 
-describe MultiJson::Adapters::Oj do
+RSpec.describe MultiJson::Adapters::Oj, :oj => true do
   it_behaves_like "an adapter", described_class
 
   describe ".dump" do

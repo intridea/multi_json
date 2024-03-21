@@ -67,23 +67,27 @@ describe MultiJson do
     end
   end
 
-  it "defaults to the best available gem" do
-    # Clear cache variable already set by previous tests
-    described_class.send(:remove_instance_variable, :@adapter) if described_class.instance_variable_defined?(:@adapter)
-
-    if jruby? && !skip_adapter?("jr_jackson")
-      expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JrJackson")
-    elsif jruby?
-      expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JsonGem")
-    else
-      expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::Oj")
+  context "automatic adapter loading" do
+    before do
+      if described_class.instance_variable_defined?(:@adapter)
+        described_class.send(:remove_instance_variable, :@adapter)
+      end
     end
-  end
 
-  it "looks for adapter even if @adapter variable is nil" do
-    described_class.send(:instance_variable_set, :@adapter, nil)
-    allow(described_class).to receive(:default_adapter).and_return(:ok_json)
-    expect(described_class.adapter).to eq(MultiJson::Adapters::OkJson)
+    it "defaults to the best available gem" do
+      if RUBY_PLATFORM == 'java' && jrjackson?
+        expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JrJackson")
+      elsif RUBY_PLATFORM == 'java' && json?
+        expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JsonGem")
+      else
+        expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::Oj")
+      end
+    end
+
+    it "looks for adapter even if @adapter variable is nil" do
+      allow(described_class).to receive(:default_adapter).and_return(:ok_json)
+      expect(described_class.adapter).to eq(MultiJson::Adapters::OkJson)
+    end
   end
 
   it "is settable via a symbol" do
@@ -142,7 +146,7 @@ describe MultiJson do
   end
 
   it "JSON gem does not create symbols on parse" do
-    skip "breaks in JRuby" if jruby?
+    skip "java based implementations" if RSpec.configuration.java
 
     described_class.with_engine(:json_gem) do
       described_class.load('{"json_class":"ZOMG"}')
@@ -170,18 +174,16 @@ describe MultiJson do
 
   it_behaves_like "has options", described_class
 
-  describe "aliases" do
-    unless skip_adapter?("jr_jackson")
-      describe "jrjackson" do
-        it "allows jrjackson alias as symbol" do
-          expect { described_class.use :jrjackson }.not_to raise_error
-          expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson)
-        end
+  describe "aliases", :jrjackson => true do
+    describe "jrjackson" do
+      it "allows jrjackson alias as symbol" do
+        expect { described_class.use :jrjackson }.not_to raise_error
+        expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson)
+      end
 
-        it "allows jrjackson alias as string" do
-          expect { described_class.use "jrjackson" }.not_to raise_error
-          expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson)
-        end
+      it "allows jrjackson alias as string" do
+        expect { described_class.use "jrjackson" }.not_to raise_error
+        expect(described_class.adapter).to eq(MultiJson::Adapters::JrJackson)
       end
     end
   end
