@@ -2,6 +2,6 @@ require "spec_helper"
 require "shared/adapter"
 require "multi_json/adapters/ok_json"
 
-describe MultiJson::Adapters::OkJson do
+RSpec.describe MultiJson::Adapters::OkJson, :ok_json => true do
   it_behaves_like "an adapter", described_class
 end
