@@ -58,17 +58,15 @@ shared_examples_for "an adapter" do |adapter|
       end
     end
 
-    unless %w[json_pure json_gem].include?(adapter)
-      let(:json_pure){ Kernel.const_get('MultiJson::Adapters::JsonPure') rescue nil }
+    let(:json_pure){ Kernel.const_get('MultiJson::Adapters::JsonPure') rescue nil }
 
-      it "dumps time in correct format" do
-        pending "https://github.com/flori/json/issues/573" if json_pure
-        time = Time.at(1_355_218_745).utc
+    it "dumps time in correct format" do
+      pending "https://github.com/flori/json/issues/573" if json_pure
+      time = Time.at(1_355_218_745).utc
 
-        dumped_json = MultiJson.dump(time)
-        expected = "2012-12-11 09:39:05 UTC"
-        expect(MultiJson.load(dumped_json)).to eq(expected)
-      end
+      dumped_json = MultiJson.dump(time)
+      expected = "2012-12-11 09:39:05 UTC"
+      expect(MultiJson.load(dumped_json)).to eq(expected)
     end
 
     it "dumps symbol and fixnum keys as strings" do
