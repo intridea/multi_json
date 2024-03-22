@@ -1,7 +1,9 @@
 require "spec_helper"
 require "shared/options"
 
-describe MultiJson do
+RSpec.describe MultiJson do
+  let(:config){ RSpec.configuration }
+
   before(:all) do
     # make sure all available libs are required
     MultiJson::REQUIREMENT_MAP.each_value do |library|
@@ -75,9 +77,9 @@ describe MultiJson do
     end
 
     it "defaults to the best available gem" do
-      if RUBY_PLATFORM == 'java' && jrjackson?
+      if config.java? && config.jrjackson?
         expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JrJackson")
-      elsif RUBY_PLATFORM == 'java' && json?
+      elsif config.java? && config.json?
         expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::JsonGem")
       else
         expect(described_class.adapter.to_s).to eq("MultiJson::Adapters::Oj")
@@ -146,7 +148,7 @@ describe MultiJson do
   end
 
   it "JSON gem does not create symbols on parse" do
-    skip "java based implementations" if RSpec.configuration.java
+    skip "java based implementations" if config.java?
 
     described_class.with_engine(:json_gem) do
       described_class.load('{"json_class":"ZOMG"}')
