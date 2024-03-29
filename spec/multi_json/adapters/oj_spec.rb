@@ -1,4 +1,6 @@
 require "spec_helper"
+return unless RSpec.configuration.oj?
+
 require "shared/adapter"
 require "multi_json/adapters/oj"
 
