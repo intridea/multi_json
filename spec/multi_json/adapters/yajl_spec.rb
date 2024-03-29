@@ -1,4 +1,6 @@
 require "spec_helper"
+return unless RSpec.configuration.yajl?
+
 require "shared/adapter"
 require "multi_json/adapters/yajl"
 

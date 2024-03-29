@@ -1,4 +1,6 @@
 require "spec_helper"
+return unless RSpec.configuration.gson?
+
 require "shared/adapter"
 require "multi_json/adapters/gson"
 
