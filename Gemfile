@@ -13,7 +13,7 @@ gem "standard", ">= 1.35.1"
 
 gem "gson", ">= 0.6", platforms: [:jruby], require: false
 gem "jrjackson", ">= 0.4.18", platforms: [:jruby], require: false
-gem "oj", "~> 3.0", platforms: [:ruby], require: false
-gem "yajl-ruby", "~> 1.3", platforms: [:ruby], require: false
+gem "oj", "~> 3.0", platforms: [:ruby, :windows], require: false
+gem "yajl-ruby", "~> 1.3", platforms: [:ruby, :windows], require: false
 
 gemspec
