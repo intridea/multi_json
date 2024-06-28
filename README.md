@@ -57,7 +57,7 @@ MultiJSON falls back to [OkJson][], a simple, vendorable JSON parser.
 
 ## Supported Ruby Versions
 
-This library aims to support and is [tested against][action] the following Ruby
+This library aims to support and is [tested against](https://github.com/intridea/multi_json/actions/workflows/ci.yml) the following Ruby
 implementations:
 
 - Ruby 3.0
