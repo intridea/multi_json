@@ -7,7 +7,12 @@ shared_examples_for "JSON-like adapter" do |adapter|
     describe "with :pretty option set to true" do
       it "passes default pretty options" do
         object = "foo"
-        expect(object).to receive(:to_json).with(JSON::PRETTY_STATE_PROTOTYPE.to_h)
+        expect(object).to receive(:to_json).with({
+          indent: '  ',
+          space: ' ',
+          object_nl: "\n",
+          array_nl: "\n",
+        })
         MultiJson.dump(object, pretty: true)
       end
     end

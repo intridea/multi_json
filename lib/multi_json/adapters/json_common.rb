@@ -13,7 +13,15 @@ module MultiJson
       end
 
       def dump(object, options = {})
-        options.merge!(::JSON::PRETTY_STATE_PROTOTYPE.to_h) if options.delete(:pretty)
+        if options.delete(:pretty)
+          options.merge!({
+            indent: '  ',
+            space: ' ',
+            object_nl: "\n",
+            array_nl: "\n",
+          })
+        end
+
         object.to_json(options)
       end
     end
