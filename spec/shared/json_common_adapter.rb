@@ -11,7 +11,7 @@ shared_examples_for "JSON-like adapter" do |adapter|
           indent: "  ",
           space: " ",
           object_nl: "\n",
-          array_nl: "\n",
+          array_nl: "\n"
         })
         MultiJson.dump(object, pretty: true)
       end

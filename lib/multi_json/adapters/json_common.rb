@@ -18,7 +18,7 @@ module MultiJson
             indent: "  ",
             space: " ",
             object_nl: "\n",
-            array_nl: "\n",
+            array_nl: "\n"
           })
         end
 
