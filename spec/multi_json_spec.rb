@@ -2,7 +2,7 @@ require "spec_helper"
 require "shared/options"
 
 RSpec.describe MultiJson do
-  let(:config){ RSpec.configuration }
+  let(:config) { RSpec.configuration }
 
   before(:all) do
     # make sure all available libs are required
