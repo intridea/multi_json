@@ -71,9 +71,7 @@ RSpec.describe MultiJson do
 
   context "automatic adapter loading" do
     before do
-      if described_class.instance_variable_defined?(:@adapter)
-        described_class.send(:remove_instance_variable, :@adapter)
-      end
+      described_class.send(:remove_instance_variable, :@adapter) if described_class.instance_variable_defined?(:@adapter)
     end
 
     it "defaults to the best available gem" do
