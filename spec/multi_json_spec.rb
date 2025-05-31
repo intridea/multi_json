@@ -174,7 +174,7 @@ RSpec.describe MultiJson do
 
   it_behaves_like "has options", described_class
 
-  describe "aliases", jrjackson: true do
+  describe "aliases", :jrjackson do
     describe "jrjackson" do
       it "allows jrjackson alias as symbol" do
         expect { described_class.use :jrjackson }.not_to raise_error

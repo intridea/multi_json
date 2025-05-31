@@ -4,7 +4,7 @@ return unless RSpec.configuration.oj?
 require "shared/adapter"
 require "multi_json/adapters/oj"
 
-RSpec.describe MultiJson::Adapters::Oj, oj: true do
+RSpec.describe MultiJson::Adapters::Oj, :oj do
   it_behaves_like "an adapter", described_class
 
   describe ".dump" do
