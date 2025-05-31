@@ -8,7 +8,7 @@ RSpec.describe MultiJson do
     # make sure all available libs are required
     MultiJson::REQUIREMENT_MAP.each_value do |library|
       require library
-    rescue ::LoadError
+    rescue LoadError
       next
     end
   end
@@ -120,7 +120,7 @@ RSpec.describe MultiJson do
 
   it "gives access to original error when raising AdapterError" do
     exception = get_exception(MultiJson::AdapterError) { described_class.use "foobar" }
-    expect(exception.cause).to be_instance_of(::LoadError)
+    expect(exception.cause).to be_instance_of(LoadError)
     expect(exception.message).to include("-- multi_json/adapters/foobar")
     expect(exception.message).to include("Did not recognize your adapter specification")
   end
