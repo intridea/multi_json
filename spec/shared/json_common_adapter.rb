@@ -8,8 +8,8 @@ shared_examples_for "JSON-like adapter" do |adapter|
       it "passes default pretty options" do
         object = "foo"
         expect(object).to receive(:to_json).with({
-          indent: '  ',
-          space: ' ',
+          indent: "  ",
+          space: " ",
           object_nl: "\n",
           array_nl: "\n",
         })

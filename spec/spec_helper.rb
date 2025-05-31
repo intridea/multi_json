@@ -9,14 +9,14 @@ RSpec.configure do |config|
   # You must run 'bundle exec rake' for this to work properly
   loaded_specs = Gem.loaded_specs
 
-  config.add_setting :java, default: RUBY_PLATFORM == 'java'
-  config.add_setting :gson, default: loaded_specs.has_key?('gson')
-  config.add_setting :json, default: loaded_specs.has_key?('json')
-  config.add_setting :json_pure, default: loaded_specs.has_key?('json_pure')
-  config.add_setting :jrjackson, default: loaded_specs.has_key?('jrjackson')
-  config.add_setting :ok_json, default: loaded_specs.has_key?('ok_json')
-  config.add_setting :oj, default: loaded_specs.has_key?('oj')
-  config.add_setting :yajl, default: loaded_specs.has_key?('yajl')
+  config.add_setting :java, default: RUBY_PLATFORM == "java"
+  config.add_setting :gson, default: loaded_specs.has_key?("gson")
+  config.add_setting :json, default: loaded_specs.has_key?("json")
+  config.add_setting :json_pure, default: loaded_specs.has_key?("json_pure")
+  config.add_setting :jrjackson, default: loaded_specs.has_key?("jrjackson")
+  config.add_setting :ok_json, default: loaded_specs.has_key?("ok_json")
+  config.add_setting :oj, default: loaded_specs.has_key?("oj")
+  config.add_setting :yajl, default: loaded_specs.has_key?("yajl")
 
   config.filter_run_excluding(:jrjackson) unless config.jrjackson?
   config.filter_run_excluding(:json) unless config.json?

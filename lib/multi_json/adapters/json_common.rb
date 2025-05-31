@@ -15,8 +15,8 @@ module MultiJson
       def dump(object, options = {})
         if options.delete(:pretty)
           options.merge!({
-            indent: '  ',
-            space: ' ',
+            indent: "  ",
+            space: " ",
             object_nl: "\n",
             array_nl: "\n",
           })

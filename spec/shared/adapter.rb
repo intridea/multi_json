@@ -58,7 +58,7 @@ shared_examples_for "an adapter" do |adapter|
       end
     end
 
-    let(:json_pure){ Kernel.const_get('MultiJson::Adapters::JsonPure') rescue nil }
+    let(:json_pure){ Kernel.const_get("MultiJson::Adapters::JsonPure") rescue nil }
 
     it "dumps time in correct format" do
       time = Time.at(1_355_218_745).utc
