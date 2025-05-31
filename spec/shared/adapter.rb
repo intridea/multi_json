@@ -13,6 +13,7 @@ shared_examples_for "an adapter" do |adapter|
   end
 
   describe ".dump" do
+    let(:json_pure) { Kernel.const_get("MultiJson::Adapters::JsonPure") rescue nil }
     describe "#dump_options" do
       before { MultiJson.dump_options = MultiJson.adapter.dump_options = {} }
 
@@ -58,7 +59,6 @@ shared_examples_for "an adapter" do |adapter|
       end
     end
 
-    let(:json_pure) { Kernel.const_get("MultiJson::Adapters::JsonPure") rescue nil }
 
     it "dumps time in correct format" do
       time = Time.at(1_355_218_745).utc
